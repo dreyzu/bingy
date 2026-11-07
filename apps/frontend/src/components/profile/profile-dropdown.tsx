@@ -197,7 +197,7 @@ export const ProfileDropdown = ({
 						<DropdownMenuSeparator className="bg-border" />
 						<DropdownMenuItem>
 							<a
-								href="https://github.com/tristan-derez/bingy"
+								href="https://github.com/dreyzu/bingy"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="flex items-center gap-1.5"

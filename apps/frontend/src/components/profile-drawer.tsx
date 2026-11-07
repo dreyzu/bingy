@@ -175,7 +175,7 @@ export function ProfileDrawer() {
 						</Button>
 						<Button className="w-full" variant="ghost">
 							<a
-								href="https://github.com/tristan-derez/bingy"
+								href="https://github.com/dreyzu/bingy"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="flex items-center justify-between w-full"
