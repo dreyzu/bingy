@@ -50,7 +50,7 @@ export function AddToWatchlistItem({
 
 	return (
 		<DropdownMenuItem onClick={handleAddToWatchlist} disabled={isPending}>
-			{m.list_dropdown_item_add_watchlist()}
+			{m.steady_cream_lagoon()}
 		</DropdownMenuItem>
 	);
 }

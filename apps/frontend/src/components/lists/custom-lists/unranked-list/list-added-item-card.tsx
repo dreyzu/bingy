@@ -56,7 +56,7 @@ export function ListAddedItemMediaCard({
 				</div>
 
 				<Input
-					placeholder={m.added_item_note_placeholder()}
+					placeholder={m.airy_rust_daisy()}
 					value={item.note || ""}
 					onChange={(e) =>
 						onUpdateNote(item.tmdbId, item.mediaType, e.target.value)

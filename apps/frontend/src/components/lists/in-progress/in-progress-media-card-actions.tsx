@@ -53,7 +53,7 @@ export const InProgressMediaCardActions = ({
 								{...props}
 								variant="ghost"
 								size="icon"
-								aria-label={m.in_progress_card_actions()}
+								aria-label={m.dreamy_white_meerkat()}
 								className="bg-background/70 backdrop-blur-sm hover:bg-background/90"
 							>
 								<IconDotsFilled />
@@ -70,7 +70,7 @@ export const InProgressMediaCardActions = ({
 									onClick={handleMarkWatched}
 								>
 									<IconCheck className="size-4" />
-									{m.in_progress_mark_next_seen()}
+									{m.fair_cerise_wombat()}
 								</Button>
 							</div>
 						</DrawerBody>
@@ -83,7 +83,7 @@ export const InProgressMediaCardActions = ({
 							<Button
 								variant="ghost"
 								size="icon"
-								aria-label={m.in_progress_card_actions()}
+								aria-label={m.dreamy_white_meerkat()}
 								className="bg-background/70 backdrop-blur-sm hover:bg-background/90"
 							>
 								<IconDotsFilled />
@@ -96,7 +96,7 @@ export const InProgressMediaCardActions = ({
 							onClick={handleMarkWatched}
 						>
 							<IconCheck className="size-4" />
-							{m.in_progress_mark_next_seen()}
+							{m.fair_cerise_wombat()}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

@@ -35,14 +35,14 @@ export function ProfileFavoritesSection({
 		<section className="flex flex-col gap-2">
 			<div className="flex flex-row justify-between">
 				<h2 className="text-lg font-semibold">
-					{m.profile_favorites_section_title()}
+					{m.light_bronze_iguana()}
 				</h2>
 				<Link
 					to="/@{$username}/favorites"
 					params={{ username }}
 					className="flex flex-row gap-2 items-center justify-center"
 				>
-					{m.profile_favorites_section_link()}
+					{m.lush_saffron_seal()}
 				</Link>
 			</div>
 

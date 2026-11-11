@@ -20,13 +20,13 @@ const statusBadgeClassName: Record<string, string> = {
 const getStatusLabel = (status: string) => {
 	switch (status) {
 		case "watching":
-			return m.in_progress_status_badge_watching();
+			return m.smart_wine_falcon();
 		case "on_hold":
-			return m.in_progress_status_badge_on_hold();
+			return m.polite_silver_biscuit();
 		case "dropped":
-			return m.in_progress_status_badge_dropped();
+			return m.alert_rust_walrus();
 		case "completed":
-			return m.in_progress_status_badge_completed();
+			return m.candid_mauve_wolf();
 		default:
 			return null;
 	}
@@ -69,7 +69,7 @@ export const InProgressMediaCard = ({
 					<div className="flex flex-col gap-0.5 min-w-0">
 						{lastSeen ? (
 							<span className="truncate text-xs text-muted-foreground">
-								{m.in_progress_last_seen({
+								{m.wild_crimson_moose({
 									season: lastSeen.season,
 									episode: lastSeen.episode,
 								})}
@@ -77,7 +77,7 @@ export const InProgressMediaCard = ({
 						) : null}
 						{nextEpisode ? (
 							<span className="truncate text-xs font-medium text-foreground">
-								{m.in_progress_next_episode({
+								{m.silent_violet_galaxy({
 									season: nextEpisode.season_number,
 									episode: nextEpisode.episode_number,
 									name: nextEpisode.name,
@@ -85,7 +85,7 @@ export const InProgressMediaCard = ({
 							</span>
 						) : (
 							<span className="text-xs font-medium text-muted-foreground">
-								{m.in_progress_no_next_episode()}
+								{m.modest_indigo_saddle()}
 							</span>
 						)}
 					</div>

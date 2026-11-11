@@ -14,10 +14,10 @@ export function ListsEmptyState({
 	filter,
 }: ListsEmptyStateProps) {
 	const messageMap: Record<VisibilityFilter, () => string> = {
-		all: m.lists_empty_state_own_all,
-		public: m.lists_empty_state_own_public,
-		private: m.lists_empty_state_own_private,
-		limited: m.lists_empty_state_own_limited,
+		all: m.lively_lilac_garden,
+		public: m.fluffy_umber_beacon,
+		private: m.dusky_lemon_galaxy,
+		limited: m.joyful_copper_acorn,
 	};
 
 	return (
@@ -27,11 +27,11 @@ export function ListsEmptyState({
 					<>
 						{messageMap[filter]()}{" "}
 						<Link to="/lists/create" className="text-primary hover:underline">
-							{m.lists_empty_state_own_cta()}
+							{m.vivid_pink_cloud()}
 						</Link>
 					</>
 				) : (
-					m.lists_empty_state_other({ username })
+					m.candid_lavender_narwhal({ username })
 				)}
 			</p>
 		</div>

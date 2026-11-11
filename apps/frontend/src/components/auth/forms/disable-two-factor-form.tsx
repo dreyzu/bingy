@@ -46,13 +46,13 @@ export function DisableTwoFactorForm() {
 				});
 				queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
 
-				toast.success({ title: m.toast_success_disable_twofactor() });
+				toast.success({ title: m.dapper_lemon_daisy() });
 				navigate({ to: "/settings" });
 			}
 
-			error && toast.error({ title: m.toast_error_disable_twofactor() });
+			error && toast.error({ title: m.primal_beige_seal() });
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -62,10 +62,10 @@ export function DisableTwoFactorForm() {
 		<div className="grid gap-2">
 			<div>
 				<p className="text-md font-semibold leading-none tracking-tight">
-					{m.two_factor_title()}
+					{m.breezy_azure_parrot()}
 				</p>
 				<p className="text-sm text-muted-foreground mt-1.5">
-					{m.btn_disable_twofactor()}
+					{m.cozy_sepia_tiger()}
 				</p>
 			</div>
 
@@ -77,7 +77,7 @@ export function DisableTwoFactorForm() {
 						render={({ field }) => (
 							<Field className="grid gap-2">
 								<FieldLabel htmlFor={`${id}-password`}>
-									{m.form_password_label()}
+									{m.airy_umber_rabbit()}
 								</FieldLabel>
 								<FieldContent>
 									<Input
@@ -100,10 +100,10 @@ export function DisableTwoFactorForm() {
 						{isSubmitting ? (
 							<span className="flex items-center justify-center gap-2">
 								<IconLoader className="animate-spin h-4 w-4" />
-								{m.btn_disabling_twofactor()}
+								{m.noble_olive_puma()}
 							</span>
 						) : (
-							m.btn_disable_twofactor()
+							m.cozy_sepia_tiger()
 						)}
 					</Button>
 				</fieldset>

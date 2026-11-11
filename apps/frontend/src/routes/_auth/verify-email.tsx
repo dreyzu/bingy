@@ -54,12 +54,12 @@ function VerifyEmailPage() {
 				callbackURL: `${config.appUrl}/welcome`,
 			});
 			toast.success({
-				title: m.toast_success_email_sent_title_verify_email_page(),
-				description: m.toast_success_email_sent_desc_verify_email_page(),
+				title: m.agile_umber_barn(),
+				description: m.quiet_khaki_flute(),
 			});
 		} catch {
 			toast.error({
-				title: m.toast_error_email_failed_verify_email_page(),
+				title: m.daring_lemon_fern(),
 			});
 		} finally {
 			setIsResending(false);
@@ -75,10 +75,10 @@ function VerifyEmailPage() {
 			<Card className="min-w-full">
 				<CardHeader>
 					<CardTitle>
-						{m.verify_email_page_verification_required_title()}
+						{m.shiny_topaz_iguana()}
 					</CardTitle>
 					<CardDescription>
-						{m.verify_email_page_verification_required_desc()}
+						{m.noble_yellow_prairie()}
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-2">
@@ -89,8 +89,8 @@ function VerifyEmailPage() {
 						disabled={isResending}
 					>
 						{isResending
-							? m.verify_email_page_btn_sending()
-							: m.verify_email_page_btn_resend({ email: authData.user.email })}
+							? m.noble_coral_planet()
+							: m.zippy_green_tulip({ email: authData.user.email })}
 					</Button>
 				</CardContent>
 			</Card>

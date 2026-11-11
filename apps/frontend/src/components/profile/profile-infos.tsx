@@ -37,7 +37,7 @@ export function ProfileInfos({
 						>
 							<IconEdit />
 							<span className="hidden md:flex">
-								{m.profile_page_edit_btn_label()}
+								{m.fierce_scarlet_moose()}
 							</span>
 						</Button>
 					) : (

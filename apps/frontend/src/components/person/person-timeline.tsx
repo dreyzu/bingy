@@ -66,7 +66,7 @@ const mapToTimelineItem = (
 		role:
 			("character" in credit ? credit.character : "") ||
 			("job" in credit ? credit.job : "") ||
-			m.person_role_unknown(),
+			m.silent_khaki_willow(),
 		year: date ? date.getFullYear().toString() : "N/A",
 		fullDate: date ? date.toISOString() : null,
 		episodeCount,

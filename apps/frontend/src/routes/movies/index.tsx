@@ -60,25 +60,25 @@ function MoviesPage() {
 	return (
 		<div className="flex flex-col w-full gap-4">
 			<NowPlayingMovies
-				title={m.movies_now_playing_title()}
+				title={m.mighty_rose_heron()}
 				movies={nowPlayingMovies}
 				isLoading={nowPlayingLoading}
 				isError={nowPlayingError}
 			/>
 			<UpcomingMovies
-				title={m.movies_upcoming_title()}
+				title={m.lucky_amber_nectar()}
 				movies={upcomingMovies}
 				isLoading={upcomingLoading}
 				isError={upcomingError}
 			/>
 			<PopularMovies
-				title={m.movies_popular_title()}
+				title={m.balmy_mint_acorn()}
 				movies={popularMovies}
 				isLoading={popularLoading}
 				isError={popularError}
 			/>
 			<TopRatedMovies
-				title={m.movies_toprated_title()}
+				title={m.winsome_coral_clover()}
 				movies={topRatedMovies}
 				isLoading={topRatedLoading}
 				isError={topRatedError}

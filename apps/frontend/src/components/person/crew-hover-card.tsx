@@ -73,7 +73,7 @@ export const CrewHoverCard = ({ person }: CrewHoverCardProps) => {
 							params={{ personId: person.id.toString() }}
 							className="w-full"
 						>
-							<Button className="w-full">{m.btn_media_learn_more()}</Button>
+							<Button className="w-full">{m.plucky_saffron_wolf()}</Button>
 						</Link>
 					</DrawerFooter>
 				</DrawerContent>

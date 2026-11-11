@@ -59,7 +59,7 @@ const getCardConfig = (item: Schemas.MediaMulti) => {
 		title: person.name,
 		subtitle: person.known_for_department,
 		overview: person.known_for?.length
-			? `${m.person_known_for({ gender: person.gender === 1 ? "female" : "male" })}: ${person.known_for
+			? `${m.winsome_white_oasis({ gender: person.gender === 1 ? "female" : "male" })}: ${person.known_for
 					.map((media) =>
 						media.media_type === "movie"
 							? (media as Schemas.MovieMedia).title

@@ -43,8 +43,8 @@ export function EpisodesContainer({ episodes }: EpisodesContainerProps) {
 									{episode.air_date ? (
 										<p className="text-sm text-muted-foreground">
 											{isFuture(new Date(episode.air_date))
-												? m.airs_on()
-												: m.aired_on()}
+												? m.agile_topaz_jasmine()
+												: m.fierce_scarlet_mesa()}
 											{formatDate(episode.air_date, localeRegion, {
 												year: "numeric",
 												month: "short",
@@ -68,7 +68,7 @@ export function EpisodesContainer({ episodes }: EpisodesContainerProps) {
 									!episode.overview && "italic",
 								)}
 							>
-								{episode.overview || m.overview_none()}
+								{episode.overview || m.happy_slate_whale()}
 							</p>
 						</div>
 					</div>

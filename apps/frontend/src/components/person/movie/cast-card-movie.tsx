@@ -56,7 +56,7 @@ export const CastCard = ({ person }: CastCardProps) => {
 						to="/person/$personId"
 						params={{ personId: person.id.toString() }}
 					>
-						<Button className="w-full">{m.btn_show_more()}</Button>
+						<Button className="w-full">{m.hazy_maroon_galaxy()}</Button>
 					</Link>
 				</CardContent>
 			</Card>

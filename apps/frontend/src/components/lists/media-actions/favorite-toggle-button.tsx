@@ -94,7 +94,7 @@ export function FavoriteToggleButton({
 				/>
 				<TooltipContent>
 					<p>
-						{isFavorited ? m.favorite_toggle_remove() : m.favorite_toggle_add()}
+						{isFavorited ? m.upbeat_cerise_rabbit() : m.ample_sepia_lynx()}
 					</p>
 				</TooltipContent>
 			</Tooltip>

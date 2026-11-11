@@ -26,8 +26,8 @@ export function MovieCreditsView({
 	if (isError || !credits) {
 		return (
 			<ResourceNotFound
-				title={m.movie_credits_not_found_title()}
-				description={m.movie_credits_not_found_desc()}
+				title={m.jolly_green_biscuit()}
+				description={m.breezy_green_iguana()}
 			/>
 		);
 	}

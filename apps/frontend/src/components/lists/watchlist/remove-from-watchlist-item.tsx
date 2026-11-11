@@ -54,7 +54,7 @@ export function RemoveFromWatchlistItem({
 			disabled={isPending}
 			variant="destructive"
 		>
-			{m.list_dropdown_item_remove_watchlist()}
+			{m.ample_saffron_wombat()}
 		</DropdownMenuItem>
 	);
 }

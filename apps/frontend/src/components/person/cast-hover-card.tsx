@@ -28,9 +28,9 @@ export const CastHoverCard = ({ person }: CastHoverCardProps) => {
 	const isMobile = useMediaQuery("(pointer: coarse)");
 	const personName = person.name;
 	const characterText = person.characters?.length
-		? `${m.person_as()} ${person.characters.join(", ")}`
+		? `${m.vibrant_crimson_meerkat()} ${person.characters.join(", ")}`
 		: person.character
-			? `${m.person_as()} ${person.character}`
+			? `${m.vibrant_crimson_meerkat()} ${person.character}`
 			: "N/A";
 	const imageUrl = person.profile_path
 		? `https://image.tmdb.org/t/p/w500${person.profile_path}`
@@ -73,7 +73,7 @@ export const CastHoverCard = ({ person }: CastHoverCardProps) => {
 							params={{ personId: person.id.toString() }}
 							className="w-full"
 						>
-							<Button className="w-full">{m.btn_media_learn_more()}</Button>
+							<Button className="w-full">{m.plucky_saffron_wolf()}</Button>
 						</Link>
 					</DrawerFooter>
 				</DrawerContent>

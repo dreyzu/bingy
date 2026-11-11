@@ -21,11 +21,11 @@ const STATUS_OPTIONS: TvProgressStatus[] = ["watching", "on_hold", "dropped"];
 const statusLabel = (status: TvProgressStatus) => {
 	switch (status) {
 		case "on_hold":
-			return m.dialog_currently_watching_status_on_hold();
+			return m.keen_cobalt_boulder();
 		case "dropped":
-			return m.dialog_currently_watching_status_dropped();
+			return m.epic_purple_raven();
 		default:
-			return m.dialog_currently_watching_status_watching();
+			return m.lean_indigo_lynx();
 	}
 };
 
@@ -107,9 +107,9 @@ export function AddToCurrentlyWatchingDialog({
 		<Dialog open={open} onOpenChange={handleOpenChange}>
 			<DialogContent className="sm:max-w-lg">
 				<DialogHeader>
-					<DialogTitle>{m.dialog_currently_watching_title()}</DialogTitle>
+					<DialogTitle>{m.dapper_mauve_island()}</DialogTitle>
 					<DialogDescription>
-						{m.dialog_currently_watching_desc({ media_name: tvShow.name })}
+						{m.bold_coral_daisy({ media_name: tvShow.name })}
 					</DialogDescription>
 				</DialogHeader>
 
@@ -128,7 +128,7 @@ export function AddToCurrentlyWatchingDialog({
 					/>
 
 					<div className="flex flex-col gap-2">
-						<Label>{m.dialog_currently_watching_status_label()}</Label>
+						<Label>{m.fluffy_rust_saddle()}</Label>
 						<div className="flex flex-wrap gap-2">
 							{STATUS_OPTIONS.map((option) => (
 								<Button
@@ -150,7 +150,7 @@ export function AddToCurrentlyWatchingDialog({
 						<DialogClose
 							render={
 								<Button variant="outline" disabled={isSubmitting}>
-									{m.dialog_currently_watching_cancel_btn()}
+									{m.upbeat_crimson_wombat()}
 								</Button>
 							}
 						/>
@@ -159,8 +159,8 @@ export function AddToCurrentlyWatchingDialog({
 							disabled={isSubmitting || season === null || episode === null}
 						>
 							{isSubmitting
-								? m.dialog_currently_watching_submitting_btn()
-								: m.dialog_currently_watching_submit_btn()}
+								? m.bubbly_lavender_lantern()
+								: m.winsome_mint_panda()}
 						</Button>
 					</div>
 				</form>

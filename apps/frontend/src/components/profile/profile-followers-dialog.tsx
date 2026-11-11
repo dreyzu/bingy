@@ -25,16 +25,16 @@ export function ProfileFollowersDialog({ users }: ProfileFollowersDialogProps) {
 				render={
 					<Button variant="link" className="flex flex-row items-center p-0">
 						<span className="font-semibold">
-							{users.length ?? 0} {m.profile_page_followers()}
+							{users.length ?? 0} {m.grand_purple_zebra()}
 						</span>
 					</Button>
 				}
 			/>
 			<DialogContent className="max-w-xs md:max-w-lg">
 				<DialogHeader>
-					<DialogTitle>{m.profile_page_followers_dialog_title()}</DialogTitle>
+					<DialogTitle>{m.loyal_ivory_seal()}</DialogTitle>
 					<DialogDescription>
-						{m.profile_page_followers_dialog_description()}
+						{m.earthy_hazel_bagel()}
 					</DialogDescription>
 				</DialogHeader>
 				{hasFollowers ? (
@@ -49,7 +49,7 @@ export function ProfileFollowersDialog({ users }: ProfileFollowersDialogProps) {
 						))}
 					</div>
 				) : (
-					<EmptyUsers message={m.profile_page_followers_empty()} />
+					<EmptyUsers message={m.modest_gray_beaver()} />
 				)}
 			</DialogContent>
 		</Dialog>

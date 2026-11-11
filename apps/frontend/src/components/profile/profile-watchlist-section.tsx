@@ -35,14 +35,14 @@ export function ProfileWatchlistSection({
 		<section className="flex flex-col gap-2">
 			<div className="flex flex-row justify-between">
 				<h2 className="text-lg font-semibold">
-					{m.profile_watchlist_section_title()}
+					{m.shiny_amber_koala()}
 				</h2>
 				<Link
 					to="/@{$username}/watchlist"
 					params={{ username }}
 					className="flex flex-row gap-2 items-center justify-center"
 				>
-					{m.profile_watchlist_section_link()}
+					{m.zesty_saffron_lemur()}
 				</Link>
 			</div>
 

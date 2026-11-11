@@ -30,7 +30,7 @@ export function EditListButton({
 		>
 			<IconEdit />
 			{showText && (
-				<span className="hidden xs:inline">{m.btn_edit_list()}</span>
+				<span className="hidden xs:inline">{m.modest_plum_turtle()}</span>
 			)}
 		</Button>
 	);

@@ -219,13 +219,13 @@ export function LogReviewDialog({
 						<DialogHeader className="shrink-0">
 							<DialogTitle>
 								{isTvShow
-									? m.log_review_dialog_title_tv()
-									: m.log_review_dialog_title_movie()}
+									? m.spry_umber_pine()
+									: m.steady_slate_canyon()}
 							</DialogTitle>
 							<DialogDescription className="max-w-full lg:max-w-3/4">
 								{isTvShow
-									? m.log_review_dialog_desc_tv()
-									: m.log_review_dialog_desc_movie()}
+									? m.winsome_magenta_koala()
+									: m.fancy_sepia_dolphin()}
 							</DialogDescription>
 						</DialogHeader>
 
@@ -235,7 +235,7 @@ export function LogReviewDialog({
 						>
 							<div className="flex flex-col gap-4 py-4 flex-1 overflow-y-auto min-h-0 pr-2">
 								<div className="flex flex-col gap-2">
-									<Label>{m.log_review_dialog_rating_label()}</Label>
+									<Label>{m.light_plum_hippo()}</Label>
 									<StarRating
 										username={username}
 										rating={reviewFormData.rating}
@@ -269,7 +269,7 @@ export function LogReviewDialog({
 												htmlFor="isComplete"
 												className="text-sm font-normal"
 											>
-												{m.log_review_dialog_tv_show_completed_label()}
+												{m.light_lemon_tiger()}
 											</Label>
 										</div>
 
@@ -288,7 +288,7 @@ export function LogReviewDialog({
 															htmlFor="useAbsoluteEpisode"
 															className="text-sm font-normal"
 														>
-															{m.log_review_dialog_absolute_episode_label()}
+															{m.elegant_jade_parrot()}
 														</Label>
 													</div>
 												) : null}
@@ -331,8 +331,8 @@ export function LogReviewDialog({
 									onChange={(review) =>
 										setReviewFormData((prev) => ({ ...prev, review }))
 									}
-									label={m.log_review_dialog_review_label()}
-									placeholder={m.log_review_dialog_review_placeholder()}
+									label={m.bright_sage_garden()}
+									placeholder={m.balmy_mint_hippo()}
 								/>
 							</div>
 
@@ -340,14 +340,14 @@ export function LogReviewDialog({
 								<DialogClose
 									render={
 										<Button variant="outline" disabled={isSubmitting}>
-											{m.log_review_dialog_cancel_btn()}
+											{m.keen_coral_meerkat()}
 										</Button>
 									}
 								/>
 								<Button type="submit" disabled={isSubmitting}>
 									{isSubmitting
-										? m.log_review_dialog_submitting_btn()
-										: m.log_review_dialog_submit_btn()}
+										? m.fancy_mauve_galaxy()
+										: m.gleeful_lemon_spruce()}
 								</Button>
 							</div>
 						</form>

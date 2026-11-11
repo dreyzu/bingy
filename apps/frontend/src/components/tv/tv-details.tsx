@@ -55,8 +55,8 @@ export function TvDetailsView({
 	if (isError || !tv) {
 		return (
 			<ResourceNotFound
-				title={m.tv_details_not_found_title()}
-				description={m.tv_details_not_found_desc()}
+				title={m.brave_pearl_willow()}
+				description={m.agile_scarlet_compass()}
 			/>
 		);
 	}
@@ -112,7 +112,7 @@ export function TvDetailsView({
 										<MediaCreators
 											creators={tv.created_by}
 											getRoleLabel={(gender) =>
-												m.tv_details_creator({ gender })
+												m.fierce_silver_lantern({ gender })
 											}
 										/>
 									</div>
@@ -153,7 +153,7 @@ export function TvDetailsView({
 												: "N/A"}
 										</p>
 										<p className="text-sm text-muted-foreground">
-											{m.tv_details_first_aired()}
+											{m.mellow_lilac_anchor()}
 										</p>
 									</div>
 								</CardContent>
@@ -170,7 +170,7 @@ export function TvDetailsView({
 												{tv.number_of_seasons}
 											</p>
 											<p className="text-sm text-muted-foreground">
-												{m.tv_details_seasons({ count: tv.number_of_seasons })}
+												{m.lean_crimson_puma({ count: tv.number_of_seasons })}
 											</p>
 										</div>
 									</CardContent>
@@ -183,7 +183,7 @@ export function TvDetailsView({
 									<div>
 										<p className="text-lg font-bold">{tv.number_of_episodes}</p>
 										<p className="text-sm text-muted-foreground">
-											{m.tv_details_episodes({ count: tv.number_of_episodes })}
+											{m.warm_scarlet_jasmine({ count: tv.number_of_episodes })}
 										</p>
 									</div>
 								</CardContent>
@@ -200,7 +200,7 @@ export function TvDetailsView({
 									params={{ tvId: tv.id.toString() }}
 									className="text-sm"
 								>
-									{m.link_text_full_credits()}
+									{m.elegant_gold_violin()}
 								</Link>
 							</div>
 						) : null}

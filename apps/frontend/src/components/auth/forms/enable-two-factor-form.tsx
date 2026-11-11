@@ -51,7 +51,7 @@ export function EnableTwoFactorForm() {
 
 			if (enableError) {
 				toast.error({
-					title: enableError.message || m.toast_error_enable_twofactor(),
+					title: enableError.message || m.peppy_yellow_moose(),
 				});
 				return;
 			}
@@ -64,7 +64,7 @@ export function EnableTwoFactorForm() {
 
 				if (totpError) {
 					toast.error({
-						title: totpError.message || m.toast_error_invalid_code(),
+						title: totpError.message || m.sweet_silver_dolphin(),
 					});
 					return;
 				}
@@ -75,7 +75,7 @@ export function EnableTwoFactorForm() {
 				}
 			}
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -90,10 +90,10 @@ export function EnableTwoFactorForm() {
 			});
 
 			if (error?.message === "Invalid two factor cookie") {
-				toast.error({ title: m.toast_error_invalid_code() });
+				toast.error({ title: m.sweet_silver_dolphin() });
 				return;
 			} else if (error) {
-				toast.error({ title: error.message ?? m.toast_error_generic() });
+				toast.error({ title: error.message ?? m.candid_beige_yak() });
 				return;
 			}
 
@@ -103,13 +103,13 @@ export function EnableTwoFactorForm() {
 				});
 				queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
 
-				toast.success({ title: m.toast_success_enable_twofactor() });
+				toast.success({ title: m.silent_emerald_maple() });
 				setShowDialog(false);
 				form.reset();
 				router.navigate({ to: "/settings" });
 			}
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		}
 	};
 
@@ -117,16 +117,16 @@ export function EnableTwoFactorForm() {
 		<>
 			<div className="flex flex-col gap-2">
 				<p className="text-md font-semibold leading-none tracking-tight">
-					{m.two_factor_title()}
+					{m.breezy_azure_parrot()}
 				</p>
 				<p className="text-sm text-muted-foreground mt-1.5">
-					{m.two_factor_enable_short_desc()}
+					{m.modest_topaz_daisy()}
 				</p>
 				{!isEmailVerified ? (
 					<Alert className="border-amber-200 bg-amber-50 text-amber-900 dark:border-amber-900 dark:bg-amber-950 dark:text-amber-50">
 						<IconExclamationCircleFilled />
-						<AlertTitle>{m.two_factor_enable_alert_mail()}</AlertTitle>
-						<AlertDescription>{m.email_not_verified()}</AlertDescription>
+						<AlertTitle>{m.wise_cobalt_pelican()}</AlertTitle>
+						<AlertDescription>{m.silent_white_spruce()}</AlertDescription>
 					</Alert>
 				) : null}
 
@@ -144,7 +144,7 @@ export function EnableTwoFactorForm() {
 							render={({ field }) => (
 								<Field className="flex flex-col gap-2">
 									<FieldLabel htmlFor={`${id}-password`}>
-										{m.form_password_label()}
+										{m.airy_umber_rabbit()}
 									</FieldLabel>
 									<FieldContent>
 										<Input
@@ -167,10 +167,10 @@ export function EnableTwoFactorForm() {
 							{isSubmitting ? (
 								<span className="flex items-center justify-center gap-2">
 									<IconLoader className="animate-spin h-4 w-4" />
-									{m.btn_enabling_two_factor()}
+									{m.bubbly_ochre_barn()}
 								</span>
 							) : (
-								m.btn_enable_two_factor()
+								m.stellar_indigo_boulder()
 							)}
 						</Button>
 					</fieldset>

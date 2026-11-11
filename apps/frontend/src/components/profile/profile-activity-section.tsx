@@ -105,10 +105,10 @@ export function ProfileActivitySection({
 		return (
 			<section className="flex flex-col gap-2">
 				<h2 className="text-lg font-semibold">
-					{m.profile_activity_section_title()}
+					{m.primal_yellow_arrow()}
 				</h2>
 				<p className="text-sm text-muted-foreground">
-					{m.profile_activity_empty()}
+					{m.loyal_olive_parrot()}
 				</p>
 			</section>
 		);
@@ -117,7 +117,7 @@ export function ProfileActivitySection({
 	return (
 		<section className="flex flex-col gap-2">
 			<h2 className="text-lg font-semibold">
-				{m.profile_activity_section_title()}
+				{m.primal_yellow_arrow()}
 			</h2>
 			<div className="flex flex-col gap-3">
 				{activities.map((activity) => {

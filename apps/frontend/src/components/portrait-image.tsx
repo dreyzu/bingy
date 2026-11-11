@@ -40,7 +40,7 @@ function PortraitImageEmptyState({
 	return (
 		<div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-muted text-muted-foreground">
 			<Icon className="size-6 w-1/4 h-1/4 text-muted-foreground" />
-			<span className="text-sm">{m.image_empty_state_message()}</span>
+			<span className="text-sm">{m.lush_periwinkle_salmon()}</span>
 		</div>
 	);
 }

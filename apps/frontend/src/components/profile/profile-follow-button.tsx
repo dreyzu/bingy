@@ -24,17 +24,17 @@ export function ProfileFollowButton({
 			{isLoading ? (
 				<>
 					<IconLoader className="animate-spin h-4 w-4 mr-1" />
-					{m.profile_page_follow_button_loading()}
+					{m.smart_plum_willow()}
 				</>
 			) : isFollowing ? (
 				<>
 					<IconUserMinus className="h-4 w-4 mr-1" />
-					{m.profile_page_unfollow_button()}
+					{m.witty_indigo_narwhal()}
 				</>
 			) : (
 				<>
 					<IconUserPlus className="h-4 w-4 mr-1" />
-					{m.profile_page_follow_button()}
+					{m.candid_pearl_mirror()}
 				</>
 			)}
 		</Button>

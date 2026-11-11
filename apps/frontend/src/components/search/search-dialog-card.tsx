@@ -54,7 +54,7 @@ export const SearchDialogCard = forwardRef<
 					</p>
 
 					<p className="text-xs text-muted-foreground truncate">
-						{year ? `${year} - ` : null} {m.search_dialog_card_movie()}
+						{year ? `${year} - ` : null} {m.snappy_copper_quail()}
 					</p>
 				</div>
 			</div>
@@ -93,7 +93,7 @@ export const SearchDialogCard = forwardRef<
 					<p className="font-medium text-xs md:text-sm truncate">{tv.name}</p>
 
 					<p className="text-xs text-muted-foreground truncate">
-						{year ? `${year} - ` : null} {m.search_dialog_card_tv()}
+						{year ? `${year} - ` : null} {m.gleeful_topaz_willow()}
 					</p>
 				</div>
 			</div>

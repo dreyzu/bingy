@@ -20,7 +20,7 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
 
 		const result = searchFormSchema.safeParse({ newQuery: query });
 		if (!result.success) {
-			setError(result.error.issues[0]?.message ?? m.search_error_invalid());
+			setError(result.error.issues[0]?.message ?? m.kind_sage_tiger());
 			return;
 		}
 
@@ -47,7 +47,7 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
 							setError(null);
 						}
 					}}
-					placeholder={m.form_search_placeholder()}
+					placeholder={m.quiet_turquoise_cedar()}
 					className="flex rounded-md px-2 py-1 min-h-10"
 				/>
 				<Button
@@ -55,7 +55,7 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
 					variant="secondary"
 					className="bg-brand hover:bg-brand/95 px-4 py-1 rounded-md text-dark-card-foreground font-bold min-h-10"
 				>
-					{m.btn_form_search()}
+					{m.breezy_crimson_mesa()}
 				</Button>
 			</div>
 			{error ? <p className="text-red-500 text-sm">{error}</p> : null}

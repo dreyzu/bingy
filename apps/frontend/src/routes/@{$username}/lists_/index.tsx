@@ -44,7 +44,7 @@ function ListsPage() {
 	}
 
 	if (!data || isError) {
-		return toast.error({ title: m.lists_error() });
+		return toast.error({ title: m.sunny_jade_fox() });
 	}
 
 	return (

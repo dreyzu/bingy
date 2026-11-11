@@ -90,7 +90,7 @@ export const SearchPagination = ({
 						className="gap-1 pl-2.5"
 					>
 						<IconChevronLeft className="h-4 w-4" />
-						<span className="sm:inline">{m.search_pagination_previous()}</span>
+						<span className="sm:inline">{m.lush_bronze_basil()}</span>
 					</PaginationLink>
 				</PaginationItem>
 
@@ -130,7 +130,7 @@ export const SearchPagination = ({
 						disabled={currentPage >= totalPages}
 						className="gap-1 pr-2.5"
 					>
-						<span className="sm:inline">{m.search_pagination_next()}</span>
+						<span className="sm:inline">{m.bright_sapphire_prairie()}</span>
 						<IconChevronRight className="h-4 w-4" />
 					</PaginationLink>
 				</PaginationItem>

@@ -19,11 +19,11 @@ export function EmptyProfile({ ownProfile }: EmptyProfileProps) {
 				<EmptyMedia variant="icon">
 					<IconMoodWrrrFilled />
 				</EmptyMedia>
-				<EmptyTitle>{m.empty_profile_title()}</EmptyTitle>
+				<EmptyTitle>{m.nifty_wine_puma()}</EmptyTitle>
 				<EmptyDescription>
 					{ownProfile
-						? m.empty_profile_desc_own()
-						: m.empty_profile_desc_other()}
+						? m.gleeful_hazel_dolphin()
+						: m.lush_indigo_eagle()}
 				</EmptyDescription>
 			</EmptyHeader>
 		</Empty>

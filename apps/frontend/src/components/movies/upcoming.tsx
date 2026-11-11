@@ -22,7 +22,7 @@ export const UpcomingMovies = ({
 	}
 
 	if (isError) {
-		toast.error({ title: m.error_failed_to_load({ title }) });
+		toast.error({ title: m.gleeful_amber_lynx({ title }) });
 		return null;
 	}
 

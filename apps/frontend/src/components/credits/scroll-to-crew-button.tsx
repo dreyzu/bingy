@@ -23,7 +23,7 @@ export const ScrollToCrewButton = ({
 				className="flex flex-row gap-1"
 			>
 				<IconArrowDown className="h-4 w-4 self-center" />
-				{m.btn_jump_to_crew()}
+				{m.warm_fuchsia_planet()}
 			</a>
 		</Button>
 	);

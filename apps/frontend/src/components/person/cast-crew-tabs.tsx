@@ -14,10 +14,10 @@ export function CastCrewTabs({ cast, crew }: CastCrewTabsProps) {
 		<Tabs defaultValue="cast" className="w-full m-0">
 			<TabsList variant="line">
 				<TabsTrigger value="cast" className="px-0">
-					{m.cast_text()}
+					{m.candid_silver_narwhal()}
 				</TabsTrigger>
 				<TabsTrigger value="crew" className="px-0">
-					{m.crew_text()}
+					{m.spry_saffron_pebble()}
 				</TabsTrigger>
 			</TabsList>
 			<TabsContent value="cast">

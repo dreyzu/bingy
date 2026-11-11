@@ -26,26 +26,26 @@ export function FavoritesEmptyState({
 }: FavoritesEmptyStateProps) {
 	const headerMessages = isOwnProfile
 		? {
-				all: m.favorites_toggle_no_result_all(),
-				movie: m.favorites_toggle_no_result_movies(),
-				tv: m.favorites_toggle_no_result_tv(),
+				all: m.plucky_sage_arrow(),
+				movie: m.earthy_rose_willow(),
+				tv: m.golden_cream_octopus(),
 			}
 		: {
-				all: m.favorites_toggle_no_result_all_other({ username }),
-				movie: m.favorites_toggle_no_result_movies_other({ username }),
-				tv: m.favorites_toggle_no_result_tv_other({ username }),
+				all: m.hasty_cerise_meerkat({ username }),
+				movie: m.winsome_scarlet_pine({ username }),
+				tv: m.rapid_sienna_mesa({ username }),
 			};
 
 	const headerDesc = isOwnProfile
 		? {
-				all: m.favorites_toggle_no_result_all_desc(),
-				movie: m.favorites_toggle_no_result_movies_desc(),
-				tv: m.favorites_toggle_no_result_tv_desc(),
+				all: m.bold_olive_salmon(),
+				movie: m.eager_hazel_oasis(),
+				tv: m.icy_crimson_prairie(),
 			}
 		: {
-				all: m.favorites_toggle_no_result_all_desc_other({}),
-				movie: m.favorites_toggle_no_result_movies_desc_other({}),
-				tv: m.favorites_toggle_no_result_tv_desc_other({}),
+				all: m.peppy_scarlet_mesa({}),
+				movie: m.primal_scarlet_cactus({}),
+				tv: m.sweet_amber_rocket({}),
 			};
 
 	const isMobile = useMediaQuery("(pointer: coarse)");
@@ -63,17 +63,17 @@ export function FavoritesEmptyState({
 					<div className="flex flex-row justify-center gap-1 w-40">
 						{filter === "all" || filter === "movie" ? (
 							<Link to="/movies">
-								<Button className="w-35">{m.btn_explore_movies()}</Button>
+								<Button className="w-35">{m.grand_indigo_sunflower()}</Button>
 							</Link>
 						) : null}
 						{filter === "all" || filter === "tv" ? (
 							<Link to="/tv">
-								<Button className="w-35">{m.btn_explore_tv()}</Button>
+								<Button className="w-35">{m.elegant_lavender_compass()}</Button>
 							</Link>
 						) : null}
 					</div>
 					<SearchCommand
-						title={m.btn_form_search()}
+						title={m.breezy_crimson_mesa()}
 						className={isMobile ? "w-50 justify-center" : "w-50"}
 						showKbdHelper
 						showButton

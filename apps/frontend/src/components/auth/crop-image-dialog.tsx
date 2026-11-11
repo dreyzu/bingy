@@ -46,7 +46,7 @@ export function CropImageDialog({
 
 			onCropComplete(croppedImage);
 		} catch (error) {
-			toast.error({ title: m.toast_error_crop_image() });
+			toast.error({ title: m.crisp_yellow_beacon() });
 		}
 	};
 
@@ -70,7 +70,7 @@ export function CropImageDialog({
 					/>
 				</div>
 				<div className="flex flex-col gap-2 px-4 pb-4">
-					<Label className="text-sm">{m.edit_image_zoom_label()}</Label>
+					<Label className="text-sm">{m.shiny_mauve_arrow()}</Label>
 					<Slider
 						min={1}
 						max={3}
@@ -82,9 +82,9 @@ export function CropImageDialog({
 				</div>
 				<DialogFooter>
 					<Button variant="outline" onClick={onCancel}>
-						{m.btn_cancel()}
+						{m.alert_azure_pebble()}
 					</Button>
-					<Button onClick={handleSave}>{m.btn_save()}</Button>
+					<Button onClick={handleSave}>{m.snappy_tan_puma()}</Button>
 				</DialogFooter>
 			</DialogContent>
 		</Dialog>

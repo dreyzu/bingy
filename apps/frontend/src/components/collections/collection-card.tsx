@@ -47,7 +47,7 @@ export function CollectionCard({ collection }: CollectionCardProps) {
 			<CardHeader>
 				<CardTitle>{collection.name}</CardTitle>
 				<CardDescription className="text-foreground">
-					{m.collection_card_desc({
+					{m.loyal_violet_valley({
 						numberOfMovies: collectionData.parts.length,
 					})}
 				</CardDescription>
@@ -61,7 +61,7 @@ export function CollectionCard({ collection }: CollectionCardProps) {
 						variant="secondary"
 						className="w-full md:w-xs text-foreground"
 					>
-						{m.btn_view_collection()}
+						{m.alert_sage_bagel()}
 					</Button>
 				</Link>
 			</CardContent>

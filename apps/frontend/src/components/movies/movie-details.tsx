@@ -60,8 +60,8 @@ export function MovieDetailView({
 	if (isError || !movie) {
 		return (
 			<ResourceNotFound
-				title={m.error_title_not_found_movie()}
-				description={m.error_desc_not_found_movie()}
+				title={m.balmy_teal_oasis()}
+				description={m.balmy_copper_koala()}
 			/>
 		);
 	}
@@ -126,7 +126,7 @@ export function MovieDetailView({
 										<MediaCreators
 											creators={directors}
 											getRoleLabel={(gender) =>
-												m.movie_details_director({ gender })
+												m.spry_ochre_falcon({ gender })
 											}
 										/>
 									</div>
@@ -172,7 +172,7 @@ export function MovieDetailView({
 													style={{ width: 18, height: 14 }}
 												/>
 											) : null}
-											{m.movie_details_release_date()}
+											{m.dapper_beige_cherry()}
 										</p>
 									</div>
 								</CardContent>
@@ -190,7 +190,7 @@ export function MovieDetailView({
 									params={{ movieId: movie.id.toString() }}
 									className="text-sm"
 								>
-									{m.link_text_full_credits()}
+									{m.elegant_gold_violin()}
 								</Link>
 							</div>
 						) : null}

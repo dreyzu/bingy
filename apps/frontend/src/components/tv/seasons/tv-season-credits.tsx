@@ -30,8 +30,8 @@ export function TvSeasonCreditsView({
 	if (isError || !credits) {
 		return (
 			<ResourceNotFound
-				title={m.season_credits_not_found_title()}
-				description={m.season_credits_not_found_desc()}
+				title={m.winsome_sage_fern()}
+				description={m.daring_teal_turtle()}
 			/>
 		);
 	}
@@ -48,8 +48,8 @@ export function TvSeasonCreditsView({
 			<div className="flex flex-col gap-8 pt-2 text-center md:text-left">
 				<h2 className="text-2xl font-bold">
 					{seasonNumber === 0
-						? m.season_credits_special()
-						: m.season_credits_title({ seasonNumber: seasonNumber })}
+						? m.hasty_onyx_wolf()
+						: m.modest_sapphire_barn({ seasonNumber: seasonNumber })}
 				</h2>
 				{credits.cast.length > 0 ? (
 					<CastSectionAggregated people={credits.cast} />
@@ -60,7 +60,7 @@ export function TvSeasonCreditsView({
 					</div>
 				) : null}
 				{credits.cast.length === 0 && credits.crew.length === 0 ? (
-					<p className="text-center">{m.season_credits_no_results()}</p>
+					<p className="text-center">{m.peppy_orange_ember()}</p>
 				) : null}
 			</div>
 		</div>

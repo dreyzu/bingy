@@ -39,8 +39,8 @@ export function TwoFactorDialog({
 		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogContent className="xs:w-full max-w-sm lg:max-w-xl">
 				<DialogHeader>
-					<DialogTitle>{m.dialog_title_two_factor()}</DialogTitle>
-					<DialogDescription>{m.dialog_desc_two_factor()}</DialogDescription>
+					<DialogTitle>{m.sturdy_saffron_valley()}</DialogTitle>
+					<DialogDescription>{m.glossy_rust_dolphin()}</DialogDescription>
 				</DialogHeader>
 				<div className="flex flex-col items-center mt-4 gap-8">
 					<div className="flex justify-center">
@@ -72,10 +72,10 @@ export function TwoFactorDialog({
 						{isVerifying ? (
 							<span className="flex items-center justify-center gap-2">
 								<IconLoader className="animate-spin h-4 w-4" />
-								{m.dialog_btn_verifying()}
+								{m.dapper_rose_crystal()}
 							</span>
 						) : (
-							m.dialog_btn_verify()
+							m.grand_lime_eagle()
 						)}
 					</Button>
 				</div>

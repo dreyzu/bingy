@@ -54,9 +54,9 @@ export function useAddToFavorites(username: string) {
 			});
 
 			toast.success({
-				title: m.toast_add_to_favorites_success({ name: variables.mediaName }),
+				title: m.keen_gold_raven({ name: variables.mediaName }),
 				button: {
-					label: m.btn_go_to_favorites(),
+					label: m.nifty_sage_meerkat(),
 					onClick: () => {
 						navigate({
 							to: "/@{$username}/favorites",
@@ -68,7 +68,7 @@ export function useAddToFavorites(username: string) {
 		},
 		onError: (_error, variables) => {
 			toast.error({
-				title: m.toast_add_to_favorites_error({ name: variables.mediaName }),
+				title: m.zesty_sepia_koala({ name: variables.mediaName }),
 			});
 		},
 	});
@@ -95,14 +95,14 @@ export function useRemoveFromFavorites(username: string) {
 			});
 
 			toast.success({
-				title: m.toast_remove_from_favorites_success({
+				title: m.warm_umber_forest({
 					name: variables.mediaName,
 				}),
 			});
 		},
 		onError: (_error, variables) => {
 			toast.error({
-				title: m.toast_remove_from_favorites_error({
+				title: m.loyal_azure_bridge({
 					name: variables.mediaName,
 				}),
 			});

@@ -145,15 +145,15 @@ export const MediaActionMenu = ({
 						>
 							<span>
 								{userTvProgress
-									? m.btn_update_currently_watching_text()
-									: m.btn_add_to_currently_watching_text()}
+									? m.humble_turquoise_moose()
+									: m.lush_pink_blossom()}
 							</span>
 							<IconPlayerPlay className="ml-auto" />
 						</Button>
 					) : null}
 					<AddToListButton onClick={() => setShowAddToListDialog(true)} />
 					<ShareButton
-						text={m.btn_share_link_media_text({
+						text={m.silent_ochre_pine({
 							media_name: title,
 							year: year,
 						})}

@@ -32,7 +32,7 @@ export function ResourceNotFound({
 					<CardDescription>{description}</CardDescription>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-2">
-					<BackButton style="w-full" text={m.btn_go_back()} />
+					<BackButton style="w-full" text={m.peppy_silver_maple()} />
 
 					<Button variant="outline" className="w-full">
 						<Link

@@ -27,7 +27,7 @@ export function UpdateProfileForm({ form, id, name }: UpdateProfileFormProps) {
 		<div className="grid gap-4">
 			<Field className="grid gap-2 hover:cursor-not-allowed">
 				<FieldLabel htmlFor={`${id}-username`}>
-					{m.form_username_label()}
+					{m.light_topaz_bridge()}
 				</FieldLabel>
 				<FieldContent className="flex flex-row gap-2 items-center">
 					<Input
@@ -54,7 +54,7 @@ export function UpdateProfileForm({ form, id, name }: UpdateProfileFormProps) {
 							htmlFor={`${id}-bio`}
 							className="flex flex-row justify-between"
 						>
-							{m.form_bio_label()}
+							{m.noble_cerise_banjo()}
 							<p className="text-sm text-muted-foreground">
 								{field.value.length}/160
 							</p>
@@ -62,7 +62,7 @@ export function UpdateProfileForm({ form, id, name }: UpdateProfileFormProps) {
 						<FieldContent>
 							<Textarea
 								id={`${id}-bio`}
-								placeholder={m.form_bio_input_placeholder()}
+								placeholder={m.noble_bronze_walrus()}
 								className="resize-none min-h-[100px]"
 								maxLength={160}
 								{...field}
@@ -84,7 +84,7 @@ export function UpdateProfileForm({ form, id, name }: UpdateProfileFormProps) {
 							htmlFor={`${id}-location`}
 							className="flex flex-row justify-between"
 						>
-							{m.form_location_label()}
+							{m.brave_copper_glacier()}
 							<p className="text-sm text-muted-foreground">
 								{field.value.length}/30
 							</p>

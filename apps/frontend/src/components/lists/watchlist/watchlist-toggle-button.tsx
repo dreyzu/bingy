@@ -107,8 +107,8 @@ export function WatchlistToggleButton({
 			<TooltipContent align="center">
 				<p>
 					{isInWatchlist
-						? m.remove_watchlist_media_tooltip()
-						: m.add_watchlist_media_tooltip()}
+						? m.witty_yellow_bamboo()
+						: m.wild_navy_crystal()}
 				</p>
 			</TooltipContent>
 		</Tooltip>

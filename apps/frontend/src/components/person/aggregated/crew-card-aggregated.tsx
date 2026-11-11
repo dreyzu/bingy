@@ -57,8 +57,8 @@ export const CrewCardAggregated = ({ person }: CrewCardAggregatedProps) => {
 					<CardDescription className="text-xs text-muted-foreground pb-2">
 						{person.total_episode_count}{" "}
 						{person.total_episode_count > 1
-							? m.person_card_tv_episodes()
-							: m.person_card_tv_episode()}
+							? m.fair_orange_maple()
+							: m.mighty_coral_kettle()}
 					</CardDescription>
 				</CardHeader>
 
@@ -67,7 +67,7 @@ export const CrewCardAggregated = ({ person }: CrewCardAggregatedProps) => {
 						to="/person/$personId"
 						params={{ personId: person.id.toString() }}
 					>
-						<Button className="w-full">{m.btn_show_more()}</Button>
+						<Button className="w-full">{m.hazy_maroon_galaxy()}</Button>
 					</Link>
 				</CardContent>
 			</Card>

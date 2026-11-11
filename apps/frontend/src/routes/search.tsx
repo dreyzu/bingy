@@ -91,7 +91,7 @@ function SearchRoute() {
 				</>
 			) : (
 				<div className="text-center text-muted-foreground py-8">
-					{m.form_search_no_query()}
+					{m.vibrant_sepia_yarn()}
 				</div>
 			)}
 		</div>

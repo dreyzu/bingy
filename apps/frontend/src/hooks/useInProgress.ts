@@ -73,10 +73,10 @@ export function useAddTvToCurrentlyWatching(username: string) {
 				queryKey: ["user-profile", username],
 			});
 
-			toast.success({ title: m.toast_add_currently_watching_success() });
+			toast.success({ title: m.noble_sepia_parrot() });
 		},
 		onError: () => {
-			toast.error({ title: m.toast_add_currently_watching_error() });
+			toast.error({ title: m.fierce_pink_pelican() });
 		},
 	});
 }

@@ -23,8 +23,8 @@ export function TvSeasonsDetailsView({
 	if (isError || !tv) {
 		return (
 			<ResourceNotFound
-				title={m.seasons_details_not_found_title()}
-				description={m.seasons_details_not_found_desc()}
+				title={m.vivid_rust_sunflower()}
+				description={m.epic_lemon_jaguar()}
 			/>
 		);
 	}
@@ -42,7 +42,7 @@ export function TvSeasonsDetailsView({
 			<div className="grid gris-cols-1 gap-4 pt-2">
 				<div>
 					<h1 className="text-4xl font-bold mb-2">{tv.name}</h1>
-					<p className="text-muted-foreground">{m.seasons_details_seasons()}</p>
+					<p className="text-muted-foreground">{m.elegant_lemon_planet()}</p>
 				</div>
 
 				<div className="grid gap-4 xl:grid-cols-2">

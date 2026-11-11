@@ -131,11 +131,11 @@ export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
 					<DropdownMenuSeparator />
 					<DropdownMenuItem onClick={() => setShowLogReviewDialog(true)}>
 						{existingRating
-							? m.list_dropdown_editreview()
-							: m.list_dropdown_logreview()}
+							? m.peppy_onyx_falcon()
+							: m.icy_mauve_otter()}
 					</DropdownMenuItem>
 					<DropdownMenuItem onClick={() => setShowAddToListDialog(true)}>
-						{m.list_dropdown_item_add_to_list()}
+						{m.agile_saffron_daisy()}
 					</DropdownMenuItem>
 					<AddToWatchlistItem
 						movie={movie}

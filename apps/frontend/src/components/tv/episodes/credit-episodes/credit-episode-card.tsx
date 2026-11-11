@@ -40,7 +40,7 @@ export const CreditEpisodeCard = ({
 
 	const getAirDateText = () => {
 		if (!episode.air_date) {
-			return m.credit_episode_card_not_aired_text();
+			return m.sunny_fuchsia_galaxy();
 		}
 
 		const airDate = new Date(episode.air_date);
@@ -48,8 +48,8 @@ export const CreditEpisodeCard = ({
 		const formattedDate = formatDate(episode.air_date, localeRegion);
 
 		return isUpcoming
-			? m.credit_episode_card_airs_text({ date: formattedDate })
-			: m.credit_episode_card_aired_text({ date: formattedDate });
+			? m.happy_slate_marmot({ date: formattedDate })
+			: m.jaunty_pink_gecko({ date: formattedDate });
 	};
 
 	return (
@@ -88,7 +88,7 @@ export const CreditEpisodeCard = ({
 							</Badge>
 						) : null}
 						{isGuestAppearance ? (
-							<Badge variant="default">{m.badge_credit_episode_guest()}</Badge>
+							<Badge variant="default">{m.alert_pearl_heron()}</Badge>
 						) : null}
 					</div>
 					<div className="text-sm whitespace-nowrap">
@@ -102,7 +102,7 @@ export const CreditEpisodeCard = ({
 							: "text-muted-foreground"
 					}`}
 				>
-					{episode.overview || m.overview_none()}
+					{episode.overview || m.happy_slate_whale()}
 				</CardDescription>
 			</CardHeader>
 			<CardContent className="flex flex-col gap-1 mt-auto">

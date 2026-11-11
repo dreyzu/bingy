@@ -37,7 +37,7 @@ export const SearchResultsContainer = ({
 	return (
 		<div className="flex flex-col gap-4 w-full">
 			<h1>
-				{m.search_container_results_for()}{" "}
+				{m.vibrant_cream_wombat()}{" "}
 				<span className="font-bold text-muted-foreground">"{query}"</span>
 			</h1>
 			<ToggleGroup
@@ -48,35 +48,35 @@ export const SearchResultsContainer = ({
 			>
 				<ToggleGroupItem
 					value="all"
-					aria-label={m.toggle_aria_label_all()}
+					aria-label={m.wise_orange_cedar()}
 					className="hover:cursor-pointer"
 				>
 					<IconLayoutGrid />
-					{m.toggle_group_item_all()}
+					{m.gallant_green_rocket()}
 				</ToggleGroupItem>
 				<ToggleGroupItem
 					value="movie"
-					aria-label={m.toggle_aria_label_movies()}
+					aria-label={m.ample_sepia_tulip()}
 					className="hover:cursor-pointer"
 				>
 					<IconMovie />
-					{m.toggle_group_item_movies()}
+					{m.candid_lavender_harbor()}
 				</ToggleGroupItem>
 				<ToggleGroupItem
 					value="tv"
-					aria-label={m.toggle_aria_label_tv()}
+					aria-label={m.fair_saffron_glacier()}
 					className="hover:cursor-pointer"
 				>
 					<IconDeviceTv />
-					{m.toggle_group_item_tv()}
+					{m.airy_yellow_rocket()}
 				</ToggleGroupItem>
 				<ToggleGroupItem
-					value={m.toggle_aria_label_people()}
+					value={m.frosty_wine_valley()}
 					aria-label="People"
 					className="hover:cursor-pointer"
 				>
 					<IconUsers />
-					{m.toggle_group_item_person()}
+					{m.gallant_violet_mesa()}
 				</ToggleGroupItem>
 			</ToggleGroup>
 
@@ -88,7 +88,7 @@ export const SearchResultsContainer = ({
 
 			{filteredResults.length === 0 ? (
 				<div className="text-center text-muted-foreground py-8">
-					{m.search_container_no_results_text()}
+					{m.eager_silver_arrow()}
 				</div>
 			) : null}
 		</div>

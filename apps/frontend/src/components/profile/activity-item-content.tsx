@@ -19,7 +19,7 @@ export function ActivityItemContent({
 		: null;
 	const listLink = getListLink(activity.username, activity.listSlug);
 	const usernameDisplay = isOwnProfile
-		? m.profile_activity_you()
+		? m.dreamy_copper_tulip()
 		: activity.username;
 	const ownProfileToString = isOwnProfile ? "true" : "false";
 
@@ -33,7 +33,7 @@ export function ActivityItemContent({
 					>
 						{usernameDisplay}
 					</Link>
-					{m.profile_activity_action_added_to_watchlist({
+					{m.dapper_ruby_moose({
 						isOwnProfile: ownProfileToString,
 					})}
 					{mediaLink ? (
@@ -45,7 +45,7 @@ export function ActivityItemContent({
 						</Link>
 					) : null}
 					<span className="text-muted-foreground">
-						{m.profile_activity_added_to_watchlist({
+						{m.rustic_slate_salmon({
 							isOwnProfile: ownProfileToString,
 						})}
 					</span>
@@ -61,7 +61,7 @@ export function ActivityItemContent({
 					>
 						{usernameDisplay}
 					</Link>
-					{m.profile_activity_action_added_to_favorites({
+					{m.candid_violet_yak({
 						isOwnProfile: ownProfileToString,
 					})}
 					{mediaLink ? (
@@ -73,7 +73,7 @@ export function ActivityItemContent({
 						</Link>
 					) : null}
 					<span className="text-muted-foreground">
-						{m.profile_activity_added_to_favorites({
+						{m.lean_lavender_pebble({
 							isOwnProfile: ownProfileToString,
 						})}
 					</span>
@@ -89,7 +89,7 @@ export function ActivityItemContent({
 					>
 						{usernameDisplay}
 					</Link>
-					{m.profile_activity_action_watched({
+					{m.clever_violet_forest({
 						isOwnProfile: ownProfileToString,
 					})}
 					{mediaLink && (
@@ -117,7 +117,7 @@ export function ActivityItemContent({
 					>
 						{usernameDisplay}
 					</Link>
-					{m.profile_activity_action_followed({
+					{m.fierce_amber_lemur({
 						isOwnProfile: isOwnProfile ? "true" : "false",
 					})}
 					{targetUsernameLink && (
@@ -140,7 +140,7 @@ export function ActivityItemContent({
 					>
 						{usernameDisplay}
 					</Link>
-					{m.profile_activity_action_rated({
+					{m.eager_lilac_clover({
 						isOwnProfile: isOwnProfile ? "true" : "false",
 					})}
 					{mediaLink && (
@@ -168,7 +168,7 @@ export function ActivityItemContent({
 					>
 						{usernameDisplay}
 					</Link>
-					{m.profile_activity_action_created_list({
+					{m.noble_pink_canyon({
 						isOwnProfile: isOwnProfile ? "true" : "false",
 					})}
 					{listLink ? (

@@ -53,31 +53,31 @@ export function DeleteListButton({
 							size={size}
 							onClick={() => setOpen(true)}
 							disabled={isPending}
-							aria-label={m.btn_delete_list_aria_label()}
+							aria-label={m.grand_sepia_oasis()}
 						>
 							<IconTrash />
 						</Button>
 					}
 				></TooltipTrigger>
 				<TooltipContent>
-					<p>{m.delete_list_tooltip({ list_name: listName })}</p>
+					<p>{m.hasty_peach_basil({ list_name: listName })}</p>
 				</TooltipContent>
 			</Tooltip>
 
 			<AlertDialog open={open} onOpenChange={setOpen}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
-						<AlertDialogTitle>{m.delete_list_dialog_title()}</AlertDialogTitle>
+						<AlertDialogTitle>{m.modest_aqua_dolphin()}</AlertDialogTitle>
 						<AlertDialogDescription>
-							{m.delete_list_dialog_description({ list_name: listName })}
+							{m.quiet_amber_harbor({ list_name: listName })}
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
 						<AlertDialogCancel>
-							{m.delete_list_dialog_cancel()}
+							{m.lean_sepia_rocket()}
 						</AlertDialogCancel>
 						<AlertDialogAction onClick={handleDelete} disabled={isPending}>
-							{m.delete_list_dialog_confirm()}
+							{m.zesty_pearl_kettle()}
 						</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>

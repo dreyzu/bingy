@@ -22,15 +22,15 @@ import { locales } from "@/paraglide/runtime";
 const getRegionName = (region: string): string => {
 	switch (region) {
 		case "FR":
-			return m.region_france();
+			return m.vibrant_onyx_dolphin();
 		case "CA":
-			return m.region_canada();
+			return m.sunny_mauve_basil();
 		case "US":
-			return m.region_united_states();
+			return m.bright_gray_cricket();
 		case "GB":
-			return m.region_united_kingdom();
+			return m.tidy_copper_rabbit();
 		case "AU":
-			return m.region_australia();
+			return m.jaunty_wine_eagle();
 		default:
 			return region;
 	}
@@ -45,7 +45,7 @@ const LocaleRegionContent = () => {
 	return (
 		<div className="space-y-4">
 			<div>
-				<h3 className="mb-2 font-medium">{m.locale_dropdown_label()}</h3>
+				<h3 className="mb-2 font-medium">{m.plucky_peach_acorn()}</h3>
 				<div className="space-y-1">
 					{locales.map((tag) => (
 						<Button
@@ -62,7 +62,7 @@ const LocaleRegionContent = () => {
 			</div>
 			<div className="h-px bg-border" />
 			<div>
-				<h3 className="mb-2 font-medium">{m.region_dropdown_label()}</h3>
+				<h3 className="mb-2 font-medium">{m.noble_coral_rabbit()}</h3>
 				<div className="space-y-1">
 					{SUPPORTED_REGIONS.map((reg) => (
 						<Button
@@ -126,7 +126,7 @@ export const LocaleRegionDropdown = () => {
 			/>
 			<DropdownMenuContent align="end" className="w-40">
 				<DropdownMenuGroup>
-					<DropdownMenuLabel>{m.locale_dropdown_label()}</DropdownMenuLabel>
+					<DropdownMenuLabel>{m.plucky_peach_acorn()}</DropdownMenuLabel>
 					<DropdownMenuRadioGroup value={locale} onValueChange={changeLocale}>
 						{locales.map((tag) => (
 							<DropdownMenuRadioItem key={tag} value={tag}>
@@ -137,7 +137,7 @@ export const LocaleRegionDropdown = () => {
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
 				<DropdownMenuGroup>
-					<DropdownMenuLabel>{m.region_dropdown_label()}</DropdownMenuLabel>
+					<DropdownMenuLabel>{m.noble_coral_rabbit()}</DropdownMenuLabel>
 					<DropdownMenuRadioGroup value={region} onValueChange={changeRegion}>
 						{SUPPORTED_REGIONS.map((reg) => (
 							<DropdownMenuRadioItem key={reg} value={reg}>

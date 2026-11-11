@@ -53,7 +53,7 @@ export function ProfileDrawer() {
 		queryClient.setQueryData(sessionQueryOptions.queryKey, null);
 		queryClient.removeQueries({ queryKey: ["accounts"] });
 
-		toast.success({ title: m.toast_success_logout() });
+		toast.success({ title: m.epic_azure_mesa() });
 
 		await router.navigate({ to: "/" });
 	};
@@ -102,7 +102,7 @@ export function ProfileDrawer() {
 							}}
 						>
 							<IconUser />
-							{m.dropdown_profile_text()}
+							{m.candid_azure_pine()}
 						</Button>
 						<Button
 							className="w-full justify-start"
@@ -116,7 +116,7 @@ export function ProfileDrawer() {
 							}}
 						>
 							<IconClockBolt />
-							{m.dropdown_watchlist_text()}
+							{m.lush_tan_pelican()}
 						</Button>
 						<Button
 							className="w-full justify-start"
@@ -130,7 +130,7 @@ export function ProfileDrawer() {
 							}}
 						>
 							<IconList />
-							{m.dropdown_lists_text()}
+							{m.peppy_pink_falcon()}
 						</Button>
 						<Button
 							className="w-full justify-start"
@@ -144,7 +144,7 @@ export function ProfileDrawer() {
 							}}
 						>
 							<IconHeart />
-							{m.dropdown_favorites_text()}
+							{m.gentle_saffron_yak()}
 						</Button>
 						<Button
 							className="w-full justify-start"
@@ -158,7 +158,7 @@ export function ProfileDrawer() {
 							}}
 						>
 							<IconHistory />
-							{m.dropdown_history_text()}
+							{m.plucky_lime_island()}
 						</Button>
 						<Button
 							className="w-full justify-start"
@@ -171,7 +171,7 @@ export function ProfileDrawer() {
 							}}
 						>
 							<IconAdjustmentsHorizontal />
-							{m.dropdown_settings_text()}
+							{m.daring_lime_meerkat()}
 						</Button>
 						<Button className="w-full" variant="ghost">
 							<a
@@ -189,7 +189,7 @@ export function ProfileDrawer() {
 						</Button>
 						<Button disabled className="w-full justify-start" variant="ghost">
 							<IconLifebuoy className="w-4 h-4" />
-							<span>{m.dropdown_support_text()}</span>
+							<span>{m.primal_slate_barn()}</span>
 						</Button>
 					</div>
 					<Separator />
@@ -197,7 +197,7 @@ export function ProfileDrawer() {
 				<DrawerFooter>
 					<Button onClick={logout} variant="destructive" className="w-full">
 						<IconLogout className="w-4 h-4" />
-						<span>{m.dropdown_logout_text()}</span>
+						<span>{m.chilly_plum_jaguar()}</span>
 					</Button>
 				</DrawerFooter>
 			</DrawerContent>

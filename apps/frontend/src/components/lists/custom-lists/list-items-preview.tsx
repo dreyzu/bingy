@@ -27,7 +27,7 @@ export function ListItemsPreview({
 		<div className="flex flex-col gap-2">
 			<div className="flex justify-between items-center">
 				<h3 className="text-sm font-medium">
-					{m.list_added_items({
+					{m.frosty_peach_forest({
 						count: selectedItems.length,
 						total_items: selectedItems.length,
 					})}

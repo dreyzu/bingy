@@ -24,12 +24,12 @@ function SigninPage() {
 	// these errors happens after being redirected from backend
 	// eg: oauth sign-in/sign-up with an invalid/not verified email by google
 	//     token to verify email/reset password expired or not present/invalid
-	const defaultMessage = m.toast_error_auth_signin_default();
+	const defaultMessage = m.snappy_tan_arrow();
 	const errorMessages: Record<string, string> = {
-		auth_failed: m.toast_error_auth_failed(),
-		email_required: m.toast_error_oauth_email_required({ provider: "Google" }),
-		token_expired_or_invalid: m.toast_error_auth_token_expired_or_invalid(),
-		no_token: m.toast_error_auth_no_token(),
+		auth_failed: m.quick_rose_compass(),
+		email_required: m.proud_jade_galaxy({ provider: "Google" }),
+		token_expired_or_invalid: m.brisk_white_wombat(),
+		no_token: m.golden_yellow_sunflower(),
 		default: defaultMessage,
 	};
 

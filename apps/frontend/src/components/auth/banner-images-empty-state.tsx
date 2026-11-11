@@ -15,10 +15,8 @@ export function BackdropImagesEmptyState() {
 				<EmptyMedia variant="icon">
 					<IconPhotoOff className="size-4" />
 				</EmptyMedia>
-				<EmptyTitle>{m.banner_image_select_empty_title()}</EmptyTitle>
-				<EmptyDescription>
-					{m.banner_image_select_empty_desc()}
-				</EmptyDescription>
+				<EmptyTitle>{m.upbeat_magenta_cactus()}</EmptyTitle>
+				<EmptyDescription>{m.stellar_purple_pine()}</EmptyDescription>
 			</EmptyHeader>
 		</Empty>
 	);

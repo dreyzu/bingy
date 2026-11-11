@@ -36,8 +36,8 @@ export function CollectionDetailsView({
 	if (isError || !collectionData) {
 		return (
 			<ResourceNotFound
-				title={m.error_title_not_found_collection()}
-				description={m.error_desc_not_found_collection()}
+				title={m.hasty_white_glacier()}
+				description={m.bubbly_yellow_gecko()}
 			/>
 		);
 	}
@@ -142,7 +142,7 @@ export function CollectionDetailsView({
 						</Card>
 
 						<MovieCarousel
-							title={m.collection_carousel_title({
+							title={m.lush_mint_turtle({
 								number: collectionData.parts.length,
 							})}
 							movies={sortedParts}

@@ -9,7 +9,7 @@ interface CastSectionAggregatedProps {
 
 export const CastSectionAggregated = ({
 	people,
-	title = m.title_cast(),
+	title = m.fancy_bronze_panda(),
 }: CastSectionAggregatedProps) => {
 	const uniquePeople = Array.from(
 		new Map(people.map((person) => [person.id, person])).values(),

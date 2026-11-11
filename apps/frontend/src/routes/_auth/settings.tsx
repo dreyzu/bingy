@@ -42,14 +42,14 @@ function SettingsPage() {
 	});
 
 	const errorMessages: Record<string, string> = {
-		email_doesn_match: m.toast_error_email_doesnt_match_settings_page(),
+		email_doesn_match: m.velvet_silver_narwhal(),
 		account_already_linked_to_different_user:
-			m.toast_error_already_linked_settings_page(),
+			m.swift_lavender_bamboo(),
 	};
 
 	if (error) {
 		const message =
-			errorMessages[error] ?? m.toast_error_generic_error_settings_page();
+			errorMessages[error] ?? m.steady_purple_orchid();
 		toast.error({ title: message }, { duration: 8000, closeButton: true });
 	}
 

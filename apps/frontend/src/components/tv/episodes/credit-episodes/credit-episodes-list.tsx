@@ -27,7 +27,7 @@ export const CreditEpisodesList = ({
 	guestEpisodeIds,
 	episodes,
 }: CreditEpisodesListProps) => {
-	const role = character || job || m.credit_episodes_list_unknown_role();
+	const role = character || job || m.balmy_jade_forest();
 
 	return (
 		<div className="w-full">
@@ -55,7 +55,7 @@ export const CreditEpisodesList = ({
 
 								<p className="text-xl text-muted-foreground mt-2">
 									<span className="text-foreground">{personName}</span>{" "}
-									{m.credit_episodes_list_as({ role: role })}
+									{m.happy_hazel_compass({ role: role })}
 								</p>
 							</div>
 						</CardContent>

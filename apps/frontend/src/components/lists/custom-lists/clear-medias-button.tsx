@@ -12,7 +12,7 @@ export function ClearMediasButton({
 }: ClearMediasButtonProps) {
 	return (
 		<Button type="button" variant="outline" size={size} onClick={onClear}>
-			{m.list_added_items_clear_all()}
+			{m.icy_pearl_tiger()}
 		</Button>
 	);
 }

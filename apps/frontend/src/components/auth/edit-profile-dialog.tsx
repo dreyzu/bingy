@@ -91,7 +91,7 @@ export function EditProfileDialog({
 			disabled={isSubmitting || !form.formState.isDirty}
 			className="w-full"
 		>
-			{isSubmitting ? m.btn_saving() : m.btn_save()}
+			{isSubmitting ? m.lean_amber_yarn() : m.snappy_tan_puma()}
 		</Button>
 	);
 
@@ -99,7 +99,7 @@ export function EditProfileDialog({
 		<Drawer open={open} onOpenChange={onOpenChange}>
 			<DrawerContent className="max-h-[96vh]">
 				<DrawerHeader className="justify-start items-start">
-					<DrawerTitle>{m.edit_profile_title()}</DrawerTitle>
+					<DrawerTitle>{m.elegant_periwinkle_glacier()}</DrawerTitle>
 				</DrawerHeader>
 				<DrawerBody>
 					<div className="px-4 pb-4">
@@ -121,7 +121,7 @@ export function EditProfileDialog({
 		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogContent className="max-w-md">
 				<DialogHeader>
-					<DialogTitle>{m.edit_profile_title()}</DialogTitle>
+					<DialogTitle>{m.elegant_periwinkle_glacier()}</DialogTitle>
 				</DialogHeader>
 				<div className="px-4 overflow-y-auto max-h-[60vh]">
 					<div className="flex flex-col gap-4 py-4">

@@ -30,7 +30,7 @@ export function ShareButton({ text }: { text: string }) {
 			onMouseLeave={() => setIsHovered(false)}
 		>
 			<Button variant="ghost" className="w-full" onClick={handleCopy}>
-				<span>{copied ? m.btn_copied_text() : m.btn_share_text()}</span>
+				<span>{copied ? m.brave_mauve_hazel() : m.vivid_olive_dolphin()}</span>
 				<IconShare className="ml-auto" />
 			</Button>
 

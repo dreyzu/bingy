@@ -55,15 +55,15 @@ export function ForgotPasswordForm({ email }: ForgotPasswordFormProps) {
 
 			error &&
 				toast.error({
-					title: m.toast_error_email_not_sent() ?? m.toast_error_generic(),
+					title: m.cozy_crimson_saddle() ?? m.candid_beige_yak(),
 				});
 
 			if (data && data.status) {
 				navigate({ to: "/signin" });
-				toast.success({ title: m.forgot_password_email_sent() });
+				toast.success({ title: m.dreamy_azure_wolf() });
 			}
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -77,10 +77,10 @@ export function ForgotPasswordForm({ email }: ForgotPasswordFormProps) {
 			>
 				<CardHeader>
 					<CardTitle className="text-2xl">
-						{m.forgot_password_title()}
+						{m.steady_sepia_anchor()}
 					</CardTitle>
 					<CardDescription>
-						<p>{m.forgot_password_desc()}</p>
+						<p>{m.steady_violet_spruce()}</p>
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="pt-2">
@@ -96,7 +96,7 @@ export function ForgotPasswordForm({ email }: ForgotPasswordFormProps) {
 								render={({ field, fieldState }) => (
 									<Field className="grid gap-2">
 										<FieldLabel htmlFor="email">
-											{m.form_email_label()}
+											{m.witty_maroon_pelican()}
 										</FieldLabel>
 										<FieldContent>
 											<Input
@@ -119,10 +119,10 @@ export function ForgotPasswordForm({ email }: ForgotPasswordFormProps) {
 								{isSubmitting ? (
 									<span className="flex items-center justify-center gap-2">
 										<IconLoader className="animate-spin h-4 w-4" />
-										{m.btn_sending_email()}
+										{m.brave_lemon_gecko()}
 									</span>
 								) : (
-									m.forgot_password_title()
+									m.steady_sepia_anchor()
 								)}
 							</Button>
 						</fieldset>

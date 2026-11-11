@@ -88,13 +88,13 @@ export function SignInForm() {
 					error.code === "INVALID_EMAIL_OR_PASSWORD" ||
 					error.code === "INVALID_PASSWORD"
 				) {
-					toast.error({ title: m.toast_error_invalid_email_password() });
+					toast.error({ title: m.icy_white_barn() });
 				} else {
-					toast.error({ title: m.toast_error_generic() });
+					toast.error({ title: m.candid_beige_yak() });
 				}
 			}
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -109,7 +109,7 @@ export function SignInForm() {
 				newUserCallbackURL: `${config.appUrl}/welcome`,
 			});
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -125,10 +125,10 @@ export function SignInForm() {
 			authClient.$ERROR_CODES;
 
 			if (error?.message === "Invalid two factor cookie") {
-				toast.error({ title: m.toast_error_invalid_code() });
+				toast.error({ title: m.sweet_silver_dolphin() });
 				return;
 			} else if (error) {
-				toast.error({ title: m.toast_error_generic() });
+				toast.error({ title: m.candid_beige_yak() });
 				return;
 			}
 
@@ -141,14 +141,14 @@ export function SignInForm() {
 				});
 
 				toast.success({
-					title: m.welcome_back_message({ username: data.user.name }),
+					title: m.swift_olive_pine({ username: data.user.name }),
 				});
 				setShowDialog(false);
 				form.reset();
 				await router.navigate({ to: "/home" });
 			}
 		} catch (err) {
-			toast.error({ title: m.toast_error_signin_invalid_code() });
+			toast.error({ title: m.tidy_beige_bridge() });
 		}
 	};
 
@@ -160,11 +160,11 @@ export function SignInForm() {
 					className="py-4 md:px-2 flex-1"
 				>
 					<CardHeader>
-						<CardTitle className="text-2xl">{m.signin_title()}</CardTitle>
+						<CardTitle className="text-2xl">{m.crisp_topaz_planet()}</CardTitle>
 						<CardDescription>
 							<div className="flex flex-col gap-1">
-								<p>{m.signin_desc_one()}</p>
-								<p>{m.signin_desc_two()}</p>
+								<p>{m.earthy_gray_eagle()}</p>
+								<p>{m.velvet_cream_maple()}</p>
 							</div>
 						</CardDescription>
 					</CardHeader>
@@ -181,7 +181,7 @@ export function SignInForm() {
 										render={({ field, fieldState }) => (
 											<Field className="grid gap-2">
 												<FieldLabel htmlFor={`${id}-email`}>
-													{m.form_email_label()}
+													{m.witty_maroon_pelican()}
 												</FieldLabel>
 												<FieldContent>
 													<Input
@@ -208,7 +208,7 @@ export function SignInForm() {
 											<Field className="grid gap-2">
 												<div className="flex items-center">
 													<FieldLabel htmlFor={`${id}-password`}>
-														{m.form_password_label()}
+														{m.airy_umber_rabbit()}
 													</FieldLabel>
 													<Link
 														to={"/forgot-password"}
@@ -217,7 +217,7 @@ export function SignInForm() {
 														}
 														className="ml-auto mr-1 inline-block text-xs underline"
 													>
-														{m.signin_forgot_password()}
+														{m.wise_rose_whale()}
 													</Link>
 												</div>
 												<Input
@@ -241,17 +241,17 @@ export function SignInForm() {
 										{isSubmitting ? (
 											<span className="flex items-center justify-center gap-2">
 												<IconLoader className="animate-spin h-4 w-4" />
-												{m.btn_signing_in()}
+												{m.golden_fuchsia_iguana()}
 											</span>
 										) : (
-											m.btn_signin()
+											m.sweet_sage_forest()
 										)}
 										{lastMethod === "email" ? (
 											<Badge
 												variant="secondary"
 												className="hidden absolute right-2 rounded-md md:block text-xs overflow-hidden"
 											>
-												{m.signin_last_method_badge()}
+												{m.warm_purple_rocket()}
 											</Badge>
 										) : null}
 									</Button>
@@ -259,20 +259,20 @@ export function SignInForm() {
 							</fieldset>
 						</form>
 
-						<SeparatorWithText text={m.signin_separator_text()} />
+						<SeparatorWithText text={m.tidy_umber_squirrel()} />
 						<div className="flex gap-2">
 							<OAuthButton
 								icon={IconBrandGoogleFilled}
-								label={m.signin_with_provider({ provider: "Google" })}
+								label={m.chilly_purple_octopus({ provider: "Google" })}
 								text="Google"
 								lastMethod={lastMethod === "google"}
 								onClick={() => handleOAuthSignIn("google")}
 							/>
 						</div>
 						<div className="flex justify-center items-center flex-wrap text-sm gap-1">
-							<span>{m.signin_no_account()}</span>
+							<span>{m.icy_olive_maple()}</span>
 							<Link to="/signup" className="underline">
-								{m.signin_no_account_link()}
+								{m.fair_azure_iguana()}
 							</Link>
 						</div>
 					</CardContent>

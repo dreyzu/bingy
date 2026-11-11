@@ -11,9 +11,9 @@ export const Route = createFileRoute("/tv/")({
 function TvIndexPage() {
 	return (
 		<div className="flex flex-col w-full gap-4">
-			<TopRatedTv title={m.tv_series_top_rated_title()} />
-			<TrendingTodayTv title={m.tv_series_trending_today_title()} />
-			<PopularTv title={m.tv_series_popular_title()} />
+			<TopRatedTv title={m.hasty_silver_island()} />
+			<TrendingTodayTv title={m.shiny_ruby_falcon()} />
+			<PopularTv title={m.airy_scarlet_hippo()} />
 		</div>
 	);
 }

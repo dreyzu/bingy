@@ -36,15 +36,15 @@ type ListCardProps = {
 const visibilityConfig = {
 	private: {
 		icon: IconLock,
-		label: m.list_visibility_private,
+		label: m.lean_beige_oasis,
 	},
 	limited: {
 		icon: IconUsers,
-		label: m.list_visibility_limited,
+		label: m.hazy_plum_valley,
 	},
 	public: {
 		icon: IconEye,
-		label: m.list_visibility_public,
+		label: m.hasty_pink_crystal,
 	},
 };
 
@@ -91,7 +91,7 @@ export function ListCard({ item, username, isOwnProfile }: ListCardProps) {
 				<CardContent></CardContent>
 				<CardFooter className="flex justify-between">
 					<p className="text-sm text-muted-foreground">
-						{m.list_created_at({
+						{m.bright_cerise_yak({
 							date: formattedDate,
 						})}
 					</p>

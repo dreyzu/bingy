@@ -75,7 +75,7 @@ export function SeasonEpisodeCombobox({
 	return (
 		<div className="flex flex-col gap-4 lg:flex-row">
 			<div className="flex flex-col gap-2 flex-1">
-				<Label>{m.log_review_dialog_season_combobox_label()}</Label>
+				<Label>{m.vibrant_teal_orchid()}</Label>
 				<Combobox
 					open={seasonOpen}
 					onOpenChange={setSeasonOpen}
@@ -89,13 +89,13 @@ export function SeasonEpisodeCombobox({
 					}}
 				>
 					<ComboboxInput
-						placeholder={m.log_review_dialog_season_combobox_placeholder()}
+						placeholder={m.zippy_cobalt_glacier()}
 						showClear={!!selectedSeason}
 					/>
 					<ComboboxContent>
 						{availableSeasons.length === 0 ? (
 							<ComboboxEmpty>
-								{m.log_review_dialog_season_combobox_no_result()}
+								{m.candid_rose_squirrel()}
 							</ComboboxEmpty>
 						) : null}
 						<ComboboxList>
@@ -113,7 +113,7 @@ export function SeasonEpisodeCombobox({
 			</div>
 
 			<div className="flex flex-col gap-2 flex-1">
-				<Label>{m.log_review_dialog_episode_combobox_label()}</Label>
+				<Label>{m.dapper_magenta_coral()}</Label>
 				<Combobox
 					open={episodeOpen}
 					onOpenChange={setEpisodeOpen}
@@ -124,14 +124,14 @@ export function SeasonEpisodeCombobox({
 					disabled={!selectedSeason || availableEpisodes === 0}
 				>
 					<ComboboxInput
-						placeholder={m.log_review_dialog_episode_combobox_placeholder()}
+						placeholder={m.velvet_beige_jasmine()}
 						showClear={!!selectedEpisode}
 						disabled={!selectedSeason || availableEpisodes === 0}
 					/>
 					<ComboboxContent>
 						{episodeNumbers.length === 0 ? (
 							<ComboboxEmpty>
-								{m.log_review_dialog_episode_combobox_no_result()}
+								{m.stellar_green_aspen()}
 							</ComboboxEmpty>
 						) : null}
 						<ComboboxList>

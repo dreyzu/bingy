@@ -55,7 +55,7 @@ export const ProfileDropdown = ({
 		queryClient.setQueryData(sessionQueryOptions.queryKey, null);
 		queryClient.removeQueries({ queryKey: ["accounts"] });
 
-		toast.success({ title: m.toast_success_logout() });
+		toast.success({ title: m.epic_azure_mesa() });
 
 		await router.navigate({ to: "/" });
 	};
@@ -127,7 +127,7 @@ export const ProfileDropdown = ({
 							}
 						>
 							<IconUser />
-							{m.dropdown_profile_text()}
+							{m.candid_azure_pine()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -138,7 +138,7 @@ export const ProfileDropdown = ({
 							}
 						>
 							<IconClockBolt />
-							{m.dropdown_watchlist_text()}
+							{m.lush_tan_pelican()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -149,7 +149,7 @@ export const ProfileDropdown = ({
 							}
 						>
 							<IconList />
-							{m.dropdown_lists_text()}
+							{m.peppy_pink_falcon()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -160,7 +160,7 @@ export const ProfileDropdown = ({
 							}
 						>
 							<IconHeart />
-							{m.dropdown_favorites_text()}
+							{m.gentle_saffron_yak()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -171,7 +171,7 @@ export const ProfileDropdown = ({
 							}
 						>
 							<IconHistory />
-							{m.dropdown_history_text()}
+							{m.plucky_lime_island()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -182,7 +182,7 @@ export const ProfileDropdown = ({
 							}
 						>
 							<IconPlayerPlay />
-							{m.dropdown_inprogress_text()}
+							{m.polite_cerise_jasmine()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -192,7 +192,7 @@ export const ProfileDropdown = ({
 							}
 						>
 							<IconAdjustmentsHorizontal />
-							{m.dropdown_settings_text()}
+							{m.daring_lime_meerkat()}
 						</DropdownMenuItem>
 						<DropdownMenuSeparator className="bg-border" />
 						<DropdownMenuItem>
@@ -211,12 +211,12 @@ export const ProfileDropdown = ({
 						</DropdownMenuItem>
 						<DropdownMenuItem disabled>
 							<IconLifebuoy />
-							{m.dropdown_support_text()}
+							{m.primal_slate_barn()}
 						</DropdownMenuItem>
 						<DropdownMenuSeparator className="bg-border" />
 						<DropdownMenuItem onClick={logout} variant="destructive">
 							<IconLogout />
-							{m.dropdown_logout_text()}
+							{m.chilly_plum_jaguar()}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</div>

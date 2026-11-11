@@ -65,7 +65,7 @@ export function ListDetailsContainer({
 								params={{ username: username, slug: list.slug }}
 								className="text-primary underline hover:text-primary/80 self-end"
 							>
-								{m.list_details_container_hide_notes()}
+								{m.rustic_coral_yak()}
 							</Link>
 						) : null}
 
@@ -99,17 +99,17 @@ export function ListDetailsContainer({
 				<p className="text-center py-12 text-muted-foreground">
 					{isOwnList ? (
 						<>
-							{m.list_container_empty_own()}{" "}
+							{m.rapid_coral_comet()}{" "}
 							<Link
 								to="/@{$username}/lists/$listslug/edit"
 								params={{ username, listslug: list.slug }}
 								className="text-primary underline hover:text-primary/80"
 							>
-								{m.list_container_empty_own_cta()}
+								{m.jolly_copper_arrow()}
 							</Link>
 						</>
 					) : (
-						m.list_container_empty()
+						m.light_lime_badger()
 					)}
 				</p>
 			) : (

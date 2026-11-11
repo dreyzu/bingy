@@ -22,11 +22,11 @@ export function MediaLearnMoreCard({ id, mediaType }: MediaLearnMoreProps) {
 							rel="noopener noreferrer"
 							className="hover:underline"
 						>
-							{m.btn_media_learn_more()}
+							{m.plucky_saffron_wolf()}
 						</a>
 					</p>
 					<p className="text-sm text-muted-foreground">
-						{m.media_details_learn_more()}
+						{m.nifty_azure_hippo()}
 					</p>
 				</div>
 			</CardContent>

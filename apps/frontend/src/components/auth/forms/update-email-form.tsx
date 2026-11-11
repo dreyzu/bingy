@@ -54,23 +54,23 @@ export function UpdateEmailForm() {
 			});
 
 			if (error) {
-				toast.error({ title: m.toast_error_update_email() });
+				toast.error({ title: m.light_navy_bridge() });
 				return;
 			}
 
 			if (data) {
 				if (data.status) {
 					toast.success({
-						title: m.toast_success_update_email_confirmation_needed({
+						title: m.gleeful_coral_octopus({
 							userEmail: user.email,
 						}),
 					});
 				} else {
-					toast.success({ title: m.toast_success_update_email() });
+					toast.success({ title: m.silent_indigo_prairie() });
 				}
 			}
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -79,19 +79,19 @@ export function UpdateEmailForm() {
 		<div className="flex flex-col gap-2 w-full">
 			<div className="flex flex-col gap-2">
 				<p className="text-md font-semibold leading-none tracking-tight">
-					{m.update_email_title()}
+					{m.balmy_silver_cricket()}
 				</p>
 				<p className="text-sm text-muted-foreground">
 					{user.emailVerified
-						? m.update_email_desc_email_verified()
-						: m.update_email_desc()}
+						? m.earthy_umber_glacier()
+						: m.peppy_wine_salmon()}
 				</p>
 			</div>
 			<label
 				htmlFor={`${id}-currentEmail`}
 				className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
 			>
-				{m.form_current_email_label()}
+				{m.witty_sage_cloud()}
 			</label>
 			<Input
 				id={`${id}-currentEmail`}
@@ -102,23 +102,23 @@ export function UpdateEmailForm() {
 			/>
 			<Dialog open={open} onOpenChange={setOpen}>
 				<DialogTrigger
-					render={<Button>{m.btn_update_email()}</Button>}
+					render={<Button>{m.witty_cobalt_badger()}</Button>}
 					className="w-full"
 				/>
 				<DialogContent className="max-w-lg">
 					<DialogHeader>
-						<DialogTitle>{m.dialog_title_update_email()}</DialogTitle>
+						<DialogTitle>{m.chilly_lavender_cactus()}</DialogTitle>
 						<DialogDescription>
 							{user.emailVerified
-								? m.dialog_desc_update_email_verified()
-								: m.dialog_desc_update_email()}
+								? m.grand_navy_flute()
+								: m.spry_jade_fern()}
 						</DialogDescription>
 					</DialogHeader>
 					<form onSubmit={form.handleSubmit(onFormSubmit)}>
 						<fieldset disabled={isSubmitting} className="grid gap-2">
 							<Field className="grid gap-2">
 								<FieldLabel htmlFor={`${id}-currentEmail`}>
-									{m.form_current_email_label()}
+									{m.witty_sage_cloud()}
 								</FieldLabel>
 								<FieldContent>
 									<Input
@@ -136,7 +136,7 @@ export function UpdateEmailForm() {
 								render={({ field, fieldState }) => (
 									<Field className="grid gap-2">
 										<FieldLabel htmlFor="email">
-											{m.form_new_email_label()}
+											{m.gentle_lilac_octopus()}
 										</FieldLabel>
 										<FieldContent>
 											<Input
@@ -160,10 +160,10 @@ export function UpdateEmailForm() {
 								{isSubmitting ? (
 									<span className="flex items-center justify-center gap-2">
 										<IconLoader className="animate-spin h-4 w-4" />
-										{m.btn_updating_email()}
+										{m.steady_purple_hippo()}
 									</span>
 								) : (
-									m.btn_update_email()
+									m.witty_cobalt_badger()
 								)}
 							</Button>
 						</fieldset>

@@ -21,8 +21,8 @@ export const CreditEpisodesContainer = ({
 	if (creditDetails.media.media_type !== "tv") {
 		return (
 			<ResourceNotFound
-				title={m.credit_episodes_container_wrong_type_title()}
-				description={m.credit_episodes_container_wrong_type_desc()}
+				title={m.golden_peach_basil()}
+				description={m.eager_lavender_rocket()}
 			/>
 		);
 	}
@@ -83,8 +83,8 @@ export const CreditEpisodesContainer = ({
 	if (allEpisodes.length === 0) {
 		return (
 			<ResourceNotFound
-				title={m.credit_episodes_container_episodes_not_found_title()}
-				description={m.credit_episodes_container_episodes_not_found_title()}
+				title={m.velvet_sapphire_nectar()}
+				description={m.velvet_sapphire_nectar()}
 			/>
 		);
 	}

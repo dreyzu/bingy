@@ -102,9 +102,9 @@ export function AddToListDialog({
 		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogContent className="max-w-md">
 				<DialogHeader>
-					<DialogTitle>{m.dialog_add_to_list_title()}</DialogTitle>
+					<DialogTitle>{m.primal_maroon_mesa()}</DialogTitle>
 					<DialogDescription>
-						{m.dialog_add_to_list_desc({
+						{m.rustic_indigo_falcon({
 							media_name: (movie?.title ?? tvShow?.name)!,
 						})}
 					</DialogDescription>
@@ -116,7 +116,7 @@ export function AddToListDialog({
 					</div>
 				)}
 
-				{status === "error" && <p>{m.dialog_add_to_list_generic_err()}</p>}
+				{status === "error" && <p>{m.mighty_yellow_jaguar()}</p>}
 
 				{status === "success" ? (
 					<>
@@ -141,7 +141,7 @@ export function AddToListDialog({
 												<div className="font-medium">{list.name}</div>
 
 												<div className="text-sm text-muted-foreground leading-relaxed line-clamp-1">
-													{list.description || m.dialog_add_to_list_no_desc()}
+													{list.description || m.zippy_khaki_galaxy()}
 												</div>
 											</div>
 										</Button>
@@ -182,7 +182,7 @@ export function AddToListDialog({
 								}}
 							>
 								<IconPlus />
-								{m.dialog_add_to_list_btn_footer()}
+								{m.jolly_slate_oasis()}
 							</Button>
 						</DialogFooter>
 					</>

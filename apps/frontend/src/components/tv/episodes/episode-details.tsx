@@ -42,8 +42,8 @@ export function TvEpisodeDetailsView({
 	if (isError || !episode) {
 		return (
 			<ResourceNotFound
-				title={m.episode_details_not_found_title()}
-				description={m.episode_details_not_found_desc()}
+				title={m.elegant_lavender_mesa()}
+				description={m.joyful_amber_comet()}
 			/>
 		);
 	}
@@ -105,7 +105,7 @@ export function TvEpisodeDetailsView({
 					<h1 className="text-4xl font-bold">{episode.name}</h1>
 					{episode.name !== `Episode ${episode.episode_number}` && (
 						<Badge variant="secondary" className="self-start">
-							{m.badge_episode_number({
+							{m.bubbly_fuchsia_puma({
 								episodeNumber: episode.episode_number,
 							})}
 						</Badge>
@@ -129,7 +129,7 @@ export function TvEpisodeDetailsView({
 					}
 				>
 					<CardHeader className="w-full p-0">
-						<CardTitle>{m.episode_details_overview_title()}</CardTitle>
+						<CardTitle>{m.steady_scarlet_meerkat()}</CardTitle>
 						<MediaOverview overview={episode.overview} />
 					</CardHeader>
 					<CardContent className="flex flex-col gap-2">
@@ -180,7 +180,7 @@ export function TvEpisodeDetailsView({
 									{formatRuntime(episode.runtime)}
 								</p>
 								<p className="text-sm text-muted-foreground">
-									{m.episode_details_runtime_text()}
+									{m.eager_khaki_dune()}
 								</p>
 							</div>
 						</CardContent>
@@ -200,7 +200,7 @@ export function TvEpisodeDetailsView({
 										: "N/A"}
 								</p>
 								<p className="text-sm text-muted-foreground">
-									{m.episode_details_air_date()}
+									{m.lean_maroon_coral()}
 								</p>
 							</div>
 						</CardContent>
@@ -218,7 +218,7 @@ export function TvEpisodeDetailsView({
 								episodeNumber: episode.episode_number.toString(),
 							}}
 						>
-							{m.link_text_full_credits()}
+							{m.elegant_gold_violin()}
 						</Link>
 					</div>
 				)}

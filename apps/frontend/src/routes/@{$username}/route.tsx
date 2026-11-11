@@ -49,7 +49,7 @@ function UserProfileLayout() {
 
 	if (error) {
 		navigate({ to: ".." });
-		return toast.error({ title: m.toast_error_profile_route_generic() });
+		return toast.error({ title: m.sturdy_mint_canyon() });
 	}
 
 	const backgroundImage = getTmdbImageUrl(data.bannerUrl);

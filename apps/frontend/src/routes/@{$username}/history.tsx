@@ -47,7 +47,7 @@ function HistoryPage() {
 	}
 
 	if (isError) {
-		return <p>{m.history_error()}</p>;
+		return <p>{m.vivid_yellow_barn()}</p>;
 	}
 
 	return (

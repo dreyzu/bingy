@@ -46,8 +46,8 @@ export function TvSeasonDetailsView({
 	if (isError || !tvSeason) {
 		return (
 			<ResourceNotFound
-				title={m.season_details_not_found_title()}
-				description={m.season_details_not_found_desc()}
+				title={m.steady_ruby_mesa()}
+				description={m.quiet_sepia_spruce()}
 			/>
 		);
 	}
@@ -150,12 +150,12 @@ export function TvSeasonDetailsView({
 						</div>
 						{tvSeason.name.toLowerCase() !==
 						m
-							.season_details_season_badge({
+							.brave_khaki_island({
 								seasonNumber: tvSeason.season_number,
 							})
 							.toLowerCase() ? (
 							<Badge variant="secondary" className="w-fit">
-								{m.season_details_season_badge({
+								{m.brave_khaki_island({
 									seasonNumber: tvSeason.season_number,
 								})}
 							</Badge>
@@ -177,7 +177,7 @@ export function TvSeasonDetailsView({
 											: "N/R"}
 									</p>
 									<p className="text-sm text-muted-foreground">
-										{m.season_details_rating()}
+										{m.velvet_beige_blossom()}
 									</p>
 								</div>
 							</CardContent>
@@ -200,7 +200,7 @@ export function TvSeasonDetailsView({
 											: "N/A"}
 									</p>
 									<p className="text-sm text-muted-foreground">
-										{m.season_details_air_date()}
+										{m.cozy_lemon_forest()}
 									</p>
 								</div>
 							</CardContent>
@@ -214,7 +214,7 @@ export function TvSeasonDetailsView({
 										{tvSeason.episodes.length}
 									</p>
 									<p className="text-sm text-muted-foreground">
-										{m.season_details_episodes({
+										{m.witty_coral_tulip({
 											count: tvSeason.episodes.length,
 										})}
 									</p>
@@ -237,7 +237,7 @@ export function TvSeasonDetailsView({
 									seasonNumber: tvSeason.season_number.toString(),
 								}}
 							>
-								{m.link_text_full_credits()}
+								{m.elegant_gold_violin()}
 							</Link>
 						</div>
 					) : null}
@@ -246,7 +246,7 @@ export function TvSeasonDetailsView({
 						<Card>
 							<CardHeader>
 								<CardTitle>
-									{m.season_details_networks({
+									{m.stellar_bronze_comet({
 										count: tvSeason.networks.length,
 									})}
 								</CardTitle>

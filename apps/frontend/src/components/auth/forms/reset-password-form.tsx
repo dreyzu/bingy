@@ -50,14 +50,14 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 				token,
 			});
 
-			error && toast.error({ title: m.toast_error_reset_password() });
+			error && toast.error({ title: m.swift_slate_dune() });
 
 			if (data) {
-				toast.success({ title: m.toast_success_reset_password() });
+				toast.success({ title: m.gallant_copper_anchor() });
 				navigate({ to: "/signin" });
 			}
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -66,9 +66,9 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 	return (
 		<Card className="mx-auto max-w-sm min-w-[420px]">
 			<CardHeader>
-				<CardTitle className="text-2xl">{m.reset_password_title()}</CardTitle>
+				<CardTitle className="text-2xl">{m.eager_scarlet_jaguar()}</CardTitle>
 				<CardDescription>
-					<p>{m.reset_password_desc()}</p>
+					<p>{m.eager_sienna_basil()}</p>
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
@@ -80,7 +80,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 							render={({ field, fieldState }) => (
 								<Field className="grid gap-2">
 									<FieldLabel htmlFor="password">
-										{m.form_new_password_label()}
+										{m.smart_mauve_fern()}
 									</FieldLabel>
 									<FieldContent>
 										<Input
@@ -104,10 +104,10 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 							{isSubmitting ? (
 								<span className="flex items-center justify-center gap-2">
 									<IconLoader className="animate-spin h-4 w-4" />
-									{m.btn_resetting_password()}
+									{m.hardy_lime_iguana()}
 								</span>
 							) : (
-								m.btn_reset_password()
+								m.zippy_ruby_flute()
 							)}
 						</Button>
 					</fieldset>

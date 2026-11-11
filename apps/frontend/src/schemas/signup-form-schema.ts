@@ -6,37 +6,37 @@ export const signUpFormSchema = z.object({
 		.string({
 			error: (iss) =>
 				iss.input === undefined
-					? m.schema_name_required()
-					: m.schema_name_invalid_type(),
+					? m.mighty_topaz_falcon()
+					: m.primal_crimson_crystal(),
 		})
 		.trim()
-		.min(2, { message: m.schema_name_min_length() })
-		.max(30, { message: m.schema_name_max_length() })
+		.min(2, { message: m.eager_cerise_dune() })
+		.max(30, { message: m.chilly_onyx_aspen() })
 		.regex(/^[a-zA-Z0-9._]+$/, {
-			message: m.schema_name_invalid_characters(),
+			message: m.rustic_mint_coral(),
 		})
 		.regex(/^[a-zA-Z0-9].*[a-zA-Z0-9]$/, {
-			message: m.schema_name_invalid_boundaries(),
+			message: m.jaunty_sienna_panda(),
 		})
 		.refine((val) => !val.includes(".."), {
-			message: m.schema_name_consecutive_dots(),
+			message: m.dusky_aqua_crystal(),
 		}),
 	email: z
 		.email({
 			error: (iss) =>
 				iss.input === undefined
-					? m.schema_email_required()
-					: m.schema_email_invalid(),
+					? m.lush_amber_squirrel()
+					: m.upbeat_topaz_jaguar(),
 		})
-		.min(3, { message: m.schema_email_min_length() })
-		.max(256, { message: m.schema_email_max_length() }),
+		.min(3, { message: m.witty_plum_dolphin() })
+		.max(256, { message: m.vivid_purple_crystal() }),
 	password: z
 		.string({
 			error: (iss) =>
 				iss.input === undefined
-					? m.schema_password_required()
-					: m.schema_password_invalid_type(),
+					? m.chilly_white_bamboo()
+					: m.humble_saffron_maple(),
 		})
-		.min(8, { message: m.schema_password_min_length() })
-		.max(256, { message: m.schema_password_max_length() }),
+		.min(8, { message: m.plucky_lime_iguana() })
+		.max(256, { message: m.velvet_crimson_salmon() }),
 });

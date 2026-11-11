@@ -101,7 +101,7 @@ export function StarRating({
 						type="button"
 						onClick={onRatingDelete}
 						className="text-muted-foreground hover:text-foreground transition-colors"
-						aria-label={m.btn_delete_rating_aria_label()}
+						aria-label={m.lucky_sapphire_coral()}
 					>
 						<IconX className="w-5 h-5" />
 					</button>

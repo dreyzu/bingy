@@ -49,7 +49,7 @@ function WatchlistPage() {
 	}
 
 	if (isError) {
-		return <p>{m.watchlist_error()}</p>;
+		return <p>{m.frosty_rose_lagoon()}</p>;
 	}
 
 	return (

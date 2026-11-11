@@ -75,13 +75,13 @@ export function SignUpForm() {
 				switch (error.code) {
 					case "USER_ALREADY_EXISTS":
 					case "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL":
-						toast.error({ title: m.toast_error_duplicate_email() });
+						toast.error({ title: m.lean_periwinkle_crystal() });
 						break;
 					case "USERNAME_ALREADY_EXISTS":
-						toast.error({ title: m.toast_error_duplicate_username() });
+						toast.error({ title: m.modest_magenta_lemur() });
 						break;
 					default:
-						toast.error({ title: m.toast_error_generic() });
+						toast.error({ title: m.candid_beige_yak() });
 				}
 				return;
 			}
@@ -97,14 +97,14 @@ export function SignUpForm() {
 				});
 
 				toast.success({
-					title: m.toast_success_signup_verify_email({
+					title: m.icy_aqua_turtle({
 						email: data.user.email,
 					}),
 				});
 				await router.navigate({ to: "/verify-email" });
 			}
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -114,7 +114,7 @@ export function SignUpForm() {
 		const providerCapitalized = capitalize(provider);
 		try {
 			toast.loading({
-				title: m.toast_loading_redirect_to_provider({
+				title: m.noble_gray_dune({
 					provider: providerCapitalized,
 				}),
 			});
@@ -127,7 +127,7 @@ export function SignUpForm() {
 			});
 		} catch (err: unknown) {
 			toast.error({
-				title: m.toast_error_oauth_provider_generic({
+				title: m.steady_ochre_salmon({
 					provider: providerCapitalized,
 				}),
 			});
@@ -143,9 +143,9 @@ export function SignUpForm() {
 				className="py-4 md:px-2 flex-1"
 			>
 				<CardHeader>
-					<CardTitle className="text-2xl">{m.signup_title()}</CardTitle>
+					<CardTitle className="text-2xl">{m.tender_onyx_squirrel()}</CardTitle>
 					<CardDescription>
-						<p>{m.signup_desc_one()}</p>
+						<p>{m.fluffy_hazel_boulder()}</p>
 					</CardDescription>
 				</CardHeader>
 				<CardContent className="grid gap-4 pt-2">
@@ -162,7 +162,7 @@ export function SignUpForm() {
 										<Field className="grid gap-2">
 											<div className="flex items-center">
 												<FieldLabel htmlFor={`${id}-username`}>
-													{m.signup_username_label()}
+													{m.lush_umber_pelican()}
 												</FieldLabel>
 												<TooltipProvider>
 													<Tooltip>
@@ -170,7 +170,7 @@ export function SignUpForm() {
 															<IconInfoCircle className="h-4 w-4" />
 														</TooltipTrigger>
 														<TooltipContent>
-															<p>{m.signup_username_tooltip()}</p>
+															<p>{m.vibrant_plum_fern()}</p>
 														</TooltipContent>
 													</Tooltip>
 												</TooltipProvider>
@@ -199,7 +199,7 @@ export function SignUpForm() {
 									render={({ field, fieldState }) => (
 										<Field className="grid gap-2">
 											<FieldLabel htmlFor={`${id}-email`}>
-												{m.form_email_label()}
+												{m.witty_maroon_pelican()}
 											</FieldLabel>
 											<FieldContent>
 												<Input
@@ -226,7 +226,7 @@ export function SignUpForm() {
 										<Field className="grid gap-2">
 											<div className="flex items-center">
 												<FieldLabel htmlFor={`${id}-password`}>
-													{m.form_password_label()}
+													{m.airy_umber_rabbit()}
 												</FieldLabel>
 												<TooltipProvider>
 													<Tooltip>
@@ -234,7 +234,7 @@ export function SignUpForm() {
 															<IconInfoCircle className="h-4 w-4" />
 														</TooltipTrigger>
 														<TooltipContent>
-															{m.signup_password_tooltip()}
+															{m.alert_silver_yarn()}
 														</TooltipContent>
 													</Tooltip>
 												</TooltipProvider>
@@ -265,30 +265,30 @@ export function SignUpForm() {
 									{isRegistering ? (
 										<span className="flex items-center justify-center gap-2">
 											<IconLoader className="animate-spin h-4 w-4" />
-											{m.btn_registering_signup()}
+											{m.gleeful_tan_fox()}
 										</span>
 									) : (
-										m.btn_signup()
+										m.gallant_cobalt_aspen()
 									)}
 								</Button>
 							</div>
 						</fieldset>
 					</form>
 					<div className="grid gap-4">
-						<SeparatorWithText text={m.signup_separator_text()} />
+						<SeparatorWithText text={m.proud_magenta_bridge()} />
 						<div className="flex gap-2">
 							<OAuthButton
 								icon={IconBrandGoogleFilled}
-								label={m.signup_with_provider({ provider: "Google" })}
+								label={m.hasty_fuchsia_fern({ provider: "Google" })}
 								text="Google"
 								onClick={() => handleOAuthRegister("google")}
 							/>
 						</div>
 					</div>
 					<div className="flex gap-1 justify-center text-sm">
-						<span>{m.signup_already_account()}</span>
+						<span>{m.earthy_green_lynx()}</span>
 						<Link to="/signin" className="underline">
-							{m.signup_already_account_link()}
+							{m.cozy_indigo_gecko()}
 						</Link>
 					</div>
 				</CardContent>

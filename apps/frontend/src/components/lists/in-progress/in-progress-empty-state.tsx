@@ -24,34 +24,34 @@ export function InProgressEmptyState({
 }: InProgressEmptyStateProps) {
 	const titles = isOwnProfile
 		? {
-				all: m.empty_inprogress_own_profile_title(),
-				watching: m.empty_inprogress_watching_own_profile_title(),
-				on_hold: m.empty_inprogress_on_hold_own_profile_title(),
-				dropped: m.empty_inprogress_dropped_own_profile_title(),
-				completed: m.empty_inprogress_completed_own_profile_title(),
+				all: m.primal_topaz_yak(),
+				watching: m.jaunty_tan_blossom(),
+				on_hold: m.vivid_saffron_acorn(),
+				dropped: m.sweet_jade_mesa(),
+				completed: m.ample_gray_raven(),
 			}
 		: {
-				all: m.empty_inprogress_other_profile_title({ username }),
-				watching: m.empty_inprogress_watching_other_profile_title({ username }),
-				on_hold: m.empty_inprogress_on_hold_other_profile_title({ username }),
-				dropped: m.empty_inprogress_dropped_other_profile_title({ username }),
-				completed: m.empty_inprogress_completed_other_profile_title({ username }),
+				all: m.jaunty_onyx_iguana({ username }),
+				watching: m.humble_maroon_rocket({ username }),
+				on_hold: m.witty_green_hazel({ username }),
+				dropped: m.nimble_white_pine({ username }),
+				completed: m.balmy_copper_cloud({ username }),
 			};
 
 	const descriptions = isOwnProfile
 		? {
-				all: m.empty_inprogress_own_profile_desc(),
-				watching: m.empty_inprogress_watching_own_profile_desc(),
-				on_hold: m.empty_inprogress_on_hold_own_profile_desc(),
-				dropped: m.empty_inprogress_dropped_own_profile_desc(),
-				completed: m.empty_inprogress_completed_own_profile_desc(),
+				all: m.tidy_violet_wolf(),
+				watching: m.zesty_mauve_clover(),
+				on_hold: m.plucky_rust_beacon(),
+				dropped: m.proud_jade_hazel(),
+				completed: m.smart_azure_mirror(),
 			}
 		: {
-				all: m.empty_inprogress_other_profile_desc(),
-				watching: m.empty_inprogress_watching_other_profile_desc(),
-				on_hold: m.empty_inprogress_on_hold_other_profile_desc(),
-				dropped: m.empty_inprogress_dropped_other_profile_desc(),
-				completed: m.empty_inprogress_completed_other_profile_desc(),
+				all: m.spry_indigo_harbor(),
+				watching: m.upbeat_umber_otter(),
+				on_hold: m.tidy_onyx_willow(),
+				dropped: m.lush_magenta_valley(),
+				completed: m.lean_lime_koala(),
 			};
 
 	return (
@@ -65,10 +65,10 @@ export function InProgressEmptyState({
 			{isOwnProfile ? (
 				<EmptyContent className="w-full">
 					<Link to="/tv">
-						<Button className="w-35">{m.empty_inprogress_cta()}</Button>
+						<Button className="w-35">{m.breezy_plum_daisy()}</Button>
 					</Link>
 					<SearchCommand
-						title={m.form_search_placeholder()}
+						title={m.quiet_turquoise_cedar()}
 						showKbdHelper
 						showButton
 					/>

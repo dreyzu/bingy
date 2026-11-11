@@ -54,16 +54,16 @@ export function UpdatePasswordForm({ hasPassword }: UpdatePasswordFormProps) {
 			});
 
 			if (error) {
-				toast.error({ title: m.toast_error_update_password() });
+				toast.error({ title: m.swift_ochre_hazel() });
 				return;
 			}
 
 			if (data) {
-				toast.success({ title: m.toast_success_update_password() });
+				toast.success({ title: m.fierce_turquoise_spruce() });
 				setIsSuccess(true);
 			}
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -73,25 +73,25 @@ export function UpdatePasswordForm({ hasPassword }: UpdatePasswordFormProps) {
 		<div className="grid gap-2">
 			<div>
 				<p className="text-md font-semibold leading-none tracking-tight">
-					{m.update_password_title()}
+					{m.quick_scarlet_eagle()}
 				</p>
 				<p className="text-sm text-muted-foreground mt-1.5">
 					{!hasPassword
-						? m.update_password_desc_oauth({ providers: "Google" })
-						: m.update_password_desc()}
+						? m.calm_aqua_heron({ providers: "Google" })
+						: m.candid_sepia_dolphin()}
 				</p>
 			</div>
 			{hasPassword ? (
 				<Dialog open={open} onOpenChange={setOpen}>
 					<DialogTrigger
-						render={<Button>{m.btn_update_password()}</Button>}
+						render={<Button>{m.brave_yellow_otter()}</Button>}
 						className="w-full"
 					></DialogTrigger>
 					<DialogContent className="max-w-lg">
 						<DialogHeader>
-							<DialogTitle>{m.dialog_title_update_password()}</DialogTitle>
+							<DialogTitle>{m.hardy_amber_coral()}</DialogTitle>
 							<DialogDescription className="w-6/7">
-								{m.dialog_desc_update_password()}
+								{m.spry_beige_otter()}
 							</DialogDescription>
 						</DialogHeader>
 						<form onSubmit={form.handleSubmit(onFormSubmit)}>
@@ -102,7 +102,7 @@ export function UpdatePasswordForm({ hasPassword }: UpdatePasswordFormProps) {
 									render={({ field, fieldState }) => (
 										<Field className="grid gap-2">
 											<FieldLabel htmlFor="currentPassword">
-												{m.form_current_password_label()}
+												{m.quiet_rose_lynx()}
 											</FieldLabel>
 											<FieldContent>
 												<Input
@@ -127,7 +127,7 @@ export function UpdatePasswordForm({ hasPassword }: UpdatePasswordFormProps) {
 									render={({ field, fieldState }) => (
 										<Field className="grid gap-2">
 											<FieldLabel htmlFor="newPassword">
-												{m.form_new_password_label()}
+												{m.smart_mauve_fern()}
 											</FieldLabel>
 											<FieldContent>
 												<Input
@@ -153,10 +153,10 @@ export function UpdatePasswordForm({ hasPassword }: UpdatePasswordFormProps) {
 									{isSubmitting ? (
 										<span className="flex items-center justify-center gap-2">
 											<IconLoader className="animate-spin h-4 w-4" />
-											{m.btn_updating_password()}
+											{m.cozy_silver_cricket()}
 										</span>
 									) : (
-										m.btn_update_password()
+										m.brave_yellow_otter()
 									)}
 								</Button>
 							</fieldset>

@@ -140,30 +140,30 @@ export function SearchCommand({
 			<CommandDialog
 				open={open}
 				onOpenChange={setOpen}
-				title={m.search_command_input_placeholder()}
-				description={m.search_command_description()}
+				title={m.warm_ochre_mirror()}
+				description={m.brisk_crimson_rabbit()}
 				className="w-xs md:w-md"
 			>
 				<Command shouldFilter={false} className="p-0">
 					<CommandInput
-						placeholder={m.search_command_input_placeholder()}
+						placeholder={m.warm_ochre_mirror()}
 						value={query}
 						onValueChange={setQuery}
 						className="text-base lg:text-sm"
 					/>
 					<CommandList>
-						{!query && <CommandEmpty>{m.search_command_empty()}</CommandEmpty>}
+						{!query && <CommandEmpty>{m.vivid_fuchsia_saddle()}</CommandEmpty>}
 
 						{query && loading && (
 							<CommandEmpty>
 								<div className="flex w-full py-4 justify-center">
-									<LoaderFive text={m.loader_text_searching()} />
+									<LoaderFive text={m.crisp_lavender_lynx()} />
 								</div>
 							</CommandEmpty>
 						)}
 
 						{query && !loading && !hasResults && (
-							<CommandEmpty>{m.search_command_no_results()}</CommandEmpty>
+							<CommandEmpty>{m.dapper_copper_lynx()}</CommandEmpty>
 						)}
 
 						{query && !loading && hasResults && (
@@ -188,7 +188,7 @@ export function SearchCommand({
 											handleSelect();
 										}}
 									>
-										<span className="font-medium">{m.btn_view_all()} →</span>
+										<span className="font-medium">{m.humble_umber_crystal()} →</span>
 									</CommandItem>
 								)}
 							</CommandGroup>
@@ -199,18 +199,18 @@ export function SearchCommand({
 							<div className="flex items-center gap-4">
 								<span className="flex items-center gap-1.5">
 									<Kbd className="bg-card">↲</Kbd>
-									<span>{m.search_command_helper_go_to_page()}</span>
+									<span>{m.ample_navy_hazel()}</span>
 								</span>
 								<span className="flex items-center gap-1.5">
 									<Kbd className="bg-card">↑↓</Kbd>
-									<span>{m.search_command_helper_navigate()}</span>
+									<span>{m.nifty_onyx_whale()}</span>
 								</span>
 							</div>
 							<span className="flex items-center gap-1.5">
 								<Kbd className="bg-card">
-									{m.search_command_helper_kbd_esc()}
+									{m.lively_saffron_flute()}
 								</Kbd>
-								<span>{m.search_command_helper_close()}</span>
+								<span>{m.brisk_plum_jaguar()}</span>
 							</span>
 						</div>
 					</div>

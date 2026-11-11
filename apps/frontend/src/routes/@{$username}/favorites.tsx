@@ -47,7 +47,7 @@ function Favorites() {
 	}
 
 	if (isError) {
-		return <p>{m.favorites_error()}</p>;
+		return <p>{m.candid_coral_marmot()}</p>;
 	}
 
 	return (

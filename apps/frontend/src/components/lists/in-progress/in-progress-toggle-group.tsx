@@ -43,32 +43,32 @@ export function InProgressToggleGroup({
 	}[] = [
 		{
 			value: "all",
-			label: m.in_progress_toggle_group_item_all(),
-			ariaLabel: m.in_progress_toggle_aria_label_all(),
+			label: m.brisk_copper_daisy(),
+			ariaLabel: m.epic_cream_daisy(),
 			icon: IconLayoutGrid,
 		},
 		{
 			value: "watching",
-			label: m.in_progress_toggle_group_item_watching(),
-			ariaLabel: m.in_progress_toggle_aria_label_watching(),
+			label: m.sturdy_rust_blossom(),
+			ariaLabel: m.calm_khaki_eagle(),
 			icon: IconEye,
 		},
 		{
 			value: "on_hold",
-			label: m.in_progress_toggle_group_item_on_hold(),
-			ariaLabel: m.in_progress_toggle_aria_label_on_hold(),
+			label: m.tidy_emerald_dolphin(),
+			ariaLabel: m.eager_saffron_pelican(),
 			icon: IconPlayerPause,
 		},
 		{
 			value: "dropped",
-			label: m.in_progress_toggle_group_item_dropped(),
-			ariaLabel: m.in_progress_toggle_aria_label_dropped(),
+			label: m.noble_lime_barn(),
+			ariaLabel: m.silent_saffron_planet(),
 			icon: IconCircleX,
 		},
 		{
 			value: "completed",
-			label: m.in_progress_toggle_group_item_completed(),
-			ariaLabel: m.in_progress_toggle_aria_label_completed(),
+			label: m.zippy_navy_clover(),
+			ariaLabel: m.elegant_olive_meadow(),
 			icon: IconCircleCheck,
 		},
 	];

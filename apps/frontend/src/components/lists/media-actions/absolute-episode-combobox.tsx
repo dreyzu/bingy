@@ -30,7 +30,7 @@ export function AbsoluteEpisodeCombobox({
 
 	return (
 		<div className="flex flex-col gap-2">
-			<Label>{m.log_review_dialog_absolute_episode_combobox_label()}</Label>
+			<Label>{m.witty_umber_sunflower()}</Label>
 			<Combobox
 				open={isOpen}
 				onOpenChange={setIsOpen}
@@ -40,14 +40,14 @@ export function AbsoluteEpisodeCombobox({
 				}}
 			>
 				<ComboboxInput
-					placeholder={m.log_review_dialog_absolute_episode_combobox_placeholder()}
+					placeholder={m.zippy_gold_acorn()}
 					showClear={!!selectedEpisode}
 				/>
 
 				<ComboboxContent>
 					{episodes.length === 0 ? (
 						<ComboboxEmpty>
-							{m.log_review_dialog_absolute_episode_combobox_no_result()}
+							{m.gallant_sage_octopus()}
 						</ComboboxEmpty>
 					) : null}
 

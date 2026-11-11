@@ -28,8 +28,8 @@ export function TvCreditsView({
 	if (isError || !credits) {
 		return (
 			<ResourceNotFound
-				title={m.tv_credits_not_found_title()}
-				description={m.tv_credits_not_found_desc()}
+				title={m.alert_magenta_forest()}
+				description={m.fluffy_crimson_biscuit()}
 			/>
 		);
 	}

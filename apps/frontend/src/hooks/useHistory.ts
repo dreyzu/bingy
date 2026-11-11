@@ -32,9 +32,9 @@ export function useAddMovieToHistory(username: string) {
 			});
 
 			toast.success({
-				title: m.toast_add_movie_watched_success(),
+				title: m.grand_hazel_salmon(),
 				button: {
-					label: m.btn_go_to_history_page(),
+					label: m.vivid_violet_pebble(),
 					onClick: () => {
 						navigate({
 							to: "/@{$username}/history",
@@ -45,7 +45,7 @@ export function useAddMovieToHistory(username: string) {
 			});
 		},
 		onError: () => {
-			toast.error({ title: m.toast_add_movie_watched_error() });
+			toast.error({ title: m.bubbly_rose_mesa() });
 		},
 	});
 }
@@ -74,9 +74,9 @@ export function useAddTvToHistory(username: string) {
 			});
 
 			toast.success({
-				title: m.toast_add_tv_watched_success(),
+				title: m.joyful_copper_pebble(),
 				button: {
-					label: m.btn_go_to_history_page(),
+					label: m.vivid_violet_pebble(),
 					onClick: () => {
 						navigate({
 							to: "/@{$username}/history",
@@ -87,7 +87,7 @@ export function useAddTvToHistory(username: string) {
 			});
 		},
 		onError: () => {
-			toast.error({ title: m.toast_add_tv_watched_error() });
+			toast.error({ title: m.loyal_purple_ember() });
 		},
 	});
 }
@@ -114,10 +114,10 @@ export function useRemoveMovieHistory() {
 				queryKey: ["user-profile"],
 			});
 
-			toast.success({ title: m.toast_remove_movie_history_success() });
+			toast.success({ title: m.proud_maroon_cricket() });
 		},
 		onError: () => {
-			toast.error({ title: m.toast_remove_movie_history_error() });
+			toast.error({ title: m.jaunty_tan_willow() });
 		},
 	});
 }
@@ -147,10 +147,10 @@ export function useRemoveTvHistory(username: string) {
 				queryKey: ["in-progress", username],
 			});
 
-			toast.success({ title: m.toast_remove_tv_history_success() });
+			toast.success({ title: m.happy_onyx_hazel() });
 		},
 		onError: () => {
-			toast.error({ title: m.toast_remove_tv_history_error() });
+			toast.error({ title: m.stellar_gray_canyon() });
 		},
 	});
 }

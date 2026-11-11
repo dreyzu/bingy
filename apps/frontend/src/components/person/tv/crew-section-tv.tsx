@@ -9,7 +9,7 @@ interface CrewSectionTvProps {
 
 export const CrewSectionTv = ({
 	people,
-	title = m.title_crew(),
+	title = m.quiet_orange_anchor(),
 }: CrewSectionTvProps) => {
 	const byDepartment = new Map<
 		string,

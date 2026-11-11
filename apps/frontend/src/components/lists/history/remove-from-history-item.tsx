@@ -59,7 +59,7 @@ export function RemoveFromHistoryItem({
 			disabled={isPending}
 			variant="destructive"
 		>
-			{m.list_dropdown_item_remove_history()}
+			{m.gallant_yellow_jasmine()}
 		</DropdownMenuItem>
 	);
 }

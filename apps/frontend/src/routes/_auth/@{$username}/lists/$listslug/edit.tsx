@@ -154,7 +154,7 @@ function EditListPage() {
 			{
 				onSuccess: (data) => {
 					toast.success({
-						title: m.toast_form_update_list_success({ list_name: values.name }),
+						title: m.lively_lilac_moose({ list_name: values.name }),
 					});
 
 					navigate({
@@ -164,7 +164,7 @@ function EditListPage() {
 				},
 				onError: () => {
 					toast.error({
-						title: m.toast_form_update_list_error({ list_name: values.name }),
+						title: m.keen_scarlet_lemur({ list_name: values.name }),
 					});
 				},
 			},
@@ -172,7 +172,7 @@ function EditListPage() {
 	};
 
 	if (!isOwnProfile) {
-		toast.error({ title: m.toast_error_list_unauthorized_edit() });
+		toast.error({ title: m.glossy_plum_tiger() });
 		navigate({
 			to: "/@{$username}/lists/$slug",
 			params: { username, slug: listslug },
@@ -185,7 +185,7 @@ function EditListPage() {
 	}
 
 	if (error || !list) {
-		toast.error({ title: m.toast_error_list_not_found() });
+		toast.error({ title: m.sweet_peach_valley() });
 		navigate({
 			to: "/@{$username}/lists/$slug",
 			params: { username, slug: listslug },
@@ -197,7 +197,7 @@ function EditListPage() {
 		<div className="flex flex-col w-full gap-6">
 			<Card>
 				<CardHeader>
-					<CardTitle>{m.edit_list_page_title()}</CardTitle>
+					<CardTitle>{m.brave_magenta_hippo()}</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<form
@@ -210,7 +210,7 @@ function EditListPage() {
 								name="name"
 								render={({ field, fieldState }) => (
 									<Field className="w-full lg:w-[55%]">
-										<FieldLabel>{m.form_create_list_name_label()}</FieldLabel>
+										<FieldLabel>{m.bubbly_magenta_rabbit()}</FieldLabel>
 										<FieldContent>
 											<Input {...field} autoComplete="off" />
 										</FieldContent>
@@ -226,15 +226,15 @@ function EditListPage() {
 								name="visibility"
 								render={({ field, fieldState }) => {
 									const visibilityLabel = {
-										public: m.form_create_list_visibility_item_public_short(),
-										limited: m.form_create_list_visibility_item_limited_short(),
-										private: m.form_create_list_visibility_item_private_short(),
+										public: m.gentle_sage_barn(),
+										limited: m.lean_lime_quail(),
+										private: m.humble_lime_beacon(),
 									}[field.value as "public" | "limited" | "private"];
 
 									return (
 										<Field className="w-full lg:w-[45%]">
 											<FieldLabel>
-												{m.form_create_list_visibility_label()}
+												{m.shiny_hazel_planet()}
 											</FieldLabel>
 											<FieldContent>
 												<Select
@@ -246,13 +246,13 @@ function EditListPage() {
 													</SelectTrigger>
 													<SelectContent>
 														<SelectItem value="public">
-															{m.form_create_list_visibility_item_public()}
+															{m.rustic_lavender_turtle()}
 														</SelectItem>
 														<SelectItem value="limited">
-															{m.form_create_list_visibility_item_limited()}
+															{m.hazy_khaki_fox()}
 														</SelectItem>
 														<SelectItem value="private">
-															{m.form_create_list_visibility_item_private()}
+															{m.keen_umber_cactus()}
 														</SelectItem>
 													</SelectContent>
 												</Select>
@@ -280,10 +280,10 @@ function EditListPage() {
 												field.onChange(checked ? "ranked" : "unranked")
 											}
 										/>
-										<FieldLabel>{m.form_create_list_type_ranked()}</FieldLabel>
+										<FieldLabel>{m.ample_gray_beacon()}</FieldLabel>
 									</FieldContent>
 									<FieldDescription>
-										{m.form_create_list_type_ranked_description()}
+										{m.quick_mauve_flute()}
 									</FieldDescription>
 								</Field>
 							)}
@@ -295,7 +295,7 @@ function EditListPage() {
 							render={({ field, fieldState }) => (
 								<Field>
 									<FieldLabel>
-										{m.form_create_list_description_label()}
+										{m.dusky_hazel_yak()}
 									</FieldLabel>
 									<FieldContent>
 										<Textarea
@@ -313,7 +313,7 @@ function EditListPage() {
 
 						<div className="flex flex-col gap-2">
 							<div className="flex flex-col gap-2">
-								<FieldLabel>{m.form_create_list_add_items_label()}</FieldLabel>
+								<FieldLabel>{m.lush_fuchsia_clover()}</FieldLabel>
 								<ListSearchAddInput draftItemsAtom={editListDraftItemsAtom} />
 							</div>
 						</div>
@@ -325,7 +325,7 @@ function EditListPage() {
 								onClick={() => onBack()}
 								className="flex-1"
 							>
-								{m.form_create_list_btn_cancel()}
+								{m.fluffy_azure_puma()}
 							</Button>
 							<Button
 								type="submit"
@@ -333,8 +333,8 @@ function EditListPage() {
 								className="flex-1"
 							>
 								{updateList.isPending
-									? m.btn_updating_list()
-									: m.btn_update_list()}
+									? m.vibrant_ruby_spruce()
+									: m.modest_azure_cricket()}
 							</Button>
 						</div>
 					</form>

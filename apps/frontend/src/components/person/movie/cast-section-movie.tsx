@@ -9,7 +9,7 @@ interface CastSectionMovieProps {
 
 export const CastSectionMovie = ({
 	people,
-	title = m.title_cast(),
+	title = m.fancy_bronze_panda(),
 }: CastSectionMovieProps) => {
 	const uniquePeople = Array.from(
 		new Map(people.map((person) => [person.id, person])).values(),

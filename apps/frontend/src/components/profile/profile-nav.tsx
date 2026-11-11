@@ -46,7 +46,7 @@ export function ProfileNav({ username }: ProfileNavProps) {
 				}}
 				activeOptions={{ exact: true }}
 			>
-				{m.profile_page_title_text()}
+				{m.modest_plum_walrus()}
 			</Link>
 			<Link
 				to="/@{$username}/watchlist"
@@ -56,7 +56,7 @@ export function ProfileNav({ username }: ProfileNavProps) {
 					className: "pb-3 text-foreground border-b-2 border-brand",
 				}}
 			>
-				{m.watchlist_page_title_text()}
+				{m.elegant_jade_dolphin()}
 			</Link>
 			<Link
 				to="/@{$username}/history"
@@ -66,7 +66,7 @@ export function ProfileNav({ username }: ProfileNavProps) {
 					className: "pb-3 text-foreground border-b-2 border-brand",
 				}}
 			>
-				{m.history_page_title_text()}
+				{m.grand_khaki_lynx()}
 			</Link>
 			<Link
 				to="/@{$username}/favorites"
@@ -76,7 +76,7 @@ export function ProfileNav({ username }: ProfileNavProps) {
 					className: "pb-3 text-foreground border-b-2 border-brand",
 				}}
 			>
-				{m.favorites_page_title_text()}
+				{m.lucky_ruby_prairie()}
 			</Link>
 			<Link
 				to="/@{$username}/in-progress"
@@ -86,7 +86,7 @@ export function ProfileNav({ username }: ProfileNavProps) {
 					className: "pb-3 text-foreground border-b-2 border-brand",
 				}}
 			>
-				{m.inprogress_title_text()}
+				{m.wise_lilac_rocket()}
 			</Link>
 			<Link
 				to="/@{$username}/lists"
@@ -96,7 +96,7 @@ export function ProfileNav({ username }: ProfileNavProps) {
 					className: "pb-3 text-foreground border-b-2 border-brand",
 				}}
 			>
-				{m.lists_page_title()}
+				{m.fluffy_cerise_cactus()}
 			</Link>
 		</nav>
 	);

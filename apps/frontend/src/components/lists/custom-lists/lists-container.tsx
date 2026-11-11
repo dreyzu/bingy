@@ -69,38 +69,38 @@ export function ListsContainer({
 					>
 						<ToggleGroupItem
 							value="all"
-							aria-label={m.list_visibility_all_aria_label()}
+							aria-label={m.lucky_wine_wombat()}
 						>
 							<IconLayoutGrid className="h-4 w-4" />
 							<span className="hidden xs:inline">
-								{m.list_visibility_all()}
+								{m.bold_mauve_eagle()}
 							</span>
 						</ToggleGroupItem>
 						<ToggleGroupItem
 							value="public"
-							aria-label={m.list_visibility_public_aria_label()}
+							aria-label={m.dreamy_onyx_pelican()}
 						>
 							<IconWorld className="h-4 w-4" />
 							<span className="hidden xs:inline">
-								{m.list_visibility_public()}
+								{m.hasty_pink_crystal()}
 							</span>
 						</ToggleGroupItem>
 						<ToggleGroupItem
 							value="limited"
-							aria-label={m.list_visibility_limited_aria_label()}
+							aria-label={m.warm_bronze_wombat()}
 						>
 							<IconUsers className="h-4 w-4" />
 							<span className="hidden xs:inline">
-								{m.list_visibility_limited()}
+								{m.hazy_plum_valley()}
 							</span>
 						</ToggleGroupItem>
 						<ToggleGroupItem
 							value="private"
-							aria-label={m.list_visibility_private_aria_label()}
+							aria-label={m.zesty_aqua_crystal()}
 						>
 							<IconLock className="h-4 w-4" />
 							<span className="hidden xs:inline">
-								{m.list_visibility_private()}
+								{m.lean_beige_oasis()}
 							</span>
 						</ToggleGroupItem>
 					</ToggleGroup>
@@ -109,7 +109,7 @@ export function ListsContainer({
 						<Link to="/lists/create" className="flex items-center gap-2">
 							<IconPlus className="h-4 w-4 font-bold" />
 							<span className="font-semibold hidden xs:inline">
-								{m.btn_create_list()}
+								{m.epic_pink_narwhal()}
 							</span>
 						</Link>
 					</Button>

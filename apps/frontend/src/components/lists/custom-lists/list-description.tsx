@@ -59,11 +59,11 @@ export const ListDescription = ({ description }: ListDescriptionProps) => {
 						<Button variant="link" size="sm" className="p-0">
 							{isExpanded ? (
 								<>
-									<IconChevronUp /> {m.btn_show_less()}
+									<IconChevronUp /> {m.nifty_aqua_clover()}
 								</>
 							) : (
 								<>
-									<IconChevronDown /> {m.btn_show_more()}
+									<IconChevronDown /> {m.hazy_maroon_galaxy()}
 								</>
 							)}
 						</Button>

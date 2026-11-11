@@ -34,7 +34,7 @@ function ListPage() {
 
 	if (isLoading) return <LoadingCentered />;
 	if (!list || error) {
-		toast.error({ title: m.toast_error_list_not_found() });
+		toast.error({ title: m.sweet_peach_valley() });
 		navigate({ to: "/@{$username}/lists", params: { username } });
 		return;
 	}

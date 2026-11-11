@@ -142,7 +142,7 @@ export function WatchToggleButton({
 					}
 				/>
 				<TooltipContent>
-					{isWatched ? m.watch_toggle_remove() : m.watch_toggle_add()}
+					{isWatched ? m.winsome_indigo_walrus() : m.ample_plum_wombat()}
 				</TooltipContent>
 			</Tooltip>
 

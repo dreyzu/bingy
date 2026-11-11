@@ -27,13 +27,13 @@ function WelcomePage() {
 	return (
 		<div className="flex flex-col gap-6">
 			<h1 className="text-3xl font-bold mt-2">
-				{m.welcome_page_greetings({
+				{m.tender_lime_badger({
 					username: authData.user.displayName ?? authData.user.name,
 				})}
 			</h1>
 			<Card>
 				<CardHeader>
-					<CardTitle>{m.welcome_page_email_verified_text()}</CardTitle>
+					<CardTitle>{m.bold_emerald_crystal()}</CardTitle>
 				</CardHeader>
 			</Card>
 		</div>

@@ -36,7 +36,7 @@ export function WatchedDateControl({
 					onCheckedChange={handleHasSpecificDateChange}
 				/>
 				<Label htmlFor="watchedToday" className="text-sm">
-					{m.log_review_dialog_seen_specific_date()}
+					{m.frosty_emerald_pelican()}
 				</Label>
 				<Popover>
 					<PopoverTrigger
@@ -73,7 +73,7 @@ export function WatchedDateControl({
 					onCheckedChange={(c) => handleHasSpecificDateChange(!c)}
 				/>
 				<Label htmlFor="unknownDate" className="text-sm font-normal">
-					{m.log_review_dialog_seen_before()}
+					{m.hazy_jade_jaguar()}
 				</Label>
 			</div>
 		</div>

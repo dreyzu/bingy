@@ -44,15 +44,15 @@ export function SetupTwoFactorDialog({
 
 	const copyText = () => {
 		navigator.clipboard.writeText(secret);
-		toast.success({ title: m.toast_success_text_copied({ x: "Secret" }) });
+		toast.success({ title: m.proud_coral_meerkat({ x: "Secret" }) });
 	};
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogContent className="max-h-[90vh] overflow-y-auto">
 				<DialogHeader>
-					<DialogTitle>{m.dialog_title_qr_code()}</DialogTitle>
-					<DialogDescription>{m.dialog_desc_qr_code()}</DialogDescription>
+					<DialogTitle>{m.earthy_green_island()}</DialogTitle>
+					<DialogDescription>{m.steady_hazel_canyon()}</DialogDescription>
 				</DialogHeader>
 				<div className="flex flex-col items-center gap-4">
 					{totpUri && (
@@ -63,7 +63,7 @@ export function SetupTwoFactorDialog({
 					{secret && (
 						<div className="text-center w-full px-2">
 							<p className="text-sm text-muted-foreground">
-								{m.dialog_instruction_qr_code()}
+								{m.sweet_ochre_dune()}
 							</p>
 							<Button
 								variant="ghost"
@@ -98,7 +98,7 @@ export function SetupTwoFactorDialog({
 							disabled={code.length !== 6}
 							className="w-full"
 						>
-							{m.dialog_btn_verify()}
+							{m.grand_lime_eagle()}
 						</Button>
 					</div>
 				</div>

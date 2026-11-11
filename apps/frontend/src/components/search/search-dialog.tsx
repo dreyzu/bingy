@@ -120,9 +120,9 @@ export function SearchDialog({
 	};
 
 	const filterLabel = useMemo(() => {
-		if (filter === "movie") return m.search_dialog_filter_movies();
-		if (filter === "tv") return m.search_dialog_filter_tv();
-		return m.search_dialog_filter_all();
+		if (filter === "movie") return m.vibrant_tan_gecko();
+		if (filter === "tv") return m.frosty_pearl_yarn();
+		return m.frosty_tan_cactus();
 	}, [filter]);
 
 	// Keyboard navigation handler
@@ -177,7 +177,7 @@ export function SearchDialog({
 				<div className="flex gap-2 items-center">
 					<IconBulb size={16} />
 					<p className="text-xs text-muted-foreground">
-						{m.search_dialog_hint_filter()}
+						{m.nimble_sepia_otter()}
 					</p>
 				</div>
 			) : null}
@@ -185,7 +185,7 @@ export function SearchDialog({
 			<div className="max-h-[60vh] overflow-y-auto no-scrollbar pb-1">
 				{loading ? (
 					<div className="flex justify-center py-8">
-						<LoaderFive text={m.loader_text_searching()} />
+						<LoaderFive text={m.crisp_lavender_lynx()} />
 					</div>
 				) : null}
 
@@ -193,7 +193,7 @@ export function SearchDialog({
 				(filter === "all" ? multiSearch.data : filter === "movie" ? movieSearch.data : tvSearch.data) &&
 				results.length === 0 ? (
 					<p className="text-center text-muted-foreground py-8">
-						{m.search_dialog_no_results()}
+						{m.lean_lemon_mesa()}
 					</p>
 				) : null}
 
@@ -220,7 +220,7 @@ export function SearchDialog({
 		<Dialog open={open} onOpenChange={handleOpenChange}>
 			<DialogContent className="w-full max-w-sm md:max-w-md lg:max-w-lg overflow-hidden z-150">
 				<DialogHeader>
-					<DialogTitle>{m.search_dialog_title()}</DialogTitle>
+					<DialogTitle>{m.keen_peach_cherry()}</DialogTitle>
 				</DialogHeader>
 				{content}
 			</DialogContent>

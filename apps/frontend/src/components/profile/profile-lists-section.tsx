@@ -32,14 +32,14 @@ export function ProfileListsSection({
 		<section className="flex flex-col gap-2">
 			<div className="flex flex-row justify-between">
 				<h2 className="text-lg font-semibold">
-					{m.profile_lists_section_title()}
+					{m.eager_lime_squirrel()}
 				</h2>
 				<Link
 					to="/@{$username}/lists"
 					params={{ username }}
 					className="flex flex-row gap-2 items-center justify-center"
 				>
-					{m.profile_lists_section_link()}
+					{m.snappy_saffron_walrus()}
 				</Link>
 			</div>
 

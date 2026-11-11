@@ -30,7 +30,7 @@ interface ListSearchAddInputProps {
 }
 
 export function ListSearchAddInput({
-	placeholder = m.list_search_add_placeholder_all(),
+	placeholder = m.keen_lavender_walrus(),
 	draftItemsAtom = createListDraftItemsAtom,
 }: ListSearchAddInputProps) {
 	const [query, setQuery] = useState("");
@@ -81,14 +81,14 @@ export function ListSearchAddInput({
 			<ComboboxContent>
 				{loading ? (
 					<div className="flex w-full py-4 justify-center">
-						<LoaderFive text={m.list_search_add_searching()} />
+						<LoaderFive text={m.jolly_indigo_nectar()} />
 					</div>
 				) : (
 					<>
 						<ComboboxEmpty>
 							{query
-								? m.list_search_add_no_results()
-								: m.list_search_add_placeholder_all_combobox()}
+								? m.hazy_yellow_mirror()
+								: m.agile_amber_saddle()}
 						</ComboboxEmpty>
 						<ComboboxList>
 							{(item: SearchResult) => {

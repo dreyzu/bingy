@@ -44,8 +44,8 @@ export function MediaRatingDisplayCard({
 					</p>
 					<p className="text-sm text-muted-foreground">
 						{voteCount > 0
-							? m.media_details_votes({ count: voteCount, voteCount })
-							: m.media_details_no_votes()}
+							? m.sturdy_copper_meadow({ count: voteCount, voteCount })
+							: m.steady_emerald_zebra()}
 					</p>
 				</div>
 			</CardContent>

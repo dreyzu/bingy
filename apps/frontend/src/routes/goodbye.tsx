@@ -11,9 +11,9 @@ function GoodByePage() {
 	return (
 		<div>
 			<div className="grid gap-4 text-center">
-				<p>{m.goodbye_page_title()}</p>
+				<p>{m.vibrant_lime_cricket()}</p>
 				<Button onClick={() => navigate({ to: "/" })}>
-					{m.goodbye_page_btn_go_home()}
+					{m.quick_jade_pelican()}
 				</Button>
 			</div>
 		</div>

@@ -9,7 +9,7 @@ interface AddToListButtonProps {
 export function AddToListButton({ onClick }: AddToListButtonProps) {
 	return (
 		<Button variant="ghost" onClick={onClick} className="flex gap-2">
-			<span>{m.btn_add_to_list_text()}</span>
+			<span>{m.glossy_green_hippo()}</span>
 			<IconPlus className="ml-auto" />
 		</Button>
 	);

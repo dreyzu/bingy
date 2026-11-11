@@ -30,16 +30,16 @@ export function ProfileFollowingDialog({ users }: ProfileFollowingDialogProps) {
 				render={
 					<Button variant="link" className="flex flex-row items-center p-0">
 						<span className="font-semibold">
-							{users.length ?? 0} {m.profile_page_following()}
+							{users.length ?? 0} {m.steady_white_boulder()}
 						</span>
 					</Button>
 				}
 			/>
 			<DialogContent className="max-w-xs md:max-w-lg">
 				<DialogHeader>
-					<DialogTitle>{m.profile_page_following_dialog_title()}</DialogTitle>
+					<DialogTitle>{m.noble_amber_yak()}</DialogTitle>
 					<DialogDescription>
-						{m.profile_page_following_dialog_description()}
+						{m.quiet_orange_lantern()}
 					</DialogDescription>
 				</DialogHeader>
 				{hasFollowing ? (
@@ -54,7 +54,7 @@ export function ProfileFollowingDialog({ users }: ProfileFollowingDialogProps) {
 						))}
 					</div>
 				) : (
-					<EmptyUsers message={m.profile_page_following_empty()} />
+					<EmptyUsers message={m.alert_turquoise_hazel()} />
 				)}
 			</DialogContent>
 		</Dialog>

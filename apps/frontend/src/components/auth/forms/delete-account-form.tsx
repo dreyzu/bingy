@@ -48,19 +48,19 @@ export function DeleteAccountForm({ hasPassword }: DeleteAccountFormProps) {
 			});
 
 			if (data) {
-				toast.success({ title: m.toast_email_sent_account_delete() });
+				toast.success({ title: m.gleeful_jade_basil() });
 				setOpen(false);
 			}
 
 			if (error) {
 				if (error.code === "INVALID_PASSWORD") {
-					toast.error({ title: m.toast_invalid_password_error() });
+					toast.error({ title: m.bright_copper_otter() });
 				} else {
-					toast.error({ title: m.toast_error_generic() });
+					toast.error({ title: m.candid_beige_yak() });
 				}
 			}
 		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -69,17 +69,17 @@ export function DeleteAccountForm({ hasPassword }: DeleteAccountFormProps) {
 	return (
 		<div className="grid gap-2">
 			<p className="text-md font-semibold leading-none tracking-tight">
-				{m.delete_account_title()}
+				{m.gentle_white_walrus()}
 			</p>
 			<p className="text-sm text-muted-foreground mt-1.5">
-				{m.delete_account_short_desc()}
+				{m.wild_cream_forest()}
 			</p>
 
 			<AlertDialog open={open} onOpenChange={setOpen}>
 				<AlertDialogTrigger
 					render={
 						<Button variant="destructive" className="mt-2 w-full">
-							{m.delete_account_title()}
+							{m.gentle_white_walrus()}
 						</Button>
 					}
 				/>
@@ -87,10 +87,10 @@ export function DeleteAccountForm({ hasPassword }: DeleteAccountFormProps) {
 				<AlertDialogContent className="max-w-lg!">
 					<AlertDialogHeader>
 						<AlertDialogTitle>
-							{m.dialog_delete_account_title()}
+							{m.noble_slate_lagoon()}
 						</AlertDialogTitle>
 						<AlertDialogDescription>
-							{m.dialog_delete_account_warning()}
+							{m.clever_white_ember()}
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 
@@ -102,7 +102,7 @@ export function DeleteAccountForm({ hasPassword }: DeleteAccountFormProps) {
 								render={({ field, fieldState }) => (
 									<Field>
 										<FieldLabel htmlFor={`${id}-password`}>
-											{m.form_password_label()}
+											{m.airy_umber_rabbit()}
 										</FieldLabel>
 										<Input
 											id={`${id}-password`}
@@ -119,15 +119,15 @@ export function DeleteAccountForm({ hasPassword }: DeleteAccountFormProps) {
 						) : null}
 
 						<AlertDialogFooter>
-							<AlertDialogCancel>{m.dialog_cancel_action()}</AlertDialogCancel>
+							<AlertDialogCancel>{m.steady_magenta_octopus()}</AlertDialogCancel>
 							<Button type="submit" disabled={isSubmitting}>
 								{isSubmitting ? (
 									<span className="flex items-center justify-center gap-2">
 										<IconLoader className="animate-spin h-4 w-4" />
-										{m.btn_sending_email()}
+										{m.brave_lemon_gecko()}
 									</span>
 								) : (
-									m.delete_account_title()
+									m.gentle_white_walrus()
 								)}
 							</Button>
 						</AlertDialogFooter>

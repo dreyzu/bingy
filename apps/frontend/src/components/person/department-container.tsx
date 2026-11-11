@@ -97,12 +97,12 @@ export const DepartmentContainer = ({
 													>
 														{item.episodeCount}{" "}
 														{item.episodeCount > 1
-															? m.department_container_episodes()
-															: m.department_container_episode()}
+															? m.witty_sepia_spruce()
+															: m.rapid_lemon_rabbit()}
 													</Link>
 												) : null}
 												<div className="flex flex-row gap-1">
-													<p>{m.person_as()}</p>
+													<p>{m.vibrant_crimson_meerkat()}</p>
 													<p>{item.role}</p>
 												</div>
 											</div>
