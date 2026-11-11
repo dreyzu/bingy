@@ -24,40 +24,42 @@ export function InProgressEmptyState({
 }: InProgressEmptyStateProps) {
 	const titles = isOwnProfile
 		? {
-				all: m.emtpy_inprogress_own_profile_title(),
-				watching: m.in_progress_no_result_watching_own(),
-				on_hold: m.in_progress_no_result_on_hold_own(),
-				dropped: m.in_progress_no_result_dropped_own(),
-				completed: m.in_progress_no_result_completed_own(),
+				all: m.empty_inprogress_own_profile_title(),
+				watching: m.empty_inprogress_watching_own_profile_title(),
+				on_hold: m.empty_inprogress_on_hold_own_profile_title(),
+				dropped: m.empty_inprogress_dropped_own_profile_title(),
+				completed: m.empty_inprogress_completed_own_profile_title(),
 			}
 		: {
 				all: m.empty_inprogress_other_profile_title({ username }),
-				watching: m.in_progress_no_result_watching_other({ username }),
-				on_hold: m.in_progress_no_result_on_hold_other({ username }),
-				dropped: m.in_progress_no_result_dropped_other({ username }),
-				completed: m.in_progress_no_result_completed_other({ username }),
+				watching: m.empty_inprogress_watching_other_profile_title({ username }),
+				on_hold: m.empty_inprogress_on_hold_other_profile_title({ username }),
+				dropped: m.empty_inprogress_dropped_other_profile_title({ username }),
+				completed: m.empty_inprogress_completed_other_profile_title({ username }),
 			};
 
 	const descriptions = isOwnProfile
 		? {
 				all: m.empty_inprogress_own_profile_desc(),
-				watching: m.in_progress_no_result_watching_desc_own(),
-				on_hold: m.in_progress_no_result_on_hold_desc_own(),
-				dropped: m.in_progress_no_result_dropped_desc_own(),
-				completed: m.in_progress_no_result_completed_desc_own(),
+				watching: m.empty_inprogress_watching_own_profile_desc(),
+				on_hold: m.empty_inprogress_on_hold_own_profile_desc(),
+				dropped: m.empty_inprogress_dropped_own_profile_desc(),
+				completed: m.empty_inprogress_completed_own_profile_desc(),
 			}
 		: {
-				all: m.empty_inprogress_other_profile_desc({ username }),
-				watching: m.in_progress_no_result_watching_desc_other({ username }),
-				on_hold: m.in_progress_no_result_on_hold_desc_other({ username }),
-				dropped: m.in_progress_no_result_dropped_desc_other({ username }),
-				completed: m.in_progress_no_result_completed_desc_other({ username }),
+				all: m.empty_inprogress_other_profile_desc(),
+				watching: m.empty_inprogress_watching_other_profile_desc(),
+				on_hold: m.empty_inprogress_on_hold_other_profile_desc(),
+				dropped: m.empty_inprogress_dropped_other_profile_desc(),
+				completed: m.empty_inprogress_completed_other_profile_desc(),
 			};
 
 	return (
 		<Empty className="min-h-100 w-full">
 			<EmptyHeader>
-				<EmptyTitle className="text-lg md:text-2xl">{titles[filter]}</EmptyTitle>
+				<EmptyTitle className="text-lg md:text-2xl">
+					{titles[filter]}
+				</EmptyTitle>
 				<EmptyDescription>{descriptions[filter]}</EmptyDescription>
 			</EmptyHeader>
 			{isOwnProfile ? (
