@@ -16,6 +16,8 @@ const SUPPORTED_REGIONS = [
 	"BR",
 	"PT",
 	"TW",
+	"JP",
+	"DE",
 ] as const;
 type Region = (typeof SUPPORTED_REGIONS)[number];
 
@@ -111,6 +113,8 @@ export function getRegionFromTimezone(timezone: string): Region | undefined {
 	if (timezone.startsWith("Australia/")) return "AU";
 	if (timezone.startsWith("Asia/Seoul")) return "KR";
 	if (timezone.startsWith("Asia/Taipei")) return "TW";
+	if (timezone.startsWith("Asia/Tokyo")) return "JP";
+	if (timezone.startsWith("Europe/Berlin")) return "DE";
 
 	return undefined;
 }

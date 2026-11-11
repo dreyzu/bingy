@@ -24,6 +24,8 @@ const REGIONAL_LANGUAGE_TAGS: Record<Exclude<Locale, BaseLocale>, string> = {
 	"pt-PT": "pt-PT",
 	"zh-CN": "zh-CN",
 	"zh-TW": "zh-TW",
+	de: "de-DE",
+	ja: "ja-JP",
 };
 
 function isBaseLocale(locale: Locale): locale is BaseLocale {

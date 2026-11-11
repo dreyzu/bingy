@@ -61,8 +61,10 @@ describe("custom-userLocale strategy", () => {
 		[["fr-CA"], "fr"],
 		[["en-GB"], "en"],
 		[["ko-KR"], "ko"],
-		[["de-DE", "pt-BR"], "pt-BR"],
-		[["de-DE", "ja"], undefined],
+		[["de-AT"], "de"],
+		[["ja-JP"], "ja"],
+		[["ru-RU", "pt-BR"], "pt-BR"],
+		[["ru-RU", "ar"], undefined],
 		[[], undefined],
 	] as const)("detects %j as %s", (languages, expected) => {
 		setBrowserLanguages([...languages]);
@@ -89,7 +91,7 @@ describe("custom-userLocale strategy", () => {
 
 	it("ignores an unsupported saved value and falls back to the browser", () => {
 		setBrowserLanguages(["pt-BR"]);
-		document.cookie = "PARAGLIDE_LOCALE=de; path=/";
+		document.cookie = "PARAGLIDE_LOCALE=ru; path=/";
 		expect(strategy?.getLocale()).toBe("pt-BR");
 	});
 

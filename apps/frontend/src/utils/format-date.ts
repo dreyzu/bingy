@@ -3,10 +3,12 @@ import {
 	type Locale,
 } from "date-fns";
 import {
+	de as deLocale,
 	enUS as enUSLocale,
 	es as esLocale,
 	fr as frLocale,
 	it as itLocale,
+	ja as jaLocale,
 	ko as koLocale,
 	ptBR as ptBRLocale,
 	pt as ptLocale,
@@ -20,6 +22,8 @@ const localeMap: Record<string, Locale> = {
 	fr: frLocale,
 	it: itLocale,
 	ko: koLocale,
+	de: deLocale,
+	ja: jaLocale,
 	pt: ptLocale,
 	"pt-BR": ptBRLocale,
 	"zh-CN": zhCNLocale,

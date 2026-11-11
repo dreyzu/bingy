@@ -14,6 +14,8 @@ describe("matchLocale", () => {
 		["pt-AO", "pt-PT"],
 		["pt-BR", "pt-BR"],
 		["pt_br", "pt-BR"],
+		["de-AT", "de"],
+		["ja-JP", "ja"],
 		["zh", "zh-CN"],
 		["zh-CN", "zh-CN"],
 		["zh-Hans-CN", "zh-CN"],
@@ -39,7 +41,7 @@ describe("matchLocale", () => {
 		expect(matchLocale(tag)).toBe(expected);
 	});
 
-	it.each(["de-DE", "ja", "x", "", "  "])(
+	it.each(["ru-RU", "ar", "x", "", "  "])(
 		"returns undefined for unsupported tag %j",
 		(tag) => {
 			expect(matchLocale(tag)).toBeUndefined();
@@ -49,12 +51,12 @@ describe("matchLocale", () => {
 
 describe("matchLocaleFromList", () => {
 	it("returns the first supported tag in preference order", () => {
-		expect(matchLocaleFromList(["de-DE", "es-MX", "fr"])).toBe("es-419");
+		expect(matchLocaleFromList(["ru-RU", "es-MX", "fr"])).toBe("es-419");
 		expect(matchLocaleFromList(["zh-HK", "en"])).toBe("zh-TW");
 	});
 
 	it("skips unsupported tags", () => {
-		expect(matchLocaleFromList(["de-DE", "ja-JP", "pt-AO"])).toBe("pt-PT");
+		expect(matchLocaleFromList(["ru-RU", "ar-SA", "pt-AO"])).toBe("pt-PT");
 	});
 
 	it("returns undefined for an empty list", () => {
@@ -62,6 +64,6 @@ describe("matchLocaleFromList", () => {
 	});
 
 	it("returns undefined when no tag is supported", () => {
-		expect(matchLocaleFromList(["de-DE", "ja"])).toBeUndefined();
+		expect(matchLocaleFromList(["ru-RU", "ar"])).toBeUndefined();
 	});
 });

@@ -35,6 +35,8 @@ const LOCALE_LABELS: Record<Locale, string> = {
 	it: "Italiano",
 	"pt-BR": "Português (Brasil)",
 	"pt-PT": "Português (Portugal)",
+	de: "Deutsch",
+	ja: "日本語",
 };
 
 const getRegionName = (region: Region): string => {
@@ -63,6 +65,10 @@ const getRegionName = (region: Region): string => {
 			return m.daring_bronze_blossom();
 		case "TW":
 			return m.modest_onyx_yak();
+		case "JP":
+			return m.silent_maroon_oasis();
+		case "DE":
+			return m.dreamy_ruby_banjo();
 		default:
 			return region;
 	}

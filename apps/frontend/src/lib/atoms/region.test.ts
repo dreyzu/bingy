@@ -43,6 +43,8 @@ describe("getRegionFromTimezone", () => {
 		["Australia/Sydney", "AU"],
 		["Asia/Seoul", "KR"],
 		["Asia/Taipei", "TW"],
+		["Asia/Tokyo", "JP"],
+		["Europe/Berlin", "DE"],
 		["UTC", undefined],
 	] as const)("maps %s to %s", async (timezone, expected) => {
 		const { getRegionFromTimezone } = await import("./region");
