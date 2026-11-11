@@ -10,7 +10,7 @@ import { m } from "@/paraglide/messages";
 
 export function BackdropImagesEmptyState() {
 	return (
-		<Empty className="min-h-[200px]">
+		<Empty className="min-h-50">
 			<EmptyHeader>
 				<EmptyMedia variant="icon">
 					<IconPhotoOff className="size-4" />

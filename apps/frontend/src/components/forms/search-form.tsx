@@ -30,7 +30,7 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="flex flex-col gap-1 w-full lg:max-w-[450px]"
+			className="flex flex-col gap-1 w-full lg:max-w-112.5"
 		>
 			<div className="flex gap-2">
 				<Input

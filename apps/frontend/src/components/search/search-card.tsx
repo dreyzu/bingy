@@ -84,13 +84,13 @@ export const SearchCard = ({ item }: SearchCardProps) => {
 
 	return (
 		<div
-			className="flex gap-4 hover:bg-accent transition-colors select-none h-[170px] md:h-[200px] cursor-pointer rounded-lg overflow-hidden"
+			className="flex gap-4 hover:bg-accent transition-colors select-none h-42.5 md:h-50 cursor-pointer rounded-lg overflow-hidden"
 			onClick={() => navigate(config.link)}
 		>
 			<img
 				src={config.imageUrl}
 				alt={config.title}
-				className="w-[100px] md:w-[133px] object-cover shrink-0"
+				className="w-25 md:w-33.25 object-cover shrink-0"
 			/>
 
 			<div className="flex flex-col gap-2 py-4 pr-4 min-w-0 flex-1">

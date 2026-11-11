@@ -56,7 +56,7 @@ export const CreditEpisodeCard = ({
 		<Card
 			className={`relative overflow-hidden rounded-md ${
 				backgroundImage
-					? "text-dark-card-foreground min-h-[200px]"
+					? "text-dark-card-foreground min-h-50"
 					: "text-foreground border"
 			}`}
 			style={

@@ -20,7 +20,7 @@ export function ProfileListsSection({
 }: ProfileListsSectionProps) {
 	if (isLoading) {
 		return (
-			<section className="flex flex-col gap-2 min-h-[150px] lg:min-h-[300px]">
+			<section className="flex flex-col gap-2 min-h-37.5 lg:min-h-75">
 				<LoadingCentered />
 			</section>
 		);
@@ -31,9 +31,7 @@ export function ProfileListsSection({
 	return (
 		<section className="flex flex-col gap-2">
 			<div className="flex flex-row justify-between">
-				<h2 className="text-lg font-semibold">
-					{m.eager_lime_squirrel()}
-				</h2>
+				<h2 className="text-lg font-semibold">{m.eager_lime_squirrel()}</h2>
 				<Link
 					to="/@{$username}/lists"
 					params={{ username }}

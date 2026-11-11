@@ -10,8 +10,8 @@ export function ProfileBanner({ backgroundImage }: ProfileBannerProps) {
 	return (
 		<div
 			className="absolute top-0 left-0 right-0 mx-auto w-full
-				max-w-full md:max-w-[480px] lg:max-w-[640px] xl:max-w-[711px]
-				h-[180px] md:h-[270px] lg:h-[360px] xl:h-[400px]
+				max-w-full md:max-w-120 lg:max-w-160 xl:max-w-177.75
+				h-45 md:h-67.5 lg:h-90 xl:h-100
 				-z-10 overflow-hidden"
 		>
 			<img

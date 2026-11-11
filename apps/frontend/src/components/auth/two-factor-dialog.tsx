@@ -67,7 +67,7 @@ export function TwoFactorDialog({
 					<Button
 						onClick={handleVerify}
 						disabled={code.length !== 6 || isVerifying}
-						className="w-[280px]"
+						className="w-70"
 					>
 						{isVerifying ? (
 							<span className="flex items-center justify-center gap-2">

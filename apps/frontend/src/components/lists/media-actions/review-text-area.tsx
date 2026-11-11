@@ -35,7 +35,7 @@ export function ReviewTextarea({
 				value={localValue}
 				onChange={handleChange}
 				placeholder={placeholder}
-				className="flex-1 min-h-[120px] resize-none"
+				className="flex-1 min-h-30 resize-none"
 			/>
 		</div>
 	);
