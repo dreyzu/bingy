@@ -10,6 +10,8 @@ When adding a new translatable string:
 2. Add the key with the English text to `messages/en.json` and the French text to `messages/fr.json`, using the same key in both files.
 3. Use it in code as `m.<key>()`.
 
+French messages (`messages/fr.json`) use the informal address (tutoiement): use `tu`, `ton`, `ta`, `tes`, and the matching verb forms, never `vous`, `votre`, or `vos`. Instructional text that explains how to do something uses the imperative.
+
 ## UI copy
 
 When a component has a title and a description below it, the description must not repeat the title's text. For example, an empty state titled "Empty watchlist" should not have a description that starts with or restates "empty watchlist".

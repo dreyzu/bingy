@@ -149,13 +149,8 @@
 	"plucky_saffron_wolf": "En savoir plus",
 	"daring_orange_parrot": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Société de production",
 				"countPlural=other": "Sociétés de production"
@@ -164,12 +159,8 @@
 	],
 	"spry_ochre_falcon": [
 		{
-			"declarations": [
-				"input gender"
-			],
-			"selectors": [
-				"gender"
-			],
+			"declarations": ["input gender"],
+			"selectors": ["gender"],
 			"match": {
 				"gender=male": "Réalisateur",
 				"gender=female": "Réalisatrice",
@@ -193,12 +184,8 @@
 	"lush_lime_saddle": "à {age} ans",
 	"dapper_peach_yak": [
 		{
-			"declarations": [
-				"input gender"
-			],
-			"selectors": [
-				"gender"
-			],
+			"declarations": ["input gender"],
+			"selectors": ["gender"],
 			"match": {
 				"gender=male": "Acteur",
 				"gender=female": "Actrice",
@@ -208,12 +195,8 @@
 	],
 	"nimble_coral_prairie": [
 		{
-			"declarations": [
-				"input gender"
-			],
-			"selectors": [
-				"gender"
-			],
+			"declarations": ["input gender"],
+			"selectors": ["gender"],
 			"match": {
 				"gender=male": "Scénariste",
 				"gender=female": "Scénariste",
@@ -223,12 +206,8 @@
 	],
 	"breezy_khaki_tiger": [
 		{
-			"declarations": [
-				"input gender"
-			],
-			"selectors": [
-				"gender"
-			],
+			"declarations": ["input gender"],
+			"selectors": ["gender"],
 			"match": {
 				"gender=male": "Réalisateur",
 				"gender=female": "Réalisatrice",
@@ -239,13 +218,8 @@
 	"loyal_umber_parrot": "Biographie",
 	"hasty_pink_koala": [
 		{
-			"declarations": [
-				"input gender",
-				"input place"
-			],
-			"selectors": [
-				"gender"
-			],
+			"declarations": ["input gender", "input place"],
+			"selectors": ["gender"],
 			"match": {
 				"gender=male": "Né à {place}",
 				"gender=female": "Née à {place}",
@@ -255,12 +229,8 @@
 	],
 	"winsome_white_oasis": [
 		{
-			"declarations": [
-				"input gender"
-			],
-			"selectors": [
-				"gender"
-			],
+			"declarations": ["input gender"],
+			"selectors": ["gender"],
 			"match": {
 				"gender=male": "Connu pour",
 				"gender=female": "Connue pour",
@@ -313,13 +283,8 @@
 	"golden_cerise_boulder": "guest stars",
 	"nifty_cerise_panda": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Épisode",
 				"countPlural=other": "Épisodes"
@@ -340,13 +305,8 @@
 	"cozy_lemon_forest": "Date de diffusion",
 	"witty_coral_tulip": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Épisode",
 				"countPlural=other": "Épisodes"
@@ -355,13 +315,8 @@
 	],
 	"stellar_bronze_comet": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Distributeur",
 				"countPlural=other": "Distributeurs"
@@ -410,12 +365,8 @@
 	"airy_navy_wombat": "Synopsis",
 	"fierce_silver_lantern": [
 		{
-			"declarations": [
-				"input gender"
-			],
-			"selectors": [
-				"gender"
-			],
+			"declarations": ["input gender"],
+			"selectors": ["gender"],
 			"match": {
 				"gender=male": "Créateur",
 				"gender=female": "Créatrice",
@@ -432,9 +383,7 @@
 				"input voteCount",
 				"local countPlural = count: plural"
 			],
-			"selectors": [
-				"countPlural"
-			],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{voteCount} vote",
 				"countPlural=other": "{voteCount} votes"
@@ -444,13 +393,8 @@
 	"steady_emerald_zebra": "Ajoute la première note",
 	"lean_crimson_puma": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Saison",
 				"countPlural=other": "Saisons"
@@ -459,13 +403,8 @@
 	],
 	"warm_scarlet_jasmine": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Épisode au total",
 				"countPlural=other": "Épisodes au total"
@@ -480,13 +419,8 @@
 	"grand_ivory_lynx": "Annoncée",
 	"velvet_gray_aspen": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Distributeur",
 				"countPlural=other": "Distributeurs"
@@ -495,13 +429,8 @@
 	],
 	"calm_amber_prairie": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Société de production",
 				"countPlural=other": "Sociétés de production"
@@ -730,9 +659,7 @@
 				"input total_items",
 				"local countPlural = count: plural"
 			],
-			"selectors": [
-				"countPlural"
-			],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "Média ajouté ({total_items})",
 				"countPlural=other": "Médias ajoutés ({total_items})"
@@ -782,7 +709,7 @@
 	"lush_pink_blossom": "Ajouter aux séries en cours",
 	"humble_turquoise_moose": "Modifier l’avancement",
 	"dapper_mauve_island": "En cours de visionnage",
-	"bold_coral_daisy": "Sélectionnez la saison et l'épisode que vous regardez actuellement pour « {media_name} »",
+	"bold_coral_daisy": "Sélectionne le dernier épisode que tu as visionné pour « {media_name} »",
 	"upbeat_crimson_wombat": "Annuler",
 	"winsome_mint_panda": "Ajouter",
 	"bubbly_lavender_lantern": "Ajout...",
@@ -878,13 +805,8 @@
 	"fierce_gold_cactus": "Reviews",
 	"zesty_purple_daisy": [
 		{
-			"declarations": [
-				"input count",
-				"local countPlural = count: plural"
-			],
-			"selectors": [
-				"countPlural"
-			],
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
 			"match": {
 				"countPlural=one": "{count} review",
 				"countPlural=other": "{count} reviews"
@@ -899,12 +821,8 @@
 	"loyal_olive_parrot": "Pas d'activité récente",
 	"rustic_slate_salmon": [
 		{
-			"declarations": [
-				"input isOwnProfile"
-			],
-			"selectors": [
-				"isOwnProfile"
-			],
+			"declarations": ["input isOwnProfile"],
+			"selectors": ["isOwnProfile"],
 			"match": {
 				"isOwnProfile=true": " à ta watchlist",
 				"isOwnProfile=false": " à sa watchlist"
@@ -913,12 +831,8 @@
 	],
 	"lean_lavender_pebble": [
 		{
-			"declarations": [
-				"input isOwnProfile"
-			],
-			"selectors": [
-				"isOwnProfile"
-			],
+			"declarations": ["input isOwnProfile"],
+			"selectors": ["isOwnProfile"],
 			"match": {
 				"isOwnProfile=true": " à tes favoris",
 				"isOwnProfile=false": " à ses favoris"
@@ -927,12 +841,8 @@
 	],
 	"dapper_ruby_moose": [
 		{
-			"declarations": [
-				"input isOwnProfile"
-			],
-			"selectors": [
-				"isOwnProfile"
-			],
+			"declarations": ["input isOwnProfile"],
+			"selectors": ["isOwnProfile"],
 			"match": {
 				"isOwnProfile=true": " as ajouté ",
 				"isOwnProfile=false": " a ajouté "
@@ -941,12 +851,8 @@
 	],
 	"candid_violet_yak": [
 		{
-			"declarations": [
-				"input isOwnProfile"
-			],
-			"selectors": [
-				"isOwnProfile"
-			],
+			"declarations": ["input isOwnProfile"],
+			"selectors": ["isOwnProfile"],
 			"match": {
 				"isOwnProfile=true": " as ajouté ",
 				"isOwnProfile=false": " a ajouté "
@@ -955,12 +861,8 @@
 	],
 	"clever_violet_forest": [
 		{
-			"declarations": [
-				"input isOwnProfile"
-			],
-			"selectors": [
-				"isOwnProfile"
-			],
+			"declarations": ["input isOwnProfile"],
+			"selectors": ["isOwnProfile"],
 			"match": {
 				"isOwnProfile=true": " as regardé ",
 				"isOwnProfile=false": " a regardé "
@@ -969,12 +871,8 @@
 	],
 	"fierce_amber_lemur": [
 		{
-			"declarations": [
-				"input isOwnProfile"
-			],
-			"selectors": [
-				"isOwnProfile"
-			],
+			"declarations": ["input isOwnProfile"],
+			"selectors": ["isOwnProfile"],
 			"match": {
 				"isOwnProfile=true": " suis ",
 				"isOwnProfile=false": " suit "
@@ -983,12 +881,8 @@
 	],
 	"eager_lilac_clover": [
 		{
-			"declarations": [
-				"input isOwnProfile"
-			],
-			"selectors": [
-				"isOwnProfile"
-			],
+			"declarations": ["input isOwnProfile"],
+			"selectors": ["isOwnProfile"],
 			"match": {
 				"isOwnProfile=true": " as noté ",
 				"isOwnProfile=false": " a noté "
@@ -997,12 +891,8 @@
 	],
 	"noble_pink_canyon": [
 		{
-			"declarations": [
-				"input isOwnProfile"
-			],
-			"selectors": [
-				"isOwnProfile"
-			],
+			"declarations": ["input isOwnProfile"],
+			"selectors": ["isOwnProfile"],
 			"match": {
 				"isOwnProfile=true": " as créé une liste : ",
 				"isOwnProfile=false": " a créé une liste : "
