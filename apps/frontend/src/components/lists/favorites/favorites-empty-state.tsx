@@ -31,9 +31,9 @@ export function FavoritesEmptyState({
 				tv: m.favorites_toggle_no_result_tv(),
 			}
 		: {
-				all: m.favorites_toggle_no_result_all_other(),
-				movie: m.favorites_toggle_no_result_movies_other(),
-				tv: m.favorites_toggle_no_result_tv_other(),
+				all: m.favorites_toggle_no_result_all_other({ username }),
+				movie: m.favorites_toggle_no_result_movies_other({ username }),
+				tv: m.favorites_toggle_no_result_tv_other({ username }),
 			};
 
 	const headerDesc = isOwnProfile
@@ -43,21 +43,15 @@ export function FavoritesEmptyState({
 				tv: m.favorites_toggle_no_result_tv_desc(),
 			}
 		: {
-				all: m.favorites_toggle_no_result_all_desc_other({
-					username: username,
-				}),
-				movie: m.favorites_toggle_no_result_movies_desc_other({
-					username: username,
-				}),
-				tv: m.favorites_toggle_no_result_tv_desc_other({
-					username: username,
-				}),
+				all: m.favorites_toggle_no_result_all_desc_other({}),
+				movie: m.favorites_toggle_no_result_movies_desc_other({}),
+				tv: m.favorites_toggle_no_result_tv_desc_other({}),
 			};
 
 	const isMobile = useMediaQuery("(pointer: coarse)");
 
 	return (
-		<Empty className="min-h-[400px] w-full">
+		<Empty className="min-h-100 w-full">
 			<EmptyHeader>
 				<EmptyTitle className="text-lg md:text-2xl">
 					{headerMessages[filter]}

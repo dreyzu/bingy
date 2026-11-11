@@ -31,9 +31,9 @@ export function HistoryEmptyState({
 				tv: m.history_toggle_no_result_tv(),
 			}
 		: {
-				all: m.history_toggle_no_result_all_other(),
-				movie: m.history_toggle_no_result_movies_other(),
-				tv: m.history_toggle_no_result_tv_other(),
+				all: m.history_toggle_no_result_all_other({ username }),
+				movie: m.history_toggle_no_result_movies_other({ username }),
+				tv: m.history_toggle_no_result_tv_other({ username }),
 			};
 
 	const headerDesc = isOwnProfile
@@ -57,7 +57,7 @@ export function HistoryEmptyState({
 	const isMobile = useMediaQuery("(pointer: coarse)");
 
 	return (
-		<Empty className="min-h-[400px] w-full">
+		<Empty className="min-h-100 w-full">
 			<EmptyHeader>
 				<EmptyTitle className="text-lg md:text-2xl">
 					{headerMessages[filter]}
