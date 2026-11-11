@@ -1,6 +1,7 @@
 import { createFileRoute, useRouteContext } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
+import { z } from "zod";
 import {
 	type MediaFilter,
 	WatchlistContainer,
@@ -11,20 +12,28 @@ import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
 import { isOwnProfile } from "@/utils/utils";
 
+const watchlistSearchSchema = z.object({
+	filter: z.enum(["all", "movie", "tv"]).optional().catch(undefined),
+});
+
 export const Route = createFileRoute("/@{$username}/watchlist")({
+	validateSearch: watchlistSearchSchema,
 	component: WatchlistPage,
 });
 
 function WatchlistPage() {
 	const { username } = Route.useParams();
+	const { filter = "all" } = Route.useSearch();
+	const navigate = Route.useNavigate();
 	const { authData } = useRouteContext({ from: "__root__" });
 	const isOwnProfileFlag = isOwnProfile(authData?.user?.name, username);
 	const localeRegion = useAtomValue(localeRegionAtom);
-	const [filter, setFilter] = useState<MediaFilter>("all");
 	const [page, setPage] = useState(1);
 
 	const handleFilterChange = (newFilter: MediaFilter) => {
-		setFilter(newFilter);
+		navigate({
+			search: { filter: newFilter === "all" ? undefined : newFilter },
+		});
 		setPage(1);
 	};
 
