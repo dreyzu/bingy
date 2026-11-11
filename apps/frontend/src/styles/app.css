@@ -57,6 +57,20 @@
 	--font-heading: "Merriweather Variable", serif;
 }
 
+:root:lang(zh-CN) {
+	--font-sans:
+		"Roboto Variable", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+		"Noto Sans SC", sans-serif;
+	--font-heading: "Merriweather Variable", "Songti SC", "SimSun", serif;
+}
+
+:root:lang(zh-TW) {
+	--font-sans:
+		"Roboto Variable", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC",
+		sans-serif;
+	--font-heading: "Merriweather Variable", "Songti TC", "PMingLiU", serif;
+}
+
 :root {
 	--radius: 0.625rem;
 	--background: oklch(1 0 0);

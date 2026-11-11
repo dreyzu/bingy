@@ -1,17 +1,48 @@
 import { atom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import type { Locale } from "@/paraglide/runtime";
+import { getLanguageTag } from "./language-tag";
 import { localeAtom } from "./locale";
 
-const SUPPORTED_REGIONS = ["CA", "US", "FR", "GB", "AU"] as const;
+const SUPPORTED_REGIONS = [
+	"CA",
+	"US",
+	"FR",
+	"GB",
+	"AU",
+	"KR",
+	"MX",
+	"IT",
+	"ES",
+	"BR",
+	"PT",
+	"TW",
+] as const;
 type Region = (typeof SUPPORTED_REGIONS)[number];
 
 const DEFAULT_REGION: Region = "US";
 
-const getInitialRegion = (): Region => {
+function isSupportedRegion(value: unknown): value is Region {
+	return SUPPORTED_REGIONS.some((region) => region === value);
+}
+
+function getStoredRegion(): Region | undefined {
 	const stored = localStorage.getItem("region");
+	if (!stored) {
+		return undefined;
+	}
+
+	try {
+		const value: unknown = JSON.parse(stored);
+		return isSupportedRegion(value) ? value : undefined;
+	} catch {
+		return undefined;
+	}
+}
+
+const getInitialRegion = (): Region => {
+	const stored = getStoredRegion();
 	if (stored) {
-		return JSON.parse(stored) as Region;
+		return stored;
 	}
 
 	// Auto-detect and save
@@ -19,6 +50,70 @@ const getInitialRegion = (): Region => {
 	localStorage.setItem("region", JSON.stringify(detected));
 	return detected;
 };
+
+const BRAZIL_TIMEZONES = [
+	"America/Araguaina",
+	"America/Bahia",
+	"America/Belem",
+	"America/Boa_Vista",
+	"America/Campo_Grande",
+	"America/Cuiaba",
+	"America/Eirunepe",
+	"America/Fortaleza",
+	"America/Maceio",
+	"America/Manaus",
+	"America/Noronha",
+	"America/Porto_Velho",
+	"America/Recife",
+	"America/Rio_Branco",
+	"America/Santarem",
+	"America/Sao_Paulo",
+	"Brazil/East",
+];
+
+const MEXICO_TIMEZONES = [
+	"America/Bahia_Banderas",
+	"America/Cancun",
+	"America/Chihuahua",
+	"America/Ciudad_Juarez",
+	"America/Ensenada",
+	"America/Hermosillo",
+	"America/Matamoros",
+	"America/Mazatlan",
+	"America/Merida",
+	"America/Mexico_City",
+	"America/Monterrey",
+	"America/Ojinaga",
+	"America/Santa_Isabel",
+	"America/Tijuana",
+	"Mexico/General",
+];
+
+export function getRegionFromTimezone(timezone: string): Region | undefined {
+	if (BRAZIL_TIMEZONES.includes(timezone)) return "BR";
+	if (MEXICO_TIMEZONES.includes(timezone)) return "MX";
+
+	if (timezone.startsWith("America/")) {
+		if (
+			timezone.includes("Toronto") ||
+			timezone.includes("Vancouver") ||
+			timezone.includes("Montreal")
+		) {
+			return "CA";
+		}
+		return "US";
+	}
+	if (timezone.startsWith("Europe/Paris")) return "FR";
+	if (timezone.startsWith("Europe/London")) return "GB";
+	if (timezone.startsWith("Europe/Rome")) return "IT";
+	if (timezone.startsWith("Europe/Madrid")) return "ES";
+	if (timezone.startsWith("Europe/Lisbon")) return "PT";
+	if (timezone.startsWith("Australia/")) return "AU";
+	if (timezone.startsWith("Asia/Seoul")) return "KR";
+	if (timezone.startsWith("Asia/Taipei")) return "TW";
+
+	return undefined;
+}
 
 function getUserRegionFromNavigator(): Region | undefined {
 	if (typeof Intl === "undefined" || typeof navigator === "undefined") {
@@ -28,44 +123,20 @@ function getUserRegionFromNavigator(): Region | undefined {
 	try {
 		// Try timezone first
 		const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-		if (timezone.startsWith("America/")) {
-			if (
-				timezone.includes("Toronto") ||
-				timezone.includes("Vancouver") ||
-				timezone.includes("Montreal")
-			) {
-				return "CA";
-			}
-			return "US";
+		const regionFromTimezone = getRegionFromTimezone(timezone);
+		if (regionFromTimezone) {
+			return regionFromTimezone;
 		}
-		if (timezone.startsWith("Europe/Paris")) return "FR";
-		if (timezone.startsWith("Europe/London")) return "GB";
-		if (timezone.startsWith("Australia/")) return "AU";
 
 		// Fallback to navigator.language
-		const locale = navigator.language.split("-")[1];
-		return SUPPORTED_REGIONS.includes(locale as Region)
-			? (locale as Region)
-			: undefined;
+		const locale = navigator.language.split("-")[1]?.toUpperCase();
+		return isSupportedRegion(locale) ? locale : undefined;
 	} catch {
 		return undefined;
 	}
 }
 
 const regionStorage = atomWithStorage<Region>("region", getInitialRegion());
-
-// Valid locale-region combinations
-const VALID_COMBOS: Record<Locale, Region[]> = {
-	en: ["US", "GB", "AU", "CA"],
-	fr: ["FR", "CA"],
-};
-
-// Default fallback for each locale
-const DEFAULT_FOR_LOCALE: Record<Locale, Region> = {
-	en: "US",
-	fr: "FR",
-};
 
 // Used only for api calls with a region param
 export const regionAtom = atom(
@@ -76,18 +147,8 @@ export const regionAtom = atom(
 );
 
 // Used for "language" param in api calls and date format
-export const localeRegionAtom = atom((get) => {
-	const locale = get(localeAtom);
-	const region = get(regionStorage);
+export const localeRegionAtom = atom((get) =>
+	getLanguageTag(get(localeAtom), get(regionStorage)),
+);
 
-	const validRegions = VALID_COMBOS[locale];
-	if (validRegions.includes(region)) {
-		return `${locale}-${region}`;
-	}
-
-	// Fallback to default region for this locale
-	const defaultRegion = DEFAULT_FOR_LOCALE[locale];
-	return `${locale}-${defaultRegion}`;
-});
-
-export { SUPPORTED_REGIONS, type Region };
+export { type Region, SUPPORTED_REGIONS };

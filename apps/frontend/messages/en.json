@@ -95,7 +95,7 @@
 	"elegant_navy_salmon": "Linking...",
 	"crisp_onyx_ember": "Unlinking...",
 	"humble_rust_tulip": "Unlink {provider}",
-	"noble_lime_jasmine": "You cannot unlink your only account",
+	"noble_lime_jasmine": "You cannot unlink your {provider} account because it is your only sign-in method.",
 	"zippy_beige_bagel": "{provider} account unlinked",
 	"candid_indigo_boulder": "Link {provider}",
 	"calm_sage_mesa": "Link accounts",
@@ -762,6 +762,7 @@
 	"bright_gray_cricket": "United States",
 	"tidy_copper_rabbit": "United Kingdom",
 	"jaunty_wine_eagle": "Australia",
+	"witty_periwinkle_canyon": "South Korea",
 	"peppy_silver_maple": "Go back",
 	"vivid_violet_pebble": "View",
 	"smart_sage_mesa": "View",
@@ -944,5 +945,12 @@
 	"upbeat_umber_otter": "Check back later!",
 	"tidy_onyx_willow": "Check back later!",
 	"lush_magenta_valley": "Check back later!",
-	"elegant_jade_parrot": "Use absolute episode number"
+	"elegant_jade_parrot": "Use absolute episode number",
+	"zippy_sage_nectar": "Italy",
+	"swift_slate_mesa": "Mexico",
+	"vibrant_teal_planet": "Spain",
+	"dusky_lemon_beaver": "Brazil",
+	"daring_bronze_blossom": "Portugal",
+	"modest_onyx_yak": "Taiwan",
+	"crisp_onyx_barn": "Language"
 }
