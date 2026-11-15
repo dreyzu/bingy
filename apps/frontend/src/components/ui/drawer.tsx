@@ -1,5 +1,5 @@
 import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer";
-import * as React from "react";
+import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -157,15 +157,15 @@ function DrawerDescription({
 
 export {
 	Drawer,
-	DrawerPortal,
 	DrawerBackdrop,
-	DrawerViewport,
-	DrawerTrigger,
+	DrawerBody,
 	DrawerClose,
 	DrawerContent,
-	DrawerBody,
-	DrawerHeader,
-	DrawerFooter,
-	DrawerTitle,
 	DrawerDescription,
+	DrawerFooter,
+	DrawerHeader,
+	DrawerPortal,
+	DrawerTitle,
+	DrawerTrigger,
+	DrawerViewport,
 };

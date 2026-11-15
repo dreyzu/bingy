@@ -3,7 +3,7 @@ import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { z } from "zod";
 import { HistoryContainer } from "@/components/lists/history/history-container";
-import { type MediaFilter } from "@/components/lists/media-toggle-group";
+import type { MediaFilter } from "@/components/lists/media-toggle-group";
 import { GlobalLoadingIndicator } from "@/components/loading/loading-global";
 import { useRatings } from "@/hooks/useRating";
 import { localeRegionAtom } from "@/lib/atoms/region";

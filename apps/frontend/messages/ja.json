@@ -970,5 +970,6 @@
 	"lucky_gold_yak": "最初から見直しを開始しました",
 	"snappy_sepia_rabbit": "見直しを開始できませんでした",
 	"gallant_coral_oasis": "再視聴×{count}",
-	"keen_teal_aspen": "番組の読み込み中にエラーが発生しました"
+	"keen_teal_aspen": "番組の読み込み中にエラーが発生しました",
+	"peppy_plum_turtle": "5点中{rating}点で評価"
 }

@@ -57,6 +57,7 @@ export function ProfileFavoritesSection({
 				})}
 				{[...Array(emptySlots)].map((_, i) => (
 					<EmptyCardSlot
+						// biome-ignore lint/suspicious/noArrayIndexKey: identical placeholder slots, never reordered
 						key={`fav-empty-${i}`}
 						isOwnProfile={ownProfile}
 						type="favorites"

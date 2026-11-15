@@ -74,7 +74,7 @@ export function EnableTwoFactorForm() {
 					setShowDialog(true);
 				}
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
@@ -108,7 +108,7 @@ export function EnableTwoFactorForm() {
 				form.reset();
 				router.navigate({ to: "/settings" });
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		}
 	};

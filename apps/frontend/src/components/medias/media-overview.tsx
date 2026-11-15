@@ -47,7 +47,9 @@ export const MediaOverview = ({ overview }: { overview: string }) => {
 							variant="secondary"
 							size="icon"
 							className="h-6 w-6 p-0 hover:bg-transparent text-muted-foreground hover:text-foreground"
-							title={isExpanded ? m.nifty_aqua_clover() : m.hazy_maroon_galaxy()}
+							title={
+								isExpanded ? m.nifty_aqua_clover() : m.hazy_maroon_galaxy()
+							}
 						>
 							{isExpanded ? (
 								<IconChevronUp size={18} />

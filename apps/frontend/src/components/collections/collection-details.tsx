@@ -57,9 +57,9 @@ export function CollectionDetailsView({
 
 			if (movie.credits?.cast) {
 				const leadRoles = movie.credits.cast.slice(0, 10);
-				leadRoles.forEach((castMember) =>
-					mergeCastMemberCharacters(acc.cast, castMember),
-				);
+				for (const castMember of leadRoles) {
+					mergeCastMemberCharacters(acc.cast, castMember);
+				}
 			}
 
 			if (movie.credits?.crew) {
@@ -68,9 +68,9 @@ export function CollectionDetailsView({
 						crewMember.department === "Writing" ||
 						crewMember.job === "Director",
 				);
-				filteredCrew.forEach((crewMember) =>
-					mergeCrewMemberJobs(acc.crew, crewMember),
-				);
+				for (const crewMember of filteredCrew) {
+					mergeCrewMemberJobs(acc.crew, crewMember);
+				}
 			}
 
 			return acc;

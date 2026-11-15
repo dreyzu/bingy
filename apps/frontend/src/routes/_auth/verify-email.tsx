@@ -74,12 +74,8 @@ function VerifyEmailPage() {
 		<div className="flex flex-col justify-center items-center gap-4">
 			<Card className="min-w-full">
 				<CardHeader>
-					<CardTitle>
-						{m.shiny_topaz_iguana()}
-					</CardTitle>
-					<CardDescription>
-						{m.noble_yellow_prairie()}
-					</CardDescription>
+					<CardTitle>{m.shiny_topaz_iguana()}</CardTitle>
+					<CardDescription>{m.noble_yellow_prairie()}</CardDescription>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-2">
 					<Button

@@ -24,6 +24,7 @@ export function ShareButton({ text }: { text: string }) {
 	};
 
 	return (
+		// biome-ignore lint/a11y/noStaticElementInteractions: hover only reveals extra share shortcuts; the copy button stays reachable by keyboard
 		<div
 			className="relative w-full"
 			onMouseEnter={() => setIsHovered(true)}

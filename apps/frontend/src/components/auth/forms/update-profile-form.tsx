@@ -1,7 +1,7 @@
 import { IconEdit, IconLocation } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import { Controller, type UseFormReturn } from "react-hook-form";
-import { z } from "zod";
+import type { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
 	Field,
@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { m } from "@/paraglide/messages";
-import { profileSchema } from "@/schemas/edit-profile-schema";
+import type { profileSchema } from "@/schemas/edit-profile-schema";
 
 export type ProfileFormValues = z.infer<typeof profileSchema>;
 

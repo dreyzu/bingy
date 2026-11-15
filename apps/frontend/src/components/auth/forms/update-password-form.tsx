@@ -62,7 +62,7 @@ export function UpdatePasswordForm({ hasPassword }: UpdatePasswordFormProps) {
 				toast.success({ title: m.fierce_turquoise_spruce() });
 				setIsSuccess(true);
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);

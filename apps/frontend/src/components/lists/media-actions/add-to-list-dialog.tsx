@@ -72,8 +72,6 @@ export function AddToListDialog({
 		listName: string,
 		listSlug: string,
 	) => {
-		if (!movie && !tvShow) return;
-
 		const payload = movie
 			? {
 					tmdbId: movie.id,
@@ -84,15 +82,19 @@ export function AddToListDialog({
 					listSlug,
 					title: movie.title,
 				}
-			: {
-					tmdbId: tvShow!.id,
-					mediaType: "tv" as const,
-					username,
-					listId,
-					listName,
-					listSlug,
-					name: tvShow!.name,
-				};
+			: tvShow
+				? {
+						tmdbId: tvShow.id,
+						mediaType: "tv" as const,
+						username,
+						listId,
+						listName,
+						listSlug,
+						name: tvShow.name,
+					}
+				: null;
+
+		if (!payload) return;
 
 		addMediaToList.mutate(payload);
 		onOpenChange(false);
@@ -105,7 +107,7 @@ export function AddToListDialog({
 					<DialogTitle>{m.primal_maroon_mesa()}</DialogTitle>
 					<DialogDescription>
 						{m.rustic_indigo_falcon({
-							media_name: (movie?.title ?? tvShow?.name)!,
+							media_name: movie?.title ?? tvShow?.name ?? "",
 						})}
 					</DialogDescription>
 				</DialogHeader>
@@ -160,7 +162,7 @@ export function AddToListDialog({
 							<Button
 								className="w-full"
 								onClick={() => {
-									const draftItem: ListDraftItem = movie
+									const draftItem: ListDraftItem | null = movie
 										? {
 												tmdbId: movie.id,
 												mediaType: "movie",
@@ -168,13 +170,17 @@ export function AddToListDialog({
 												posterPath: movie.posterPath,
 												releaseDate: movie.releaseDate,
 											}
-										: {
-												tmdbId: tvShow!.id,
-												mediaType: "tv",
-												title: tvShow!.name,
-												posterPath: tvShow!.posterPath,
-												releaseDate: tvShow!.releaseDate,
-											};
+										: tvShow
+											? {
+													tmdbId: tvShow.id,
+													mediaType: "tv",
+													title: tvShow.name,
+													posterPath: tvShow.posterPath,
+													releaseDate: tvShow.releaseDate,
+												}
+											: null;
+
+									if (!draftItem) return;
 
 									setSelectedItems([draftItem]);
 									onOpenChange(false);

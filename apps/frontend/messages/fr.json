@@ -970,5 +970,6 @@
 	"lucky_gold_yak": "Série relancée depuis le début",
 	"snappy_sepia_rabbit": "Impossible de relancer la série",
 	"gallant_coral_oasis": "Revisionnage ×{count}",
-	"keen_teal_aspen": "Erreur lors du chargement des séries"
+	"keen_teal_aspen": "Erreur lors du chargement des séries",
+	"peppy_plum_turtle": "Noter {rating} sur 5"
 }

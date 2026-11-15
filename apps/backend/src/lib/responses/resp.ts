@@ -17,4 +17,4 @@ const serveCreated = <T>(c: Context, data: T, status: ContentfulStatusCode) => {
 	return c.json({ data }, status);
 };
 
-export { serve, serveData, serveNoContent, serveCreated };
+export { serve, serveCreated, serveData, serveNoContent };

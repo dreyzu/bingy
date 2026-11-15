@@ -86,9 +86,7 @@ export function ListSearchAddInput({
 				) : (
 					<>
 						<ComboboxEmpty>
-							{query
-								? m.hazy_yellow_mirror()
-								: m.agile_amber_saddle()}
+							{query ? m.hazy_yellow_mirror() : m.agile_amber_saddle()}
 						</ComboboxEmpty>
 						<ComboboxList>
 							{(item: SearchResult) => {

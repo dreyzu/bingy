@@ -93,7 +93,7 @@ export function SignInForm() {
 					toast.error({ title: m.candid_beige_yak() });
 				}
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
@@ -108,7 +108,7 @@ export function SignInForm() {
 				errorCallbackURL: `${config.appUrl}/signup`,
 				newUserCallbackURL: `${config.appUrl}/welcome`,
 			});
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
@@ -147,7 +147,7 @@ export function SignInForm() {
 				form.reset();
 				await router.navigate({ to: "/home" });
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.tidy_beige_bridge() });
 		}
 	};

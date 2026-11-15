@@ -67,41 +67,30 @@ export function ListsContainer({
 						className="justify-start"
 						spacing={2}
 					>
-						<ToggleGroupItem
-							value="all"
-							aria-label={m.lucky_wine_wombat()}
-						>
+						<ToggleGroupItem value="all" aria-label={m.lucky_wine_wombat()}>
 							<IconLayoutGrid className="h-4 w-4" />
-							<span className="hidden xs:inline">
-								{m.bold_mauve_eagle()}
-							</span>
+							<span className="hidden xs:inline">{m.bold_mauve_eagle()}</span>
 						</ToggleGroupItem>
 						<ToggleGroupItem
 							value="public"
 							aria-label={m.dreamy_onyx_pelican()}
 						>
 							<IconWorld className="h-4 w-4" />
-							<span className="hidden xs:inline">
-								{m.hasty_pink_crystal()}
-							</span>
+							<span className="hidden xs:inline">{m.hasty_pink_crystal()}</span>
 						</ToggleGroupItem>
 						<ToggleGroupItem
 							value="limited"
 							aria-label={m.warm_bronze_wombat()}
 						>
 							<IconUsers className="h-4 w-4" />
-							<span className="hidden xs:inline">
-								{m.hazy_plum_valley()}
-							</span>
+							<span className="hidden xs:inline">{m.hazy_plum_valley()}</span>
 						</ToggleGroupItem>
 						<ToggleGroupItem
 							value="private"
 							aria-label={m.zesty_aqua_crystal()}
 						>
 							<IconLock className="h-4 w-4" />
-							<span className="hidden xs:inline">
-								{m.lean_beige_oasis()}
-							</span>
+							<span className="hidden xs:inline">{m.lean_beige_oasis()}</span>
 						</ToggleGroupItem>
 					</ToggleGroup>
 

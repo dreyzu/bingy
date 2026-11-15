@@ -14,15 +14,11 @@ import { activity, users } from "../../db/schemas/user";
 import { db } from "../../lib/database";
 import env from "../../lib/env";
 import { serveNotFound } from "../../lib/responses/error";
-import {
-	serveCreated,
-	serveData,
-	serveNoContent,
-} from "../../lib/responses/resp";
+import { serveCreated, serveNoContent } from "../../lib/responses/resp";
 import { createSlug } from "../../lib/slug";
 import {
 	getMediaDetails,
-	NormalizedMedia,
+	type NormalizedMedia,
 } from "../../lib/tmdb/get-media-details";
 
 type Variables = {
@@ -343,13 +339,13 @@ userListRoutes.get("/watchlist/check/:mediaType/:tmdbId", async (c) => {
 	const user = c.get("user");
 	if (!user) return c.json({ error: "UNAUTHORIZED" }, 401);
 	const mediaType = c.req.param("mediaType");
-	const tmdbId = parseInt(c.req.param("tmdbId"));
+	const tmdbId = parseInt(c.req.param("tmdbId"), 10);
 
 	if (mediaType !== "movie" && mediaType !== "tv") {
 		return c.json({ error: "Invalid media type" }, 400);
 	}
 
-	if (isNaN(tmdbId)) {
+	if (Number.isNaN(tmdbId)) {
 		return c.json({ error: "Invalid TMDB ID" }, 400);
 	}
 

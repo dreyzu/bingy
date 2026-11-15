@@ -202,79 +202,42 @@ userFavoriteRoutes.get(
 			tvWatchedAt: tvShowWatchHistory.watchedAt,
 		};
 
-		let entries;
-		let totalCount;
+		const favoritesFilter = mediaTypeFilter
+			? and(
+					eq(favorites.userId, targetUser.id),
+					eq(media.mediaType, mediaTypeFilter),
+				)
+			: eq(favorites.userId, targetUser.id);
 
-		if (mediaTypeFilter) {
-			[entries, totalCount] = await Promise.all([
-				db
-					.select(baseSelect)
-					.from(favorites)
-					.innerJoin(media, eq(favorites.mediaId, media.id))
-					.leftJoin(
-						movieWatchHistory,
-						and(
-							eq(movieWatchHistory.mediaId, media.id),
-							eq(movieWatchHistory.userId, targetUser.id),
-						),
-					)
-					.leftJoin(
-						tvShowWatchHistory,
-						and(
-							eq(tvShowWatchHistory.mediaId, media.id),
-							eq(tvShowWatchHistory.userId, targetUser.id),
-						),
-					)
-					.where(
-						and(
-							eq(favorites.userId, targetUser.id),
-							eq(media.mediaType, mediaTypeFilter),
-						),
-					)
-					.orderBy(favorites.addedAt)
-					.limit(limit)
-					.offset(offset),
-				db
-					.select({ count: sql<number>`count(*)` })
-					.from(favorites)
-					.innerJoin(media, eq(favorites.mediaId, media.id))
-					.where(
-						and(
-							eq(favorites.userId, targetUser.id),
-							eq(media.mediaType, mediaTypeFilter),
-						),
+		const [entries, totalCount] = await Promise.all([
+			db
+				.select(baseSelect)
+				.from(favorites)
+				.innerJoin(media, eq(favorites.mediaId, media.id))
+				.leftJoin(
+					movieWatchHistory,
+					and(
+						eq(movieWatchHistory.mediaId, media.id),
+						eq(movieWatchHistory.userId, targetUser.id),
 					),
-			]);
-		} else {
-			[entries, totalCount] = await Promise.all([
-				db
-					.select(baseSelect)
-					.from(favorites)
-					.innerJoin(media, eq(favorites.mediaId, media.id))
-					.leftJoin(
-						movieWatchHistory,
-						and(
-							eq(movieWatchHistory.mediaId, media.id),
-							eq(movieWatchHistory.userId, targetUser.id),
-						),
-					)
-					.leftJoin(
-						tvShowWatchHistory,
-						and(
-							eq(tvShowWatchHistory.mediaId, media.id),
-							eq(tvShowWatchHistory.userId, targetUser.id),
-						),
-					)
-					.where(eq(favorites.userId, targetUser.id))
-					.orderBy(favorites.addedAt)
-					.limit(limit)
-					.offset(offset),
-				db
-					.select({ count: sql<number>`count(*)` })
-					.from(favorites)
-					.where(eq(favorites.userId, targetUser.id)),
-			]);
-		}
+				)
+				.leftJoin(
+					tvShowWatchHistory,
+					and(
+						eq(tvShowWatchHistory.mediaId, media.id),
+						eq(tvShowWatchHistory.userId, targetUser.id),
+					),
+				)
+				.where(favoritesFilter)
+				.orderBy(favorites.addedAt)
+				.limit(limit)
+				.offset(offset),
+			db
+				.select({ count: sql<number>`count(*)` })
+				.from(favorites)
+				.innerJoin(media, eq(favorites.mediaId, media.id))
+				.where(favoritesFilter),
+		]);
 
 		const totalResults = Number(totalCount[0]?.count ?? 0);
 
@@ -294,7 +257,7 @@ userFavoriteRoutes.get(
 						inArray(tvShowProgress.mediaId, tvMediaIds),
 					),
 				);
-			progress.forEach((p) => progressByMediaId.set(p.mediaId, p));
+			for (const p of progress) progressByMediaId.set(p.mediaId, p);
 		}
 
 		const hydratedData = (

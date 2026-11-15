@@ -45,7 +45,7 @@ export function CropImageDialog({
 			});
 
 			onCropComplete(croppedImage);
-		} catch (error) {
+		} catch {
 			toast.error({ title: m.crisp_yellow_beacon() });
 		}
 	};

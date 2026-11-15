@@ -62,7 +62,7 @@ export function ListCard({ item, username, isOwnProfile }: ListCardProps) {
 	);
 
 	const description =
-		displayText && shouldTruncate ? displayText + "..." : displayText;
+		displayText && shouldTruncate ? `${displayText}...` : displayText;
 
 	return (
 		<Link

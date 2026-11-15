@@ -21,9 +21,7 @@ export function EmptyProfile({ ownProfile }: EmptyProfileProps) {
 				</EmptyMedia>
 				<EmptyTitle>{m.nifty_wine_puma()}</EmptyTitle>
 				<EmptyDescription>
-					{ownProfile
-						? m.gleeful_hazel_dolphin()
-						: m.lush_indigo_eagle()}
+					{ownProfile ? m.gleeful_hazel_dolphin() : m.lush_indigo_eagle()}
 				</EmptyDescription>
 			</EmptyHeader>
 		</Empty>

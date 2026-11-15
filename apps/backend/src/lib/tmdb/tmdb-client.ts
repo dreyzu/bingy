@@ -1,5 +1,5 @@
 import { FetchError, ofetch } from "ofetch";
-import { EndpointParameters, EndpointPath, Fetcher, Method } from "shared";
+import type { EndpointParameters, EndpointPath, Fetcher, Method } from "shared";
 import { logger } from "#lib/logger";
 import { cacheClient } from "../cache-client";
 import { createApiClient } from "./tmdb";

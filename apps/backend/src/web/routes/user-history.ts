@@ -3,7 +3,6 @@ import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
 import {
-	favorites,
 	media,
 	movieWatchHistory,
 	tvShowProgress,
@@ -168,6 +167,7 @@ userHistoryRoutes.post(
 						lastWatchedSeason,
 						lastWatchedEpisode,
 						absoluteEpisode: data.absoluteEpisode ?? null,
+						lastWatchedAt: data.watchedAt ?? null,
 						trackingMode: data.trackingMode ?? "season",
 						status: "watching",
 					})
@@ -177,6 +177,7 @@ userHistoryRoutes.post(
 							lastWatchedSeason: lastWatchedSeason,
 							lastWatchedEpisode: lastWatchedEpisode,
 							absoluteEpisode: data.absoluteEpisode ?? null,
+							lastWatchedAt: data.watchedAt ?? null,
 							trackingMode: data.trackingMode ?? "season",
 							updatedAt: new Date(),
 						},
@@ -349,7 +350,7 @@ userHistoryRoutes.get(
 			.innerJoin(media, eq(tvShowWatchHistory.mediaId, media.id))
 			.where(eq(tvShowWatchHistory.userId, targetUser.id));
 
-		let entries;
+		let entries: Awaited<typeof movieQuery>;
 		if (mediaTypeFilter === "movie") {
 			entries = await movieQuery
 				.orderBy(desc(movieWatchHistory.watchedAt))
@@ -403,7 +404,7 @@ userHistoryRoutes.get(
 						inArray(tvShowProgress.mediaId, tvMediaIds),
 					),
 				);
-			progress.forEach((p) => progressByMediaId.set(p.mediaId, p));
+			for (const p of progress) progressByMediaId.set(p.mediaId, p);
 		}
 
 		const hydratedData = (

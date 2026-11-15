@@ -1,4 +1,4 @@
-import { Fetcher, GetEndpoints, MaybeOptionalArg } from "shared";
+import type { Fetcher, GetEndpoints } from "shared";
 import env from "../../lib/env";
 
 export class ApiClient {

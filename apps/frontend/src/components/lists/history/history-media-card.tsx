@@ -30,6 +30,7 @@ const RatingStars = ({ rating }: { rating: string }) => {
 	return (
 		<div className="flex items-center gap-0.5">
 			{Array.from({ length: fullStars }).map((_, i) => (
+				// biome-ignore lint/suspicious/noArrayIndexKey: static decorative stars, never reordered
 				<IconStarFilled key={i} className="h-3.5 w-3.5 text-brand" />
 			))}
 			{hasHalfStar ? (

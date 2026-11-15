@@ -105,11 +105,7 @@ export function WatchlistToggleButton({
 				}
 			></TooltipTrigger>
 			<TooltipContent align="center">
-				<p>
-					{isInWatchlist
-						? m.witty_yellow_bamboo()
-						: m.wild_navy_crystal()}
-				</p>
+				<p>{isInWatchlist ? m.witty_yellow_bamboo() : m.wild_navy_crystal()}</p>
 			</TooltipContent>
 		</Tooltip>
 	);

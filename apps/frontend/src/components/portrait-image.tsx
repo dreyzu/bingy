@@ -72,12 +72,13 @@ export function PortraitImage({
 	return (
 		<>
 			{imageUrl ? (
-				<img
-					src={imageUrl}
-					alt={alt}
-					className={cn(containerClasses, "cursor-zoom-in")}
+				<button
+					type="button"
+					className={cn(containerClasses, "cursor-zoom-in p-0")}
 					onClick={() => setOpen(true)}
-				/>
+				>
+					<img src={imageUrl} alt={alt} className="size-full object-cover" />
+				</button>
 			) : (
 				<div className={containerClasses}>
 					<PortraitImageEmptyState category={category} />

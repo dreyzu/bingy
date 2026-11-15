@@ -46,9 +46,7 @@ export function AbsoluteEpisodeCombobox({
 
 				<ComboboxContent>
 					{episodes.length === 0 ? (
-						<ComboboxEmpty>
-							{m.gallant_sage_octopus()}
-						</ComboboxEmpty>
+						<ComboboxEmpty>{m.gallant_sage_octopus()}</ComboboxEmpty>
 					) : null}
 
 					<ComboboxList>

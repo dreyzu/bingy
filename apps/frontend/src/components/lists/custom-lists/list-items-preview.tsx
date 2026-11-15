@@ -47,6 +47,7 @@ export function ListItemsPreview({
 					{selectedItems.toReversed().map((item) => {
 						return (
 							<ListAddedItemMediaCard
+								key={`${item.mediaType}-${item.tmdbId}`}
 								item={item}
 								onRemove={handleRemoveItem}
 								onUpdateNote={handleUpdateNote}

@@ -56,7 +56,7 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 				toast.success({ title: m.gallant_copper_anchor() });
 				navigate({ to: "/signin" });
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);

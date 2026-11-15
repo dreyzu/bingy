@@ -103,7 +103,7 @@ export function SignUpForm() {
 				});
 				await router.navigate({ to: "/verify-email" });
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
@@ -125,7 +125,7 @@ export function SignUpForm() {
 				errorCallbackURL: `${config.appUrl}/signup`,
 				newUserCallbackURL: `${config.appUrl}/welcome`,
 			});
-		} catch (err: unknown) {
+		} catch {
 			toast.error({
 				title: m.steady_ochre_salmon({
 					provider: providerCapitalized,

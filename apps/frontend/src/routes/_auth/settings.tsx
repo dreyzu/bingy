@@ -43,13 +43,11 @@ function SettingsPage() {
 
 	const errorMessages: Record<string, string> = {
 		email_doesn_match: m.velvet_silver_narwhal(),
-		account_already_linked_to_different_user:
-			m.swift_lavender_bamboo(),
+		account_already_linked_to_different_user: m.swift_lavender_bamboo(),
 	};
 
 	if (error) {
-		const message =
-			errorMessages[error] ?? m.steady_purple_orchid();
+		const message = errorMessages[error] ?? m.steady_purple_orchid();
 		toast.error({ title: message }, { duration: 8000, closeButton: true });
 	}
 

@@ -970,5 +970,6 @@
 	"lucky_gold_yak": "已開始重看",
 	"snappy_sepia_rabbit": "無法開始重看",
 	"gallant_coral_oasis": "重看 ×{count}",
-	"keen_teal_aspen": "載入影集時發生錯誤"
+	"keen_teal_aspen": "載入影集時發生錯誤",
+	"peppy_plum_turtle": "評 {rating} 分（滿分 5 分）"
 }

@@ -68,9 +68,9 @@ export const PersonDetailsView = ({
 									{m.fluffy_tan_lantern()}
 								</h3>
 								<div className="flex flex-col gap-1">
-									{person.also_known_as.map((name: string, index: number) => (
+									{person.also_known_as.map((name: string) => (
 										<span
-											key={index}
+											key={name}
 											className="text-muted-foreground text-sm flex-wrap"
 										>
 											{name.trim()}

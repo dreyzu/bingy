@@ -69,35 +69,31 @@ export function FavoriteToggleButton({
 	const isPending = addToFavorites.isPending || removeFromFavorites.isPending;
 
 	return (
-		<>
-			<Tooltip>
-				<TooltipTrigger
-					render={
-						<button
-							type="button"
-							onClick={handleToggle}
-							disabled={isPending}
-							className={`group flex flex-col items-center gap-1 cursor-pointer transition-colors hover:text-red-400 ${
-								isFavorited ? "text-red-500" : `text-${color}`
-							}`}
-						>
-							{isFavorited ? (
-								<>
-									<IconHeartFilled className="size-8 group-hover:hidden" />
-									<IconHeartOff className="size-8 hidden group-hover:block" />
-								</>
-							) : (
-								<IconHeart className="size-8" />
-							)}
-						</button>
-					}
-				/>
-				<TooltipContent>
-					<p>
-						{isFavorited ? m.upbeat_cerise_rabbit() : m.ample_sepia_lynx()}
-					</p>
-				</TooltipContent>
-			</Tooltip>
-		</>
+		<Tooltip>
+			<TooltipTrigger
+				render={
+					<button
+						type="button"
+						onClick={handleToggle}
+						disabled={isPending}
+						className={`group flex flex-col items-center gap-1 cursor-pointer transition-colors hover:text-red-400 ${
+							isFavorited ? "text-red-500" : `text-${color}`
+						}`}
+					>
+						{isFavorited ? (
+							<>
+								<IconHeartFilled className="size-8 group-hover:hidden" />
+								<IconHeartOff className="size-8 hidden group-hover:block" />
+							</>
+						) : (
+							<IconHeart className="size-8" />
+						)}
+					</button>
+				}
+			/>
+			<TooltipContent>
+				<p>{isFavorited ? m.upbeat_cerise_rabbit() : m.ample_sepia_lynx()}</p>
+			</TooltipContent>
+		</Tooltip>
 	);
 }

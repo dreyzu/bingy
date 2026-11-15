@@ -125,9 +125,7 @@ export function MovieDetailView({
 
 										<MediaCreators
 											creators={directors}
-											getRoleLabel={(gender) =>
-												m.spry_ochre_falcon({ gender })
-											}
+											getRoleLabel={(gender) => m.spry_ochre_falcon({ gender })}
 										/>
 									</div>
 									{authData ? (

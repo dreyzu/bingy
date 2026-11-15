@@ -23,6 +23,7 @@ defineCustomClientStrategy("custom-userLocale", {
 		return savedLocale ?? matchLocaleFromList(navigator.languages);
 	},
 	setLocale: (locale) => {
+		// biome-ignore lint/suspicious/noDocumentCookie: Paraglide strategies set the locale synchronously, and the Cookie Store API is async
 		document.cookie = `${cookieName}=${locale}; path=/; max-age=${cookieMaxAge}; SameSite=Lax`;
 	},
 });

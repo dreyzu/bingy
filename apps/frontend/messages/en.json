@@ -970,5 +970,6 @@
 	"lucky_gold_yak": "Rewatch started",
 	"snappy_sepia_rabbit": "Couldn't start the rewatch",
 	"gallant_coral_oasis": "Rewatch ×{count}",
-	"keen_teal_aspen": "Error while loading shows"
+	"keen_teal_aspen": "Error while loading shows",
+	"peppy_plum_turtle": "Rate {rating} out of 5"
 }

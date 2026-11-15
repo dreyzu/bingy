@@ -970,5 +970,6 @@
 	"lucky_gold_yak": "已开始重看",
 	"snappy_sepia_rabbit": "无法开始重看",
 	"gallant_coral_oasis": "重看 ×{count}",
-	"keen_teal_aspen": "加载剧集时出错"
+	"keen_teal_aspen": "加载剧集时出错",
+	"peppy_plum_turtle": "打 {rating} 分（满分 5 分）"
 }

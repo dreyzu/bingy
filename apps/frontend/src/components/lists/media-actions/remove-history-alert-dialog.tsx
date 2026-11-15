@@ -25,18 +25,14 @@ export function RemoveHistoryAlertDialog({
 	return (
 		<AlertDialog open={open} onOpenChange={onOpenChange}>
 			<AlertDialogContent>
-				<AlertDialogTitle>
-					{m.plucky_tan_hippo()}
-				</AlertDialogTitle>
+				<AlertDialogTitle>{m.plucky_tan_hippo()}</AlertDialogTitle>
 				<AlertDialogDescription>
 					{m.mighty_azure_oasis({
 						media_name: mediaName,
 					})}
 				</AlertDialogDescription>
 				<AlertDialogFooter>
-					<AlertDialogCancel>
-						{m.plucky_violet_jaguar()}
-					</AlertDialogCancel>
+					<AlertDialogCancel>{m.plucky_violet_jaguar()}</AlertDialogCancel>
 					<AlertDialogAction onClick={onConfirm}>
 						{m.brave_periwinkle_pebble()}
 					</AlertDialogAction>

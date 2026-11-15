@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import fallbackPoster from "@/assets/media-image-placeholder.jpg";
@@ -76,16 +76,15 @@ const getCardConfig = (item: Schemas.MediaMulti) => {
 };
 
 export const SearchCard = ({ item }: SearchCardProps) => {
-	const navigate = useNavigate();
 	const locale = useAtomValue(localeAtom);
 	const config = getCardConfig(item);
 
 	const overview = getTruncatedContent(config.overview ?? "");
 
 	return (
-		<div
+		<Link
+			{...config.link}
 			className="flex gap-4 hover:bg-accent transition-colors select-none h-42.5 md:h-50 cursor-pointer rounded-lg overflow-hidden"
-			onClick={() => navigate(config.link)}
 		>
 			<img
 				src={config.imageUrl}
@@ -120,6 +119,6 @@ export const SearchCard = ({ item }: SearchCardProps) => {
 					</p>
 				) : null}
 			</div>
-		</div>
+		</Link>
 	);
 };

@@ -2,13 +2,8 @@ import { zValidator } from "@hono/zod-validator";
 import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
-import {
-	media,
-	tvShowProgress,
-	tvShowWatchHistory,
-	watchlist,
-} from "../../db/schemas/list";
-import { activity, type User, users } from "../../db/schemas/user";
+import { media, tvShowProgress } from "../../db/schemas/list";
+import { type User, users } from "../../db/schemas/user";
 import { db } from "../../lib/database";
 import { logger } from "../../lib/logger";
 import { TmdbError, tmdbClient } from "../../lib/tmdb/tmdb-client";
@@ -144,6 +139,7 @@ userProgressRoutes.get(
 									lastWatchedSeason: item.progress.lastWatchedSeason,
 									lastWatchedEpisode: item.progress.lastWatchedEpisode,
 									absoluteEpisode: item.progress.absoluteEpisode,
+									lastWatchedAt: item.progress.lastWatchedAt,
 									trackingMode: item.progress.trackingMode,
 									status,
 									rewatchCount: item.progress.rewatchCount,
@@ -239,7 +235,10 @@ userProgressRoutes.post(
 
 		const language = c.req.query("language") || "en-US";
 		const trackingMode = data.trackingMode ?? "season";
-		const watchedAt = data.watchedAt ? new Date(data.watchedAt) : new Date();
+		// seasonNumber/episodeNumber is the episode that was watched at this date
+		const lastWatchedAt = data.watchedAt
+			? new Date(data.watchedAt)
+			: new Date();
 
 		try {
 			const absoluteEpisode =
@@ -286,6 +285,7 @@ userProgressRoutes.post(
 						lastWatchedSeason: seasonNumber,
 						lastWatchedEpisode: episodeNumber,
 						absoluteEpisode,
+						lastWatchedAt,
 						trackingMode,
 						status: data.status ?? autoStatus ?? "watching",
 					})
@@ -295,6 +295,7 @@ userProgressRoutes.post(
 							lastWatchedSeason: seasonNumber,
 							lastWatchedEpisode: episodeNumber,
 							absoluteEpisode,
+							lastWatchedAt,
 							trackingMode,
 							// only change status when explicitly provided
 							...(data.status
@@ -366,6 +367,7 @@ userProgressRoutes.patch(
 				lastWatchedSeason: number;
 				lastWatchedEpisode: number;
 				absoluteEpisode: number | null;
+				lastWatchedAt: Date;
 			} | null = null;
 			if (status === "completed" && entry.status !== "completed") {
 				const language = c.req.query("language") || "en-US";
@@ -391,6 +393,8 @@ userProgressRoutes.patch(
 										lastAired.episode,
 									)
 								: null,
+						// the remaining episodes are considered watched now
+						lastWatchedAt: new Date(),
 					};
 				}
 			}
@@ -433,6 +437,7 @@ userProgressRoutes.post(
 					lastWatchedSeason: 0,
 					lastWatchedEpisode: 0,
 					absoluteEpisode: entry.trackingMode === "absolute" ? 0 : null,
+					lastWatchedAt: null,
 					status: "watching",
 					rewatchCount: sql`${tvShowProgress.rewatchCount} + 1`,
 					updatedAt: new Date(),

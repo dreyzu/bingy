@@ -30,7 +30,11 @@ export function ListAddedItemMediaCard({
 						className="h-full w-full object-cover"
 					/>
 				) : (
-					<img src={fallbackPoster} className="h-full w-full object-cover" />
+					<img
+						src={fallbackPoster}
+						alt={item.title}
+						className="h-full w-full object-cover"
+					/>
 				)}
 			</div>
 

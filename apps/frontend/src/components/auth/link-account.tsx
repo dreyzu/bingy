@@ -20,9 +20,7 @@ export function LinkAccountComponent({ accounts }: LinkAccountComponentProps) {
 
 	const getButtonText = () => {
 		if (isLoading) {
-			return googleConnected
-				? m.crisp_onyx_ember()
-				: m.elegant_navy_salmon();
+			return googleConnected ? m.crisp_onyx_ember() : m.elegant_navy_salmon();
 		}
 
 		return googleConnected
@@ -61,7 +59,7 @@ export function LinkAccountComponent({ accounts }: LinkAccountComponentProps) {
 					errorCallbackURL: `${config.appUrl}/settings`,
 				});
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsLoading(false);

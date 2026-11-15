@@ -4,7 +4,7 @@ import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import React, { useRef, useState } from "react";
 import logo from "@/assets/bingy-icon.svg";
 import logoFull from "@/assets/bingy-icon_text.svg";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { Button, type buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface NavbarProps {

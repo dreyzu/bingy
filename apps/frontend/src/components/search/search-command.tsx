@@ -188,7 +188,9 @@ export function SearchCommand({
 											handleSelect();
 										}}
 									>
-										<span className="font-medium">{m.humble_umber_crystal()} →</span>
+										<span className="font-medium">
+											{m.humble_umber_crystal()} →
+										</span>
 									</CommandItem>
 								)}
 							</CommandGroup>
@@ -207,9 +209,7 @@ export function SearchCommand({
 								</span>
 							</div>
 							<span className="flex items-center gap-1.5">
-								<Kbd className="bg-card">
-									{m.lively_saffron_flute()}
-								</Kbd>
+								<Kbd className="bg-card">{m.lively_saffron_flute()}</Kbd>
 								<span>{m.brisk_plum_jaguar()}</span>
 							</span>
 						</div>

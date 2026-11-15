@@ -56,6 +56,7 @@ export function BannerImageSelectDialog({
 	const isLoading = isLoadingMovie || isLoadingTv;
 
 	// Reset selected index when dialog opens or images change
+	// biome-ignore lint/correctness/useExhaustiveDependencies: open and backdrops are the reset triggers
 	useEffect(() => {
 		setSelectedIndex(0);
 	}, [open, backdrops]);

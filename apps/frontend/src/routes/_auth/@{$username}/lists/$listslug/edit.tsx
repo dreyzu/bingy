@@ -8,7 +8,7 @@ import {
 import { useAtom, useAtomValue } from "jotai";
 import { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
+import type { z } from "zod";
 import { ListItemsPreview } from "@/components/lists/custom-lists/list-items-preview";
 import { ListSearchAddInput } from "@/components/lists/custom-lists/list-search-add";
 import { LoadingCentered } from "@/components/loading/loading-centered";
@@ -233,9 +233,7 @@ function EditListPage() {
 
 									return (
 										<Field className="w-full lg:w-[45%]">
-											<FieldLabel>
-												{m.shiny_hazel_planet()}
-											</FieldLabel>
+											<FieldLabel>{m.shiny_hazel_planet()}</FieldLabel>
 											<FieldContent>
 												<Select
 													onValueChange={field.onChange}
@@ -282,9 +280,7 @@ function EditListPage() {
 										/>
 										<FieldLabel>{m.ample_gray_beacon()}</FieldLabel>
 									</FieldContent>
-									<FieldDescription>
-										{m.quick_mauve_flute()}
-									</FieldDescription>
+									<FieldDescription>{m.quick_mauve_flute()}</FieldDescription>
 								</Field>
 							)}
 						/>
@@ -294,9 +290,7 @@ function EditListPage() {
 							name="description"
 							render={({ field, fieldState }) => (
 								<Field>
-									<FieldLabel>
-										{m.dusky_hazel_yak()}
-									</FieldLabel>
+									<FieldLabel>{m.dusky_hazel_yak()}</FieldLabel>
 									<FieldContent>
 										<Textarea
 											className="resize-y field-sizing-content"

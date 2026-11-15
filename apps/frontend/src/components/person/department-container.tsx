@@ -27,8 +27,9 @@ export const DepartmentContainer = ({
 	const id = useId();
 	const itemsByYear = items.reduce<Record<string, TimelineItem[]>>(
 		(acc, item) => {
-			const yearItems = (acc[item.year] ??= []);
+			const yearItems = acc[item.year] ?? [];
 			yearItems.push(item);
+			acc[item.year] = yearItems;
 			return acc;
 		},
 		{},

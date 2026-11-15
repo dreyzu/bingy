@@ -38,9 +38,7 @@ export function ProfileFollowingDialog({ users }: ProfileFollowingDialogProps) {
 			<DialogContent className="max-w-xs md:max-w-lg">
 				<DialogHeader>
 					<DialogTitle>{m.noble_amber_yak()}</DialogTitle>
-					<DialogDescription>
-						{m.quiet_orange_lantern()}
-					</DialogDescription>
+					<DialogDescription>{m.quiet_orange_lantern()}</DialogDescription>
 				</DialogHeader>
 				{hasFollowing ? (
 					<div className="-mx-4 no-scrollbar max-h-[50vh] lg:max-h-[30vh] overflow-y-auto px-4">

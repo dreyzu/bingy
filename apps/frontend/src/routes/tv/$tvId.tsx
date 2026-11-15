@@ -38,8 +38,7 @@ function TvDetailsContainer() {
 			character: member.roles?.[0]?.character || "",
 			credit_id: member.roles?.[0]?.credit_id || "",
 			order: member.order,
-			characters:
-				member.roles?.map((r) => r.character).filter(Boolean) || [],
+			characters: member.roles?.map((r) => r.character).filter(Boolean) || [],
 		})) || [];
 
 	const crew: Array<Schemas.CrewMember & { jobs?: string[] }> =

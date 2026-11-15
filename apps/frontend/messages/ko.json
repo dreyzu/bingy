@@ -970,5 +970,6 @@
 	"lucky_gold_yak": "처음부터 다시 보기를 시작했어요",
 	"snappy_sepia_rabbit": "다시 보기를 시작하지 못했어요",
 	"gallant_coral_oasis": "다시 보기 ×{count}",
-	"keen_teal_aspen": "프로그램을 불러오는 중 오류가 발생했어요"
+	"keen_teal_aspen": "프로그램을 불러오는 중 오류가 발생했어요",
+	"peppy_plum_turtle": "별점 {rating}점 주기"
 }

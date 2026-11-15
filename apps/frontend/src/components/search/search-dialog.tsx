@@ -1,6 +1,6 @@
 import { IconBulb, IconSearch } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Schemas } from "shared";
 import { SearchDialogCard } from "@/components/search/search-dialog-card";
 import {
@@ -34,7 +34,7 @@ export function SearchDialog({
 }: SearchDialogProps) {
 	const [query, setQuery] = useState("");
 	const [selectedIndex, setSelectedIndex] = useState(0);
-	const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+	const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
 	const localeRegion = useAtomValue(localeRegionAtom);
 
 	// Parse filter from query (!movie, !tv, or default to "all")
@@ -126,29 +126,26 @@ export function SearchDialog({
 	}, [filter]);
 
 	// Keyboard navigation handler
-	const handleKeyDown = useCallback(
-		(e: React.KeyboardEvent) => {
-			if (results.length === 0) return;
+	const handleKeyDown = (e: React.KeyboardEvent) => {
+		if (results.length === 0) return;
 
-			switch (e.key) {
-				case "ArrowDown":
-					e.preventDefault();
-					setSelectedIndex((prev) => (prev + 1) % results.length);
-					break;
-				case "ArrowUp":
-					e.preventDefault();
-					setSelectedIndex(
-						(prev) => (prev - 1 + results.length) % results.length,
-					);
-					break;
-				case "Enter":
-					e.preventDefault();
-					handleSelect(results[selectedIndex] as Schemas.MediaMulti);
-					break;
-			}
-		},
-		[results, selectedIndex, handleSelect],
-	);
+		switch (e.key) {
+			case "ArrowDown":
+				e.preventDefault();
+				setSelectedIndex((prev) => (prev + 1) % results.length);
+				break;
+			case "ArrowUp":
+				e.preventDefault();
+				setSelectedIndex(
+					(prev) => (prev - 1 + results.length) % results.length,
+				);
+				break;
+			case "Enter":
+				e.preventDefault();
+				handleSelect(results[selectedIndex] as Schemas.MediaMulti);
+				break;
+		}
+	};
 
 	const content = (
 		<div className="flex flex-col gap-2 overflow-hidden">
@@ -158,10 +155,10 @@ export function SearchDialog({
 				<Input
 					type="text"
 					value={query}
-				onChange={(e) => {
-					setQuery(e.target.value);
-					setSelectedIndex(0);
-				}}
+					onChange={(e) => {
+						setQuery(e.target.value);
+						setSelectedIndex(0);
+					}}
 					onKeyDown={handleKeyDown}
 					className="px-10 py-5"
 					autoFocus
@@ -190,7 +187,11 @@ export function SearchDialog({
 				) : null}
 
 				{!loading &&
-				(filter === "all" ? multiSearch.data : filter === "movie" ? movieSearch.data : tvSearch.data) &&
+				(filter === "all"
+					? multiSearch.data
+					: filter === "movie"
+						? movieSearch.data
+						: tvSearch.data) &&
 				results.length === 0 ? (
 					<p className="text-center text-muted-foreground py-8">
 						{m.lean_lemon_mesa()}

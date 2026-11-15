@@ -61,11 +61,9 @@ export function SeasonEpisodeCombobox({
 	};
 
 	// Number of episodes available for the selected season
-	const availableEpisodes = useMemo(() => {
-		if (!selectedSeason) return 0;
-		const seasonNum = Number(selectedSeason);
-		return getMaxEpisode(seasonNum);
-	}, [selectedSeason, lastAired, seasonEpisodeCountMap]);
+	const availableEpisodes = selectedSeason
+		? getMaxEpisode(Number(selectedSeason))
+		: 0;
 
 	const episodeNumbers = useMemo(
 		() => Array.from({ length: availableEpisodes }, (_, i) => i + 1),
@@ -94,9 +92,7 @@ export function SeasonEpisodeCombobox({
 					/>
 					<ComboboxContent>
 						{availableSeasons.length === 0 ? (
-							<ComboboxEmpty>
-								{m.candid_rose_squirrel()}
-							</ComboboxEmpty>
+							<ComboboxEmpty>{m.candid_rose_squirrel()}</ComboboxEmpty>
 						) : null}
 						<ComboboxList>
 							{availableSeasons.map((season) => (
@@ -130,9 +126,7 @@ export function SeasonEpisodeCombobox({
 					/>
 					<ComboboxContent>
 						{episodeNumbers.length === 0 ? (
-							<ComboboxEmpty>
-								{m.stellar_green_aspen()}
-							</ComboboxEmpty>
+							<ComboboxEmpty>{m.stellar_green_aspen()}</ComboboxEmpty>
 						) : null}
 						<ComboboxList>
 							{episodeNumbers.map((episodeNum) => (

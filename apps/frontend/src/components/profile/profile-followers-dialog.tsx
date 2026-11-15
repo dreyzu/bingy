@@ -33,9 +33,7 @@ export function ProfileFollowersDialog({ users }: ProfileFollowersDialogProps) {
 			<DialogContent className="max-w-xs md:max-w-lg">
 				<DialogHeader>
 					<DialogTitle>{m.loyal_ivory_seal()}</DialogTitle>
-					<DialogDescription>
-						{m.earthy_hazel_bagel()}
-					</DialogDescription>
+					<DialogDescription>{m.earthy_hazel_bagel()}</DialogDescription>
 				</DialogHeader>
 				{hasFollowers ? (
 					<div className="-mx-4 no-scrollbar max-h-[50vh] lg:max-h-[30vh] overflow-y-auto px-4">

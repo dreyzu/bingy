@@ -970,5 +970,6 @@
 	"lucky_gold_yak": "Serie von vorne gestartet",
 	"snappy_sepia_rabbit": "Serie konnte nicht neu gestartet werden",
 	"gallant_coral_oasis": "Erneut gesehen ×{count}",
-	"keen_teal_aspen": "Fehler beim Laden der Serien"
+	"keen_teal_aspen": "Fehler beim Laden der Serien",
+	"peppy_plum_turtle": "Mit {rating} von 5 bewerten"
 }

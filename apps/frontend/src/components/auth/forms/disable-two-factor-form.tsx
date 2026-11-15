@@ -51,7 +51,7 @@ export function DisableTwoFactorForm() {
 			}
 
 			error && toast.error({ title: m.primal_beige_seal() });
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);

@@ -58,11 +58,11 @@ export function ForgotPasswordForm({ email }: ForgotPasswordFormProps) {
 					title: m.cozy_crimson_saddle() ?? m.candid_beige_yak(),
 				});
 
-			if (data && data.status) {
+			if (data?.status) {
 				navigate({ to: "/signin" });
 				toast.success({ title: m.dreamy_azure_wolf() });
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
@@ -76,9 +76,7 @@ export function ForgotPasswordForm({ email }: ForgotPasswordFormProps) {
 				className="py-4 md:px-2 min-w-[300px] md:min-w-md lg:min-w-lg"
 			>
 				<CardHeader>
-					<CardTitle className="text-2xl">
-						{m.steady_sepia_anchor()}
-					</CardTitle>
+					<CardTitle className="text-2xl">{m.steady_sepia_anchor()}</CardTitle>
 					<CardDescription>
 						<p>{m.steady_violet_spruce()}</p>
 					</CardDescription>

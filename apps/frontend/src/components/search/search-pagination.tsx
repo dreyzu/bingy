@@ -103,6 +103,7 @@ export const SearchPagination = ({
 
 				{/* Numbers - hidden on mobile */}
 				{getPageNumbers().map((pageNum, idx) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: ellipsis entries have no other unique value
 					<PaginationItem key={idx} className="hidden sm:inline-flex">
 						{pageNum === "ellipsis" ? (
 							<PaginationEllipsis />

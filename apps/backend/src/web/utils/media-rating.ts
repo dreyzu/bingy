@@ -1,11 +1,12 @@
 import { eq } from "drizzle-orm";
-import type { PgTransaction } from "drizzle-orm/pg-core";
-import { media, movieWatchHistory, tvShowWatchHistory } from "../../db/schemas/list";
+import {
+	media,
+	movieWatchHistory,
+	tvShowWatchHistory,
+} from "../../db/schemas/list";
+import type { Transaction } from "../../lib/database";
 
-export async function updateMediaRating(
-	tx: PgTransaction<any, any, any>,
-	mediaId: string,
-) {
+export async function updateMediaRating(tx: Transaction, mediaId: string) {
 	const [movieRatings, tvRatings] = await Promise.all([
 		tx
 			.select({ rating: movieWatchHistory.rating })

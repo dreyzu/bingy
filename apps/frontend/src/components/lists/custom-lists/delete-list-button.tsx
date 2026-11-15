@@ -73,9 +73,7 @@ export function DeleteListButton({
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
-						<AlertDialogCancel>
-							{m.lean_sepia_rocket()}
-						</AlertDialogCancel>
+						<AlertDialogCancel>{m.lean_sepia_rocket()}</AlertDialogCancel>
 						<AlertDialogAction onClick={handleDelete} disabled={isPending}>
 							{m.zesty_pearl_kettle()}
 						</AlertDialogAction>

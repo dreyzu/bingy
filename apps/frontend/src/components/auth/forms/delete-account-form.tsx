@@ -59,7 +59,7 @@ export function DeleteAccountForm({ hasPassword }: DeleteAccountFormProps) {
 					toast.error({ title: m.candid_beige_yak() });
 				}
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
@@ -86,9 +86,7 @@ export function DeleteAccountForm({ hasPassword }: DeleteAccountFormProps) {
 
 				<AlertDialogContent className="max-w-lg!">
 					<AlertDialogHeader>
-						<AlertDialogTitle>
-							{m.noble_slate_lagoon()}
-						</AlertDialogTitle>
+						<AlertDialogTitle>{m.noble_slate_lagoon()}</AlertDialogTitle>
 						<AlertDialogDescription>
 							{m.clever_white_ember()}
 						</AlertDialogDescription>
@@ -119,7 +117,9 @@ export function DeleteAccountForm({ hasPassword }: DeleteAccountFormProps) {
 						) : null}
 
 						<AlertDialogFooter>
-							<AlertDialogCancel>{m.steady_magenta_octopus()}</AlertDialogCancel>
+							<AlertDialogCancel>
+								{m.steady_magenta_octopus()}
+							</AlertDialogCancel>
 							<Button type="submit" disabled={isSubmitting}>
 								{isSubmitting ? (
 									<span className="flex items-center justify-center gap-2">

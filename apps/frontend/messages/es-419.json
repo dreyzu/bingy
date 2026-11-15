@@ -970,5 +970,6 @@
 	"lucky_gold_yak": "Serie reiniciada desde el principio",
 	"snappy_sepia_rabbit": "No se pudo reiniciar la serie",
 	"gallant_coral_oasis": "Revisionado ×{count}",
-	"keen_teal_aspen": "Error al cargar las series"
+	"keen_teal_aspen": "Error al cargar las series",
+	"peppy_plum_turtle": "Calificar con {rating} de 5"
 }

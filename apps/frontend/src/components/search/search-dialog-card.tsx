@@ -14,7 +14,7 @@ interface SearchDialogCardProps {
 }
 
 export const SearchDialogCard = forwardRef<
-	HTMLDivElement,
+	HTMLButtonElement,
 	SearchDialogCardProps
 >(function SearchDialogCard({ item, onSelect, isSelected = false }, ref) {
 	const locale = useAtomValue(localeAtom);
@@ -28,18 +28,11 @@ export const SearchDialogCard = forwardRef<
 			: null;
 
 		return (
-			<div
+			<button
+				type="button"
 				ref={ref}
 				onClick={onSelect}
-				onKeyDown={(e) => {
-					if (e.key === "Enter" || e.key === " ") {
-						e.preventDefault();
-						onSelect();
-					}
-				}}
-				tabIndex={0}
-				role="button"
-				className={`flex w-full items-center gap-2 p-2 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+				className={`flex w-full text-left items-center gap-2 p-2 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
 					isSelected ? "ring-2 ring-inset ring-primary" : "hover:bg-accent"
 				}`}
 			>
@@ -49,15 +42,15 @@ export const SearchDialogCard = forwardRef<
 					className="w-10 md:w-12 h-15 md:h-18 object-cover aspect-2/3 rounded shrink-0"
 				/>
 				<div className="flex-1 max-w-full min-w-0">
-					<p className="font-medium text-xs md:text-sm truncate">
+					<span className="block font-medium text-xs md:text-sm truncate">
 						{movie.title}
-					</p>
+					</span>
 
-					<p className="text-xs text-muted-foreground truncate">
+					<span className="block text-xs text-muted-foreground truncate">
 						{year ? `${year} - ` : null} {m.snappy_copper_quail()}
-					</p>
+					</span>
 				</div>
-			</div>
+			</button>
 		);
 	}
 
@@ -69,18 +62,11 @@ export const SearchDialogCard = forwardRef<
 			: null;
 
 		return (
-			<div
+			<button
+				type="button"
 				ref={ref}
 				onClick={onSelect}
-				onKeyDown={(e) => {
-					if (e.key === "Enter" || e.key === " ") {
-						e.preventDefault();
-						onSelect();
-					}
-				}}
-				tabIndex={0}
-				role="button"
-				className={`flex w-full items-center gap-2 p-2 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
+				className={`flex w-full text-left items-center gap-2 p-2 rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
 					isSelected ? "ring-1 ring-inset ring-primary" : "hover:bg-accent"
 				}`}
 			>
@@ -90,13 +76,15 @@ export const SearchDialogCard = forwardRef<
 					className="w-10 md:w-12 h-15 md:h-18 object-cover aspect-2/3 rounded shrink-0"
 				/>
 				<div className="flex-1 max-w-full min-w-0">
-					<p className="font-medium text-xs md:text-sm truncate">{tv.name}</p>
+					<span className="block font-medium text-xs md:text-sm truncate">
+						{tv.name}
+					</span>
 
-					<p className="text-xs text-muted-foreground truncate">
+					<span className="block text-xs text-muted-foreground truncate">
 						{year ? `${year} - ` : null} {m.gleeful_topaz_willow()}
-					</p>
+					</span>
 				</div>
-			</div>
+			</button>
 		);
 	}
 

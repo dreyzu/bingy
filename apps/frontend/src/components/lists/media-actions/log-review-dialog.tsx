@@ -218,14 +218,10 @@ export function LogReviewDialog({
 					<div className="flex flex-col flex-1 min-h-0 overflow-hidden">
 						<DialogHeader className="shrink-0">
 							<DialogTitle>
-								{isTvShow
-									? m.spry_umber_pine()
-									: m.steady_slate_canyon()}
+								{isTvShow ? m.spry_umber_pine() : m.steady_slate_canyon()}
 							</DialogTitle>
 							<DialogDescription className="max-w-full lg:max-w-3/4">
-								{isTvShow
-									? m.winsome_magenta_koala()
-									: m.fancy_sepia_dolphin()}
+								{isTvShow ? m.winsome_magenta_koala() : m.fancy_sepia_dolphin()}
 							</DialogDescription>
 						</DialogHeader>
 

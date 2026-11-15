@@ -95,9 +95,7 @@ function App() {
 							<h3 className="text-xl font-semibold mb-2">
 								{m.tender_ivory_koala()}
 							</h3>
-							<p className="text-muted-foreground">
-								{m.brisk_teal_glacier()}
-							</p>
+							<p className="text-muted-foreground">{m.brisk_teal_glacier()}</p>
 						</div>
 
 						<div className="flex flex-col items-center text-center p-6 rounded-lg border border-border bg-card/50 backdrop-blur-sm">
@@ -107,9 +105,7 @@ function App() {
 							<h3 className="text-xl font-semibold mb-2">
 								{m.earthy_cobalt_marmot()}
 							</h3>
-							<p className="text-muted-foreground">
-								{m.vivid_slate_blossom()}
-							</p>
+							<p className="text-muted-foreground">{m.vivid_slate_blossom()}</p>
 						</div>
 
 						<div className="flex flex-col items-center text-center p-6 rounded-lg border border-border bg-card/50 backdrop-blur-sm">
@@ -119,9 +115,7 @@ function App() {
 							<h3 className="text-xl font-semibold mb-2">
 								{m.nimble_gold_blossom()}
 							</h3>
-							<p className="text-muted-foreground">
-								{m.epic_ruby_saddle()}
-							</p>
+							<p className="text-muted-foreground">{m.epic_ruby_saddle()}</p>
 						</div>
 					</div>
 				</div>

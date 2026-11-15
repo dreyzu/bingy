@@ -10,9 +10,9 @@ const parseCacheControlMaxAge = (
 ): number | null => {
 	if (!cacheControl) return null;
 
-	const maxAgeMatch = cacheControl.match(/max-age=(\d+)/);
-	if (maxAgeMatch) {
-		return Number.parseInt(maxAgeMatch[1]!, 10);
+	const maxAge = cacheControl.match(/max-age=(\d+)/)?.[1];
+	if (maxAge) {
+		return Number.parseInt(maxAge, 10);
 	}
 
 	return null;
