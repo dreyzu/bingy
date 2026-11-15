@@ -13,7 +13,11 @@ services:
     networks:
       - bingy-network
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -h ${DB_HOST} -p ${DB_PORT} -d ${DB_NAME}"]
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${DB_USER} -h ${DB_HOST} -p ${DB_PORT} -d ${DB_NAME}",
+        ]
       interval: 10s
       timeout: 5s
       retries: 5

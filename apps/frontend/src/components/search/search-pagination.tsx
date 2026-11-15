@@ -17,6 +17,36 @@ interface SearchPaginationProps {
 	language: string;
 }
 
+const PaginationLink = ({
+	page,
+	query,
+	language,
+	children,
+	disabled,
+	className,
+}: {
+	page: number;
+	query: string;
+	language: string;
+	children: React.ReactNode;
+	disabled?: boolean;
+	className?: string;
+}) => {
+	const styles = cn(
+		buttonVariants({ variant: "ghost", size: "default" }),
+		disabled && "opacity-50 cursor-not-allowed",
+		className,
+	);
+
+	if (disabled) return <span className={styles}>{children}</span>;
+
+	return (
+		<Link to="/search" search={{ q: query, language, page }} className={styles}>
+			{children}
+		</Link>
+	);
+};
+
 export const SearchPagination = ({
 	currentPage,
 	totalPages,
@@ -49,36 +79,6 @@ export const SearchPagination = ({
 		return pages;
 	};
 
-	const PaginationLink = ({
-		page,
-		children,
-		disabled,
-		className,
-	}: {
-		page: number;
-		children: React.ReactNode;
-		disabled?: boolean;
-		className?: string;
-	}) => {
-		const styles = cn(
-			buttonVariants({ variant: "ghost", size: "default" }),
-			disabled && "opacity-50 cursor-not-allowed",
-			className,
-		);
-
-		if (disabled) return <span className={styles}>{children}</span>;
-
-		return (
-			<Link
-				to="/search"
-				search={{ q: query, language, page }}
-				className={styles}
-			>
-				{children}
-			</Link>
-		);
-	};
-
 	return (
 		<Pagination>
 			<PaginationContent>
@@ -86,6 +86,8 @@ export const SearchPagination = ({
 				<PaginationItem>
 					<PaginationLink
 						page={currentPage - 1}
+						query={query}
+						language={language}
 						disabled={currentPage <= 1}
 						className="gap-1 pl-2.5"
 					>
@@ -128,6 +130,8 @@ export const SearchPagination = ({
 				<PaginationItem>
 					<PaginationLink
 						page={currentPage + 1}
+						query={query}
+						language={language}
 						disabled={currentPage >= totalPages}
 						className="gap-1 pr-2.5"
 					>
