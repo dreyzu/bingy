@@ -2,12 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import { NowPlayingMovies } from "@/components/movies/now-playing";
 import { PopularMovies } from "@/components/movies/popular";
-import { TopRatedMovies } from "@/components/movies/top-rated";
 import { UpcomingMovies } from "@/components/movies/upcoming";
 import {
 	useNowPlayingMovies,
 	usePopularMovies,
-	useTopRatedMovies,
 	useUpcomingMovies,
 } from "@/hooks/useMovies";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
@@ -26,15 +24,6 @@ function MoviesPage() {
 		isLoading: nowPlayingLoading,
 		isError: nowPlayingError,
 	} = useNowPlayingMovies({
-		region,
-		language: localeRegion,
-	});
-
-	const {
-		data: topRatedMovies,
-		isLoading: topRatedLoading,
-		isError: topRatedError,
-	} = useTopRatedMovies({
 		region,
 		language: localeRegion,
 	});
@@ -76,12 +65,6 @@ function MoviesPage() {
 				movies={popularMovies}
 				isLoading={popularLoading}
 				isError={popularError}
-			/>
-			<TopRatedMovies
-				title={m.winsome_coral_clover()}
-				movies={topRatedMovies}
-				isLoading={topRatedLoading}
-				isError={topRatedError}
 			/>
 		</div>
 	);
