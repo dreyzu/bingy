@@ -2,7 +2,12 @@ import { RedisClient } from "bun";
 import env from "./env";
 import { logger } from "./logger";
 
-const cacheRedis = new RedisClient(`${env.REDIS_URL}/1`);
+const CACHE_DB = 1;
+
+const cacheUrl = new URL(env.REDIS_URL);
+cacheUrl.pathname = `/${CACHE_DB}`;
+
+const cacheRedis = new RedisClient(cacheUrl.toString());
 
 export const cacheClient = {
 	get: async (key: string): Promise<string | null> => {

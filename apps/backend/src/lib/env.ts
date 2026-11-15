@@ -13,7 +13,7 @@ const envSchema = z.object({
 	REDIS_HOST: z.string().default("localhost"),
 	REDIS_PORT: z.string().default("6379"),
 	REDIS_PASSWORD: z.string(),
-	REDIS_URL: z.string().default("redis:/localhost:6379"),
+	REDIS_URL: z.string().default("redis://localhost:6379"),
 	GOOGLE_CLIENT_ID: z.string(),
 	GOOGLE_CLIENT_SECRET: z.string(),
 	BASE_URL: z.string(),
