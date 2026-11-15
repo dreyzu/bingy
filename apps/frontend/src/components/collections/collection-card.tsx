@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,6 +10,7 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { useCollection } from "@/hooks/useCollection";
+import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
 
 interface CollectionCardProps {
@@ -16,10 +18,12 @@ interface CollectionCardProps {
 }
 
 export function CollectionCard({ collection }: CollectionCardProps) {
-	if (!collection) return null;
+	const localeRegion = useAtomValue(localeRegionAtom);
+	const { data: collectionData } = useCollection(collection?.id ?? 0, {
+		language: localeRegion,
+	});
 
-	const { data: collectionData } = useCollection(collection.id);
-	if (!collectionData?.parts?.length) return null;
+	if (!collection || !collectionData?.parts?.length) return null;
 
 	const backgroundImage = collection.backdrop_path
 		? `https://image.tmdb.org/t/p/original${collection.backdrop_path}`
@@ -27,7 +31,7 @@ export function CollectionCard({ collection }: CollectionCardProps) {
 
 	return (
 		<Card
-			className="relative overflow-hidden min-h-[200px] ring-0 justify-center text-dark-card-foreground"
+			className="relative overflow-hidden min-h-50 ring-0 justify-center text-dark-card-foreground"
 			style={
 				backgroundImage
 					? {
@@ -41,7 +45,7 @@ export function CollectionCard({ collection }: CollectionCardProps) {
 			<CardHeader>
 				<CardTitle>{collection.name}</CardTitle>
 				<CardDescription className="text-foreground">
-					{m.collection_card_desc({
+					{m.loyal_violet_valley({
 						numberOfMovies: collectionData.parts.length,
 					})}
 				</CardDescription>
@@ -55,7 +59,7 @@ export function CollectionCard({ collection }: CollectionCardProps) {
 						variant="secondary"
 						className="w-full md:w-xs text-foreground"
 					>
-						{m.btn_view_collection()}
+						{m.alert_sage_bagel()}
 					</Button>
 				</Link>
 			</CardContent>

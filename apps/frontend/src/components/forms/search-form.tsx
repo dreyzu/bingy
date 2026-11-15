@@ -12,7 +12,7 @@ interface SearchFormProps {
 
 export function SearchForm({ initialQuery }: SearchFormProps) {
 	const navigate = useNavigate();
-	const [query, setQuery] = useState(initialQuery);
+	const [query, setQuery] = useState(initialQuery ?? "");
 	const [error, setError] = useState<string | null>(null);
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -20,16 +20,7 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
 
 		const result = searchFormSchema.safeParse({ newQuery: query });
 		if (!result.success) {
-			const firstIssue = result.error.issues[0];
-			if (firstIssue.message === "Search cannot be empty") {
-				setError(m.search_error_empty());
-				return;
-			} else if (firstIssue.message === "Search cannot exceed 300 characters") {
-				setError(m.search_error_too_long({ number: 300 }));
-				return;
-			}
-
-			setError(m.search_error_invalid());
+			setError(result.error.issues[0]?.message ?? m.kind_sage_tiger());
 			return;
 		}
 
@@ -39,7 +30,7 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className="flex flex-col gap-1 w-full lg:max-w-[450px]"
+			className="flex flex-col gap-1 w-full lg:max-w-112.5"
 		>
 			<div className="flex gap-2">
 				<Input
@@ -51,21 +42,20 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
 
 						if (
 							error &&
-							(error !== "Search cannot exceed 300 characters" ||
-								value.length <= 300)
+							searchFormSchema.safeParse({ newQuery: value }).success
 						) {
 							setError(null);
 						}
 					}}
-					placeholder={m.form_search_placeholder()}
+					placeholder={m.quiet_turquoise_cedar()}
 					className="flex rounded-md px-2 py-1 min-h-10"
 				/>
 				<Button
 					type="submit"
 					variant="secondary"
-					className="bg-brand hover:bg-brand/95 px-4 py-1 rounded-md text-dark-card-foreground font-bold"
+					className="bg-brand hover:bg-brand/95 px-4 py-1 rounded-md text-dark-card-foreground font-bold min-h-10"
 				>
-					{m.btn_form_search()}
+					{m.breezy_crimson_mesa()}
 				</Button>
 			</div>
 			{error ? <p className="text-red-500 text-sm">{error}</p> : null}

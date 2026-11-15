@@ -20,14 +20,12 @@ export function LinkAccountComponent({ accounts }: LinkAccountComponentProps) {
 
 	const getButtonText = () => {
 		if (isLoading) {
-			return googleConnected
-				? m.btn_unlinking_account()
-				: m.btn_linking_account();
+			return googleConnected ? m.crisp_onyx_ember() : m.elegant_navy_salmon();
 		}
 
 		return googleConnected
-			? m.btn_unlink_account({ provider: "Google" })
-			: m.btn_link_account({ provider: "Google" });
+			? m.humble_rust_tulip({ provider: "Google" })
+			: m.candid_indigo_boulder({ provider: "Google" });
 	};
 
 	const handleLinkAccount = async (provider: "google") => {
@@ -37,14 +35,21 @@ export function LinkAccountComponent({ accounts }: LinkAccountComponentProps) {
 			if (googleConnected) {
 				if (accounts.length <= 1) {
 					toast.error({
-						title: m.toast_error_unlink_account({ provider: "Google" }),
+						title: m.noble_lime_jasmine({ provider: "Google" }),
 					});
 					return;
 				}
 
-				await authClient.unlinkAccount({ providerId: provider });
+				const account = accounts?.find(
+					(account) => account.providerId === "google",
+				);
+
+				if (account) {
+					await authClient.unlinkAccount({ accountId: account.id });
+				}
+
 				toast.success({
-					title: m.toast_success_unlink_account({ provider: "Google" }),
+					title: m.zippy_beige_bagel({ provider: "Google" }),
 				});
 				navigate({ to: "/settings" });
 			} else {
@@ -54,8 +59,8 @@ export function LinkAccountComponent({ accounts }: LinkAccountComponentProps) {
 					errorCallbackURL: `${config.appUrl}/settings`,
 				});
 			}
-		} catch (err) {
-			toast.error({ title: m.toast_error_generic() });
+		} catch {
+			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsLoading(false);
 		}
@@ -67,19 +72,19 @@ export function LinkAccountComponent({ accounts }: LinkAccountComponentProps) {
 				{googleConnected ? (
 					<>
 						<p className="text-md font-semibold leading-none tracking-tight">
-							{m.unlink_account_title()}
+							{m.quick_mauve_boulder()}
 						</p>
 						<p className="text-sm text-muted-foreground mt-1.5">
-							{m.unlink_account_desc()}
+							{m.polite_coral_mirror()}
 						</p>
 					</>
 				) : (
 					<>
 						<p className="text-md font-semibold leading-none tracking-tight">
-							{m.link_account_title()}
+							{m.calm_sage_mesa()}
 						</p>
 						<p className="text-sm text-muted-foreground mt-1.5">
-							{m.link_account_desc()}
+							{m.mighty_green_yak()}
 						</p>
 					</>
 				)}

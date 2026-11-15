@@ -11,7 +11,7 @@ interface CastSectionTvProps {
 export const CastSectionTv = ({
 	people,
 	guestStars,
-	title = m.title_cast(),
+	title = m.fancy_bronze_panda(),
 }: CastSectionTvProps) => {
 	const merged = [...people, ...guestStars];
 

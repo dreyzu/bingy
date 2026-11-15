@@ -8,10 +8,10 @@ export const deleteAccountSchema = (hasPassword: boolean) =>
 					.string({
 						error: (iss) =>
 							iss.input === undefined
-								? m.schema_password_required()
-								: m.schema_password_invalid_type(),
+								? m.chilly_white_bamboo()
+								: m.humble_saffron_maple(),
 					})
-					.min(8, { message: m.schema_password_min_length() })
-					.max(256, { message: m.schema_password_max_length() })
+					.min(8, { message: m.plucky_lime_iguana() })
+					.max(256, { message: m.velvet_crimson_salmon() })
 			: z.string().optional().or(z.literal("")),
 	});

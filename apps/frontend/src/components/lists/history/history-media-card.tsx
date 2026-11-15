@@ -30,6 +30,7 @@ const RatingStars = ({ rating }: { rating: string }) => {
 	return (
 		<div className="flex items-center gap-0.5">
 			{Array.from({ length: fullStars }).map((_, i) => (
+				// biome-ignore lint/suspicious/noArrayIndexKey: static decorative stars, never reordered
 				<IconStarFilled key={i} className="h-3.5 w-3.5 text-brand" />
 			))}
 			{hasHalfStar ? (
@@ -44,11 +45,13 @@ export const HistoryMediaCard = ({ item, linkTo }: HistoryMediaCardProps) => {
 		<div key={`${item.mediaType}-${item.id}`} className="group">
 			<Link to={linkTo}>
 				<MediaPosterContainer {...item} />
-				<div className="mt-2">
-					{item.rating ? (
-						<div>
-							<RatingStars rating={item.rating} />
-						</div>
+				<div className="mt-2 flex items-center justify-between">
+					{item.rating ? <RatingStars rating={item.rating} /> : <span />}
+					{item.mediaType === "tv" && item.progress ? (
+						<span className="text-xs text-muted-foreground">
+							S{item.progress.lastWatchedSeason}E
+							{item.progress.lastWatchedEpisode}
+						</span>
 					) : null}
 				</div>
 			</Link>

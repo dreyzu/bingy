@@ -22,6 +22,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
 	Drawer,
+	DrawerBody,
 	DrawerContent,
 	DrawerDescription,
 	DrawerFooter,
@@ -52,7 +53,7 @@ export function ProfileDrawer() {
 		queryClient.setQueryData(sessionQueryOptions.queryKey, null);
 		queryClient.removeQueries({ queryKey: ["accounts"] });
 
-		toast.success({ title: m.toast_success_logout() });
+		toast.success({ title: m.epic_azure_mesa() });
 
 		await router.navigate({ to: "/" });
 	};
@@ -76,7 +77,7 @@ export function ProfileDrawer() {
 					>
 						<AvatarImage src={image || ""} alt={displayName ?? username} />
 						<AvatarFallback className="rounded-full">
-							{username ? username[0].toUpperCase() : "U"}
+							{username ? username.charAt(0) : "U"}
 						</AvatarFallback>
 					</Avatar>
 					<DrawerTitle className="line-clamp-1 leading-relaxed">
@@ -86,115 +87,117 @@ export function ProfileDrawer() {
 						{authData.user.email}
 					</DrawerDescription>
 				</DrawerHeader>
-				<Separator />
-				<div className="no-scrollbar overflow-y-auto flex flex-col items-center my-4 gap-4 flex-1 px-3">
-					<Button
-						className="w-full justify-start"
-						variant="ghost"
-						onClick={() => {
-							setIsOpen(false);
-							navigate({
-								to: "/@{$username}",
-								params: { username },
-							});
-						}}
-					>
-						<IconUser />
-						{m.dropdown_profile_text()}
-					</Button>
-					<Button
-						className="w-full justify-start"
-						variant="ghost"
-						onClick={() => {
-							setIsOpen(false);
-							navigate({
-								to: "/@{$username}/watchlist",
-								params: { username },
-							});
-						}}
-					>
-						<IconClockBolt />
-						{m.dropdown_watchlist_text()}
-					</Button>
-					<Button
-						className="w-full justify-start"
-						variant="ghost"
-						onClick={() => {
-							setIsOpen(false);
-							navigate({
-								to: "/@{$username}/lists",
-								params: { username },
-							});
-						}}
-					>
-						<IconList />
-						{m.dropdown_lists_text()}
-					</Button>
-					<Button
-						className="w-full justify-start"
-						variant="ghost"
-						onClick={() => {
-							setIsOpen(false);
-							navigate({
-								to: "/@{$username}/favorites",
-								params: { username },
-							});
-						}}
-					>
-						<IconHeart />
-						{m.dropdown_favorites_text()}
-					</Button>
-					<Button
-						className="w-full justify-start"
-						variant="ghost"
-						onClick={() => {
-							setIsOpen(false);
-							navigate({
-								to: "/@{$username}/history",
-								params: { username },
-							});
-						}}
-					>
-						<IconHistory />
-						{m.dropdown_history_text()}
-					</Button>
-					<Button
-						className="w-full justify-start"
-						variant="ghost"
-						onClick={() => {
-							setIsOpen(false);
-							navigate({
-								to: "/settings",
-							});
-						}}
-					>
-						<IconAdjustmentsHorizontal />
-						{m.dropdown_settings_text()}
-					</Button>
-					<Button className="w-full" variant="ghost">
-						<a
-							href="https://github.com/tristan-derez/bingy"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="flex items-center justify-between w-full"
+				<DrawerBody>
+					<Separator />
+					<div className="flex flex-col items-center my-4 gap-4 px-3">
+						<Button
+							className="w-full justify-start"
+							variant="ghost"
+							onClick={() => {
+								setIsOpen(false);
+								navigate({
+									to: "/@{$username}",
+									params: { username },
+								});
+							}}
 						>
-							<div className="flex items-center gap-2">
-								<IconBrandGithub className="w-4 h-4" />
-								<span>GitHub</span>
-							</div>
-							<IconExternalLink className="w-4 h-4 text-muted-foreground" />
-						</a>
-					</Button>
-					<Button disabled className="w-full justify-start" variant="ghost">
-						<IconLifebuoy className="w-4 h-4" />
-						<span>{m.dropdown_support_text()}</span>
-					</Button>
-				</div>
-				<Separator />
+							<IconUser />
+							{m.candid_azure_pine()}
+						</Button>
+						<Button
+							className="w-full justify-start"
+							variant="ghost"
+							onClick={() => {
+								setIsOpen(false);
+								navigate({
+									to: "/@{$username}/watchlist",
+									params: { username },
+								});
+							}}
+						>
+							<IconClockBolt />
+							{m.lush_tan_pelican()}
+						</Button>
+						<Button
+							className="w-full justify-start"
+							variant="ghost"
+							onClick={() => {
+								setIsOpen(false);
+								navigate({
+									to: "/@{$username}/lists",
+									params: { username },
+								});
+							}}
+						>
+							<IconList />
+							{m.peppy_pink_falcon()}
+						</Button>
+						<Button
+							className="w-full justify-start"
+							variant="ghost"
+							onClick={() => {
+								setIsOpen(false);
+								navigate({
+									to: "/@{$username}/favorites",
+									params: { username },
+								});
+							}}
+						>
+							<IconHeart />
+							{m.gentle_saffron_yak()}
+						</Button>
+						<Button
+							className="w-full justify-start"
+							variant="ghost"
+							onClick={() => {
+								setIsOpen(false);
+								navigate({
+									to: "/@{$username}/history",
+									params: { username },
+								});
+							}}
+						>
+							<IconHistory />
+							{m.plucky_lime_island()}
+						</Button>
+						<Button
+							className="w-full justify-start"
+							variant="ghost"
+							onClick={() => {
+								setIsOpen(false);
+								navigate({
+									to: "/settings",
+								});
+							}}
+						>
+							<IconAdjustmentsHorizontal />
+							{m.daring_lime_meerkat()}
+						</Button>
+						<Button className="w-full" variant="ghost">
+							<a
+								href="https://github.com/dreyzu/bingy"
+								target="_blank"
+								rel="noopener noreferrer"
+								className="flex items-center justify-between w-full"
+							>
+								<div className="flex items-center gap-2">
+									<IconBrandGithub className="w-4 h-4" />
+									<span>GitHub</span>
+								</div>
+								<IconExternalLink className="w-4 h-4 text-muted-foreground" />
+							</a>
+						</Button>
+						<Button disabled className="w-full justify-start" variant="ghost">
+							<IconLifebuoy className="w-4 h-4" />
+							<span>{m.primal_slate_barn()}</span>
+						</Button>
+					</div>
+					<Separator />
+				</DrawerBody>
 				<DrawerFooter>
 					<Button onClick={logout} variant="destructive" className="w-full">
 						<IconLogout className="w-4 h-4" />
-						<span>{m.dropdown_logout_text()}</span>
+						<span>{m.chilly_plum_jaguar()}</span>
 					</Button>
 				</DrawerFooter>
 			</DrawerContent>

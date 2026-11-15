@@ -9,7 +9,7 @@ interface CrewSectionMovieProps {
 
 export const CrewSectionMovie = ({
 	people,
-	title = m.title_crew(),
+	title = m.quiet_orange_anchor(),
 }: CrewSectionMovieProps) => {
 	const byDepartment = new Map<
 		string,
@@ -54,7 +54,7 @@ export const CrewSectionMovie = ({
 				return (
 					<div key={department} className="flex flex-col gap-4">
 						<h3 className="text-xl font-semibold">{department}</h3>
-						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+						<div className="grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-4 w-full">
 							{deptPeople.map((person) => (
 								<CrewCardMovie
 									key={`${department}-${person.id}`}

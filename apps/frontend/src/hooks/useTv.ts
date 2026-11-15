@@ -23,14 +23,6 @@ export function useLatestTv(params?: TvParams) {
 	});
 }
 
-export function useTopRatedTv(params?: TvParams) {
-	return useQuery({
-		queryKey: ["tv", "top_rated", params],
-		queryFn: () => fetchMultiPagesTv("top_rated", { maxPages: 1, params }),
-		staleTime: 1000 * 60 * 40,
-	});
-}
-
 export function usePopularTv(params?: TvParams) {
 	return useQuery({
 		queryKey: ["tv", "popular", params],

@@ -12,27 +12,27 @@ import { m } from "@/paraglide/messages";
 const STATUS_CONFIG = {
 	"In Production": {
 		icon: IconClipboard,
-		key: "tv_details_status_in_production",
+		key: "daring_plum_octopus",
 	},
 	"Returning Series": {
 		icon: IconProgress,
-		key: "tv_details_status_returning_series",
+		key: "bold_beige_otter",
 	},
 	Canceled: {
 		icon: IconCircleX,
-		key: "tv_details_status_canceled",
+		key: "dapper_khaki_gecko",
 	},
 	Ended: {
 		icon: IconCircleCheck,
-		key: "tv_details_status_ended",
+		key: "warm_ruby_falcon",
 	},
 	Pilot: {
 		icon: IconSparkles,
-		key: "tv_details_status_pilot",
+		key: "snappy_gray_boulder",
 	},
 	Planned: {
 		icon: IconCalendarWeek,
-		key: "tv_details_status_planned",
+		key: "grand_ivory_lynx",
 	},
 } as const;
 
@@ -55,9 +55,9 @@ export function TVStatusCard({ status }: TVStatusCardProps) {
 			<CardContent className="flex items-center gap-4">
 				<Icon />
 				<div>
-					<p className="text-xl xl:text-2xl font-bold">{statusMessage()}</p>
+					<p className="text-lg font-bold">{statusMessage()}</p>
 					<p className="text-sm text-muted-foreground">
-						{m.tv_details_status()}
+						{m.polite_yellow_daisy()}
 					</p>
 				</div>
 			</CardContent>

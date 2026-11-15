@@ -44,17 +44,17 @@ export function SettingsComponent({
 			<TabsList className="self-center">
 				<TabsTrigger value="account">
 					<IconUserCog />
-					{m.settings_tab_trigger_account()}
+					{m.proud_emerald_dolphin()}
 				</TabsTrigger>
 				<TabsTrigger value="display">
 					<IconBrush />
-					{m.settings_tab_trigger_display()}
+					{m.fierce_sage_galaxy()}
 				</TabsTrigger>
 			</TabsList>
 			<TabsContent value="account">
 				<Card className="p-4">
-					<CardTitle>{m.settings_card_title_account()}</CardTitle>
-					<CardDescription>{m.settings_card_desc_account()}</CardDescription>
+					<CardTitle>{m.bubbly_aqua_puma()}</CardTitle>
+					<CardDescription>{m.happy_khaki_iguana()}</CardDescription>
 					<Separator />
 					<LinkAccountComponent accounts={accounts} />
 					<Separator />
@@ -79,8 +79,8 @@ export function SettingsComponent({
 			</TabsContent>
 			<TabsContent value="display">
 				<Card className="p-4">
-					<CardTitle>{m.settings_card_title_display()}</CardTitle>
-					<CardDescription>{m.settings_card_desc_display()}</CardDescription>
+					<CardTitle>{m.hazy_azure_island()}</CardTitle>
+					<CardDescription>{m.kind_white_jasmine()}</CardDescription>
 					<div className="flex flex-col py-2">
 						<ModeToggle />
 					</div>

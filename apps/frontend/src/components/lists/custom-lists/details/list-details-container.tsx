@@ -51,7 +51,7 @@ export function ListDetailsContainer({
 	const hasItem = list.items.length > 0;
 
 	return (
-		<div className="container flex flex-col gap-6">
+		<div className="flex flex-col gap-6 w-full">
 			<div className="flex flex-col gap-2">
 				<ListName listName={list.name} />
 
@@ -65,11 +65,12 @@ export function ListDetailsContainer({
 								params={{ username: username, slug: list.slug }}
 								className="text-primary underline hover:text-primary/80 self-end"
 							>
-								{m.list_details_container_hide_notes()}
+								{m.rustic_coral_yak()}
 							</Link>
 						) : null}
 
 						{isOwnList ? (
+							// biome-ignore lint/a11y/noStaticElementInteractions lint/a11y/useKeyWithClickEvents: only keeps clicks on the list actions from triggering the surrounding link
 							<div className="flex gap-2" onClick={(e) => e.preventDefault()}>
 								<EditListButton
 									listSlug={list.slug}
@@ -94,49 +95,45 @@ export function ListDetailsContainer({
 					</div>
 				</div>
 			</div>
-
-			{!hasItem ? (
-				<p className="text-center py-12 text-muted-foreground">
-					{isOwnList ? (
-						<>
-							{m.list_container_empty_own()}{" "}
-							<Link
-								to="/@{$username}/lists/$listslug/edit"
-								params={{ username, listslug: list.slug }}
-								className="text-primary underline hover:text-primary/80"
-							>
-								{m.list_container_empty_own_cta()}
-							</Link>
-						</>
-					) : (
-						m.list_container_empty()
-					)}
-				</p>
+			!hasItem ? (
+			<p className="text-center py-12 text-muted-foreground">
+				{isOwnList ? (
+					<>
+						{m.rapid_coral_comet()}{" "}
+						<Link
+							to="/@{$username}/lists/$listslug/edit"
+							params={{ username, listslug: list.slug }}
+							className="text-primary underline hover:text-primary/80"
+						>
+							{m.jolly_copper_arrow()}
+						</Link>
+					</>
+				) : (
+					m.light_lime_badger()
+				)}
+			</p>
 			) : (
-				<>
-					<div className="flex flex-col divide-y">
-						{sortedItems.map((item) => (
-							<div
-								key={`${item.mediaType}-${item.id}`}
-								className="py-3 first:pt-0 last:pb-0"
-							>
-								<ListMediaDetailsCard
-									item={item}
-									showPosition={list.type === "ranked"}
-								/>
-							</div>
-						))}
-					</div>
-
-					{page && totalPages && onPageChange && totalPages > 1 && (
-						<ListPagination
-							page={page}
-							totalPages={totalPages}
-							onPageChange={onPageChange}
+			<div className="flex flex-col divide-y">
+				{sortedItems.map((item) => (
+					<div
+						key={`${item.mediaType}-${item.id}`}
+						className="py-3 first:pt-0 last:pb-0"
+					>
+						<ListMediaDetailsCard
+							item={item}
+							showPosition={list.type === "ranked"}
 						/>
-					)}
-				</>
+					</div>
+				))}
+			</div>
+			{page && totalPages && onPageChange && totalPages > 1 && (
+				<ListPagination
+					page={page}
+					totalPages={totalPages}
+					onPageChange={onPageChange}
+				/>
 			)}
+			);
 		</div>
 	);
 }

@@ -26,7 +26,7 @@ export function GlobalError({ error }: GlobalErrorProps) {
 						className="w-full"
 						onClick={() => window.location.reload()}
 					>
-						{m.btn_error_retry()}
+						{m.fair_pearl_quail()}
 					</Button>
 				</CardContent>
 			</Card>

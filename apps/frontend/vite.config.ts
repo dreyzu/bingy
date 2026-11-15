@@ -3,7 +3,7 @@ import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import tailwindcss from "@tailwindcss/vite";
 import tanstackRouter from "@tanstack/router-plugin/vite";
 import viteReact from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import { defineConfig, type PluginOption } from "vite";
 
 export default defineConfig({
 	optimizeDeps: {
@@ -15,8 +15,8 @@ export default defineConfig({
 			outdir: "./src/paraglide",
 			outputStructure: "message-modules",
 			cookieName: "PARAGLIDE_LOCALE",
-			strategy: ["cookie", "preferredLanguage", "baseLocale"],
-		}),
+			strategy: ["custom-userLocale", "baseLocale"],
+		}) as PluginOption,
 		tanstackRouter({ autoCodeSplitting: true }),
 		viteReact(),
 		tailwindcss(),

@@ -6,7 +6,7 @@ import {
 } from "@tanstack/react-router";
 import { useAtom } from "jotai";
 import { Controller, useForm } from "react-hook-form";
-import { z } from "zod";
+import type { z } from "zod";
 import { ListItemsPreview } from "@/components/lists/custom-lists/list-items-preview";
 import { ListSearchAddInput } from "@/components/lists/custom-lists/list-search-add";
 import { toast } from "@/components/toast/toast";
@@ -45,8 +45,7 @@ function CreateListPage() {
 	const { authData } = useRouteContext({ from: "__root__" });
 	const navigate = useNavigate();
 
-	if (!authData) return null;
-	const username = authData.user.name;
+	const username = authData?.user.name ?? "";
 
 	const createList = useCreateList(username);
 	const [selectedItems, setSelectedItems] = useAtom(createListDraftItemsAtom);
@@ -109,7 +108,7 @@ function CreateListPage() {
 				setSelectedItems([]);
 
 				toast.success({
-					title: m.toast_form_create_list_success({ list_name: values.name }),
+					title: m.lucky_sapphire_tulip({ list_name: values.name }),
 				});
 				navigate({
 					to: "/@{$username}/lists/$slug",
@@ -118,17 +117,19 @@ function CreateListPage() {
 			},
 			onError: () => {
 				toast.error({
-					title: m.toast_form_create_list_error({ list_name: values.name }),
+					title: m.rustic_rust_barn({ list_name: values.name }),
 				});
 			},
 		});
 	};
 
+	if (!authData) return null;
+
 	return (
-		<div className="container flex flex-col max-w-3xl gap-6">
+		<div className="flex flex-col gap-6 w-full">
 			<Card>
 				<CardHeader>
-					<CardTitle>{m.create_list_title()}</CardTitle>
+					<CardTitle>{m.stellar_topaz_lynx()}</CardTitle>
 				</CardHeader>
 				<CardContent>
 					<form
@@ -141,7 +142,7 @@ function CreateListPage() {
 								name="name"
 								render={({ field, fieldState }) => (
 									<Field className="w-full lg:w-[55%]">
-										<FieldLabel>{m.form_create_list_name_label()}</FieldLabel>
+										<FieldLabel>{m.bubbly_magenta_rabbit()}</FieldLabel>
 										<FieldContent>
 											<Input {...field} autoComplete="off" />
 										</FieldContent>
@@ -157,16 +158,14 @@ function CreateListPage() {
 								name="visibility"
 								render={({ field, fieldState }) => {
 									const visibilityLabel = {
-										public: m.form_create_list_visibility_item_public_short(),
-										limited: m.form_create_list_visibility_item_limited_short(),
-										private: m.form_create_list_visibility_item_private_short(),
+										public: m.gentle_sage_barn(),
+										limited: m.lean_lime_quail(),
+										private: m.humble_lime_beacon(),
 									}[field.value as "public" | "limited" | "private"];
 
 									return (
 										<Field className="w-full lg:w-[45%]">
-											<FieldLabel>
-												{m.form_create_list_visibility_label()}
-											</FieldLabel>
+											<FieldLabel>{m.shiny_hazel_planet()}</FieldLabel>
 											<FieldContent>
 												<Select
 													onValueChange={field.onChange}
@@ -177,13 +176,13 @@ function CreateListPage() {
 													</SelectTrigger>
 													<SelectContent>
 														<SelectItem value="public">
-															{m.form_create_list_visibility_item_public()}
+															{m.rustic_lavender_turtle()}
 														</SelectItem>
 														<SelectItem value="limited">
-															{m.form_create_list_visibility_item_limited()}
+															{m.hazy_khaki_fox()}
 														</SelectItem>
 														<SelectItem value="private">
-															{m.form_create_list_visibility_item_private()}
+															{m.keen_umber_cactus()}
 														</SelectItem>
 													</SelectContent>
 												</Select>
@@ -211,11 +210,9 @@ function CreateListPage() {
 												field.onChange(checked ? "ranked" : "unranked")
 											}
 										/>
-										<FieldLabel>{m.form_create_list_type_ranked()}</FieldLabel>
+										<FieldLabel>{m.ample_gray_beacon()}</FieldLabel>
 									</FieldContent>
-									<FieldDescription>
-										{m.form_create_list_type_ranked_description()}
-									</FieldDescription>
+									<FieldDescription>{m.quick_mauve_flute()}</FieldDescription>
 								</Field>
 							)}
 						/>
@@ -225,9 +222,7 @@ function CreateListPage() {
 							name="description"
 							render={({ field, fieldState }) => (
 								<Field>
-									<FieldLabel>
-										{m.form_create_list_description_label()}
-									</FieldLabel>
+									<FieldLabel>{m.dusky_hazel_yak()}</FieldLabel>
 									<FieldContent>
 										<Textarea
 											className="resize-y field-sizing-content"
@@ -244,7 +239,7 @@ function CreateListPage() {
 
 						<div className="flex flex-col gap-2">
 							<div className="flex flex-col gap-2">
-								<FieldLabel>{m.form_create_list_add_items_label()}</FieldLabel>
+								<FieldLabel>{m.lush_fuchsia_clover()}</FieldLabel>
 								<ListSearchAddInput draftItemsAtom={createListDraftItemsAtom} />
 							</div>
 						</div>
@@ -261,7 +256,7 @@ function CreateListPage() {
 								}
 								className="flex-1"
 							>
-								{m.form_create_list_btn_cancel()}
+								{m.fluffy_azure_puma()}
 							</Button>
 							<Button
 								type="submit"
@@ -269,8 +264,8 @@ function CreateListPage() {
 								className="flex-1"
 							>
 								{createList.isPending
-									? m.form_create_list_btn_creating()
-									: m.form_create_list_btn_create()}
+									? m.candid_topaz_quail()
+									: m.fancy_scarlet_koala()}
 							</Button>
 						</div>
 					</form>

@@ -16,7 +16,7 @@ export const PersonBiography = ({ biography }: PersonBiographyProps) => {
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	if (!biography) {
-		return <p>{m.person_biography_missing()}</p>;
+		return <p>{m.shiny_lilac_meadow()}</p>;
 	}
 
 	const { shouldTruncate, displayText, hiddenText } =
@@ -51,7 +51,7 @@ export const PersonBiography = ({ biography }: PersonBiographyProps) => {
 				<CollapsibleTrigger
 					render={
 						<Button variant="link" size="sm" className="p-0">
-							{isExpanded ? m.btn_show_less() : m.btn_show_more()}
+							{isExpanded ? m.nifty_aqua_clover() : m.hazy_maroon_galaxy()}
 						</Button>
 					}
 				/>

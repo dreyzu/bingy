@@ -48,6 +48,7 @@ export function MediaPosterContainer({
 					<TvShowBadge minWidth={8} />
 				)}
 			</div>
+			{/* biome-ignore lint/a11y/noStaticElementInteractions lint/a11y/useKeyWithClickEvents: only keeps clicks on the dropdown from reaching the poster */}
 			<div
 				className="absolute bottom-1.5 right-1.5 z-10"
 				onClick={(e) => e.stopPropagation()}

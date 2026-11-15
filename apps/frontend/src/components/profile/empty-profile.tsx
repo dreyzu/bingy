@@ -14,16 +14,14 @@ interface EmptyProfileProps {
 
 export function EmptyProfile({ ownProfile }: EmptyProfileProps) {
 	return (
-		<Empty className="min-h-[400px]">
+		<Empty className="min-h-100">
 			<EmptyHeader>
 				<EmptyMedia variant="icon">
 					<IconMoodWrrrFilled />
 				</EmptyMedia>
-				<EmptyTitle>{m.empty_profile_title()}</EmptyTitle>
+				<EmptyTitle>{m.nifty_wine_puma()}</EmptyTitle>
 				<EmptyDescription>
-					{ownProfile
-						? m.empty_profile_desc_own()
-						: m.empty_profile_desc_other()}
+					{ownProfile ? m.gleeful_hazel_dolphin() : m.lush_indigo_eagle()}
 				</EmptyDescription>
 			</EmptyHeader>
 		</Empty>

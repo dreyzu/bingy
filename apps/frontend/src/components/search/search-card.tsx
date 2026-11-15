@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import fallbackPoster from "@/assets/media-image-placeholder.jpg";
@@ -59,7 +59,7 @@ const getCardConfig = (item: Schemas.MediaMulti) => {
 		title: person.name,
 		subtitle: person.known_for_department,
 		overview: person.known_for?.length
-			? `${m.person_known_for({ gender: person.gender === 1 ? "female" : "male" })}: ${person.known_for
+			? `${m.winsome_white_oasis({ gender: person.gender === 1 ? "female" : "male" })}: ${person.known_for
 					.map((media) =>
 						media.media_type === "movie"
 							? (media as Schemas.MovieMedia).title
@@ -76,21 +76,20 @@ const getCardConfig = (item: Schemas.MediaMulti) => {
 };
 
 export const SearchCard = ({ item }: SearchCardProps) => {
-	const navigate = useNavigate();
 	const locale = useAtomValue(localeAtom);
 	const config = getCardConfig(item);
 
 	const overview = getTruncatedContent(config.overview ?? "");
 
 	return (
-		<div
-			className="flex gap-4 hover:bg-accent transition-colors select-none h-[170px] md:h-[200px] cursor-pointer rounded-lg overflow-hidden"
-			onClick={() => navigate(config.link)}
+		<Link
+			{...config.link}
+			className="flex gap-4 hover:bg-accent transition-colors select-none h-42.5 md:h-50 cursor-pointer rounded-lg overflow-hidden"
 		>
 			<img
 				src={config.imageUrl}
 				alt={config.title}
-				className="w-[100px] md:w-[133px] object-cover shrink-0"
+				className="w-25 md:w-33.25 object-cover shrink-0"
 			/>
 
 			<div className="flex flex-col gap-2 py-4 pr-4 min-w-0 flex-1">
@@ -120,6 +119,6 @@ export const SearchCard = ({ item }: SearchCardProps) => {
 					</p>
 				) : null}
 			</div>
-		</div>
+		</Link>
 	);
 };

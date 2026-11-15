@@ -20,6 +20,7 @@
 	},
 	"menuColor": "inverted",
 	"menuAccent": "bold",
+	"rtl": false,
 	"registries": {
 		"@magicui": "https://magicui.design/r/{name}.json",
 		"@aceternity": "https://ui.aceternity.com/registry/{name}.json"

@@ -28,14 +28,14 @@ export function TvEpisodeCreditsView({
 	if (isError || !credits) {
 		return (
 			<ResourceNotFound
-				title={m.episode_credits_not_found_title()}
-				description={m.episode_credits_not_found_desc()}
+				title={m.jaunty_sage_beacon()}
+				description={m.zesty_fuchsia_dolphin()}
 			/>
 		);
 	}
 
 	return (
-		<div className="container scroll-smooth">
+		<div className="w-full scroll-smooth">
 			<div className="mb-4 flex justify-between">
 				<BackButton />
 
@@ -45,7 +45,7 @@ export function TvEpisodeCreditsView({
 			</div>
 			<div className="flex flex-col gap-8 mt-8 text-center md:text-left">
 				<h2 className="text-2xl font-bold">
-					{m.episode_credits_title({ episodeNumber: episodeNumber })}
+					{m.swift_tan_pelican({ episodeNumber: episodeNumber })}
 				</h2>
 				{credits.cast ? (
 					<CastSectionTv

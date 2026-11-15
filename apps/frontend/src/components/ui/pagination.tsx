@@ -65,12 +65,12 @@ const PaginationPrevious = ({
 	...props
 }: React.ComponentProps<typeof PaginationLink>) => (
 	<PaginationLink
-		aria-label={m.pagination_previous_aria_label()}
+		aria-label={m.alert_amber_willow()}
 		className={cn("gap-1 pl-2.5", className)}
 		{...props}
 	>
 		<IconChevronLeft className="h-4 w-4" />
-		<span>{m.pagination_previous()}</span>
+		<span>{m.snappy_azure_pelican()}</span>
 	</PaginationLink>
 );
 PaginationPrevious.displayName = "PaginationPrevious";
@@ -80,11 +80,11 @@ const PaginationNext = ({
 	...props
 }: React.ComponentProps<typeof PaginationLink>) => (
 	<PaginationLink
-		aria-label={m.pagination_next_aria_label()}
+		aria-label={m.keen_mauve_island()}
 		className={cn("gap-1 pr-2.5", className)}
 		{...props}
 	>
-		<span>{m.pagination_next()}</span>
+		<span>{m.glossy_ruby_flute()}</span>
 		<IconChevronRight className="h-4 w-4" />
 	</PaginationLink>
 );

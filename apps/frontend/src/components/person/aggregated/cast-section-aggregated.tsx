@@ -9,7 +9,7 @@ interface CastSectionAggregatedProps {
 
 export const CastSectionAggregated = ({
 	people,
-	title = m.title_cast(),
+	title = m.fancy_bronze_panda(),
 }: CastSectionAggregatedProps) => {
 	const uniquePeople = Array.from(
 		new Map(people.map((person) => [person.id, person])).values(),
@@ -20,11 +20,11 @@ export const CastSectionAggregated = ({
 	}
 
 	return (
-		<section className="flex flex-col gap-6">
+		<section className="flex flex-col gap-4">
 			<h2 className="text-2xl font-bold">
 				{title} ({uniquePeople.length})
 			</h2>
-			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
+			<div className="grid grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-4 w-full">
 				{uniquePeople.map((person) => (
 					<CastCardAggregated key={person.id} person={person} />
 				))}

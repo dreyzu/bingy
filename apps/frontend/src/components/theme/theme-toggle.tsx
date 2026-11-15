@@ -32,7 +32,7 @@ export function ModeToggle() {
 				className="flex items-center justify-start md:justify-center gap-2 w-full md:flex-1"
 			>
 				<IconSun />
-				{m.btn_light_mode()}
+				{m.daring_ivory_tiger()}
 			</Button>
 
 			<Button
@@ -42,7 +42,7 @@ export function ModeToggle() {
 				className="flex items-center justify-start md:justify-center gap-2 w-full md:flex-1"
 			>
 				<IconMoon />
-				{m.btn_dark_mode()}
+				{m.nifty_emerald_iguana()}
 			</Button>
 
 			<Button
@@ -52,7 +52,7 @@ export function ModeToggle() {
 				className="flex items-center justify-start md:justify-center gap-2 w-full md:flex-1"
 			>
 				<IconBrandWindowsFilled />
-				{m.btn_system_mode()}
+				{m.wild_teal_pelican()}
 			</Button>
 		</div>
 	);

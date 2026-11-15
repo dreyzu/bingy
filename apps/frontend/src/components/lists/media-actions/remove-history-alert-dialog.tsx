@@ -25,20 +25,16 @@ export function RemoveHistoryAlertDialog({
 	return (
 		<AlertDialog open={open} onOpenChange={onOpenChange}>
 			<AlertDialogContent>
-				<AlertDialogTitle>
-					{m.alert_dialog_remove_media_history_title()}
-				</AlertDialogTitle>
+				<AlertDialogTitle>{m.plucky_tan_hippo()}</AlertDialogTitle>
 				<AlertDialogDescription>
-					{m.alert_dialog_remove_media_history_desc({
+					{m.mighty_azure_oasis({
 						media_name: mediaName,
 					})}
 				</AlertDialogDescription>
 				<AlertDialogFooter>
-					<AlertDialogCancel>
-						{m.alert_dialog_remove_media_history_cancel_btn()}
-					</AlertDialogCancel>
+					<AlertDialogCancel>{m.plucky_violet_jaguar()}</AlertDialogCancel>
 					<AlertDialogAction onClick={onConfirm}>
-						{m.alert_dialog_remove_media_history_confirm_btn()}
+						{m.brave_periwinkle_pebble()}
 					</AlertDialogAction>
 				</AlertDialogFooter>
 			</AlertDialogContent>

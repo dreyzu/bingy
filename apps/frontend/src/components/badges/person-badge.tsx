@@ -7,7 +7,7 @@ export const PersonBadge = () => {
 			variant="secondary"
 			className="bg-green-500/10 text-green-500 hover:bg-green-500/20 min-w-18 justify-center"
 		>
-			{m.search_person_badge()}
+			{m.ample_plum_beacon()}
 		</Badge>
 	);
 };

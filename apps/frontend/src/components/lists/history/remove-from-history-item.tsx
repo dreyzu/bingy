@@ -23,7 +23,7 @@ export function RemoveFromHistoryItem({
 	onRequestRemove,
 }: RemoveFromHistoryItemProps) {
 	const removeMovieHistory = useRemoveMovieHistory();
-	const removeTvHistory = useRemoveTvHistory();
+	const removeTvHistory = useRemoveTvHistory(username);
 
 	const movieRating = useMovieRating(username, movie?.id ?? 0);
 	const tvRating = useTvRating(username, tvShow?.id ?? 0);
@@ -59,7 +59,7 @@ export function RemoveFromHistoryItem({
 			disabled={isPending}
 			variant="destructive"
 		>
-			{m.list_dropdown_item_remove_history()}
+			{m.gallant_yellow_jasmine()}
 		</DropdownMenuItem>
 	);
 }

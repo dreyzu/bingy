@@ -37,15 +37,15 @@ export function MediaRatingDisplayCard({
 			<CardContent className="flex items-center gap-4">
 				<IconStarFilled className="h-5 w-5 text-yellow-500" />
 				<div>
-					<p className="text-xl xl:text-2xl font-bold">
+					<p className="text-lg font-bold">
 						{averageRating
 							? `${averageRating % 1 ? averageRating.toFixed(1) : averageRating}/5`
 							: "—"}
 					</p>
 					<p className="text-sm text-muted-foreground">
 						{voteCount > 0
-							? m.media_details_votes({ count: voteCount, voteCount })
-							: m.media_details_no_votes()}
+							? m.sturdy_copper_meadow({ count: voteCount, voteCount })
+							: m.steady_emerald_zebra()}
 					</p>
 				</div>
 			</CardContent>

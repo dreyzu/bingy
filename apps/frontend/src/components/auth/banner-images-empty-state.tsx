@@ -10,15 +10,13 @@ import { m } from "@/paraglide/messages";
 
 export function BackdropImagesEmptyState() {
 	return (
-		<Empty className="min-h-[200px]">
+		<Empty className="min-h-50">
 			<EmptyHeader>
 				<EmptyMedia variant="icon">
 					<IconPhotoOff className="size-4" />
 				</EmptyMedia>
-				<EmptyTitle>{m.banner_image_select_empty_title()}</EmptyTitle>
-				<EmptyDescription>
-					{m.banner_image_select_empty_desc()}
-				</EmptyDescription>
+				<EmptyTitle>{m.upbeat_magenta_cactus()}</EmptyTitle>
+				<EmptyDescription>{m.stellar_purple_pine()}</EmptyDescription>
 			</EmptyHeader>
 		</Empty>
 	);

@@ -51,7 +51,7 @@ export function ListContainer({
 	const hasItem = list.items.length > 0;
 
 	return (
-		<div className="container flex flex-col gap-6">
+		<div className="flex flex-col gap-6 w-full">
 			<div className="flex flex-col gap-2 justify-center">
 				<ListName listName={list.name} />
 
@@ -65,13 +65,14 @@ export function ListContainer({
 								params={{ username: username, slug: list.slug }}
 								className="text-primary underline hover:text-primary/80 self-end"
 							>
-								{m.list_container_see_notes()}
+								{m.primal_mauve_tiger()}
 							</Link>
 						) : (
 							<span>&nbsp;</span>
 						)}
 
 						{isOwnList ? (
+							// biome-ignore lint/a11y/noStaticElementInteractions lint/a11y/useKeyWithClickEvents: only keeps clicks on the list actions from triggering the surrounding link
 							<div className="flex gap-2" onClick={(e) => e.preventDefault()}>
 								<EditListButton
 									listSlug={list.slug}
@@ -96,45 +97,41 @@ export function ListContainer({
 					</div>
 				</div>
 			</div>
-
-			{!hasItem ? (
-				<p className="text-center py-12 text-muted-foreground">
-					{isOwnList ? (
-						<>
-							{m.list_container_empty_own()}{" "}
-							<Link
-								to="/@{$username}/lists/$listslug/edit"
-								params={{ username, listslug: list.slug }}
-								className="text-primary underline hover:text-primary/80"
-							>
-								{m.list_container_empty_own_cta()}
-							</Link>
-						</>
-					) : (
-						m.list_container_empty()
-					)}
-				</p>
+			!hasItem ? (
+			<p className="text-center py-12 text-muted-foreground">
+				{isOwnList ? (
+					<>
+						{m.rapid_coral_comet()}{" "}
+						<Link
+							to="/@{$username}/lists/$listslug/edit"
+							params={{ username, listslug: list.slug }}
+							className="text-primary underline hover:text-primary/80"
+						>
+							{m.jolly_copper_arrow()}
+						</Link>
+					</>
+				) : (
+					m.light_lime_badger()
+				)}
+			</p>
 			) : (
-				<>
-					<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
-						{sortedItems.map((item) => (
-							<ListMediaCard
-								key={`${item.mediaType}-${item.id}`}
-								item={item}
-								showPosition={list.type === "ranked"}
-							/>
-						))}
-					</div>
-
-					{page && totalPages && onPageChange && totalPages > 1 && (
-						<ListPagination
-							page={page}
-							totalPages={totalPages}
-							onPageChange={onPageChange}
-						/>
-					)}
-				</>
+			<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
+				{sortedItems.map((item) => (
+					<ListMediaCard
+						key={`${item.mediaType}-${item.id}`}
+						item={item}
+						showPosition={list.type === "ranked"}
+					/>
+				))}
+			</div>
+			{page && totalPages && onPageChange && totalPages > 1 && (
+				<ListPagination
+					page={page}
+					totalPages={totalPages}
+					onPageChange={onPageChange}
+				/>
 			)}
+			);
 		</div>
 	);
 }

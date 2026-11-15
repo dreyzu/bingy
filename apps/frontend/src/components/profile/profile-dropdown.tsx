@@ -8,6 +8,7 @@ import {
 	IconLifebuoy,
 	IconList,
 	IconLogout,
+	IconPlayerPlay,
 	IconUser,
 } from "@tabler/icons-react";
 import {
@@ -54,7 +55,7 @@ export const ProfileDropdown = ({
 		queryClient.setQueryData(sessionQueryOptions.queryKey, null);
 		queryClient.removeQueries({ queryKey: ["accounts"] });
 
-		toast.success({ title: m.toast_success_logout() });
+		toast.success({ title: m.epic_azure_mesa() });
 
 		await router.navigate({ to: "/" });
 	};
@@ -124,10 +125,9 @@ export const ProfileDropdown = ({
 									params: { username },
 								})
 							}
-							className="hover:cursor-pointer"
 						>
 							<IconUser />
-							{m.dropdown_profile_text()}
+							{m.candid_azure_pine()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -136,10 +136,9 @@ export const ProfileDropdown = ({
 									params: { username },
 								})
 							}
-							className="hover:cursor-pointer"
 						>
 							<IconClockBolt />
-							{m.dropdown_watchlist_text()}
+							{m.lush_tan_pelican()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -148,10 +147,9 @@ export const ProfileDropdown = ({
 									params: { username },
 								})
 							}
-							className="hover:cursor-pointer"
 						>
 							<IconList />
-							{m.dropdown_lists_text()}
+							{m.peppy_pink_falcon()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -160,10 +158,9 @@ export const ProfileDropdown = ({
 									params: { username },
 								})
 							}
-							className="hover:cursor-pointer"
 						>
 							<IconHeart />
-							{m.dropdown_favorites_text()}
+							{m.gentle_saffron_yak()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -172,10 +169,20 @@ export const ProfileDropdown = ({
 									params: { username },
 								})
 							}
-							className="hover:cursor-pointer"
 						>
 							<IconHistory />
-							{m.dropdown_history_text()}
+							{m.plucky_lime_island()}
+						</DropdownMenuItem>
+						<DropdownMenuItem
+							onClick={() =>
+								navigate({
+									to: "/@{$username}/shows",
+									params: { username },
+								})
+							}
+						>
+							<IconPlayerPlay />
+							{m.polite_cerise_jasmine()}
 						</DropdownMenuItem>
 						<DropdownMenuItem
 							onClick={() =>
@@ -183,36 +190,33 @@ export const ProfileDropdown = ({
 									to: "/settings",
 								})
 							}
-							className="hover:cursor-pointer"
 						>
 							<IconAdjustmentsHorizontal />
-							{m.dropdown_settings_text()}
+							{m.daring_lime_meerkat()}
 						</DropdownMenuItem>
 						<DropdownMenuSeparator className="bg-border" />
-						<DropdownMenuItem className="hover:cursor-pointer">
+						<DropdownMenuItem>
 							<a
-								href="https://github.com/tristan-derez/bingy"
+								href="https://github.com/dreyzu/bingy"
 								target="_blank"
 								rel="noopener noreferrer"
-								className="flex items-center justify-between"
+								className="flex items-center gap-1.5"
 							>
-								<div className="flex items-center gap-2">
-									<IconBrandGithub className="w-4 h-4" />
-									<span>GitHub</span>
-								</div>
+								<IconBrandGithub size={4} />
+								GitHub
 							</a>
 							<DropdownMenuShortcut>
 								<IconExternalLink className="text-muted-foreground" />
 							</DropdownMenuShortcut>
 						</DropdownMenuItem>
 						<DropdownMenuItem disabled>
-							<IconLifebuoy className="w-4 h-4" />
-							<span>{m.dropdown_support_text()}</span>
+							<IconLifebuoy />
+							{m.primal_slate_barn()}
 						</DropdownMenuItem>
 						<DropdownMenuSeparator className="bg-border" />
 						<DropdownMenuItem onClick={logout} variant="destructive">
-							<IconLogout className="w-4 h-4" />
-							<span>{m.dropdown_logout_text()}</span>
+							<IconLogout />
+							{m.chilly_plum_jaguar()}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</div>

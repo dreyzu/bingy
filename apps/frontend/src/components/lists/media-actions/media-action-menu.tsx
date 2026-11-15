@@ -1,4 +1,6 @@
+import { IconPlayerPlay } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -7,6 +9,7 @@ import {
 	useRateTvShow,
 	useTvRating,
 } from "@/hooks/useRating";
+import { useUserTvProgress } from "@/hooks/useTrackedShows";
 import { useTv } from "@/hooks/useTv";
 import { m } from "@/paraglide/messages";
 import { getTvShowProgress } from "@/utils/season-helper";
@@ -16,6 +19,7 @@ import { AddToListButton } from "./action-bar/add-to-list-button";
 import { LogReviewButton } from "./action-bar/log-review-button";
 import { ShareButton } from "./action-bar/share-button";
 import { AddToListDialog } from "./add-to-list-dialog";
+import { AddToTrackedShowsDialog } from "./add-to-tracked-shows-dialog";
 import { FavoriteToggleButton } from "./favorite-toggle-button";
 import { LogReviewDialog } from "./log-review-dialog";
 import { StarRating } from "./star-rating";
@@ -38,7 +42,6 @@ interface MediaActionMenuProps {
 	};
 	username: string;
 	posterPath: string | null;
-	currentUrl: string;
 }
 
 export const MediaActionMenu = ({
@@ -46,7 +49,6 @@ export const MediaActionMenu = ({
 	tvShow,
 	username,
 	posterPath,
-	currentUrl,
 }: MediaActionMenuProps) => {
 	const passProps = { movie, tvShow, username };
 	const imageUrl = getTmdbImageUrl(posterPath, "w500");
@@ -57,6 +59,12 @@ export const MediaActionMenu = ({
 	const { data: tvDetails } = useTv(tmdbId, {}, { enabled: isTvShow });
 
 	const tvProgress = useMemo(() => getTvShowProgress(tvDetails), [tvDetails]);
+
+	const { data: userTvProgress } = useUserTvProgress(
+		username,
+		tmdbId,
+		isTvShow,
+	);
 
 	const { data: movieRating } = useMovieRating(username, tmdbId);
 	const { data: tvRating } = useTvRating(username, tmdbId);
@@ -90,6 +98,8 @@ export const MediaActionMenu = ({
 
 	const [showAddToListDialog, setShowAddToListDialog] = useState(false);
 	const [showLogReviewDialog, setShowLogReviewDialog] = useState(false);
+	const [showAddToTrackedShowsDialog, setShowAddToTrackedShowsDialog] =
+		useState(false);
 
 	const existingRating = isTvShow ? tvRating : movieRating;
 
@@ -127,10 +137,23 @@ export const MediaActionMenu = ({
 						existingRating={!!existingRating}
 						onClick={() => setShowLogReviewDialog(true)}
 					/>
+					{tvShow ? (
+						<Button
+							variant="ghost"
+							onClick={() => setShowAddToTrackedShowsDialog(true)}
+							className="flex gap-2"
+						>
+							<span>
+								{userTvProgress
+									? m.humble_turquoise_moose()
+									: m.lush_pink_blossom()}
+							</span>
+							<IconPlayerPlay className="ml-auto" />
+						</Button>
+					) : null}
 					<AddToListButton onClick={() => setShowAddToListDialog(true)} />
 					<ShareButton
-						url={currentUrl}
-						text={m.btn_share_link_media_text({
+						text={m.silent_ochre_pine({
 							media_name: title,
 							year: year,
 						})}
@@ -147,6 +170,15 @@ export const MediaActionMenu = ({
 				imageUrl={imageUrl}
 				existingData={existingRating}
 			/>
+			{tvShow ? (
+				<AddToTrackedShowsDialog
+					open={showAddToTrackedShowsDialog}
+					onOpenChange={setShowAddToTrackedShowsDialog}
+					tvShow={tvShow}
+					username={username}
+					existingProgress={userTvProgress ?? null}
+				/>
+			) : null}
 			<AddToListDialog
 				open={showAddToListDialog}
 				onOpenChange={setShowAddToListDialog}

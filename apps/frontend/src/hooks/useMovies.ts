@@ -33,14 +33,6 @@ export function usePopularMovies(params?: MoviesParams) {
 	});
 }
 
-export function useTopRatedMovies(params?: MoviesParams) {
-	return useQuery({
-		queryKey: ["movies", "top_rated", params],
-		queryFn: () => fetchMultiPagesMovies("top_rated", 1, params),
-		staleTime: 1000 * 60 * 40,
-	});
-}
-
 export function useUpcomingMovies(params?: MoviesParams) {
 	return useQuery({
 		queryKey: ["movies", "upcoming", params],

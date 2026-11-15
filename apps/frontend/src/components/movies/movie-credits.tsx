@@ -26,20 +26,21 @@ export function MovieCreditsView({
 	if (isError || !credits) {
 		return (
 			<ResourceNotFound
-				title={m.movie_credits_not_found_title()}
-				description={m.movie_credits_not_found_desc()}
+				title={m.jolly_green_biscuit()}
+				description={m.breezy_green_iguana()}
 			/>
 		);
 	}
 	return (
-		<div className="container scroll-smooth">
-			<div className="mb-4 flex justify-between">
+		<div className="scroll-smooth w-full">
+			<div className="flex justify-between w-full">
 				<BackButton />
+
 				{credits.crew.length > 0 && credits.cast.length > 0 ? (
 					<ScrollToCrewButton crewSectionId={crewSectionId} />
 				) : null}
 			</div>
-			<div className="flex flex-col gap-8 mt-8 text-center md:text-left">
+			<div className="flex flex-col gap-2 mt-4 text-center md:text-left">
 				<CastSectionMovie people={credits.cast} />
 				<div id={crewSectionId} className="scroll-mt-26 lg:scroll-mt-30">
 					<CrewSectionMovie people={credits.crew} />

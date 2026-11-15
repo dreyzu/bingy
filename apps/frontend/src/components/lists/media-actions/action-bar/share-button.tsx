@@ -1,15 +1,20 @@
 import { IconBrandX, IconCopy, IconShare } from "@tabler/icons-react";
+import { useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { config } from "@/lib/env";
 import { m } from "@/paraglide/messages";
 
-export function ShareButton({ url, text }: { url: string; text: string }) {
+export function ShareButton({ text }: { text: string }) {
+	const routerState = useRouterState();
+	const url = `${config.appUrl}${routerState.location.pathname}`;
 	const [isHovered, setIsHovered] = useState(false);
 	const [copied, setCopied] = useState(false);
 
 	const handleCopy = async () => {
 		await navigator.clipboard.writeText(url);
 		setCopied(true);
+		setIsHovered(false);
 		setTimeout(() => setCopied(false), 2000);
 	};
 
@@ -19,17 +24,18 @@ export function ShareButton({ url, text }: { url: string; text: string }) {
 	};
 
 	return (
+		// biome-ignore lint/a11y/noStaticElementInteractions: hover only reveals extra share shortcuts; the copy button stays reachable by keyboard
 		<div
 			className="relative w-full"
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
 		>
 			<Button variant="ghost" className="w-full" onClick={handleCopy}>
-				<span>{copied ? m.btn_copied_text() : m.btn_share_text()}</span>
+				<span>{copied ? m.brave_mauve_hazel() : m.vivid_olive_dolphin()}</span>
 				<IconShare className="ml-auto" />
 			</Button>
 
-			{isHovered && (
+			{isHovered ? (
 				<div className="absolute inset-0 flex items-center justify-between bg-background px-3 border rounded-lg shadow-sm">
 					<span className="text-xs truncate text-muted-foreground flex-1 mr-2">
 						{url}
@@ -43,7 +49,7 @@ export function ShareButton({ url, text }: { url: string; text: string }) {
 						</Button>
 					</div>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }

@@ -35,7 +35,7 @@ function OAuthButton({
 					variant="secondary"
 					className="hidden right-2 rounded-md md:absolute"
 				>
-					{m.signin_last_method_badge()}
+					{m.warm_purple_rocket()}
 				</Badge>
 			) : null}
 		</Button>

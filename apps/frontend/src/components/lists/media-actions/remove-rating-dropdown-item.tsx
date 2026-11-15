@@ -23,7 +23,7 @@ export function RemoveRatingDropdownItem({
 	username,
 }: RemoveRatingDropdownItemProps) {
 	const removeMovieRating = useRemoveMovieRating();
-	const removeTvRating = useRemoveTvRating();
+	const removeTvRating = useRemoveTvRating(username);
 
 	const mediaType = movie ? "movie" : "tv";
 	const mediaId = movie?.id ?? tvShow?.id;
@@ -62,7 +62,7 @@ export function RemoveRatingDropdownItem({
 			disabled={isPending}
 			variant="destructive"
 		>
-			{m.list_dropdown_item_remove_rating()}
+			{m.dapper_rust_jasmine()}
 		</DropdownMenuItem>
 	);
 }

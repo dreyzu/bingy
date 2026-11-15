@@ -48,8 +48,7 @@ interface ListDropdownProps {
 
 export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
 	const { authData } = useRouteContext({ from: "__root__" });
-	if (!authData) return null;
-	const username = authData.user.name;
+	const username = authData?.user.name ?? "";
 	const isTvShow = !!tvShow;
 	const tmdbId = isTvShow ? tvShow.id : (movie?.id ?? 0);
 
@@ -63,7 +62,7 @@ export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
 	const rateMovieMutation = useRateMovie(username);
 	const rateTvMutation = useRateTvShow(username);
 	const removeMovieHistory = useRemoveMovieHistory();
-	const removeTvHistory = useRemoveTvHistory();
+	const removeTvHistory = useRemoveTvHistory(username);
 
 	const [showLogReviewDialog, setShowLogReviewDialog] = useState(false);
 	const [showAddToListDialog, setShowAddToListDialog] = useState(false);
@@ -130,12 +129,10 @@ export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
 					</div>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem onClick={() => setShowLogReviewDialog(true)}>
-						{existingRating
-							? m.list_dropdown_editreview()
-							: m.list_dropdown_logreview()}
+						{existingRating ? m.peppy_onyx_falcon() : m.icy_mauve_otter()}
 					</DropdownMenuItem>
 					<DropdownMenuItem onClick={() => setShowAddToListDialog(true)}>
-						{m.list_dropdown_item_add_to_list()}
+						{m.agile_saffron_daisy()}
 					</DropdownMenuItem>
 					<AddToWatchlistItem
 						movie={movie}

@@ -49,14 +49,14 @@ function UserProfileLayout() {
 
 	if (error) {
 		navigate({ to: ".." });
-		return toast.error({ title: m.toast_error_profile_route_generic() });
+		return toast.error({ title: m.sturdy_mint_canyon() });
 	}
 
 	const backgroundImage = getTmdbImageUrl(data.bannerUrl);
 
 	return (
 		<div className="flex flex-col w-full max-w-full min-w-full pt-8 md:pt-40 lg:pt-50">
-			<div className="max-w-4xl mx-auto w-full gap-4 flex flex-col">
+			<div className="w-full gap-4 flex flex-col">
 				<ProfileBanner backgroundImage={backgroundImage} />
 				<ProfileInfos
 					displayName={data.displayName}

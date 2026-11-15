@@ -3,7 +3,6 @@ import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
 import { MediaBackgroundImage } from "@/components/medias/media-background-image";
 import { MediaOverview } from "@/components/medias/media-overview";
-import { MediaPortraitImage } from "@/components/medias/media-portrait-image";
 import { MovieCarousel } from "@/components/movies/movie-carousel";
 import { BackButton } from "@/components/ui/back-button";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +14,7 @@ import {
 	mergeCrewMemberJobs,
 } from "@/utils/utils";
 import { CastCrewTabs } from "../person/cast-crew-tabs";
+import { PortraitImage } from "../portrait-image";
 
 interface CollectionDetailsViewProps {
 	collectionData: Schemas.CollectionDetails | undefined;
@@ -36,8 +36,8 @@ export function CollectionDetailsView({
 	if (isError || !collectionData) {
 		return (
 			<ResourceNotFound
-				title={m.error_title_not_found_collection()}
-				description={m.error_desc_not_found_collection()}
+				title={m.hasty_white_glacier()}
+				description={m.bubbly_yellow_gecko()}
 			/>
 		);
 	}
@@ -57,9 +57,9 @@ export function CollectionDetailsView({
 
 			if (movie.credits?.cast) {
 				const leadRoles = movie.credits.cast.slice(0, 10);
-				leadRoles.forEach((castMember) =>
-					mergeCastMemberCharacters(acc.cast, castMember),
-				);
+				for (const castMember of leadRoles) {
+					mergeCastMemberCharacters(acc.cast, castMember);
+				}
 			}
 
 			if (movie.credits?.crew) {
@@ -68,9 +68,9 @@ export function CollectionDetailsView({
 						crewMember.department === "Writing" ||
 						crewMember.job === "Director",
 				);
-				filteredCrew.forEach((crewMember) =>
-					mergeCrewMemberJobs(acc.crew, crewMember),
-				);
+				for (const crewMember of filteredCrew) {
+					mergeCrewMemberJobs(acc.crew, crewMember);
+				}
 			}
 
 			return acc;
@@ -106,20 +106,20 @@ export function CollectionDetailsView({
 	return (
 		<>
 			<MediaBackgroundImage backgroundImage={backgroundImage} />
-			<div className="container pt-3 md:pt-10 lg:pt-50">
+			<div className="w-full pt-3 md:pt-10 lg:pt-50">
 				<BackButton />
 
 				<div className="grid lg:grid-cols-[auto_1fr] gap-2 lg:gap-4 pt-2 justify-items-center">
-					<div className="flex flex-col gap-2 items-center lg:items-start max-w-[250px] md:max-w-[300px] lg:max-w-[400px]">
-						<MediaPortraitImage
+					<div className="flex flex-col gap-2 items-center lg:items-start max-w-62.5 md:max-w-60 2xl:max-w-75">
+						<PortraitImage
 							imagePath={collectionData.poster_path}
 							alt={collectionData.name}
-							imageSize="w500"
+							category="movie"
 						/>
 					</div>
 
 					<div className="w-full flex flex-col gap-4 overflow-hidden">
-						<Card className="shadow-none bg-transparent border-none ring-0 lg:p-0">
+						<Card className="shadow-none bg-transparent border-none p-0 ring-0 gap-0">
 							<CardContent className="p-0">
 								<div className="flex flex-col gap-2 px-0.5 py-0.5">
 									<h1 className="text-2xl lg:text-4xl font-bold leading-relaxed">
@@ -142,7 +142,7 @@ export function CollectionDetailsView({
 						</Card>
 
 						<MovieCarousel
-							title={m.collection_carousel_title({
+							title={m.lush_mint_turtle({
 								number: collectionData.parts.length,
 							})}
 							movies={sortedParts}

@@ -24,7 +24,7 @@ export function UserCard({ name, description, avatarUrl }: UserCardProps) {
 			</div>
 			<Button variant="outline" size="sm" className="shrink-0 gap-1">
 				<IconUserPlus className="h-4 w-4" />
-				{m.profile_page_follow_button()}
+				{m.candid_pearl_mirror()}
 			</Button>
 		</div>
 	);

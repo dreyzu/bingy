@@ -76,7 +76,7 @@ export function AddToHistoryItem({
 
 	return (
 		<DropdownMenuItem onClick={handleAddToHistory} disabled={isPending}>
-			{m.list_dropdown_item_mark_as_seen()}
+			{m.smart_emerald_falcon()}
 		</DropdownMenuItem>
 	);
 }

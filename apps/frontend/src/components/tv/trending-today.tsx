@@ -25,7 +25,7 @@ export const TrendingTodayTv = ({ title }: TrendingTodayTvProps) => {
 	}
 
 	if (error) {
-		toast.error({ title: m.toast_error_not_found_generic({ title }) });
+		toast.error({ title: m.sunny_green_acorn({ title }) });
 		return null;
 	}
 

@@ -15,7 +15,7 @@ export async function validateImage(file: unknown): Promise<Buffer> {
 
 	const type = await fileTypeFromBuffer(buffer);
 
-	if (!type || !type.mime.startsWith("image/")) {
+	if (!type?.mime.startsWith("image/")) {
 		throw new Error("INVALID_IMG_FILE");
 	}
 

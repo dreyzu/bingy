@@ -15,18 +15,18 @@ export function MediaLearnMoreCard({ id, mediaType }: MediaLearnMoreProps) {
 			<CardContent className=" flex items-center gap-4">
 				<IconExternalLink />
 				<div>
-					<p className="text-xl xl:text-2xl font-bold">
+					<p className="text-lg font-bold">
 						<a
 							href={tmdbUrl}
 							target="_blank"
 							rel="noopener noreferrer"
 							className="hover:underline"
 						>
-							{m.btn_media_learn_more()}
+							{m.plucky_saffron_wolf()}
 						</a>
 					</p>
 					<p className="text-sm text-muted-foreground">
-						{m.media_details_learn_more()}
+						{m.nifty_azure_hippo()}
 					</p>
 				</div>
 			</CardContent>

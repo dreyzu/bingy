@@ -33,7 +33,7 @@ export function useMovieRating(username: string, tmdbId: number) {
 		queryKey: ["ratings", "movie", tmdbId],
 		queryFn: () => getMovieRating(username, tmdbId),
 		staleTime: 1000 * 60 * 10,
-		enabled: !!tmdbId,
+		enabled: !!username && !!tmdbId,
 	});
 }
 
@@ -42,7 +42,7 @@ export function useTvRating(username: string, tmdbId: number) {
 		queryKey: ["ratings", "tv", tmdbId],
 		queryFn: () => getTvRating(username, tmdbId),
 		staleTime: 1000 * 60 * 10,
-		enabled: !!tmdbId,
+		enabled: !!username && !!tmdbId,
 	});
 }
 
@@ -71,9 +71,9 @@ export function useRateMovie(username: string) {
 
 			if (res.rating) {
 				toast.success({
-					title: m.toast_rate_movie_success(),
+					title: m.smart_ruby_compass(),
 					button: {
-						label: m.btn_go_to_history_page(),
+						label: m.vivid_violet_pebble(),
 						onClick: () => {
 							navigate({
 								to: "/@{$username}/history",
@@ -83,11 +83,11 @@ export function useRateMovie(username: string) {
 					},
 				});
 			} else {
-				toast.success({ title: m.toast_add_movie_watched_success() });
+				toast.success({ title: m.grand_hazel_salmon() });
 			}
 		},
 		onError: () => {
-			toast.error({ title: m.toast_rate_movie_error() });
+			toast.error({ title: m.balmy_mauve_dune() });
 		},
 	});
 }
@@ -114,12 +114,15 @@ export function useRateTvShow(username: string) {
 			queryClient.invalidateQueries({
 				queryKey: ["user-profile", username],
 			});
+			queryClient.invalidateQueries({
+				queryKey: ["tracked-shows", username],
+			});
 
 			if (res.rating) {
 				toast.success({
-					title: m.toast_rate_tv_success(),
+					title: m.grand_purple_jaguar(),
 					button: {
-						label: m.btn_go_to_history_page(),
+						label: m.vivid_violet_pebble(),
 						onClick: () => {
 							navigate({
 								to: "/@{$username}/history",
@@ -130,9 +133,9 @@ export function useRateTvShow(username: string) {
 				});
 			} else {
 				toast.success({
-					title: m.toast_add_tv_watched_success(),
+					title: m.joyful_copper_pebble(),
 					button: {
-						label: m.btn_go_to_history_page(),
+						label: m.vivid_violet_pebble(),
 						onClick: () => {
 							navigate({
 								to: "/@{$username}/history",
@@ -144,7 +147,7 @@ export function useRateTvShow(username: string) {
 			}
 		},
 		onError: () => {
-			toast.error({ title: m.toast_rate_tv_error() });
+			toast.error({ title: m.dusky_ruby_lagoon() });
 		},
 	});
 }
@@ -168,15 +171,15 @@ export function useRemoveMovieRating() {
 				queryKey: ["user-profile"],
 			});
 
-			toast.success({ title: m.toast_remove_movie_rating_success() });
+			toast.success({ title: m.fancy_sienna_coral() });
 		},
 		onError: () => {
-			toast.error({ title: m.toast_remove_movie_rating_error() });
+			toast.error({ title: m.proud_sepia_iguana() });
 		},
 	});
 }
 
-export function useRemoveTvRating() {
+export function useRemoveTvRating(username: string) {
 	const queryClient = useQueryClient();
 
 	return useMutation({
@@ -194,11 +197,14 @@ export function useRemoveTvRating() {
 			queryClient.invalidateQueries({
 				queryKey: ["user-profile"],
 			});
+			queryClient.invalidateQueries({
+				queryKey: ["tracked-shows", username],
+			});
 
-			toast.success({ title: m.toast_remove_tv_rating_success() });
+			toast.success({ title: m.brisk_topaz_island() });
 		},
 		onError: () => {
-			toast.error({ title: m.toast_remove_tv_rating_error() });
+			toast.error({ title: m.vivid_cobalt_island() });
 		},
 	});
 }

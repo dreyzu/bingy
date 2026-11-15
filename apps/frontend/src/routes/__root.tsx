@@ -3,12 +3,12 @@ import { createRootRouteWithContext } from "@tanstack/react-router";
 import { GlobalError } from "@/components/errors/global-error";
 import { NotFoundComponent } from "@/components/errors/not-found";
 import { RootComponent } from "@/components/root-component";
-import { authClient } from "@/lib/auth-client";
+import type { authClient } from "@/lib/auth-client";
 import { sessionQueryOptions } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
 import appCss from "@/styles/app.css?url";
 
-interface MyRouterContext {
+export interface MyRouterContext {
 	queryClient: QueryClient;
 	authData?: ReturnType<typeof authClient.useSession>["data"];
 }
@@ -30,7 +30,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 			{
 				name: "description",
-				content: m.head_app_description(),
+				content: m.humble_khaki_seal(),
 			},
 			{
 				name: "theme-color",

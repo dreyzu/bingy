@@ -36,9 +36,7 @@ export function ProfileInfos({
 							className="shrink-0"
 						>
 							<IconEdit />
-							<span className="hidden md:flex">
-								{m.profile_page_edit_btn_label()}
-							</span>
+							<span className="hidden md:flex">{m.fierce_scarlet_moose()}</span>
 						</Button>
 					) : (
 						<ProfileFollowButton />

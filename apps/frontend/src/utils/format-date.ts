@@ -2,12 +2,38 @@ import {
 	formatDistanceToNow as dfnsFormatDistanceToNow,
 	type Locale,
 } from "date-fns";
-import { enUS as enUSLocale, fr as frLocale } from "date-fns/locale";
+import {
+	de as deLocale,
+	enUS as enUSLocale,
+	es as esLocale,
+	fr as frLocale,
+	it as itLocale,
+	ja as jaLocale,
+	ko as koLocale,
+	ptBR as ptBRLocale,
+	pt as ptLocale,
+	zhCN as zhCNLocale,
+	zhTW as zhTWLocale,
+} from "date-fns/locale";
 
 const localeMap: Record<string, Locale> = {
 	en: enUSLocale,
+	es: esLocale,
 	fr: frLocale,
+	it: itLocale,
+	ko: koLocale,
+	de: deLocale,
+	ja: jaLocale,
+	pt: ptLocale,
+	"pt-BR": ptBRLocale,
+	"zh-CN": zhCNLocale,
+	"zh-TW": zhTWLocale,
 };
+
+function getDateFnsLocale(locale: string): Locale {
+	const [language = "en"] = locale.split("-");
+	return localeMap[locale] ?? localeMap[language] ?? enUSLocale;
+}
 
 /**
  * Formats a date string into a localized date format.
@@ -46,10 +72,8 @@ export function formatDate(
  * formatDistanceToNow(new Date(Date.now() - 1000 * 60 * 60 * 2)) // "2 hours ago"
  */
 export function formatDistanceToNow(date: Date, locale = "en-US"): string {
-	const lang = locale.split("-")[0];
-	const dateLocale = localeMap[lang] ?? enUSLocale;
 	return dfnsFormatDistanceToNow(date, {
 		addSuffix: true,
-		locale: dateLocale,
+		locale: getDateFnsLocale(locale),
 	});
 }

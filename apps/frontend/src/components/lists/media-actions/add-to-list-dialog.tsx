@@ -72,8 +72,6 @@ export function AddToListDialog({
 		listName: string,
 		listSlug: string,
 	) => {
-		if (!movie && !tvShow) return;
-
 		const payload = movie
 			? {
 					tmdbId: movie.id,
@@ -84,15 +82,19 @@ export function AddToListDialog({
 					listSlug,
 					title: movie.title,
 				}
-			: {
-					tmdbId: tvShow!.id,
-					mediaType: "tv" as const,
-					username,
-					listId,
-					listName,
-					listSlug,
-					name: tvShow!.name,
-				};
+			: tvShow
+				? {
+						tmdbId: tvShow.id,
+						mediaType: "tv" as const,
+						username,
+						listId,
+						listName,
+						listSlug,
+						name: tvShow.name,
+					}
+				: null;
+
+		if (!payload) return;
 
 		addMediaToList.mutate(payload);
 		onOpenChange(false);
@@ -102,10 +104,10 @@ export function AddToListDialog({
 		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogContent className="max-w-md">
 				<DialogHeader>
-					<DialogTitle>{m.dialog_add_to_list_title()}</DialogTitle>
+					<DialogTitle>{m.primal_maroon_mesa()}</DialogTitle>
 					<DialogDescription>
-						{m.dialog_add_to_list_desc({
-							media_name: (movie?.title ?? tvShow?.name)!,
+						{m.rustic_indigo_falcon({
+							media_name: movie?.title ?? tvShow?.name ?? "",
 						})}
 					</DialogDescription>
 				</DialogHeader>
@@ -116,14 +118,14 @@ export function AddToListDialog({
 					</div>
 				)}
 
-				{status === "error" && <p>{m.dialog_add_to_list_generic_err()}</p>}
+				{status === "error" && <p>{m.mighty_yellow_jaguar()}</p>}
 
 				{status === "success" ? (
 					<>
 						<div
 							ref={scrollContainerRef}
 							onScroll={handleScroll}
-							className="max-h-[400px] overflow-x-hidden overflow-y-auto no-scrollbar space-y-2"
+							className="max-h-100 overflow-x-hidden overflow-y-auto no-scrollbar space-y-2"
 						>
 							{data.pages.map((page) => (
 								<div key={page.page} className="space-y-2">
@@ -141,7 +143,7 @@ export function AddToListDialog({
 												<div className="font-medium">{list.name}</div>
 
 												<div className="text-sm text-muted-foreground leading-relaxed line-clamp-1">
-													{list.description || m.dialog_add_to_list_no_desc()}
+													{list.description || m.zippy_khaki_galaxy()}
 												</div>
 											</div>
 										</Button>
@@ -160,7 +162,7 @@ export function AddToListDialog({
 							<Button
 								className="w-full"
 								onClick={() => {
-									const draftItem: ListDraftItem = movie
+									const draftItem: ListDraftItem | null = movie
 										? {
 												tmdbId: movie.id,
 												mediaType: "movie",
@@ -168,13 +170,17 @@ export function AddToListDialog({
 												posterPath: movie.posterPath,
 												releaseDate: movie.releaseDate,
 											}
-										: {
-												tmdbId: tvShow!.id,
-												mediaType: "tv",
-												title: tvShow!.name,
-												posterPath: tvShow!.posterPath,
-												releaseDate: tvShow!.releaseDate,
-											};
+										: tvShow
+											? {
+													tmdbId: tvShow.id,
+													mediaType: "tv",
+													title: tvShow.name,
+													posterPath: tvShow.posterPath,
+													releaseDate: tvShow.releaseDate,
+												}
+											: null;
+
+									if (!draftItem) return;
 
 									setSelectedItems([draftItem]);
 									onOpenChange(false);
@@ -182,7 +188,7 @@ export function AddToListDialog({
 								}}
 							>
 								<IconPlus />
-								{m.dialog_add_to_list_btn_footer()}
+								{m.jolly_slate_oasis()}
 							</Button>
 						</DialogFooter>
 					</>

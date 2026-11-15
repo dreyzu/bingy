@@ -57,7 +57,7 @@ export function WatchProvidersSection({
 							)}
 							<div className="flex flex-col h-10 justify-center">
 								<span className="text-sm leading-relaxed">
-									{m.watch_providers_text()}
+									{m.candid_rose_crystal()}
 								</span>
 								<span className="text-base font-bold leading-relaxed md:hidden">
 									{providerName.length > 12

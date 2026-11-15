@@ -17,7 +17,7 @@ export const MediaOverview = ({ overview }: { overview: string }) => {
 
 	if (!shouldTruncate) {
 		return (
-			<p className="text-sm xl:w-6/7 whitespace-pre-line text-foreground text-pretty leading-relaxed">
+			<p className="text-sm xl:w-11/12 whitespace-pre-line text-foreground text-pretty leading-relaxed">
 				{overview}
 			</p>
 		);
@@ -27,7 +27,7 @@ export const MediaOverview = ({ overview }: { overview: string }) => {
 		<Collapsible
 			open={isExpanded}
 			onOpenChange={setIsExpanded}
-			className="group flex gap-3 text-sm xl:w-6/7"
+			className="group flex gap-3 text-sm"
 		>
 			<div className="flex-1 whitespace-pre-line leading-relaxed text-pretty text-foreground">
 				<span>{displayText}</span>
@@ -47,7 +47,9 @@ export const MediaOverview = ({ overview }: { overview: string }) => {
 							variant="secondary"
 							size="icon"
 							className="h-6 w-6 p-0 hover:bg-transparent text-muted-foreground hover:text-foreground"
-							title={isExpanded ? m.btn_show_less() : m.btn_show_more()}
+							title={
+								isExpanded ? m.nifty_aqua_clover() : m.hazy_maroon_galaxy()
+							}
 						>
 							{isExpanded ? (
 								<IconChevronUp size={18} />

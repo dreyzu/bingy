@@ -1,4 +1,4 @@
-import { Fetcher, GetEndpoints, MaybeOptionalArg } from "shared";
+import type { Fetcher, GetEndpoints } from "shared";
 import env from "../../lib/env";
 
 export class ApiClient {
@@ -16,9 +16,17 @@ export class ApiClient {
 
 	get<Path extends keyof GetEndpoints, TEndpoint extends GetEndpoints[Path]>(
 		path: Path,
-		...params: MaybeOptionalArg<TEndpoint["parameters"]>
+		params?: TEndpoint["parameters"],
+		cacheTtl?: number,
 	): Promise<TEndpoint["response"]> {
-		return this.fetcher("get", this.baseUrl, path, this.apiKey, params[0]);
+		return this.fetcher(
+			"get",
+			this.baseUrl,
+			path,
+			this.apiKey,
+			params,
+			cacheTtl,
+		);
 	}
 }
 

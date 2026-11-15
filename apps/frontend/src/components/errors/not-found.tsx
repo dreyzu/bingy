@@ -21,11 +21,11 @@ export function NotFoundComponent() {
 					<div className="space-y-4">
 						<h1 className="text-4xl font-bold text-center">Oops!</h1>
 						<p className="text-lg text-center text-muted-foreground">
-							{m.error_page_not_found()}
+							{m.winsome_sage_nectar()}
 						</p>
 						<div className="text-lg text-center">
 							<Button onClick={() => navigate({ to: "/" })}>
-								{m.btn_go_home()}
+								{m.hasty_periwinkle_lynx()}
 							</Button>
 						</div>
 					</div>

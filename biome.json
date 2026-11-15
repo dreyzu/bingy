@@ -1,19 +1,21 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.5.15/schema.json",
 	"vcs": {
-		"enabled": false,
+		"enabled": true,
 		"clientKind": "git",
-		"useIgnoreFile": false
+		"useIgnoreFile": true
 	},
 	"files": {
 		"ignoreUnknown": false,
 		"includes": [
 			"**",
-			"!node_modules",
-			"!*.gen.ts",
-			"!dist",
-			"!.git",
-			"!.vscode"
+			"!!**/dist",
+			"!!**/.tanstack",
+			"!!**/.nitro",
+			"!!**/src/paraglide",
+			"!**/drizzle",
+			"!**/*.gen.ts",
+			"!**/.vscode"
 		]
 	},
 	"formatter": {
@@ -28,13 +30,30 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true,
+			"preset": "recommended",
 			"suspicious": {
 				"noUnknownAtRules": "off"
 			}
-		},
-		"includes": ["!*.gen.ts"]
+		}
 	},
+	"overrides": [
+		{
+			"includes": ["apps/frontend/src/components/ui/**"],
+			"linter": {
+				"enabled": false
+			}
+		},
+		{
+			"includes": ["**/*.test.ts", "**/*.test.tsx"],
+			"linter": {
+				"rules": {
+					"suspicious": {
+						"noDocumentCookie": "off"
+					}
+				}
+			}
+		}
+	],
 	"javascript": {
 		"formatter": {
 			"arrowParentheses": "always",

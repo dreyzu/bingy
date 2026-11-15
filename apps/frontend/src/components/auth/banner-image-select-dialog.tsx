@@ -56,6 +56,7 @@ export function BannerImageSelectDialog({
 	const isLoading = isLoadingMovie || isLoadingTv;
 
 	// Reset selected index when dialog opens or images change
+	// biome-ignore lint/correctness/useExhaustiveDependencies: open and backdrops are the reset triggers
 	useEffect(() => {
 		setSelectedIndex(0);
 	}, [open, backdrops]);
@@ -144,13 +145,13 @@ export function BannerImageSelectDialog({
 				onKeyDown={handleKeyDown}
 			>
 				<DialogHeader>
-					<DialogTitle>{m.banner_image_select_title()}</DialogTitle>
+					<DialogTitle>{m.daring_purple_raven()}</DialogTitle>
 				</DialogHeader>
 
 				<div className="mt-4 overflow-y-auto max-h-[60vh] no-scrollbar">
 					{isLoading ? (
 						<div className="flex justify-center py-8">
-							<LoaderFive text={m.banner_image_select_loading()} />
+							<LoaderFive text={m.breezy_lavender_bridge()} />
 						</div>
 					) : null}
 

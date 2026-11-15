@@ -1,9 +1,9 @@
 import { and, eq } from "drizzle-orm";
-import type { PgTransaction } from "drizzle-orm/pg-core";
 import { media } from "../../db/schemas/list";
+import type { Transaction } from "../../lib/database";
 
 export async function getOrCreateMedia(
-	tx: PgTransaction<any, any, any>,
+	tx: Transaction,
 	tmdbId: number,
 	mediaType: "movie" | "tv",
 ): Promise<string> {

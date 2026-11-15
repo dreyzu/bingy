@@ -14,9 +14,7 @@ export function LogReviewButton({
 	return (
 		<Button variant="ghost" onClick={onClick} className="flex gap-2">
 			<span>
-				{existingRating
-					? m.btn_log_review_existing_rating()
-					: m.btn_log_review_text()}
+				{existingRating ? m.silent_purple_arrow() : m.daring_sienna_cactus()}
 			</span>
 			<IconPencilStar className="ml-auto" />
 		</Button>

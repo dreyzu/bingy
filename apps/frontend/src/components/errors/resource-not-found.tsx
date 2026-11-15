@@ -32,12 +32,12 @@ export function ResourceNotFound({
 					<CardDescription>{description}</CardDescription>
 				</CardHeader>
 				<CardContent className="flex flex-col gap-2">
-					<BackButton style="w-full" text={m.btn_go_back()} />
+					<BackButton style="w-full" text={m.peppy_silver_maple()} />
 
 					<Button variant="outline" className="w-full">
 						<Link
 							to="/"
-							className="hover:cursor-default flex items-center gap-2 flex-1 justify-center"
+							className="flex items-center gap-2 flex-1 justify-center"
 						>
 							<IconSmartHome className="h-4 w-4" /> Home
 						</Link>

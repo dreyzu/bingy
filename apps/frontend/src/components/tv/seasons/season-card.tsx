@@ -33,8 +33,8 @@ export function SeasonCard({
 						<div className="flex items-center gap-3">
 							<CardTitle>
 								{season.season_number === 0
-									? m.season_card_special_season()
-									: m.season_card_season({
+									? m.lush_slate_pine()
+									: m.eager_lilac_penguin({
 											seasonNumber: season.season_number,
 										})}
 							</CardTitle>
@@ -49,7 +49,7 @@ export function SeasonCard({
 						<Badge variant="outline">
 							<span>
 								{season.episode_count}{" "}
-								{m.season_card_episode_badge({ count: season.episode_count })}
+								{m.nifty_cerise_panda({ count: season.episode_count })}
 							</span>
 						</Badge>
 					</div>
@@ -70,7 +70,7 @@ export function SeasonCard({
 						<div className="flex-1 gap-2">
 							{season.name
 								? season.name !==
-										m.season_card_season({
+										m.eager_lilac_penguin({
 											seasonNumber: season.season_number,
 										}) &&
 									season.season_number !== 0 && (
@@ -78,7 +78,7 @@ export function SeasonCard({
 									)
 								: null}
 							<p className="text-muted-foreground xl:line-clamp-9">
-								{season.overview ? season.overview : m.overview_none()}
+								{season.overview ? season.overview : m.happy_slate_whale()}
 							</p>
 						</div>
 					</div>

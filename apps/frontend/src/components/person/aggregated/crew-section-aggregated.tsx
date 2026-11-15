@@ -9,7 +9,7 @@ interface CrewSectionAggregatedProps {
 
 export const CrewSectionAggregated = ({
 	people,
-	title = m.title_crew(),
+	title = m.quiet_orange_anchor(),
 }: CrewSectionAggregatedProps) => {
 	const byDepartment = new Map<
 		string,

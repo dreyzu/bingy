@@ -52,6 +52,7 @@ export function StarRating({
 
 	return (
 		<div className="flex gap-2 items-center py-1">
+			{/* biome-ignore lint/a11y/noStaticElementInteractions: mouse leave only clears the hover preview */}
 			<div
 				className={`gap-${gapSize} flex items-center`}
 				onMouseLeave={() => setHoverRating(null)}
@@ -63,13 +64,17 @@ export function StarRating({
 
 					return (
 						<div key={starIndex} className="relative text-brand">
-							<div
-								className="absolute left-0 w-1/2 h-full z-10"
+							<button
+								type="button"
+								aria-label={m.peppy_plum_turtle({ rating: starIndex + 0.5 })}
+								className="absolute left-0 w-1/2 h-full z-10 cursor-pointer"
 								onMouseEnter={() => setHoverRating(starIndex + 0.5)}
 								onClick={() => handleClick(starIndex, true)}
 							/>
-							<div
-								className="absolute right-0 w-1/2 h-full z-10"
+							<button
+								type="button"
+								aria-label={m.peppy_plum_turtle({ rating: starIndex + 1 })}
+								className="absolute right-0 w-1/2 h-full z-10 cursor-pointer"
 								onMouseEnter={() => setHoverRating(starIndex + 1)}
 								onClick={() => handleClick(starIndex, false)}
 							/>
@@ -101,7 +106,7 @@ export function StarRating({
 						type="button"
 						onClick={onRatingDelete}
 						className="text-muted-foreground hover:text-foreground transition-colors"
-						aria-label={m.btn_delete_rating_aria_label()}
+						aria-label={m.lucky_sapphire_coral()}
 					>
 						<IconX className="w-5 h-5" />
 					</button>

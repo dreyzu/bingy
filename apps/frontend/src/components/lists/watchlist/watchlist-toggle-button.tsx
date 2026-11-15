@@ -87,7 +87,7 @@ export function WatchlistToggleButton({
 						type="button"
 						onClick={handleWatchlistToggle}
 						disabled={isPending}
-						className={`group flex flex-col items-center gap-1 transition-colors hover:text-blue-400 ${
+						className={`group flex flex-col items-center gap-1 transition-colors cursor-pointer hover:text-blue-400 ${
 							isInWatchlist ? "text-blue-500" : `text-${color}`
 						}`}
 					>
@@ -105,11 +105,7 @@ export function WatchlistToggleButton({
 				}
 			></TooltipTrigger>
 			<TooltipContent align="center">
-				<p>
-					{isInWatchlist
-						? m.remove_watchlist_media_tooltip()
-						: m.add_watchlist_media_tooltip()}
-				</p>
+				<p>{isInWatchlist ? m.witty_yellow_bamboo() : m.wild_navy_crystal()}</p>
 			</TooltipContent>
 		</Tooltip>
 	);

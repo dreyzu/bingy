@@ -30,31 +30,25 @@ export default function Header() {
 
 	const allNavItems = [
 		{
-			name: m.header_link_home(),
-			link: "/",
+			name: m.kind_saffron_penguin(),
+			link: authData ? "/home" : "/",
 			requiresAuth: false,
-			hideWhenAuth: true,
-		},
-		{
-			name: m.header_link_dashboard(),
-			link: "/dashboard",
-			requiresAuth: true,
 			hideWhenAuth: false,
 		},
 		{
-			name: m.header_link_movies(),
+			name: m.proud_green_beaver(),
 			link: "/movies" as const,
 			requiresAuth: false,
 			hideWhenAuth: false,
 		},
 		{
-			name: m.header_link_tv_shows(),
+			name: m.fair_lemon_fox(),
 			link: "/tv" as const,
 			requiresAuth: false,
 			hideWhenAuth: false,
 		},
 		{
-			name: m.header_link_search(),
+			name: m.lively_crimson_daisy(),
 			icon: <IconSearch className="h-4 w-4" />,
 			onClick: () => setSearchOpen(true),
 		},
@@ -68,25 +62,25 @@ export default function Header() {
 
 	const allMobileBottomItems = [
 		{
-			name: m.header_link_home(),
-			link: authData ? "/dashboard" : "/",
+			name: m.kind_saffron_penguin(),
+			link: authData ? "/home" : "/",
 			icon: <IconSmartHome className="h-6 w-6" />,
 			requiresAuth: false,
 		},
 		{
-			name: m.header_link_movies(),
+			name: m.proud_green_beaver(),
 			link: "/movies",
 			icon: <IconMovie className="h-6 w-6" />,
 			requiresAuth: false,
 		},
 		{
-			name: m.header_link_tv_shows(),
+			name: m.fair_lemon_fox(),
 			link: "/tv",
 			icon: <IconDeviceTv className="h-6 w-6" />,
 			requiresAuth: false,
 		},
 		{
-			name: m.header_link_search(),
+			name: m.lively_crimson_daisy(),
 			icon: <IconSearch className="h-6 w-6" />,
 			onClick: () => setSearchOpen(true),
 			requiresAuth: false,
@@ -122,7 +116,7 @@ export default function Header() {
 						{authData ? (
 							<ProfileDropdown />
 						) : (
-							<NavbarButton to="/signin">{m.header_btn_sign_in()}</NavbarButton>
+							<NavbarButton to="/signin">{m.vivid_coral_cedar()}</NavbarButton>
 						)}
 					</div>
 				</NavBody>
@@ -136,7 +130,7 @@ export default function Header() {
 							<ProfileDrawer />
 						) : (
 							<NavbarButton to="/signin" size="sm">
-								{m.header_btn_sign_in()}
+								{m.vivid_coral_cedar()}
 							</NavbarButton>
 						)
 					}

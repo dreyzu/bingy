@@ -65,7 +65,7 @@ export function EditProfilePicture({
 			},
 			onError: () => {
 				setPreview(null);
-				toast.error({ title: m.toast_edit_profile_picture_error() });
+				toast.error({ title: m.joyful_jade_garden() });
 			},
 		});
 	};

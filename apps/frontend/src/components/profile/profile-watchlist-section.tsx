@@ -23,7 +23,7 @@ export function ProfileWatchlistSection({
 
 	if (isLoading) {
 		return (
-			<section className="flex flex-col gap-2 min-h-[150px] lg:min-h-[300px]">
+			<section className="flex flex-col gap-2 min-h-37.5 lg:min-h-75">
 				<LoadingCentered />
 			</section>
 		);
@@ -34,15 +34,13 @@ export function ProfileWatchlistSection({
 	return (
 		<section className="flex flex-col gap-2">
 			<div className="flex flex-row justify-between">
-				<h2 className="text-lg font-semibold">
-					{m.profile_watchlist_section_title()}
-				</h2>
+				<h2 className="text-lg font-semibold">{m.shiny_amber_koala()}</h2>
 				<Link
 					to="/@{$username}/watchlist"
 					params={{ username }}
 					className="flex flex-row gap-2 items-center justify-center"
 				>
-					{m.profile_watchlist_section_link()}
+					{m.zesty_saffron_lemur()}
 				</Link>
 			</div>
 
@@ -59,6 +57,7 @@ export function ProfileWatchlistSection({
 				})}
 				{[...Array(emptySlots)].map((_, i) => (
 					<EmptyCardSlot
+						// biome-ignore lint/suspicious/noArrayIndexKey: identical placeholder slots, never reordered
 						key={`fav-empty-${i}`}
 						isOwnProfile={ownProfile}
 						type="watchlist"
