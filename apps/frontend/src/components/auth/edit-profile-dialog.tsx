@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouteContext } from "@tanstack/react-router";
 import { useId } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
+import type { z } from "zod";
 import { EditProfileBanner } from "@/components/auth/edit-profile-banner";
 import { EditProfilePicture } from "@/components/auth/edit-profile-picture";
 import { UpdateProfileForm } from "@/components/auth/forms/update-profile-form";
@@ -46,8 +46,6 @@ export function EditProfileDialog({
 	bannerUrl,
 }: EditProfileDialogProps) {
 	const { authData } = useRouteContext({ from: "__root__" });
-	if (!authData) return null;
-
 	const id = useId();
 	const isMobile = useMediaQuery("(pointer: coarse)");
 	const updateProfile = useUpdateUserProfile();
@@ -72,6 +70,8 @@ export function EditProfileDialog({
 			},
 		});
 	};
+
+	if (!authData) return null;
 
 	const { displayName, image: avatar } = authData.user;
 	const isSubmitting = updateProfile.isPending;

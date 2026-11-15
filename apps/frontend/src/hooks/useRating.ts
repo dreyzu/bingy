@@ -33,7 +33,7 @@ export function useMovieRating(username: string, tmdbId: number) {
 		queryKey: ["ratings", "movie", tmdbId],
 		queryFn: () => getMovieRating(username, tmdbId),
 		staleTime: 1000 * 60 * 10,
-		enabled: !!tmdbId,
+		enabled: !!username && !!tmdbId,
 	});
 }
 
@@ -42,7 +42,7 @@ export function useTvRating(username: string, tmdbId: number) {
 		queryKey: ["ratings", "tv", tmdbId],
 		queryFn: () => getTvRating(username, tmdbId),
 		staleTime: 1000 * 60 * 10,
-		enabled: !!tmdbId,
+		enabled: !!username && !!tmdbId,
 	});
 }
 

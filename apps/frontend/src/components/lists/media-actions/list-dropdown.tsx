@@ -48,8 +48,7 @@ interface ListDropdownProps {
 
 export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
 	const { authData } = useRouteContext({ from: "__root__" });
-	if (!authData) return null;
-	const username = authData.user.name;
+	const username = authData?.user.name ?? "";
 	const isTvShow = !!tvShow;
 	const tmdbId = isTvShow ? tvShow.id : (movie?.id ?? 0);
 
@@ -130,9 +129,7 @@ export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
 					</div>
 					<DropdownMenuSeparator />
 					<DropdownMenuItem onClick={() => setShowLogReviewDialog(true)}>
-						{existingRating
-							? m.peppy_onyx_falcon()
-							: m.icy_mauve_otter()}
+						{existingRating ? m.peppy_onyx_falcon() : m.icy_mauve_otter()}
 					</DropdownMenuItem>
 					<DropdownMenuItem onClick={() => setShowAddToListDialog(true)}>
 						{m.agile_saffron_daisy()}

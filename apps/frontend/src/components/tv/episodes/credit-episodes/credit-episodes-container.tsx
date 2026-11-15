@@ -17,33 +17,16 @@ export const CreditEpisodesContainer = ({
 }: CreditEpisodesContainerProps) => {
 	const localeRegion = useAtomValue(localeRegionAtom);
 
-	// movies should not be accessible from there
-	if (creditDetails.media.media_type !== "tv") {
-		return (
-			<ResourceNotFound
-				title={m.golden_peach_basil()}
-				description={m.eager_lavender_rocket()}
-			/>
-		);
-	}
-
-	const { job } = creditDetails;
-	const {
-		episodes,
-		seasons,
-		character,
-		id: tvId,
-		name,
-		poster_path,
-	} = creditDetails.media;
-	const { person } = creditDetails;
+	const tvMedia =
+		creditDetails.media.media_type === "tv" ? creditDetails.media : null;
+	const tvId = tvMedia?.id ?? 0;
 
 	// if seasons.season_number is equal to episodes.season_number -> we dont fetch seasons since we already have the data
 	const episodeSeasonNumbers = new Set(
-		(episodes ?? []).map((ep) => ep.season_number),
+		(tvMedia?.episodes ?? []).map((ep) => ep.season_number),
 	);
 	const seasonsToFetch =
-		seasons?.filter(
+		tvMedia?.seasons?.filter(
 			(season) => !episodeSeasonNumbers.has(season.season_number),
 		) ?? [];
 
@@ -60,6 +43,19 @@ export const CreditEpisodesContainer = ({
 			},
 		})),
 	});
+
+	// movies should not be accessible from there
+	if (!tvMedia) {
+		return (
+			<ResourceNotFound
+				title={m.golden_peach_basil()}
+				description={m.eager_lavender_rocket()}
+			/>
+		);
+	}
+
+	const { job, person } = creditDetails;
+	const { episodes, character, name, poster_path } = tvMedia;
 
 	if (seasonQueries.some((query) => query.isLoading)) {
 		return <LoadingCentered />;

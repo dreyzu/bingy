@@ -6,5 +6,6 @@ export function useCollection(id: number, params?: CollectionParams) {
 		queryKey: ["collection", id, params],
 		queryFn: () => fetchCollection(id, params),
 		staleTime: 1000 * 60 * 50,
+		enabled: !!id,
 	});
 }

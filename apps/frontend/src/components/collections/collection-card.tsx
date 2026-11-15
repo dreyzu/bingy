@@ -19,13 +19,11 @@ interface CollectionCardProps {
 
 export function CollectionCard({ collection }: CollectionCardProps) {
 	const localeRegion = useAtomValue(localeRegionAtom);
-	if (!collection) return null;
-
-	const { data: collectionData } = useCollection(collection.id, {
+	const { data: collectionData } = useCollection(collection?.id ?? 0, {
 		language: localeRegion,
 	});
 
-	if (!collectionData?.parts?.length) return null;
+	if (!collection || !collectionData?.parts?.length) return null;
 
 	const backgroundImage = collection.backdrop_path
 		? `https://image.tmdb.org/t/p/original${collection.backdrop_path}`

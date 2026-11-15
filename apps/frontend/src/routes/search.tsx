@@ -34,7 +34,7 @@ export const Route = createFileRoute("/search")({
 			return { q: undefined };
 		}
 
-		await context.queryClient.ensureQueryData(
+		await context.queryClient.query(
 			searchQueryOptions(search.q, search.language, search.page),
 		);
 
@@ -63,10 +63,6 @@ function SearchRoute() {
 	const router = useRouter();
 	const { q, language, page } = Route.useSearch();
 
-	const query = q
-		? useSuspenseQuery(searchQueryOptions(q, language, page))
-		: null;
-
 	return (
 		<div className="flex flex-col gap-4 w-full">
 			<Button
@@ -74,26 +70,42 @@ function SearchRoute() {
 				className="mb-4 max-w-20"
 				variant="outline"
 			>
-				<IconArrowLeft className="h-4 w-4" /> Back
+				<IconArrowLeft className="h-4 w-4" />
 			</Button>
 
 			<SearchForm initialQuery={q} currentPage={page} />
 
-			{q && query ? (
-				<>
-					<SearchResultsContainer results={query.data.results} query={q} />
-					<SearchPagination
-						currentPage={page}
-						totalPages={query.data.total_pages}
-						query={q}
-						language={language}
-					/>
-				</>
+			{q ? (
+				<SearchResults q={q} language={language} page={page} />
 			) : (
 				<div className="text-center text-muted-foreground py-8">
 					{m.vibrant_sepia_yarn()}
 				</div>
 			)}
 		</div>
+	);
+}
+
+function SearchResults({
+	q,
+	language,
+	page,
+}: {
+	q: string;
+	language: string;
+	page: number;
+}) {
+	const query = useSuspenseQuery(searchQueryOptions(q, language, page));
+
+	return (
+		<>
+			<SearchResultsContainer results={query.data.results} query={q} />
+			<SearchPagination
+				currentPage={page}
+				totalPages={query.data.total_pages}
+				query={q}
+				language={language}
+			/>
+		</>
 	);
 }

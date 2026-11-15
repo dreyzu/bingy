@@ -28,8 +28,6 @@ import { updateEmailSchema } from "@/schemas/update-email-schema";
 
 export function UpdateEmailForm() {
 	const { authData } = useRouteContext({ from: "__root__" });
-	if (!authData) return null;
-
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [open, setOpen] = useState(false);
 	const id = useId();
@@ -40,6 +38,8 @@ export function UpdateEmailForm() {
 			email: "",
 		},
 	});
+
+	if (!authData) return null;
 
 	const user = authData.user;
 
@@ -69,7 +69,7 @@ export function UpdateEmailForm() {
 					toast.success({ title: m.silent_indigo_prairie() });
 				}
 			}
-		} catch (err) {
+		} catch {
 			toast.error({ title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
@@ -109,9 +109,7 @@ export function UpdateEmailForm() {
 					<DialogHeader>
 						<DialogTitle>{m.chilly_lavender_cactus()}</DialogTitle>
 						<DialogDescription>
-							{user.emailVerified
-								? m.grand_navy_flute()
-								: m.spry_jade_fern()}
+							{user.emailVerified ? m.grand_navy_flute() : m.spry_jade_fern()}
 						</DialogDescription>
 					</DialogHeader>
 					<form onSubmit={form.handleSubmit(onFormSubmit)}>
