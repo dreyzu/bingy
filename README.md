@@ -68,11 +68,11 @@ docker-compose.yml   Local PostgreSQL and Redis
 
 Run from the repository root:
 
-| Command          | Description                                                 |
-| ---------------- | ----------------------------------------------------------- |
-| `bun dev`        | Start the database services, API, frontend, and Drizzle Studio |
-| `bun db:start`   | Start only the PostgreSQL and Redis containers              |
-| `bun typecheck`  | Type-check all packages with `tsc --build`                  |
+| Command         | Description                                                    |
+| --------------- | -------------------------------------------------------------- |
+| `bun dev`       | Start the database services, API, frontend, and Drizzle Studio |
+| `bun db:start`  | Start only the PostgreSQL and Redis containers                 |
+| `bun typecheck` | Type-check all packages with `tsc --build`                     |
 
 ## Project status
 
