@@ -23,7 +23,7 @@ export type NextTvEpisode = Pick<
  * @param seasons
  * @returns
  */
-export function getValidSeason(seasons: Season[]): Season[] {
+export function getValidSeason<T extends Season>(seasons: T[]): T[] {
 	return seasons
 		.filter((s) => s.season_number > 0)
 		.sort((a, b) => a.season_number - b.season_number);
@@ -101,6 +101,45 @@ export async function getAbsoluteFromSeasonEpisode(
 		episodeNumber,
 		tvDetails.seasons,
 	);
+}
+
+// absolute number of an episode, counting every episode of the regular seasons before it
+export function getAbsoluteEpisodeNumber(
+	seasons: Season[],
+	seasonNumber: number,
+	episodeNumber: number,
+): number {
+	return (
+		getValidSeason(seasons)
+			.filter((season) => season.season_number < seasonNumber)
+			.reduce((total, season) => total + season.episode_count, 0) +
+		episodeNumber
+	);
+}
+
+// latest aired episode of a show, ignoring specials - null when nothing has aired yet
+export function getLastAiredEpisode(
+	tvDetails: Pick<Schemas.TvDetails, "last_episode_to_air" | "seasons">,
+): { season: number; episode: number } | null {
+	const lastEpisode = tvDetails.last_episode_to_air;
+	if (lastEpisode && lastEpisode.season_number > 0) {
+		return {
+			season: lastEpisode.season_number,
+			episode: lastEpisode.episode_number,
+		};
+	}
+
+	// the last aired episode is a special: use the end of the last regular season that started airing
+	const lastSeason = getValidSeason(tvDetails.seasons)
+		.filter(
+			(season) =>
+				season.episode_count > 0 &&
+				isEpisodeAired(season.air_date, new Date(), 0),
+		)
+		.at(-1);
+	return lastSeason
+		? { season: lastSeason.season_number, episode: lastSeason.episode_count }
+		: null;
 }
 
 export function getSeasonsAfterEpisode(

@@ -14,7 +14,9 @@ import { logger } from "../../lib/logger";
 import { TmdbError, tmdbClient } from "../../lib/tmdb/tmdb-client";
 import { getOrCreateMedia } from "../../web/utils/create-update-media";
 import {
+	getAbsoluteEpisodeNumber,
 	getAbsoluteFromSeasonEpisode,
+	getLastAiredEpisode,
 	getNextEpisodesForProgress,
 	getSeasonsAfterEpisode,
 } from "../../web/utils/tv-helper";
@@ -325,6 +327,8 @@ const findOwnTvProgress = async (userId: string, tmdbId: number) => {
 			id: tvShowProgress.id,
 			status: tvShowProgress.status,
 			trackingMode: tvShowProgress.trackingMode,
+			lastWatchedSeason: tvShowProgress.lastWatchedSeason,
+			lastWatchedEpisode: tvShowProgress.lastWatchedEpisode,
 		})
 		.from(tvShowProgress)
 		.innerJoin(media, eq(tvShowProgress.mediaId, media.id))
@@ -357,9 +361,43 @@ userProgressRoutes.patch(
 			const entry = await findOwnTvProgress(user.id, tmdbId);
 			if (!entry) return c.json({ error: "PROGRESS_NOT_FOUND" }, 404);
 
+			// completing a show moves its progress to the latest aired episode
+			let completedProgress: {
+				lastWatchedSeason: number;
+				lastWatchedEpisode: number;
+				absoluteEpisode: number | null;
+			} | null = null;
+			if (status === "completed" && entry.status !== "completed") {
+				const language = c.req.query("language") || "en-US";
+				const tvDetails = await tmdbClient.get("/tv/{series_id}", {
+					query: { language },
+					path: { series_id: tmdbId },
+				});
+				const lastAired = getLastAiredEpisode(tvDetails);
+				const isAhead =
+					lastAired &&
+					(lastAired.season > entry.lastWatchedSeason ||
+						(lastAired.season === entry.lastWatchedSeason &&
+							lastAired.episode > entry.lastWatchedEpisode));
+				if (lastAired && isAhead) {
+					completedProgress = {
+						lastWatchedSeason: lastAired.season,
+						lastWatchedEpisode: lastAired.episode,
+						absoluteEpisode:
+							entry.trackingMode === "absolute"
+								? getAbsoluteEpisodeNumber(
+										tvDetails.seasons,
+										lastAired.season,
+										lastAired.episode,
+									)
+								: null,
+					};
+				}
+			}
+
 			const [progress] = await db
 				.update(tvShowProgress)
-				.set({ status, updatedAt: new Date() })
+				.set({ ...completedProgress, status, updatedAt: new Date() })
 				.where(eq(tvShowProgress.id, entry.id))
 				.returning();
 
