@@ -78,6 +78,13 @@
       "when": 1794778178671,
       "tag": "0010_reflective_chameleon",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1794780987415,
+      "tag": "0011_oval_professor_monster",
+      "breakpoints": true
     }
   ]
 }

@@ -100,6 +100,8 @@ export const tvShowProgress = pgTable(
 		lastWatchedSeason: integer("last_watched_season").notNull(),
 		lastWatchedEpisode: integer("last_watched_episode").notNull(),
 		absoluteEpisode: integer("absolute_episode"),
+		// when the last watched episode (lastWatchedSeason/lastWatchedEpisode) was watched
+		lastWatchedAt: timestamp("last_watched_at"),
 		trackingMode: text("tracking_mode").notNull().default("season"),
 		status: varchar("status", { length: 20 })
 			.notNull()

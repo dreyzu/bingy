@@ -38,6 +38,8 @@ export type MarkEpisodeWatchedPayload = {
 	absoluteEpisode?: number | null;
 	trackingMode?: "season" | "absolute";
 	status?: TvProgressStatus;
+	// ISO date the episode was watched, defaults to now
+	watchedAt?: string;
 };
 
 export const markTvEpisodeWatched = async (
@@ -90,6 +92,7 @@ export type WatchProgress = Pretty<{
 	lastWatchedSeason: number;
 	lastWatchedEpisode: number;
 	absoluteEpisode: number | null;
+	lastWatchedAt: Date | null;
 	trackingMode: "season" | "absolute";
 	status: string;
 	rewatchCount: number;
