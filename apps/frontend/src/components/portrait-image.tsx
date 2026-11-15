@@ -45,6 +45,18 @@ function PortraitImageEmptyState({
 	);
 }
 
+function FullImage({
+	src,
+	alt,
+	className,
+}: {
+	src: string | null;
+	alt: string;
+	className: string;
+}) {
+	return src ? <img src={src} alt={alt} className={className} /> : null;
+}
+
 export function PortraitImage({
 	imagePath,
 	alt,
@@ -62,12 +74,6 @@ export function PortraitImage({
 		"rounded-lg shadow-lg ring-accent ring-1 overflow-hidden flex items-center justify-center",
 		className,
 	);
-
-	function FullImage({ className }: { className: string }) {
-		return fullImageUrl ? (
-			<img src={fullImageUrl} alt={alt} className={className} />
-		) : null;
-	}
 
 	return (
 		<>
@@ -90,7 +96,11 @@ export function PortraitImage({
 					<DrawerContent className="max-h-[96vh]">
 						<DrawerBody>
 							<div className="flex items-center justify-center p-4">
-								<FullImage className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-lg" />
+								<FullImage
+									src={fullImageUrl}
+									alt={alt}
+									className="max-w-full max-h-[70vh] w-auto h-auto object-contain rounded-lg"
+								/>
 							</div>
 						</DrawerBody>
 					</DrawerContent>
@@ -101,7 +111,11 @@ export function PortraitImage({
 						showCloseButton={false}
 						className="p-0 border-0 bg-transparent ring-0 shadow-none w-auto max-w-fit"
 					>
-						<FullImage className="max-w-[85vw] max-h-[75vh] w-auto h-auto object-contain rounded-lg" />
+						<FullImage
+							src={fullImageUrl}
+							alt={alt}
+							className="max-w-[85vw] max-h-[75vh] w-auto h-auto object-contain rounded-lg"
+						/>
 					</DialogContent>
 				</Dialog>
 			)}
