@@ -142,6 +142,17 @@ export function getLastAiredEpisode(
 		: null;
 }
 
+// whether season/episode comes after the reference season/episode
+export function isEpisodeAfter(
+	episode: { season: number; episode: number },
+	reference: { season: number; episode: number },
+): boolean {
+	return (
+		episode.season > reference.season ||
+		(episode.season === reference.season && episode.episode > reference.episode)
+	);
+}
+
 export function getSeasonsAfterEpisode(
 	seasons: Season[],
 	lastWatchedSeason: number,
