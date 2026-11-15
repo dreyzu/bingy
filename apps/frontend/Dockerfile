@@ -3,6 +3,7 @@ FROM oven/bun:latest AS builder
 WORKDIR /app
 
 COPY package.json bun.lock ./
+COPY tsconfig.base.json ./
 
 COPY apps/frontend/package.json ./apps/frontend/
 COPY apps/shared/package.json ./apps/shared/
