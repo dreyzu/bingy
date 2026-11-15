@@ -14,6 +14,8 @@ import {
 	getLastAiredEpisode,
 	getNextEpisodesForProgress,
 	getSeasonsAfterEpisode,
+	isEpisodeAfter,
+	isEpisodeAired,
 } from "../../web/utils/tv-helper";
 
 type Variables = {
@@ -111,13 +113,20 @@ userProgressRoutes.get(
 							);
 
 							// show has ended and nothing is left to watch: it is completed
+							// a completed show with a new episode already out goes back to watching
+							// (the next episodes include ones airing soon, which must not reopen it)
 							let status = item.progress.status;
-							if (
+							const nextEpisode = nextEpisodes[0];
+							const shouldComplete =
 								status === "watching" &&
-								nextEpisodes.length === 0 &&
-								isEndedShow(tvDetails.status)
-							) {
-								status = "completed";
+								!nextEpisode &&
+								isEndedShow(tvDetails.status);
+							const shouldReopen =
+								status === "completed" &&
+								nextEpisode !== undefined &&
+								isEpisodeAired(nextEpisode.air_date, new Date(), 0);
+							if (shouldComplete || shouldReopen) {
+								status = shouldComplete ? "completed" : "watching";
 								await db
 									.update(tvShowProgress)
 									.set({ status, updatedAt: new Date() })
@@ -204,6 +213,30 @@ userProgressRoutes.get("/:username/tv/:tmdbId", async (c) => {
 	}
 });
 
+// find the logged in user's progress entry for a tv show
+const findOwnTvProgress = async (userId: string, tmdbId: number) => {
+	const [row] = await db
+		.select({
+			id: tvShowProgress.id,
+			status: tvShowProgress.status,
+			trackingMode: tvShowProgress.trackingMode,
+			lastWatchedSeason: tvShowProgress.lastWatchedSeason,
+			lastWatchedEpisode: tvShowProgress.lastWatchedEpisode,
+		})
+		.from(tvShowProgress)
+		.innerJoin(media, eq(tvShowProgress.mediaId, media.id))
+		.where(
+			and(
+				eq(tvShowProgress.userId, userId),
+				eq(media.mediaType, "tv"),
+				eq(media.tmdbId, tmdbId),
+			),
+		)
+		.limit(1);
+
+	return row ?? null;
+};
+
 // create or update tv show progress - seasonNumber and episodeNumber are the last episode the user watched
 // user must be logged in
 userProgressRoutes.post(
@@ -252,7 +285,8 @@ userProgressRoutes.post(
 					: null;
 
 			// marking the final episode of an ended show completes it
-			let autoStatus: "completed" | undefined;
+			// marking a newer episode of a completed show puts it back to watching
+			let autoStatus: "completed" | "watching" | undefined;
 			if (!data.status) {
 				try {
 					const tvDetails = await tmdbClient.get("/tv/{series_id}", {
@@ -271,6 +305,22 @@ userProgressRoutes.post(
 					}
 				} catch (error) {
 					logger.error(error);
+				}
+
+				if (!autoStatus) {
+					const existing = await findOwnTvProgress(user.id, data.tmdbId);
+					if (
+						existing?.status === "completed" &&
+						isEpisodeAfter(
+							{ season: seasonNumber, episode: episodeNumber },
+							{
+								season: existing.lastWatchedSeason,
+								episode: existing.lastWatchedEpisode,
+							},
+						)
+					) {
+						autoStatus = "watching";
+					}
 				}
 			}
 
@@ -321,30 +371,6 @@ userProgressRoutes.post(
 	},
 );
 
-// find the logged in user's progress entry for a tv show
-const findOwnTvProgress = async (userId: string, tmdbId: number) => {
-	const [row] = await db
-		.select({
-			id: tvShowProgress.id,
-			status: tvShowProgress.status,
-			trackingMode: tvShowProgress.trackingMode,
-			lastWatchedSeason: tvShowProgress.lastWatchedSeason,
-			lastWatchedEpisode: tvShowProgress.lastWatchedEpisode,
-		})
-		.from(tvShowProgress)
-		.innerJoin(media, eq(tvShowProgress.mediaId, media.id))
-		.where(
-			and(
-				eq(tvShowProgress.userId, userId),
-				eq(media.mediaType, "tv"),
-				eq(media.tmdbId, tmdbId),
-			),
-		)
-		.limit(1);
-
-	return row ?? null;
-};
-
 // change the status of a tv show progress
 // user must be logged in
 userProgressRoutes.patch(
@@ -376,12 +402,13 @@ userProgressRoutes.patch(
 					path: { series_id: tmdbId },
 				});
 				const lastAired = getLastAiredEpisode(tvDetails);
-				const isAhead =
+				if (
 					lastAired &&
-					(lastAired.season > entry.lastWatchedSeason ||
-						(lastAired.season === entry.lastWatchedSeason &&
-							lastAired.episode > entry.lastWatchedEpisode));
-				if (lastAired && isAhead) {
+					isEpisodeAfter(lastAired, {
+						season: entry.lastWatchedSeason,
+						episode: entry.lastWatchedEpisode,
+					})
+				) {
 					completedProgress = {
 						lastWatchedSeason: lastAired.season,
 						lastWatchedEpisode: lastAired.episode,
