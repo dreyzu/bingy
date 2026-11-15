@@ -48,11 +48,11 @@ function MoviesPage() {
 
 	return (
 		<div className="flex flex-col w-full gap-4">
-			<NowPlayingMovies
-				title={m.mighty_rose_heron()}
-				movies={nowPlayingMovies}
-				isLoading={nowPlayingLoading}
-				isError={nowPlayingError}
+			<PopularMovies
+				title={m.balmy_mint_acorn()}
+				movies={popularMovies}
+				isLoading={popularLoading}
+				isError={popularError}
 			/>
 			<UpcomingMovies
 				title={m.lucky_amber_nectar()}
@@ -60,11 +60,11 @@ function MoviesPage() {
 				isLoading={upcomingLoading}
 				isError={upcomingError}
 			/>
-			<PopularMovies
-				title={m.balmy_mint_acorn()}
-				movies={popularMovies}
-				isLoading={popularLoading}
-				isError={popularError}
+			<NowPlayingMovies
+				title={m.mighty_rose_heron()}
+				movies={nowPlayingMovies}
+				isLoading={nowPlayingLoading}
+				isError={nowPlayingError}
 			/>
 		</div>
 	);
