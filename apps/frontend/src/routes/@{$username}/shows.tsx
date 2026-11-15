@@ -2,26 +2,27 @@ import { createFileRoute, useRouteContext } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { z } from "zod";
-import type { InProgressFilter } from "@/api/in-progress";
-import { InProgressContainer } from "@/components/lists/in-progress/in-progress-container";
+import type { TrackedShowFilter } from "@/api/tracked-shows";
+import { TrackedShowsContainer } from "@/components/lists/tracked-shows/tracked-shows-container";
 import { GlobalLoadingIndicator } from "@/components/loading/loading-global";
-import { useInProgress } from "@/hooks/useInProgress";
+import { useTrackedShows } from "@/hooks/useTrackedShows";
 import { localeRegionAtom } from "@/lib/atoms/region";
+import { m } from "@/paraglide/messages";
 import { isOwnProfile } from "@/utils/utils";
 
-const inProgressSearchSchema = z.object({
+const showsSearchSchema = z.object({
 	filter: z
 		.enum(["all", "watching", "on_hold", "dropped", "completed"])
 		.optional()
 		.catch(undefined),
 });
 
-export const Route = createFileRoute("/@{$username}/in-progress")({
-	validateSearch: inProgressSearchSchema,
-	component: InProgressPage,
+export const Route = createFileRoute("/@{$username}/shows")({
+	validateSearch: showsSearchSchema,
+	component: ShowsPage,
 });
 
-function InProgressPage() {
+function ShowsPage() {
 	const { username } = Route.useParams();
 	const { filter = "watching" } = Route.useSearch();
 	const navigate = Route.useNavigate();
@@ -30,14 +31,14 @@ function InProgressPage() {
 	const localeRegion = useAtomValue(localeRegionAtom);
 	const [page, setPage] = useState(1);
 
-	const handleFilterChange = (newFilter: InProgressFilter) => {
+	const handleFilterChange = (newFilter: TrackedShowFilter) => {
 		navigate({
 			search: { filter: newFilter === "watching" ? undefined : newFilter },
 		});
 		setPage(1);
 	};
 
-	const { data, isLoading, isError } = useInProgress(
+	const { data, isLoading, isError } = useTrackedShows(
 		username,
 		page,
 		localeRegion,
@@ -50,11 +51,11 @@ function InProgressPage() {
 	}
 
 	if (isError) {
-		return <p>Failed to load in-progress shows.</p>;
+		return <p>{m.keen_teal_aspen()}</p>;
 	}
 
 	return (
-		<InProgressContainer
+		<TrackedShowsContainer
 			username={username}
 			isOwnProfile={isOwnProfileFlag}
 			items={data?.data}

@@ -3,13 +3,13 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { useUserTvProgress } from "@/hooks/useInProgress";
 import {
 	useMovieRating,
 	useRateMovie,
 	useRateTvShow,
 	useTvRating,
 } from "@/hooks/useRating";
+import { useUserTvProgress } from "@/hooks/useTrackedShows";
 import { useTv } from "@/hooks/useTv";
 import { m } from "@/paraglide/messages";
 import { getTvShowProgress } from "@/utils/season-helper";
@@ -18,8 +18,8 @@ import { WatchlistToggleButton } from "../watchlist/watchlist-toggle-button";
 import { AddToListButton } from "./action-bar/add-to-list-button";
 import { LogReviewButton } from "./action-bar/log-review-button";
 import { ShareButton } from "./action-bar/share-button";
-import { AddToCurrentlyWatchingDialog } from "./add-to-currently-watching-dialog";
 import { AddToListDialog } from "./add-to-list-dialog";
+import { AddToTrackedShowsDialog } from "./add-to-tracked-shows-dialog";
 import { FavoriteToggleButton } from "./favorite-toggle-button";
 import { LogReviewDialog } from "./log-review-dialog";
 import { StarRating } from "./star-rating";
@@ -98,7 +98,7 @@ export const MediaActionMenu = ({
 
 	const [showAddToListDialog, setShowAddToListDialog] = useState(false);
 	const [showLogReviewDialog, setShowLogReviewDialog] = useState(false);
-	const [showCurrentlyWatchingDialog, setShowCurrentlyWatchingDialog] =
+	const [showAddToTrackedShowsDialog, setShowAddToTrackedShowsDialog] =
 		useState(false);
 
 	const existingRating = isTvShow ? tvRating : movieRating;
@@ -140,7 +140,7 @@ export const MediaActionMenu = ({
 					{tvShow ? (
 						<Button
 							variant="ghost"
-							onClick={() => setShowCurrentlyWatchingDialog(true)}
+							onClick={() => setShowAddToTrackedShowsDialog(true)}
 							className="flex gap-2"
 						>
 							<span>
@@ -171,9 +171,9 @@ export const MediaActionMenu = ({
 				existingData={existingRating}
 			/>
 			{tvShow ? (
-				<AddToCurrentlyWatchingDialog
-					open={showCurrentlyWatchingDialog}
-					onOpenChange={setShowCurrentlyWatchingDialog}
+				<AddToTrackedShowsDialog
+					open={showAddToTrackedShowsDialog}
+					onOpenChange={setShowAddToTrackedShowsDialog}
 					tvShow={tvShow}
 					username={username}
 					existingProgress={userTvProgress ?? null}

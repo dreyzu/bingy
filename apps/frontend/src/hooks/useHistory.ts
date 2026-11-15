@@ -70,7 +70,7 @@ export function useAddTvToHistory(username: string) {
 				queryKey: ["user-profile", username],
 			});
 			queryClient.invalidateQueries({
-				queryKey: ["in-progress", username],
+				queryKey: ["tracked-shows", username],
 			});
 
 			toast.success({
@@ -144,7 +144,7 @@ export function useRemoveTvHistory(username: string) {
 				queryKey: ["user-profile"],
 			});
 			queryClient.invalidateQueries({
-				queryKey: ["in-progress", username],
+				queryKey: ["tracked-shows", username],
 			});
 
 			toast.success({ title: m.happy_onyx_hazel() });

@@ -1,13 +1,16 @@
+import { IconRepeat } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import type { InProgressItem } from "@/api/in-progress";
-import { InProgressMediaCardActions } from "@/components/lists/in-progress/in-progress-media-card-actions";
+import type { TrackedShow } from "@/api/tracked-shows";
+import { TrackedShowsMediaCardActions } from "@/components/lists/tracked-shows/tracked-shows-media-card-actions";
+import { getStatusLabel } from "@/components/lists/tracked-shows/tracked-shows-status";
 import { Badge } from "@/components/ui/badge";
 import { m } from "@/paraglide/messages";
 import { getTmdbImageUrl } from "@/utils/utils";
 
-interface InProgressMediaCardProps {
+interface TrackedShowsMediaCardProps {
 	username: string;
-	item: InProgressItem;
+	isOwnProfile: boolean;
+	item: TrackedShow;
 }
 
 const statusBadgeClassName: Record<string, string> = {
@@ -17,25 +20,11 @@ const statusBadgeClassName: Record<string, string> = {
 	completed: "bg-green-500/15 text-green-600 dark:text-green-400",
 };
 
-const getStatusLabel = (status: string) => {
-	switch (status) {
-		case "watching":
-			return m.smart_wine_falcon();
-		case "on_hold":
-			return m.polite_silver_biscuit();
-		case "dropped":
-			return m.alert_rust_walrus();
-		case "completed":
-			return m.candid_mauve_wolf();
-		default:
-			return null;
-	}
-};
-
-export const InProgressMediaCard = ({
+export const TrackedShowsMediaCard = ({
 	username,
+	isOwnProfile,
 	item,
-}: InProgressMediaCardProps) => {
+}: TrackedShowsMediaCardProps) => {
 	const nextEpisode = item.nextEpisodes[0] ?? null;
 	const { lastWatchedSeason, lastWatchedEpisode } = item.progress;
 	const lastSeen =
@@ -43,6 +32,7 @@ export const InProgressMediaCard = ({
 			? { season: lastWatchedSeason, episode: lastWatchedEpisode }
 			: null;
 	const statusLabel = getStatusLabel(item.progress.status);
+	const { rewatchCount } = item.progress;
 	const canMarkWatched = item.progress.status === "watching";
 
 	const imageUrl = nextEpisode
@@ -90,13 +80,26 @@ export const InProgressMediaCard = ({
 						)}
 					</div>
 				</div>
-				{statusLabel ? (
-					<Badge
-						variant="outline"
-						className={`mt-auto self-end border-transparent ${statusBadgeClassName[item.progress.status] ?? ""}`}
-					>
-						{statusLabel}
-					</Badge>
+				{statusLabel || rewatchCount > 0 ? (
+					<div className="mt-auto flex flex-wrap justify-end gap-1">
+						{rewatchCount > 0 ? (
+							<Badge
+								variant="outline"
+								className="gap-1 border-transparent bg-sky-500/15 text-sky-600 dark:text-sky-400"
+							>
+								<IconRepeat className="size-3" />
+								{m.gallant_coral_oasis({ count: rewatchCount })}
+							</Badge>
+						) : null}
+						{statusLabel ? (
+							<Badge
+								variant="outline"
+								className={`border-transparent ${statusBadgeClassName[item.progress.status] ?? ""}`}
+							>
+								{statusLabel}
+							</Badge>
+						) : null}
+					</div>
 				) : null}
 			</div>
 		</>
@@ -128,11 +131,11 @@ export const InProgressMediaCard = ({
 					{content}
 				</Link>
 			)}
-			{nextEpisode && canMarkWatched ? (
-				<InProgressMediaCardActions
+			{isOwnProfile ? (
+				<TrackedShowsMediaCardActions
 					username={username}
 					item={item}
-					nextEpisode={nextEpisode}
+					nextEpisode={canMarkWatched ? nextEpisode : null}
 				/>
 			) : null}
 		</div>

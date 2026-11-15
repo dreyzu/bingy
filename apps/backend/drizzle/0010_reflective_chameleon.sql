@@ -1,0 +1,1 @@
+ALTER TABLE "tv_show_progress" ADD COLUMN "rewatch_count" integer DEFAULT 0 NOT NULL;

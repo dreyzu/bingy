@@ -3,16 +3,25 @@ import { apiFetch } from "./fetcher";
 
 export type TvProgressStatus = "watching" | "on_hold" | "dropped";
 
-export type InProgressFilter = "all" | TvProgressStatus | "completed";
+export type TrackedShowStatus = TvProgressStatus | "completed";
 
-export const getInProgress = async (
+export const TRACKED_SHOW_STATUSES: TrackedShowStatus[] = [
+	"watching",
+	"on_hold",
+	"dropped",
+	"completed",
+];
+
+export type TrackedShowFilter = "all" | TrackedShowStatus;
+
+export const getTrackedShows = async (
 	username: string,
 	page = 1,
 	language = "en-US",
 	limit = 24,
-	status: InProgressFilter = "all",
+	status: TrackedShowFilter = "all",
 ) => {
-	const res = await apiFetch<GetInProgressResponse>(
+	const res = await apiFetch<GetTrackedShowsResponse>(
 		`/progress/${username}/tv`,
 		{
 			method: "GET",
@@ -41,6 +50,33 @@ export const markTvEpisodeWatched = async (
 	return res;
 };
 
+export const updateTvProgressStatus = async (
+	tmdbId: number,
+	status: TrackedShowStatus,
+) => {
+	const res = await apiFetch<WatchProgress>(`/progress/tv/${tmdbId}`, {
+		method: "PATCH",
+		body: { status },
+	});
+	return res;
+};
+
+// restarts a completed show from the first episode, incrementing its rewatch count
+export const rewatchTvShow = async (tmdbId: number) => {
+	const res = await apiFetch<WatchProgress>(`/progress/tv/${tmdbId}/rewatch`, {
+		method: "POST",
+	});
+	return res;
+};
+
+// deletes the show progress entirely, removing it from the tracked shows list
+export const removeTvProgress = async (tmdbId: number) => {
+	const res = await apiFetch(`/progress/tv/${tmdbId}`, {
+		method: "DELETE",
+	});
+	return res;
+};
+
 // returns null when the user has no progress for this show
 export const getUserTvProgress = async (username: string, tmdbId: number) => {
 	const res = await apiFetch<WatchProgress | null>(
@@ -56,6 +92,7 @@ export type WatchProgress = Pretty<{
 	absoluteEpisode: number | null;
 	trackingMode: "season" | "absolute";
 	status: string;
+	rewatchCount: number;
 	createdAt: Date;
 	updatedAt: Date;
 }>;
@@ -71,7 +108,7 @@ export type NextEpisode = Pretty<{
 	still_path: string | null;
 }>;
 
-export type InProgressItem = Pretty<{
+export type TrackedShow = Pretty<{
 	id: number;
 	name: string;
 	original_name: string;
@@ -89,8 +126,8 @@ export type InProgressItem = Pretty<{
 	nextEpisodes: NextEpisode[];
 }>;
 
-export type GetInProgressResponse = Pretty<{
-	data: InProgressItem[];
+export type GetTrackedShowsResponse = Pretty<{
+	data: TrackedShow[];
 	page: number;
 	total_pages: number;
 	total_results: number;

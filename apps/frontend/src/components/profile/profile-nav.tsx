@@ -79,7 +79,7 @@ export function ProfileNav({ username }: ProfileNavProps) {
 				{m.lucky_ruby_prairie()}
 			</Link>
 			<Link
-				to="/@{$username}/in-progress"
+				to="/@{$username}/shows"
 				params={{ username }}
 				className="pb-3 text-muted-foreground hover:text-foreground transition-colors whitespace-nowrap"
 				activeProps={{

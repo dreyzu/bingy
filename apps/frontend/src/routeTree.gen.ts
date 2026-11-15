@@ -21,7 +21,7 @@ import { Route as SignupRouteImport } from './routes/signup'
 import { Route as AtChar123usernameChar125IndexRouteImport } from './routes/@{$username}/index'
 import { Route as AtChar123usernameChar125FavoritesRouteImport } from './routes/@{$username}/favorites'
 import { Route as AtChar123usernameChar125HistoryRouteImport } from './routes/@{$username}/history'
-import { Route as AtChar123usernameChar125InProgressRouteImport } from './routes/@{$username}/in-progress'
+import { Route as AtChar123usernameChar125ShowsRouteImport } from './routes/@{$username}/shows'
 import { Route as AtChar123usernameChar125WatchlistRouteImport } from './routes/@{$username}/watchlist'
 import { Route as AuthHomeRouteImport } from './routes/_auth/home'
 import { Route as AuthSettingsRouteImport } from './routes/_auth/settings'
@@ -110,10 +110,10 @@ const AtChar123usernameChar125HistoryRoute =
     path: '/history',
     getParentRoute: () => AtChar123usernameChar125RouteRoute,
   } as any)
-const AtChar123usernameChar125InProgressRoute =
-  AtChar123usernameChar125InProgressRouteImport.update({
-    id: '/in-progress',
-    path: '/in-progress',
+const AtChar123usernameChar125ShowsRoute =
+  AtChar123usernameChar125ShowsRouteImport.update({
+    id: '/shows',
+    path: '/shows',
     getParentRoute: () => AtChar123usernameChar125RouteRoute,
   } as any)
 const AtChar123usernameChar125WatchlistRoute =
@@ -257,7 +257,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/@{$username}/favorites': typeof AtChar123usernameChar125FavoritesRoute
   '/@{$username}/history': typeof AtChar123usernameChar125HistoryRoute
-  '/@{$username}/in-progress': typeof AtChar123usernameChar125InProgressRoute
+  '/@{$username}/shows': typeof AtChar123usernameChar125ShowsRoute
   '/@{$username}/watchlist': typeof AtChar123usernameChar125WatchlistRoute
   '/home': typeof AuthHomeRoute
   '/settings': typeof AuthSettingsRoute
@@ -294,7 +294,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/@{$username}/favorites': typeof AtChar123usernameChar125FavoritesRoute
   '/@{$username}/history': typeof AtChar123usernameChar125HistoryRoute
-  '/@{$username}/in-progress': typeof AtChar123usernameChar125InProgressRoute
+  '/@{$username}/shows': typeof AtChar123usernameChar125ShowsRoute
   '/@{$username}/watchlist': typeof AtChar123usernameChar125WatchlistRoute
   '/home': typeof AuthHomeRoute
   '/settings': typeof AuthSettingsRoute
@@ -334,7 +334,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/@{$username}/favorites': typeof AtChar123usernameChar125FavoritesRoute
   '/@{$username}/history': typeof AtChar123usernameChar125HistoryRoute
-  '/@{$username}/in-progress': typeof AtChar123usernameChar125InProgressRoute
+  '/@{$username}/shows': typeof AtChar123usernameChar125ShowsRoute
   '/@{$username}/watchlist': typeof AtChar123usernameChar125WatchlistRoute
   '/_auth/home': typeof AuthHomeRoute
   '/_auth/settings': typeof AuthSettingsRoute
@@ -374,7 +374,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/@{$username}/favorites'
     | '/@{$username}/history'
-    | '/@{$username}/in-progress'
+    | '/@{$username}/shows'
     | '/@{$username}/watchlist'
     | '/home'
     | '/settings'
@@ -411,7 +411,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/@{$username}/favorites'
     | '/@{$username}/history'
-    | '/@{$username}/in-progress'
+    | '/@{$username}/shows'
     | '/@{$username}/watchlist'
     | '/home'
     | '/settings'
@@ -450,7 +450,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/@{$username}/favorites'
     | '/@{$username}/history'
-    | '/@{$username}/in-progress'
+    | '/@{$username}/shows'
     | '/@{$username}/watchlist'
     | '/_auth/home'
     | '/_auth/settings'
@@ -590,11 +590,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AtChar123usernameChar125HistoryRouteImport
       parentRoute: typeof AtChar123usernameChar125RouteRoute
     }
-    '/@{$username}/in-progress': {
-      id: '/@{$username}/in-progress'
-      path: '/in-progress'
-      fullPath: '/@{$username}/in-progress'
-      preLoaderRoute: typeof AtChar123usernameChar125InProgressRouteImport
+    '/@{$username}/shows': {
+      id: '/@{$username}/shows'
+      path: '/shows'
+      fullPath: '/@{$username}/shows'
+      preLoaderRoute: typeof AtChar123usernameChar125ShowsRouteImport
       parentRoute: typeof AtChar123usernameChar125RouteRoute
     }
     '/@{$username}/watchlist': {
@@ -771,7 +771,7 @@ declare module '@tanstack/react-router' {
 interface AtChar123usernameChar125RouteRouteChildren {
   AtChar123usernameChar125FavoritesRoute: typeof AtChar123usernameChar125FavoritesRoute
   AtChar123usernameChar125HistoryRoute: typeof AtChar123usernameChar125HistoryRoute
-  AtChar123usernameChar125InProgressRoute: typeof AtChar123usernameChar125InProgressRoute
+  AtChar123usernameChar125ShowsRoute: typeof AtChar123usernameChar125ShowsRoute
   AtChar123usernameChar125WatchlistRoute: typeof AtChar123usernameChar125WatchlistRoute
   AtChar123usernameChar125IndexRoute: typeof AtChar123usernameChar125IndexRoute
   AtChar123usernameChar125ListsSlugRoute: typeof AtChar123usernameChar125ListsSlugRoute
@@ -784,8 +784,7 @@ const AtChar123usernameChar125RouteRouteChildren: AtChar123usernameChar125RouteR
     AtChar123usernameChar125FavoritesRoute:
       AtChar123usernameChar125FavoritesRoute,
     AtChar123usernameChar125HistoryRoute: AtChar123usernameChar125HistoryRoute,
-    AtChar123usernameChar125InProgressRoute:
-      AtChar123usernameChar125InProgressRoute,
+    AtChar123usernameChar125ShowsRoute: AtChar123usernameChar125ShowsRoute,
     AtChar123usernameChar125WatchlistRoute:
       AtChar123usernameChar125WatchlistRoute,
     AtChar123usernameChar125IndexRoute: AtChar123usernameChar125IndexRoute,

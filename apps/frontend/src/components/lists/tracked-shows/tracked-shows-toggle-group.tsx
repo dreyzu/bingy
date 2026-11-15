@@ -5,7 +5,7 @@ import {
 	IconLayoutGrid,
 	IconPlayerPause,
 } from "@tabler/icons-react";
-import type { InProgressFilter } from "@/api/in-progress";
+import type { TrackedShowFilter } from "@/api/tracked-shows";
 import {
 	Select,
 	SelectContent,
@@ -17,26 +17,26 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useMediaQuery } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
 
-type InProgressToggleGroupProps = {
-	value: InProgressFilter;
-	onValueChange: (value: InProgressFilter) => void;
+type TrackedShowsToggleGroupProps = {
+	value: TrackedShowFilter;
+	onValueChange: (value: TrackedShowFilter) => void;
 };
 
-const isInProgressFilter = (value: string): value is InProgressFilter =>
+const isTrackedShowFilter = (value: string): value is TrackedShowFilter =>
 	value === "all" ||
 	value === "watching" ||
 	value === "on_hold" ||
 	value === "dropped" ||
 	value === "completed";
 
-export function InProgressToggleGroup({
+export function TrackedShowsToggleGroup({
 	value,
 	onValueChange,
-}: InProgressToggleGroupProps) {
+}: TrackedShowsToggleGroupProps) {
 	const isMobile = useMediaQuery("(pointer: coarse)");
 
 	const options: {
-		value: InProgressFilter;
+		value: TrackedShowFilter;
 		label: string;
 		ariaLabel: string;
 		icon: typeof IconLayoutGrid;
@@ -81,7 +81,7 @@ export function InProgressToggleGroup({
 			<Select
 				value={value}
 				onValueChange={(next) => {
-					if (next && isInProgressFilter(next)) onValueChange(next);
+					if (next && isTrackedShowFilter(next)) onValueChange(next);
 				}}
 			>
 				<SelectTrigger className="w-full">
@@ -108,7 +108,7 @@ export function InProgressToggleGroup({
 
 	const handleChange = (values: string[]) => {
 		const newValue = values[0];
-		if (newValue && isInProgressFilter(newValue)) {
+		if (newValue && isTrackedShowFilter(newValue)) {
 			onValueChange(newValue);
 		}
 	};

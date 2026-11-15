@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import type { InProgressFilter } from "@/api/in-progress";
+import type { TrackedShowFilter } from "@/api/tracked-shows";
 import { SearchCommand } from "@/components/search/search-command";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,17 +11,17 @@ import {
 } from "@/components/ui/empty";
 import { m } from "@/paraglide/messages";
 
-type InProgressEmptyStateProps = {
-	filter: InProgressFilter;
+type TrackedShowsEmptyStateProps = {
+	filter: TrackedShowFilter;
 	username: string;
 	isOwnProfile: boolean;
 };
 
-export function InProgressEmptyState({
+export function TrackedShowsEmptyState({
 	filter,
 	username,
 	isOwnProfile,
-}: InProgressEmptyStateProps) {
+}: TrackedShowsEmptyStateProps) {
 	const titles = isOwnProfile
 		? {
 				all: m.primal_topaz_yak(),

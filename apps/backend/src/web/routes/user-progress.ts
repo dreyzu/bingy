@@ -24,8 +24,8 @@ type Variables = {
 	session: unknown;
 };
 
-// statuses shown in the in-progress list
-const IN_PROGRESS_STATUSES = [
+// statuses shown in the tracked shows list
+const TRACKED_SHOW_STATUSES = [
 	"watching",
 	"on_hold",
 	"dropped",
@@ -35,8 +35,8 @@ const IN_PROGRESS_STATUSES = [
 // tmdb statuses for a show that will not air any more episodes
 const isEndedShow = (tmdbStatus: string) =>
 	tmdbStatus === "Ended" || tmdbStatus === "Canceled";
-type InProgressStatus = (typeof IN_PROGRESS_STATUSES)[number];
-const IN_PROGRESS_STATUS_FILTERS = ["all", ...IN_PROGRESS_STATUSES] as const;
+type TrackedShowStatus = (typeof TRACKED_SHOW_STATUSES)[number];
+const TRACKED_SHOW_STATUS_FILTERS = ["all", ...TRACKED_SHOW_STATUSES] as const;
 
 const userProgressRoutes = new Hono<{ Variables: Variables }>();
 
@@ -49,7 +49,7 @@ userProgressRoutes.get(
 			language: z.string().default("en-US"),
 			limit: z.coerce.number().int().min(1).max(100).default(24),
 			page: z.coerce.number().int().min(1).default(1),
-			status: z.enum(IN_PROGRESS_STATUS_FILTERS).default("all"),
+			status: z.enum(TRACKED_SHOW_STATUS_FILTERS).default("all"),
 		}),
 	),
 	async (c) => {
@@ -57,10 +57,10 @@ userProgressRoutes.get(
 		const { language, limit, page, status: statusQuery } = c.req.valid("query");
 		const offset = (page - 1) * limit;
 
-		const statuses: InProgressStatus[] =
+		const statuses: TrackedShowStatus[] =
 			statusQuery === "all"
-				? [...IN_PROGRESS_STATUSES]
-				: [statusQuery as InProgressStatus];
+				? [...TRACKED_SHOW_STATUSES]
+				: [statusQuery as TrackedShowStatus];
 
 		const targetUser = await db.query.users.findFirst({
 			where: eq(users.name, username),
@@ -144,6 +144,7 @@ userProgressRoutes.get(
 									absoluteEpisode: item.progress.absoluteEpisode,
 									trackingMode: item.progress.trackingMode,
 									status,
+									rewatchCount: item.progress.rewatchCount,
 									createdAt: item.progress.createdAt,
 									updatedAt: item.progress.updatedAt,
 								},
@@ -171,7 +172,7 @@ userProgressRoutes.get(
 	},
 );
 
-// get a tv show progress from an user by username - returns null if not in progress
+// get a tv show progress from an user by username - returns null if the show is not tracked
 userProgressRoutes.get("/:username/tv/:tmdbId", async (c) => {
 	const { username, tmdbId } = c.req.param();
 	const tmdbIdNumber = Number(tmdbId);
@@ -205,7 +206,7 @@ userProgressRoutes.get("/:username/tv/:tmdbId", async (c) => {
 	}
 });
 
-// create entry in progress for tv - seasonNumber and episodeNumber are the last episode the user watched
+// create or update tv show progress - seasonNumber and episodeNumber are the last episode the user watched
 // user must be logged in
 userProgressRoutes.post(
 	"/tv",
@@ -313,6 +314,123 @@ userProgressRoutes.post(
 		} catch (error) {
 			logger.error(error);
 			return c.json({ error: "Failed to update TV progress" }, 500);
+		}
+	},
+);
+
+// find the logged in user's progress entry for a tv show
+const findOwnTvProgress = async (userId: string, tmdbId: number) => {
+	const [row] = await db
+		.select({
+			id: tvShowProgress.id,
+			status: tvShowProgress.status,
+			trackingMode: tvShowProgress.trackingMode,
+		})
+		.from(tvShowProgress)
+		.innerJoin(media, eq(tvShowProgress.mediaId, media.id))
+		.where(
+			and(
+				eq(tvShowProgress.userId, userId),
+				eq(media.mediaType, "tv"),
+				eq(media.tmdbId, tmdbId),
+			),
+		)
+		.limit(1);
+
+	return row ?? null;
+};
+
+// change the status of a tv show progress
+// user must be logged in
+userProgressRoutes.patch(
+	"/tv/:tmdbId",
+	zValidator("param", z.object({ tmdbId: z.coerce.number().int() })),
+	zValidator("json", z.object({ status: z.enum(TRACKED_SHOW_STATUSES) })),
+	async (c) => {
+		const user = c.get("user");
+		if (!user) return c.json({ error: "UNAUTHORIZED" }, 401);
+
+		const { tmdbId } = c.req.valid("param");
+		const { status } = c.req.valid("json");
+
+		try {
+			const entry = await findOwnTvProgress(user.id, tmdbId);
+			if (!entry) return c.json({ error: "PROGRESS_NOT_FOUND" }, 404);
+
+			const [progress] = await db
+				.update(tvShowProgress)
+				.set({ status, updatedAt: new Date() })
+				.where(eq(tvShowProgress.id, entry.id))
+				.returning();
+
+			return c.json(progress);
+		} catch (error) {
+			logger.error(error);
+			return c.json({ error: "Failed to update TV progress status" }, 500);
+		}
+	},
+);
+
+// restart a completed tv show from the beginning, keeping count of the rewatches
+// user must be logged in
+userProgressRoutes.post(
+	"/tv/:tmdbId/rewatch",
+	zValidator("param", z.object({ tmdbId: z.coerce.number().int() })),
+	async (c) => {
+		const user = c.get("user");
+		if (!user) return c.json({ error: "UNAUTHORIZED" }, 401);
+
+		const { tmdbId } = c.req.valid("param");
+
+		try {
+			const entry = await findOwnTvProgress(user.id, tmdbId);
+			if (!entry) return c.json({ error: "PROGRESS_NOT_FOUND" }, 404);
+			if (entry.status !== "completed")
+				return c.json({ error: "SHOW_NOT_COMPLETED" }, 409);
+
+			// season 0 (specials) is skipped, so the next episode is S1E1
+			const [progress] = await db
+				.update(tvShowProgress)
+				.set({
+					lastWatchedSeason: 0,
+					lastWatchedEpisode: 0,
+					absoluteEpisode: entry.trackingMode === "absolute" ? 0 : null,
+					status: "watching",
+					rewatchCount: sql`${tvShowProgress.rewatchCount} + 1`,
+					updatedAt: new Date(),
+				})
+				.where(eq(tvShowProgress.id, entry.id))
+				.returning();
+
+			return c.json(progress);
+		} catch (error) {
+			logger.error(error);
+			return c.json({ error: "Failed to rewatch TV show" }, 500);
+		}
+	},
+);
+
+// remove a tv show from the tracked shows list, resetting its progress entirely
+// user must be logged in
+userProgressRoutes.delete(
+	"/tv/:tmdbId",
+	zValidator("param", z.object({ tmdbId: z.coerce.number().int() })),
+	async (c) => {
+		const user = c.get("user");
+		if (!user) return c.json({ error: "UNAUTHORIZED" }, 401);
+
+		const { tmdbId } = c.req.valid("param");
+
+		try {
+			const entry = await findOwnTvProgress(user.id, tmdbId);
+			if (!entry) return c.json({ error: "PROGRESS_NOT_FOUND" }, 404);
+
+			await db.delete(tvShowProgress).where(eq(tvShowProgress.id, entry.id));
+
+			return c.body(null, 204);
+		} catch (error) {
+			logger.error(error);
+			return c.json({ error: "Failed to remove TV progress" }, 500);
 		}
 	},
 );

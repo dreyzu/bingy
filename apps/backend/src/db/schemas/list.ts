@@ -105,6 +105,8 @@ export const tvShowProgress = pgTable(
 			.notNull()
 			.default("watching")
 			.$type<"watching" | "completed" | "on_hold" | "dropped">(),
+		// number of times the user restarted the show after completing it
+		rewatchCount: integer("rewatch_count").notNull().default(0),
 		...timestamps,
 	},
 	(table) => [

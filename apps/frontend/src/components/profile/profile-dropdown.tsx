@@ -176,7 +176,7 @@ export const ProfileDropdown = ({
 						<DropdownMenuItem
 							onClick={() =>
 								navigate({
-									to: "/@{$username}/in-progress",
+									to: "/@{$username}/shows",
 									params: { username },
 								})
 							}

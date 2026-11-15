@@ -1,5 +1,5 @@
 import { type FormEvent, useEffect, useMemo, useState } from "react";
-import type { TvProgressStatus } from "@/api/in-progress";
+import type { TvProgressStatus } from "@/api/tracked-shows";
 import { SeasonEpisodeCombobox } from "@/components/lists/media-actions/season-episode-combobox";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +11,7 @@ import {
 	DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { useAddTvToCurrentlyWatching } from "@/hooks/useInProgress";
+import { useTrackShow } from "@/hooks/useTrackedShows";
 import { useTv } from "@/hooks/useTv";
 import { m } from "@/paraglide/messages";
 import { getTvShowProgress } from "@/utils/season-helper";
@@ -29,7 +29,7 @@ const statusLabel = (status: TvProgressStatus) => {
 	}
 };
 
-interface AddToCurrentlyWatchingDialogProps {
+interface AddToTrackedShowsDialogProps {
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
 	tvShow: {
@@ -44,13 +44,13 @@ interface AddToCurrentlyWatchingDialogProps {
 	} | null;
 }
 
-export function AddToCurrentlyWatchingDialog({
+export function AddToTrackedShowsDialog({
 	open,
 	onOpenChange,
 	tvShow,
 	username,
 	existingProgress,
-}: AddToCurrentlyWatchingDialogProps) {
+}: AddToTrackedShowsDialogProps) {
 	const { data: tvDetails } = useTv(tvShow.id, {}, { enabled: open });
 
 	const tvProgress = useMemo(() => getTvShowProgress(tvDetails), [tvDetails]);
@@ -61,7 +61,7 @@ export function AddToCurrentlyWatchingDialog({
 	const [episode, setEpisode] = useState<number | null>(null);
 	const [status, setStatus] = useState<TvProgressStatus>("watching");
 
-	const addMutation = useAddTvToCurrentlyWatching(username);
+	const addMutation = useTrackShow(username);
 	const isSubmitting = addMutation.isPending;
 
 	// prefill with the current progress when updating an existing entry

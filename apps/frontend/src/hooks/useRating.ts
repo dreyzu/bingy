@@ -115,7 +115,7 @@ export function useRateTvShow(username: string) {
 				queryKey: ["user-profile", username],
 			});
 			queryClient.invalidateQueries({
-				queryKey: ["in-progress", username],
+				queryKey: ["tracked-shows", username],
 			});
 
 			if (res.rating) {
@@ -198,7 +198,7 @@ export function useRemoveTvRating(username: string) {
 				queryKey: ["user-profile"],
 			});
 			queryClient.invalidateQueries({
-				queryKey: ["in-progress", username],
+				queryKey: ["tracked-shows", username],
 			});
 
 			toast.success({ title: m.brisk_topaz_island() });
