@@ -1,9 +1,5 @@
 import { eq } from "drizzle-orm";
-import {
-	media,
-	movieWatchHistory,
-	tvShowWatchHistory,
-} from "../../db/schemas/list";
+import { media, movieWatchHistory, tvShowWatchHistory } from "../../db/schemas";
 import type { Transaction } from "../../lib/database";
 
 export async function updateMediaRating(tx: Transaction, mediaId: string) {

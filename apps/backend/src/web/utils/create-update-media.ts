@@ -1,5 +1,5 @@
 import { and, eq } from "drizzle-orm";
-import { media } from "../../db/schemas/list";
+import { media } from "../../db/schemas";
 import type { Transaction } from "../../lib/database";
 
 export async function getOrCreateMedia(

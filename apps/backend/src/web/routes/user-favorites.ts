@@ -2,16 +2,17 @@ import { zValidator } from "@hono/zod-validator";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
+import type { User } from "../../db/schemas";
 import {
+	activity,
 	favorites,
 	media,
 	movieWatchHistory,
 	tvShowProgress,
 	tvShowWatchHistory,
+	users,
 	watchlist,
-} from "../../db/schemas/list";
-import type { User } from "../../db/schemas/user";
-import { activity, users } from "../../db/schemas/user";
+} from "../../db/schemas";
 import { db } from "../../lib/database";
 import { getMediaDetails } from "../../lib/tmdb/get-media-details";
 import { getOrCreateMedia } from "../../web/utils/create-update-media";

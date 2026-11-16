@@ -3,14 +3,15 @@ import { and, desc, eq, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { nanoid } from "nanoid";
 import { z } from "zod";
+import type { User } from "../../db/schemas";
 import {
+	activity,
 	customLists,
 	listItems,
 	media,
+	users,
 	watchlist,
-} from "../../db/schemas/list";
-import type { User } from "../../db/schemas/user";
-import { activity, users } from "../../db/schemas/user";
+} from "../../db/schemas";
 import { db } from "../../lib/database";
 import env from "../../lib/env";
 import { serveNotFound } from "../../lib/responses/error";

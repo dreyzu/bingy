@@ -1,6 +1,6 @@
 import { APIError } from "better-auth";
 import { eq } from "drizzle-orm";
-import { users } from "../db/schemas/user";
+import { users } from "../db/schemas";
 import { db } from "./database";
 
 type OAuthUsername = {
