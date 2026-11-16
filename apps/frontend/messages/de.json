@@ -971,5 +971,20 @@
 	"snappy_sepia_rabbit": "Serie konnte nicht neu gestartet werden",
 	"gallant_coral_oasis": "Erneut gesehen ×{count}",
 	"keen_teal_aspen": "Fehler beim Laden der Serien",
-	"peppy_plum_turtle": "Mit {rating} von 5 bewerten"
+	"peppy_plum_turtle": "Mit {rating} von 5 bewerten",
+	"witty_sage_comet": "Benutzer nicht gefunden :(",
+	"bold_amber_pine": "Hoppla!",
+	"wise_turquoise_lemur": "Hoppla!",
+	"airy_ruby_coral": "Startseite",
+	"chilly_saffron_galaxy": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} Stimme",
+				"countPlural=other": "{count} Stimmen"
+			}
+		}
+	],
+	"alert_sienna_cherry": "k. A."
 }

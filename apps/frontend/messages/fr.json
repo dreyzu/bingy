@@ -971,5 +971,20 @@
 	"snappy_sepia_rabbit": "Impossible de relancer la série",
 	"gallant_coral_oasis": "Revisionnage ×{count}",
 	"keen_teal_aspen": "Erreur lors du chargement des séries",
-	"peppy_plum_turtle": "Noter {rating} sur 5"
+	"peppy_plum_turtle": "Noter {rating} sur 5",
+	"witty_sage_comet": "Utilisateur introuvable :(",
+	"bold_amber_pine": "Oups !",
+	"wise_turquoise_lemur": "Oups !",
+	"airy_ruby_coral": "Accueil",
+	"chilly_saffron_galaxy": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} vote",
+				"countPlural=other": "{count} votes"
+			}
+		}
+	],
+	"alert_sienna_cherry": "N/C"
 }

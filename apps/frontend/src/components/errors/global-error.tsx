@@ -19,7 +19,9 @@ export function GlobalError({ error }: GlobalErrorProps) {
 		<div className="h-screen w-screen flex items-center justify-center p-4">
 			<Card className="max-w-md w-full shadow-lg p-2">
 				<CardContent className="flex flex-col items-center text-center p-4 gap-4">
-					<CardTitle className="text-2xl text-red-500">Oops!</CardTitle>
+					<CardTitle className="text-2xl text-red-500">
+						{m.bold_amber_pine()}
+					</CardTitle>
 					<CardDescription className="text-md">{message}</CardDescription>
 					<Button
 						variant="secondary"

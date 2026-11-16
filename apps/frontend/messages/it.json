@@ -971,5 +971,20 @@
 	"snappy_sepia_rabbit": "Impossibile ricominciare la serie",
 	"gallant_coral_oasis": "Riguardato ×{count}",
 	"keen_teal_aspen": "Errore durante il caricamento delle serie",
-	"peppy_plum_turtle": "Valuta {rating} su 5"
+	"peppy_plum_turtle": "Valuta {rating} su 5",
+	"witty_sage_comet": "Utente non trovato :(",
+	"bold_amber_pine": "Ops!",
+	"wise_turquoise_lemur": "Ops!",
+	"airy_ruby_coral": "Home",
+	"chilly_saffron_galaxy": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} voto",
+				"countPlural=other": "{count} voti"
+			}
+		}
+	],
+	"alert_sienna_cherry": "N/D"
 }

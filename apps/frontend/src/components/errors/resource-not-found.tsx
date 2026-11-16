@@ -39,7 +39,7 @@ export function ResourceNotFound({
 							to="/"
 							className="flex items-center gap-2 flex-1 justify-center"
 						>
-							<IconSmartHome className="h-4 w-4" /> Home
+							<IconSmartHome className="h-4 w-4" /> {m.airy_ruby_coral()}
 						</Link>
 					</Button>
 				</CardContent>

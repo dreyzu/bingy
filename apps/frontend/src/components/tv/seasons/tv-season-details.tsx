@@ -19,6 +19,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { WatchProvidersSection } from "@/components/watch-providers/watch-providers-section";
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
+import { formatRuntimeHours } from "@/utils/format-runtime";
 
 interface TvSeasonDetailsViewProps {
 	tvSeason: Schemas.TvSeasonDetails | undefined;
@@ -113,9 +114,9 @@ export function TvSeasonDetailsView({
 	}
 
 	const hasRuntime = tvSeason.episodes.some((ep) => ep.runtime);
-	const totalRuntimeHours = (
-		tvSeason.episodes.reduce((total, ep) => total + (ep.runtime || 0), 0) / 60
-	).toFixed(1);
+	const totalRuntimeHours = formatRuntimeHours(
+		tvSeason.episodes.reduce((total, ep) => total + (ep.runtime || 0), 0),
+	);
 
 	return (
 		<div className="w-full">
@@ -144,7 +145,7 @@ export function TvSeasonDetailsView({
 							{hasRuntime ? (
 								<Badge variant="default" className="w-fit gap-1 self-center">
 									<IconStopwatch className="h-4 w-4" />
-									<span>{totalRuntimeHours}"h</span>
+									<span>{totalRuntimeHours}</span>
 								</Badge>
 							) : null}
 						</div>

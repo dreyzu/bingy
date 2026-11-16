@@ -19,7 +19,9 @@ export function NotFoundComponent() {
 						loading="lazy"
 					/>
 					<div className="space-y-4">
-						<h1 className="text-4xl font-bold text-center">Oops!</h1>
+						<h1 className="text-4xl font-bold text-center">
+							{m.wise_turquoise_lemur()}
+						</h1>
 						<p className="text-lg text-center text-muted-foreground">
 							{m.winsome_sage_nectar()}
 						</p>

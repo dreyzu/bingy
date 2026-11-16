@@ -971,5 +971,20 @@
 	"snappy_sepia_rabbit": "Couldn't start the rewatch",
 	"gallant_coral_oasis": "Rewatch ×{count}",
 	"keen_teal_aspen": "Error while loading shows",
-	"peppy_plum_turtle": "Rate {rating} out of 5"
+	"peppy_plum_turtle": "Rate {rating} out of 5",
+	"witty_sage_comet": "User not found :(",
+	"bold_amber_pine": "Oops!",
+	"wise_turquoise_lemur": "Oops!",
+	"airy_ruby_coral": "Home",
+	"chilly_saffron_galaxy": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} vote",
+				"countPlural=other": "{count} votes"
+			}
+		}
+	],
+	"alert_sienna_cherry": "N/A"
 }

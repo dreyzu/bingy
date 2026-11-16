@@ -165,7 +165,7 @@ export function TvEpisodeDetailsView({
 										{episode.vote_average.toFixed(1)}
 									</p>
 									<p className="text-sm text-muted-foreground">
-										{episode.vote_count} votes
+										{m.chilly_saffron_galaxy({ count: episode.vote_count })}
 									</p>
 								</div>
 							</CardContent>

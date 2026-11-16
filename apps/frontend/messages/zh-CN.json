@@ -971,5 +971,20 @@
 	"snappy_sepia_rabbit": "无法开始重看",
 	"gallant_coral_oasis": "重看 ×{count}",
 	"keen_teal_aspen": "加载剧集时出错",
-	"peppy_plum_turtle": "打 {rating} 分（满分 5 分）"
+	"peppy_plum_turtle": "打 {rating} 分（满分 5 分）",
+	"witty_sage_comet": "找不到该用户 :(",
+	"bold_amber_pine": "哎呀！",
+	"wise_turquoise_lemur": "哎呀！",
+	"airy_ruby_coral": "首页",
+	"chilly_saffron_galaxy": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count} 票",
+				"countPlural=other": "{count} 票"
+			}
+		}
+	],
+	"alert_sienna_cherry": "无"
 }
