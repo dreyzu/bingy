@@ -97,41 +97,45 @@ export function ListContainer({
 					</div>
 				</div>
 			</div>
-			!hasItem ? (
-			<p className="text-center py-12 text-muted-foreground">
-				{isOwnList ? (
-					<>
-						{m.rapid_coral_comet()}{" "}
-						<Link
-							to="/@{$username}/lists/$listslug/edit"
-							params={{ username, listslug: list.slug }}
-							className="text-primary underline hover:text-primary/80"
-						>
-							{m.jolly_copper_arrow()}
-						</Link>
-					</>
-				) : (
-					m.light_lime_badger()
-				)}
-			</p>
+
+			{!hasItem ? (
+				<p className="text-center py-12 text-muted-foreground">
+					{isOwnList ? (
+						<>
+							{m.rapid_coral_comet()}{" "}
+							<Link
+								to="/@{$username}/lists/$listslug/edit"
+								params={{ username, listslug: list.slug }}
+								className="text-primary underline hover:text-primary/80"
+							>
+								{m.jolly_copper_arrow()}
+							</Link>
+						</>
+					) : (
+						m.light_lime_badger()
+					)}
+				</p>
 			) : (
-			<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
-				{sortedItems.map((item) => (
-					<ListMediaCard
-						key={`${item.mediaType}-${item.id}`}
-						item={item}
-						showPosition={list.type === "ranked"}
-					/>
-				))}
-			</div>
-			{page && totalPages && onPageChange && totalPages > 1 && (
-				<ListPagination
-					page={page}
-					totalPages={totalPages}
-					onPageChange={onPageChange}
-				/>
+				<>
+					<div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
+						{sortedItems.map((item) => (
+							<ListMediaCard
+								key={`${item.mediaType}-${item.id}`}
+								item={item}
+								showPosition={list.type === "ranked"}
+							/>
+						))}
+					</div>
+
+					{page && totalPages && onPageChange && totalPages > 1 && (
+						<ListPagination
+							page={page}
+							totalPages={totalPages}
+							onPageChange={onPageChange}
+						/>
+					)}
+				</>
 			)}
-			);
 		</div>
 	);
 }

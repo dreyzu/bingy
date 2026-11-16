@@ -42,7 +42,7 @@ function UserProfileLayout() {
 		// todo: add user 404
 		return (
 			<CenteredLayout>
-				<p>User not found :(</p>
+				<p>{m.witty_sage_comet()}</p>
 			</CenteredLayout>
 		);
 	}
