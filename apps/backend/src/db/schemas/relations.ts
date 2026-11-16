@@ -1,16 +1,15 @@
 import { relations } from "drizzle-orm";
+import { activity } from "./activity";
+import { accounts } from "./auth";
+import { customLists, favorites, listItems, watchlist } from "./collection";
+import { media } from "./media";
+import { reviewComments } from "./review";
 import {
-	customLists,
-	favorites,
-	listItems,
-	media,
 	movieWatchHistory,
-	reviewComments,
 	tvShowProgress,
 	tvShowWatchHistory,
-	watchlist,
-} from "./list";
-import { accounts, activity, users } from "./user";
+} from "./tracking";
+import { users } from "./user";
 
 export const mediaRelations = relations(media, ({ many }) => ({
 	movieWatchHistory: many(movieWatchHistory),

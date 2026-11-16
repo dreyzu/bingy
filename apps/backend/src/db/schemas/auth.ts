@@ -1,0 +1,82 @@
+import { type InferInsertModel, type InferSelectModel, sql } from "drizzle-orm";
+import {
+	boolean,
+	index,
+	integer,
+	pgTable,
+	text,
+	timestamp,
+	uniqueIndex,
+	uuid,
+} from "drizzle-orm/pg-core";
+import { timestamps } from "./column.helper";
+import { users } from "./user";
+
+export const accounts = pgTable(
+	"accounts",
+	{
+		id: uuid("id").primaryKey().default(sql`uuidv7()`),
+		userId: uuid("user_id")
+			.notNull()
+			.references(() => users.id, { onDelete: "cascade" }),
+		accountId: text("account_id").notNull(),
+		providerId: text("provider_id").notNull(),
+		accessToken: text("access_token"),
+		refreshToken: text("refresh_token"),
+		accessTokenExpiresAt: timestamp("access_token_expires_at"),
+		refreshTokenExpiresAt: timestamp("refresh_token_expires_at"),
+		scope: text(),
+		idToken: text("id_token"),
+		passwordHash: text("password_hash"),
+		...timestamps,
+	},
+	(table) => [
+		uniqueIndex("unique_user_provider").on(table.userId, table.providerId),
+		uniqueIndex("unique_provider_account").on(
+			table.providerId,
+			table.accountId,
+		),
+		index("idx_accounts_provider").on(table.providerId),
+	],
+);
+
+export const two_factor = pgTable("two_factor", {
+	id: uuid("id").primaryKey().default(sql`uuidv7()`),
+	userId: uuid("user_id")
+		.notNull()
+		.references(() => users.id, { onDelete: "cascade" }),
+	secret: text(),
+	backupCodes: text("backup_codes"),
+	verified: boolean("verified").default(false).notNull(),
+	failedVerificationCount: integer("failed_verification_count")
+		.default(0)
+		.notNull(),
+	lockedUntil: timestamp("locked_until"),
+});
+
+export const sessions = pgTable(
+	"sessions",
+	{
+		id: uuid("id").primaryKey().default(sql`uuidv7()`),
+		userId: uuid("user_id")
+			.notNull()
+			.references(() => users.id, { onDelete: "cascade" }),
+		token: text().notNull(),
+		expiresAt: timestamp("expires_at").notNull(),
+		ipAddress: text("ip_address"),
+		userAgent: text("user_agent"),
+		...timestamps,
+	},
+	(table) => [uniqueIndex("unique_session_token").on(table.token)],
+);
+
+export const verifications = pgTable("verifications", {
+	id: uuid("id").primaryKey().default(sql`uuidv7()`),
+	identifier: text(),
+	value: text(),
+	expiresAt: timestamp("expires_at").notNull(),
+	...timestamps,
+});
+
+export type Account = InferSelectModel<typeof accounts>;
+export type NewAccount = InferInsertModel<typeof accounts>;
