@@ -9,17 +9,19 @@ import type { Schemas } from "shared";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { MediaActionMenu } from "@/components/lists/media-actions/media-action-menu";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { MediaBackgroundImage } from "@/components/medias/media-background-image";
 import { MediaCreators } from "@/components/medias/media-creators";
-import { MediaGenresBadge } from "@/components/medias/media-genres-badge";
+import {
+	MEDIA_DETAILS_POSTER_CLASSES,
+	MediaDetailsLayout,
+} from "@/components/medias/media-details-layout";
+import { MediaDetailsOverview } from "@/components/medias/media-details-overview";
+import { MediaInfoTabs } from "@/components/medias/media-info-tabs";
 import { MediaLearnMoreCard } from "@/components/medias/media-learn-more";
-import { MediaOverview } from "@/components/medias/media-overview";
 import { MediaRatingDisplayCard } from "@/components/medias/media-rating-display-card";
 import { MediaTitle } from "@/components/medias/media-title";
-import { CastCrewTabs } from "@/components/person/cast-crew-tabs";
 import { PortraitImage } from "@/components/portrait-image";
 import { TVStatusCard } from "@/components/tv/tv-details/status-card";
-import { BackButton } from "@/components/ui/back-button";
+import { getTvFacts } from "@/components/tv/tv-facts";
 import { Card, CardContent } from "@/components/ui/card";
 import { WatchProvidersSection } from "@/components/watch-providers/watch-providers-section";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
@@ -64,149 +66,133 @@ export function TvDetailsView({
 	const backgroundImage = getTmdbImageUrl(tv.backdrop_path);
 
 	return (
-		<>
-			<MediaBackgroundImage backgroundImage={backgroundImage} />
-			<div className="w-full pt-3 md:pt-10 lg:pt-60">
-				<BackButton />
-
-				<div className="grid lg:grid-cols-[auto_1fr] gap-2 lg:gap-4 pt-2 justify-items-center">
-					<div className="flex flex-col gap-2 items-center lg:items-start max-w-62.5 md:max-w-60 2xl:max-w-75">
-						<PortraitImage
-							imagePath={tv.poster_path}
-							alt={tv.name}
-							imageSize="w500"
-							category="tv"
-						/>
-
-						{watchProviders ? (
-							<WatchProvidersSection
-								watchProviders={watchProviders}
-								region={region}
-								className="w-full"
+		<MediaDetailsLayout
+			backgroundImage={backgroundImage}
+			poster={
+				<PortraitImage
+					imagePath={tv.poster_path}
+					alt={tv.name}
+					imageSize="w500"
+					category="tv"
+					className={MEDIA_DETAILS_POSTER_CLASSES}
+				/>
+			}
+			watchProviders={
+				watchProviders ? (
+					<WatchProvidersSection
+						watchProviders={watchProviders}
+						region={region}
+						className="w-full"
+					/>
+				) : null
+			}
+			header={
+				<Card className="shadow-none bg-transparent border-none ring-0 p-0">
+					<CardContent className="p-0">
+						<div className="flex flex-col gap-4 px-0.5 py-0.5">
+							<MediaTitle
+								title={tv.name}
+								releaseDate={tv.first_air_date}
+								originalTitle={tv.original_name}
 							/>
-						) : null}
-					</div>
 
-					<div className="w-full flex flex-col gap-4 overflow-hidden">
-						<Card className="shadow-none bg-transparent border-none ring-0 lg:p-0">
-							<CardContent className="p-0">
-								<div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 px-0.5 py-0.5">
-									<div className="flex flex-col gap-4">
-										<MediaTitle
-											title={tv.name}
-											releaseDate={tv.first_air_date}
-											originalTitle={tv.original_name}
-										/>
-
-										<MediaGenresBadge genres={tv.genres} />
-
-										<div className="flex flex-col gap-1">
-											{tv.tagline ? (
-												<p className="font-bold italic text-base lg:text-lg">
-													{tv.tagline}
-												</p>
-											) : null}
-											<MediaOverview overview={tv.overview} />
-										</div>
-
-										<MediaCreators
-											creators={tv.created_by}
-											getRoleLabel={(gender) =>
-												m.fierce_silver_lantern({ gender })
-											}
-										/>
-									</div>
-
-									{authData ? (
-										<div className="lg:self-start mt-3 lg:pr-0.5">
-											<MediaActionMenu
-												username={authData.user.name}
-												tvShow={{
-													id: tv.id,
-													name: tv.name,
-													posterPath: tv.poster_path,
-													releaseDate: tv.first_air_date,
-													mediaType: "tv",
-												}}
-												posterPath={tv.poster_path}
-											/>
-										</div>
-									) : null}
-								</div>
-							</CardContent>
-						</Card>
-
-						<div className="grid lg:grid-cols-3 gap-3 p-px">
-							<MediaRatingDisplayCard mediaType="tv" tmdbId={tv.id} />
-
-							<Card>
-								<CardContent className="flex items-center gap-4">
-									<IconCalendarWeekFilled />
-									<div>
-										<p className="text-lg font-bold">
-											{tv.first_air_date
-												? formatDate(tv.first_air_date, localeRegion, {
-														year: "numeric",
-														month: "short",
-														day: "numeric",
-													})
-												: "N/A"}
-										</p>
-										<p className="text-sm text-muted-foreground">
-											{m.mellow_lilac_anchor()}
-										</p>
-									</div>
-								</CardContent>
-							</Card>
-
-							<TVStatusCard status={tv.status} />
-
-							<Link to="/tv/$tvId/seasons" params={{ tvId: tv.id.toString() }}>
-								<Card>
-									<CardContent className="flex items-center gap-4">
-										<IconDeviceTv />
-										<div>
-											<p className="text-lg font-bold">
-												{tv.number_of_seasons}
-											</p>
-											<p className="text-sm text-muted-foreground">
-												{m.lean_crimson_puma({ count: tv.number_of_seasons })}
-											</p>
-										</div>
-									</CardContent>
-								</Card>
-							</Link>
-
-							<Card>
-								<CardContent className="flex items-center gap-4">
-									<IconStack2 />
-									<div>
-										<p className="text-lg font-bold">{tv.number_of_episodes}</p>
-										<p className="text-sm text-muted-foreground">
-											{m.warm_scarlet_jasmine({ count: tv.number_of_episodes })}
-										</p>
-									</div>
-								</CardContent>
-							</Card>
-
-							{tv.id ? <MediaLearnMoreCard id={tv.id} mediaType="tv" /> : null}
+							<MediaCreators
+								creators={tv.created_by}
+								formatCredit={m.elegant_lilac_mesa}
+								media={{ type: "tv", id: tv.id }}
+							/>
 						</div>
-
-						{cast && cast.length > 0 ? (
-							<div className="flex flex-col gap-2">
-								<CastCrewTabs cast={cast} crew={crew} />
-								<Link
-									to="/tv/$tvId/credits"
-									params={{ tvId: tv.id.toString() }}
-									className="text-sm"
-								>
-									{m.elegant_gold_violin()}
-								</Link>
-							</div>
-						) : null}
-					</div>
+					</CardContent>
+				</Card>
+			}
+			actions={
+				authData ? (
+					<MediaActionMenu
+						username={authData.user.name}
+						tvShow={{
+							id: tv.id,
+							name: tv.name,
+							posterPath: tv.poster_path,
+							releaseDate: tv.first_air_date,
+							mediaType: "tv",
+						}}
+						posterPath={tv.poster_path}
+					/>
+				) : null
+			}
+			overview={
+				<div className="flex flex-col gap-1">
+					{tv.tagline ? (
+						<p className="font-bold italic text-base lg:text-lg">
+							{tv.tagline}
+						</p>
+					) : null}
+					<MediaDetailsOverview overview={tv.overview} />
 				</div>
+			}
+		>
+			<div className="grid lg:grid-cols-3 gap-3 p-px">
+				<MediaRatingDisplayCard mediaType="tv" tmdbId={tv.id} />
+
+				<Card>
+					<CardContent className="flex items-center gap-4">
+						<IconCalendarWeekFilled />
+						<div>
+							<p className="text-lg font-bold">
+								{tv.first_air_date
+									? formatDate(tv.first_air_date, localeRegion, {
+											year: "numeric",
+											month: "short",
+											day: "numeric",
+										})
+									: "N/A"}
+							</p>
+							<p className="text-sm text-muted-foreground">
+								{m.mellow_lilac_anchor()}
+							</p>
+						</div>
+					</CardContent>
+				</Card>
+
+				<TVStatusCard status={tv.status} />
+
+				<Link to="/tv/$tvId/seasons" params={{ tvId: tv.id.toString() }}>
+					<Card>
+						<CardContent className="flex items-center gap-4">
+							<IconDeviceTv />
+							<div>
+								<p className="text-lg font-bold">{tv.number_of_seasons}</p>
+								<p className="text-sm text-muted-foreground">
+									{m.lean_crimson_puma({ count: tv.number_of_seasons })}
+								</p>
+							</div>
+						</CardContent>
+					</Card>
+				</Link>
+
+				<Card>
+					<CardContent className="flex items-center gap-4">
+						<IconStack2 />
+						<div>
+							<p className="text-lg font-bold">{tv.number_of_episodes}</p>
+							<p className="text-sm text-muted-foreground">
+								{m.warm_scarlet_jasmine({ count: tv.number_of_episodes })}
+							</p>
+						</div>
+					</CardContent>
+				</Card>
+
+				{tv.id ? <MediaLearnMoreCard id={tv.id} mediaType="tv" /> : null}
 			</div>
-		</>
+
+			<MediaInfoTabs
+				key={tv.id}
+				cast={cast}
+				crew={crew}
+				genres={tv.genres}
+				facts={getTvFacts(tv, { locale: localeRegion, region })}
+				media={{ type: "tv", id: tv.id }}
+			/>
+		</MediaDetailsLayout>
 	);
 }

@@ -156,17 +156,6 @@
 			}
 		}
 	],
-	"spry_ochre_falcon": [
-		{
-			"declarations": ["input gender"],
-			"selectors": ["gender"],
-			"match": {
-				"gender=male": "Realizador",
-				"gender=female": "Realizadora",
-				"gender=*": "Realizador"
-			}
-		}
-	],
 	"mighty_rose_heron": "Filmes em cartaz agora",
 	"balmy_mint_acorn": "Filmes populares",
 	"lucky_amber_nectar": "Próximos filmes",
@@ -361,17 +350,6 @@
 	"brave_pearl_willow": "Série não encontrada",
 	"agile_scarlet_compass": "Não foi possível encontrar a série que procuras.",
 	"airy_navy_wombat": "Visão geral",
-	"fierce_silver_lantern": [
-		{
-			"declarations": ["input gender"],
-			"selectors": ["gender"],
-			"match": {
-				"gender=male": "Criador",
-				"gender=female": "Criadora",
-				"gender=*": "Criador"
-			}
-		}
-	],
 	"mellow_lilac_anchor": "Estreia original",
 	"polite_yellow_daisy": "Estado",
 	"sturdy_copper_meadow": [
@@ -986,5 +964,40 @@
 			}
 		}
 	],
-	"alert_sienna_cherry": "N/D"
+	"alert_sienna_cherry": "N/D",
+	"swift_saffron_daisy": "Realizado por {names}",
+	"elegant_lilac_mesa": "Criada por {names}",
+	"lush_hazel_valley": ", ",
+	"bubbly_maroon_meerkat": " …",
+	"bubbly_sage_badger": "Ver toda a equipa técnica",
+	"wise_magenta_ember": "Elenco",
+	"dreamy_coral_basil": "Equipa técnica",
+	"steady_saffron_fox": "Géneros",
+	"epic_lemon_anchor": "Detalhes",
+	"joyful_pearl_penguin": "Estúdios",
+	"lucky_scarlet_cactus": "Países",
+	"alert_gray_dune": "Idioma principal",
+	"balmy_coral_quail": "Idiomas falados",
+	"gleeful_fuchsia_heron": "Títulos alternativos",
+	"sturdy_lime_anchor": "Orçamento",
+	"jaunty_teal_fern": "Receitas",
+	"tender_umber_forest": "Canais",
+	"icy_magenta_lagoon": "Estúdios",
+	"bubbly_wine_otter": "País de origem",
+	"shiny_peach_ember": "Países de produção",
+	"sturdy_beige_bagel": "Idioma principal",
+	"bright_coral_falcon": "Idiomas falados",
+	"fluffy_azure_wombat": "Tipo de série",
+	"plucky_sage_cedar": "Última emissão",
+	"noble_cobalt_saddle": "Títulos alternativos",
+	"bright_green_canyon": "Classificação etária",
+	"breezy_wine_mirror": "Ficção",
+	"daring_periwinkle_fox": "Minissérie",
+	"winsome_orange_hippo": "Documentário",
+	"candid_purple_beacon": "Reality show",
+	"jaunty_coral_cactus": "Talk show",
+	"kind_green_fox": "Notícias",
+	"zesty_onyx_moose": "Vídeo",
+	"witty_lavender_otter": "Mostrar tudo ({count})",
+	"noble_indigo_canyon": "Mostrar menos"
 }

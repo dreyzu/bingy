@@ -156,17 +156,6 @@
 			}
 		}
 	],
-	"spry_ochre_falcon": [
-		{
-			"declarations": ["input gender"],
-			"selectors": ["gender"],
-			"match": {
-				"gender=male": "監督",
-				"gender=female": "監督",
-				"gender=*": "監督"
-			}
-		}
-	],
 	"mighty_rose_heron": "上映中の映画",
 	"balmy_mint_acorn": "人気の映画",
 	"lucky_amber_nectar": "公開予定の映画",
@@ -361,17 +350,6 @@
 	"brave_pearl_willow": "TV番組が見つかりません",
 	"agile_scarlet_compass": "お探しのTV番組は見つかりませんでした。",
 	"airy_navy_wombat": "概要",
-	"fierce_silver_lantern": [
-		{
-			"declarations": ["input gender"],
-			"selectors": ["gender"],
-			"match": {
-				"gender=male": "制作者",
-				"gender=female": "制作者",
-				"gender=*": "制作者"
-			}
-		}
-	],
 	"mellow_lilac_anchor": "初回放送日",
 	"polite_yellow_daisy": "ステータス",
 	"sturdy_copper_meadow": [
@@ -986,5 +964,40 @@
 			}
 		}
 	],
-	"alert_sienna_cherry": "該当なし"
+	"alert_sienna_cherry": "該当なし",
+	"swift_saffron_daisy": "監督：{names}",
+	"elegant_lilac_mesa": "クリエイター：{names}",
+	"lush_hazel_valley": "、",
+	"bubbly_maroon_meerkat": "…",
+	"bubbly_sage_badger": "スタッフをすべて表示",
+	"wise_magenta_ember": "出演者",
+	"dreamy_coral_basil": "スタッフ",
+	"steady_saffron_fox": "ジャンル",
+	"epic_lemon_anchor": "詳細",
+	"joyful_pearl_penguin": "制作会社",
+	"lucky_scarlet_cactus": "制作国",
+	"alert_gray_dune": "主要言語",
+	"balmy_coral_quail": "使用言語",
+	"gleeful_fuchsia_heron": "別タイトル",
+	"sturdy_lime_anchor": "製作費",
+	"jaunty_teal_fern": "興行収入",
+	"tender_umber_forest": "放送局",
+	"icy_magenta_lagoon": "制作会社",
+	"bubbly_wine_otter": "国・地域",
+	"shiny_peach_ember": "制作国・地域",
+	"sturdy_beige_bagel": "主要言語",
+	"bright_coral_falcon": "使用言語",
+	"fluffy_azure_wombat": "番組の種類",
+	"plucky_sage_cedar": "最終放送日",
+	"noble_cobalt_saddle": "別タイトル",
+	"bright_green_canyon": "年齢制限",
+	"breezy_wine_mirror": "ドラマ",
+	"daring_periwinkle_fox": "ミニシリーズ",
+	"winsome_orange_hippo": "ドキュメンタリー",
+	"candid_purple_beacon": "リアリティ番組",
+	"jaunty_coral_cactus": "トーク番組",
+	"kind_green_fox": "ニュース",
+	"zesty_onyx_moose": "ビデオ",
+	"witty_lavender_otter": "すべて表示（{count}）",
+	"noble_indigo_canyon": "折りたたむ"
 }
