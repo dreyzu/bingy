@@ -142,49 +142,52 @@ export function MovieDetailView({
 					<MediaDetailsOverview overview={movie.overview} />
 				</div>
 			}
+			stats={
+				<div className="grid lg:grid-cols-3 gap-2 p-px">
+					<MediaRatingDisplayCard mediaType="movie" tmdbId={movie.id} />
+
+					<Card>
+						<CardContent className="flex items-center gap-4">
+							<IconCalendarWeekFilled />
+							<div>
+								<p className="text-lg font-bold">
+									{releaseDate
+										? formatDate(releaseDate, localeRegion, {
+												day: "numeric",
+												month: "short",
+												year: "numeric",
+											})
+										: "N/A"}
+								</p>
+								<p className="text-sm text-muted-foreground flex items-center gap-2">
+									{releaseRegion ? (
+										<span
+											className={`fi fi-${releaseRegion.toLowerCase()}`}
+											style={{ width: 18, height: 14 }}
+										/>
+									) : null}
+									{m.dapper_beige_cherry()}
+								</p>
+							</div>
+						</CardContent>
+					</Card>
+
+					{movie.id ? (
+						<MediaLearnMoreCard id={movie.id} mediaType="movie" />
+					) : null}
+				</div>
+			}
+			infoTabs={
+				<MediaInfoTabs
+					key={movie.id}
+					cast={cast}
+					crew={crew}
+					genres={movie.genres}
+					facts={getMovieFacts(movie, { locale: localeRegion, region })}
+					media={{ type: "movie", id: movie.id }}
+				/>
+			}
 		>
-			<div className="grid lg:grid-cols-3 gap-2 p-px">
-				<MediaRatingDisplayCard mediaType="movie" tmdbId={movie.id} />
-
-				<Card>
-					<CardContent className="flex items-center gap-4">
-						<IconCalendarWeekFilled />
-						<div>
-							<p className="text-lg font-bold">
-								{releaseDate
-									? formatDate(releaseDate, localeRegion, {
-											day: "numeric",
-											month: "short",
-											year: "numeric",
-										})
-									: "N/A"}
-							</p>
-							<p className="text-sm text-muted-foreground flex items-center gap-2">
-								{releaseRegion ? (
-									<span
-										className={`fi fi-${releaseRegion.toLowerCase()}`}
-										style={{ width: 18, height: 14 }}
-									/>
-								) : null}
-								{m.dapper_beige_cherry()}
-							</p>
-						</div>
-					</CardContent>
-				</Card>
-
-				{movie.id ? (
-					<MediaLearnMoreCard id={movie.id} mediaType="movie" />
-				) : null}
-			</div>
-			<MediaInfoTabs
-				key={movie.id}
-				cast={cast}
-				crew={crew}
-				genres={movie.genres}
-				facts={getMovieFacts(movie, { locale: localeRegion, region })}
-				media={{ type: "movie", id: movie.id }}
-			/>
-
 			{collection ? <CollectionCard collection={collection} /> : null}
 		</MediaDetailsLayout>
 	);

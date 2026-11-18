@@ -130,69 +130,71 @@ export function TvDetailsView({
 					<MediaDetailsOverview overview={tv.overview} />
 				</div>
 			}
-		>
-			<div className="grid lg:grid-cols-3 gap-3 p-px">
-				<MediaRatingDisplayCard mediaType="tv" tmdbId={tv.id} />
+			stats={
+				<div className="grid lg:grid-cols-3 gap-3 p-px">
+					<MediaRatingDisplayCard mediaType="tv" tmdbId={tv.id} />
 
-				<Card>
-					<CardContent className="flex items-center gap-4">
-						<IconCalendarWeekFilled />
-						<div>
-							<p className="text-lg font-bold">
-								{tv.first_air_date
-									? formatDate(tv.first_air_date, localeRegion, {
-											year: "numeric",
-											month: "short",
-											day: "numeric",
-										})
-									: "N/A"}
-							</p>
-							<p className="text-sm text-muted-foreground">
-								{m.mellow_lilac_anchor()}
-							</p>
-						</div>
-					</CardContent>
-				</Card>
-
-				<TVStatusCard status={tv.status} />
-
-				<Link to="/tv/$tvId/seasons" params={{ tvId: tv.id.toString() }}>
 					<Card>
 						<CardContent className="flex items-center gap-4">
-							<IconDeviceTv />
+							<IconCalendarWeekFilled />
 							<div>
-								<p className="text-lg font-bold">{tv.number_of_seasons}</p>
+								<p className="text-lg font-bold">
+									{tv.first_air_date
+										? formatDate(tv.first_air_date, localeRegion, {
+												year: "numeric",
+												month: "short",
+												day: "numeric",
+											})
+										: "N/A"}
+								</p>
 								<p className="text-sm text-muted-foreground">
-									{m.lean_crimson_puma({ count: tv.number_of_seasons })}
+									{m.mellow_lilac_anchor()}
 								</p>
 							</div>
 						</CardContent>
 					</Card>
-				</Link>
 
-				<Card>
-					<CardContent className="flex items-center gap-4">
-						<IconStack2 />
-						<div>
-							<p className="text-lg font-bold">{tv.number_of_episodes}</p>
-							<p className="text-sm text-muted-foreground">
-								{m.warm_scarlet_jasmine({ count: tv.number_of_episodes })}
-							</p>
-						</div>
-					</CardContent>
-				</Card>
+					<TVStatusCard status={tv.status} />
 
-				{tv.id ? <MediaLearnMoreCard id={tv.id} mediaType="tv" /> : null}
-			</div>
+					<Link to="/tv/$tvId/seasons" params={{ tvId: tv.id.toString() }}>
+						<Card>
+							<CardContent className="flex items-center gap-4">
+								<IconDeviceTv />
+								<div>
+									<p className="text-lg font-bold">{tv.number_of_seasons}</p>
+									<p className="text-sm text-muted-foreground">
+										{m.lean_crimson_puma({ count: tv.number_of_seasons })}
+									</p>
+								</div>
+							</CardContent>
+						</Card>
+					</Link>
 
-			<MediaInfoTabs
-				key={tv.id}
-				cast={cast}
-				crew={crew}
-				genres={tv.genres}
-				facts={getTvFacts(tv, { locale: localeRegion, region })}
-				media={{ type: "tv", id: tv.id }}
-			/>
-		</MediaDetailsLayout>
+					<Card>
+						<CardContent className="flex items-center gap-4">
+							<IconStack2 />
+							<div>
+								<p className="text-lg font-bold">{tv.number_of_episodes}</p>
+								<p className="text-sm text-muted-foreground">
+									{m.warm_scarlet_jasmine({ count: tv.number_of_episodes })}
+								</p>
+							</div>
+						</CardContent>
+					</Card>
+
+					{tv.id ? <MediaLearnMoreCard id={tv.id} mediaType="tv" /> : null}
+				</div>
+			}
+			infoTabs={
+				<MediaInfoTabs
+					key={tv.id}
+					cast={cast}
+					crew={crew}
+					genres={tv.genres}
+					facts={getTvFacts(tv, { locale: localeRegion, region })}
+					media={{ type: "tv", id: tv.id }}
+				/>
+			}
+		/>
 	);
 }

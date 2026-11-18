@@ -14,24 +14,30 @@ interface MediaDetailsLayoutProps {
 	header: ReactNode;
 	overview?: ReactNode;
 	actions?: ReactNode;
-	children: ReactNode;
+	stats?: ReactNode;
+	infoTabs?: ReactNode;
+	children?: ReactNode;
 	className?: string;
 }
 
 /**
  * Below `lg`, the header sits next to a small poster on the right, then the
- * overview, the watch providers, the actions and the rest of the content span
- * the full width, leaving the backdrop visible above. From `lg` up, the
- * poster and watch providers form a left column, and the right column shows
- * the header with the overview below it, the actions beside both, then the
- * content.
+ * overview, the watch providers, the actions, the stats, the info tabs and the
+ * rest of the content span the full width, leaving the backdrop visible
+ * above. From `lg` up, the poster and watch providers form a left column, and
+ * the right column shows the header, the overview and the info tabs stacked,
+ * the actions beside them, then the stats and the content.
  *
- * The overview row is `1fr` so that, when the actions are taller than the
- * header, the extra height goes below the overview instead of between the
- * header and the overview. The right column is `self-start` so it never
- * stretches to the poster column's height: otherwise that row would also grow
- * when the content below is short, and the gap above the content would change
- * when switching tabs.
+ * The info tabs row is `1fr` so that, when the actions are taller than what
+ * sits beside them, the extra height goes below the tabs instead of between
+ * the header, the overview and the tabs. The right column is `self-start` so
+ * it never stretches to the poster column's height: otherwise that row would
+ * also grow when the content below is short, and the gap above the content
+ * would change when switching tabs.
+ *
+ * Without actions (signed out, or collections), the overview would span the
+ * whole right column from `lg` up, so it is capped at three quarters of it to
+ * keep lines readable.
  *
  * Both column wrappers use `display: contents` below `lg`, so their children
  * become items of the outer grid and are laid out by their `order`.
@@ -43,6 +49,8 @@ export function MediaDetailsLayout({
 	header,
 	overview,
 	actions,
+	stats,
+	infoTabs,
 	children,
 	className,
 }: MediaDetailsLayoutProps) {
@@ -62,23 +70,40 @@ export function MediaDetailsLayout({
 						) : null}
 					</div>
 
-					<div className="contents lg:grid lg:grid-cols-[1fr_auto] lg:grid-rows-[auto_1fr] lg:content-start lg:self-start lg:gap-x-2 lg:gap-y-4 lg:w-full lg:overflow-hidden">
-						<div className="order-1 min-w-0 self-center lg:self-auto">
+					<div className="contents lg:grid lg:grid-cols-[1fr_auto] lg:grid-rows-[auto_auto_1fr] lg:content-start lg:self-start lg:gap-x-2 lg:gap-y-4 lg:w-full lg:overflow-hidden">
+						<div className="order-1 min-w-0 self-center lg:self-auto lg:col-start-1 lg:row-start-1">
 							{header}
 						</div>
 						{overview ? (
-							<div className="order-3 col-span-2 lg:col-span-1 lg:col-start-1 min-w-0 pb-4">
+							<div
+								className={cn(
+									"order-3 col-span-2 lg:col-span-1 lg:col-start-1 lg:row-start-2 min-w-0",
+									!actions && "lg:max-w-3/4",
+								)}
+							>
 								{overview}
 							</div>
 						) : null}
 						{actions ? (
-							<div className="order-5 col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-2 lg:self-start lg:mt-3">
+							<div className="order-5 col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:self-start lg:mt-3">
 								{actions}
 							</div>
 						) : null}
-						<div className="order-6 col-span-2 min-w-0 max-lg:overflow-hidden flex flex-col gap-4">
-							{children}
-						</div>
+						{infoTabs ? (
+							<div className="order-7 col-span-2 lg:col-span-1 lg:col-start-1 lg:row-start-3 min-w-0 max-lg:overflow-hidden">
+								{infoTabs}
+							</div>
+						) : null}
+						{stats ? (
+							<div className="order-6 col-span-2 lg:row-start-4 min-w-0 max-lg:overflow-hidden">
+								{stats}
+							</div>
+						) : null}
+						{children ? (
+							<div className="order-8 col-span-2 min-w-0 max-lg:overflow-hidden flex flex-col gap-4">
+								{children}
+							</div>
+						) : null}
 					</div>
 				</div>
 			</div>
