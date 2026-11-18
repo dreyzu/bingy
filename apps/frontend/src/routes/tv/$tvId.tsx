@@ -21,7 +21,7 @@ function TvDetailsContainer() {
 		isError,
 	} = useTv(Number(tvId), {
 		append_to_response:
-			"aggregate_credits,external_ids,watch/providers,alternative_titles,content_ratings",
+			"aggregate_credits,external_ids,watch/providers,alternative_titles,content_ratings,videos",
 		language: localeRegion,
 		region,
 	});

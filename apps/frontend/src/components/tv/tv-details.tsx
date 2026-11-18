@@ -18,7 +18,9 @@ import { MediaDetailsOverview } from "@/components/medias/media-details-overview
 import { MediaInfoTabs } from "@/components/medias/media-info-tabs";
 import { MediaLearnMoreCard } from "@/components/medias/media-learn-more";
 import { MediaRatingDisplayCard } from "@/components/medias/media-rating-display-card";
+import { MediaReleaseYear } from "@/components/medias/media-release-year";
 import { MediaTitle } from "@/components/medias/media-title";
+import { MediaTrailerButton } from "@/components/medias/media-trailer-button";
 import { PortraitImage } from "@/components/portrait-image";
 import { TVStatusCard } from "@/components/tv/tv-details/status-card";
 import { getTvFacts } from "@/components/tv/tv-facts";
@@ -90,17 +92,18 @@ export function TvDetailsView({
 				<Card className="shadow-none bg-transparent border-none ring-0 p-0">
 					<CardContent className="p-0">
 						<div className="flex flex-col gap-4 px-0.5 py-0.5">
-							<MediaTitle
-								title={tv.name}
-								releaseDate={tv.first_air_date}
-								originalTitle={tv.original_name}
-							/>
+							<MediaTitle title={tv.name} originalTitle={tv.original_name} />
 
-							<MediaCreators
-								creators={tv.created_by}
-								formatCredit={m.elegant_lilac_mesa}
-								media={{ type: "tv", id: tv.id }}
-							/>
+							<div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+								<MediaReleaseYear releaseDate={tv.first_air_date} />
+								<MediaCreators
+									creators={tv.created_by}
+									formatCredit={m.elegant_lilac_mesa}
+									media={{ type: "tv", id: tv.id }}
+								/>
+							</div>
+
+							<MediaTrailerButton videos={tv.videos?.results} />
 						</div>
 					</CardContent>
 				</Card>

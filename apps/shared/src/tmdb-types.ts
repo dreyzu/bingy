@@ -144,6 +144,7 @@ export namespace Schemas {
 			"watch/providers"?: WatchProviders;
 			alternative_titles?: TvAlternativeTitles;
 			content_ratings?: TvContentRatings;
+			videos?: TvVideos;
 		}
 	>;
 
@@ -487,6 +488,7 @@ export namespace Schemas {
 			external_ids?: MovieExternalIds;
 			"watch/providers"?: WatchProviders;
 			alternative_titles?: MovieAlternativeTitles;
+			videos?: MovieVideos;
 		}
 	>;
 
@@ -1336,7 +1338,11 @@ export namespace Endpoints {
 		method: "GET";
 		path: "/movie/{movie_id}";
 		parameters: {
-			query: Partial<{ append_to_response: string; language: string }>;
+			query: Partial<{
+				append_to_response: string;
+				language: string;
+				include_video_language: string;
+			}>;
 			path: Required<{ movie_id: number }>;
 		};
 		response: Schemas.MovieDetails;
@@ -1700,7 +1706,11 @@ export namespace Endpoints {
 		method: "GET";
 		path: "/tv/{series_id}";
 		parameters: {
-			query: Partial<{ append_to_response: string; language: string }>;
+			query: Partial<{
+				append_to_response: string;
+				language: string;
+				include_video_language: string;
+			}>;
 			path: Required<{ series_id: number }>;
 		};
 		response: Schemas.TvDetails;

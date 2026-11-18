@@ -15,7 +15,9 @@ import { MediaDetailsOverview } from "@/components/medias/media-details-overview
 import { MediaInfoTabs } from "@/components/medias/media-info-tabs";
 import { MediaLearnMoreCard } from "@/components/medias/media-learn-more";
 import { MediaRatingDisplayCard } from "@/components/medias/media-rating-display-card";
+import { MediaReleaseYear } from "@/components/medias/media-release-year";
 import { MediaTitle } from "@/components/medias/media-title";
+import { MediaTrailerButton } from "@/components/medias/media-trailer-button";
 import { getMovieFacts } from "@/components/movies/movie-facts";
 import { PortraitImage } from "@/components/portrait-image";
 import { Card, CardContent } from "@/components/ui/card";
@@ -97,21 +99,24 @@ export function MovieDetailView({
 						<div className="flex flex-col gap-2 px-0.5 py-0.5">
 							<MediaTitle
 								title={movie.title}
-								releaseDate={movie.release_date}
 								originalTitle={movie.original_title}
 							/>
 
-							<div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-								<div className="flex gap-0.5 items-center font-bold">
-									<IconStopwatch width={16} height={16} />
-									<p className="text-sm">{formatRuntime(movie.runtime)}</p>
-								</div>
-
+							<div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+								<MediaReleaseYear releaseDate={movie.release_date} />
 								<MediaCreators
 									creators={directors}
 									formatCredit={m.swift_saffron_daisy}
 									media={{ type: "movie", id: movie.id }}
 								/>
+							</div>
+
+							<div className="flex flex-wrap items-center gap-3">
+								<MediaTrailerButton videos={movie.videos?.results} />
+								<div className="flex gap-0.5 items-center font-bold">
+									<IconStopwatch width={16} height={16} />
+									<p className="text-sm">{formatRuntime(movie.runtime)}</p>
+								</div>
 							</div>
 						</div>
 					</CardContent>

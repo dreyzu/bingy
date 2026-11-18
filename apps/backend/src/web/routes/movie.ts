@@ -6,6 +6,7 @@ import {
 	serveNotFound,
 } from "../../lib/responses/error";
 import { serveData } from "../../lib/responses/resp";
+import { detailsQuery } from "../../lib/tmdb/details-query";
 import { TmdbError, tmdbClient } from "../../lib/tmdb/tmdb-client";
 import {
 	countryQuerySchema,
@@ -124,7 +125,7 @@ movieRoutes.get(
 
 		try {
 			const movie = await tmdbClient.get("/movie/{movie_id}", {
-				query: { language, append_to_response },
+				query: detailsQuery(language, append_to_response),
 				path: { movie_id: id },
 			});
 			return serveData(c, movie);

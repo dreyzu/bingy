@@ -28,7 +28,7 @@ function MovieDetailsPage() {
 		isError,
 	} = useMovie(Number(movieId), {
 		append_to_response:
-			"credits,external_ids,watch/providers,alternative_titles",
+			"credits,external_ids,watch/providers,alternative_titles,videos",
 		language: localeRegion,
 	});
 
