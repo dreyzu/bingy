@@ -4,6 +4,7 @@ import { MovieDetailView } from "@/components/movies/movie-details";
 import { useMovie, useMovieResource } from "@/hooks/useMovies";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 import { getReleaseDate } from "@/utils/release-dates";
+import { uniqueCastMembers, uniqueCrewMembers } from "@/utils/utils";
 
 export const Route = createFileRoute("/movies/$movieId")({
 	component: MovieDetailsPage,
@@ -26,7 +27,8 @@ function MovieDetailsPage() {
 		isLoading,
 		isError,
 	} = useMovie(Number(movieId), {
-		append_to_response: "credits,external_ids,watch/providers",
+		append_to_response:
+			"credits,external_ids,watch/providers,alternative_titles",
 		language: localeRegion,
 	});
 
@@ -50,12 +52,8 @@ function MovieDetailsPage() {
 				name: person.name,
 				gender: person.gender,
 			})) ?? [];
-	const cast = movie?.credits?.cast?.slice(0, 10) || [];
-	const crew = Array.from(
-		new Map(
-			movie?.credits?.crew?.map((member) => [member.id, member]),
-		).values(),
-	).slice(0, 10);
+	const cast = uniqueCastMembers(movie?.credits?.cast ?? []).slice(0, 10);
+	const crew = uniqueCrewMembers(movie?.credits?.crew ?? []).slice(0, 10);
 	const collection = movie ? movie.belongs_to_collection : undefined;
 	const watchProviders = movie?.["watch/providers"];
 
