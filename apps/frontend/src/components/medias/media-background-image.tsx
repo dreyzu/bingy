@@ -7,37 +7,16 @@ interface MediaBackgroundImageProps {
 export function MediaBackgroundImage({
 	backgroundImage,
 }: MediaBackgroundImageProps) {
-	const bgColor = "var(--background)";
-
 	return (
-		<div className="absolute top-14 lg:top-0 left-1/2 -translate-x-1/2 w-full ring-0 border-none shadow-none max-w-xl lg:max-w-7xl h-75 lg:h-112.5 -z-10 overflow-hidden">
-			<div
-				className="absolute inset-0"
-				style={{
-					backgroundImage: `url(${backgroundImage ?? backgroundPlaceholder})`,
-					backgroundSize: "100% auto",
-					backgroundPosition: "top center",
-					backgroundRepeat: "no-repeat",
-				}}
-			/>
-
-			<div
-				className="absolute inset-0"
-				style={{
-					background: `radial-gradient(
-						circle at center, 
-						transparent 0%, 
-						${bgColor} 85%
-					)`,
-				}}
-			/>
-
-			<div
-				className="absolute inset-0"
-				style={{
-					background: `linear-gradient(to bottom, transparent 40%, ${bgColor} 100%)`,
-				}}
-			/>
+		<div className="absolute top-14 lg:top-0 left-1/2 -translate-x-1/2 w-full max-w-xl lg:max-w-7xl h-75 lg:h-112.5 -z-10 overflow-hidden">
+			<div className="w-full max-h-full overflow-hidden mask-t-from-70% mask-b-from-45% mask-x-from-75%">
+				<img
+					src={backgroundImage ?? backgroundPlaceholder}
+					alt=""
+					aria-hidden
+					className="block w-full h-auto"
+				/>
+			</div>
 		</div>
 	);
 }

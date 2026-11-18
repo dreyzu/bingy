@@ -7,6 +7,7 @@ import {
 	serveNotFound,
 } from "../../lib/responses/error";
 import { serveData } from "../../lib/responses/resp";
+import { detailsQuery } from "../../lib/tmdb/details-query";
 import { TmdbError, tmdbClient } from "../../lib/tmdb/tmdb-client";
 import {
 	idParamSchema,
@@ -90,7 +91,7 @@ tvRoutes.get(
 
 		try {
 			const tv = await tmdbClient.get("/tv/{series_id}", {
-				query: { language, append_to_response },
+				query: detailsQuery(language, append_to_response),
 				path: { series_id: id },
 			});
 			return serveData(c, tv);

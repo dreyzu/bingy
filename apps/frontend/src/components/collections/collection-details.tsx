@@ -1,10 +1,12 @@
 import type { Schemas } from "shared";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { MediaBackgroundImage } from "@/components/medias/media-background-image";
-import { MediaOverview } from "@/components/medias/media-overview";
+import {
+	MEDIA_DETAILS_POSTER_CLASSES,
+	MediaDetailsLayout,
+} from "@/components/medias/media-details-layout";
+import { MediaDetailsOverview } from "@/components/medias/media-details-overview";
 import { MovieCarousel } from "@/components/movies/movie-carousel";
-import { BackButton } from "@/components/ui/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { m } from "@/paraglide/messages";
@@ -104,57 +106,46 @@ export function CollectionDetailsView({
 	);
 
 	return (
-		<>
-			<MediaBackgroundImage backgroundImage={backgroundImage} />
-			<div className="w-full pt-3 md:pt-10 lg:pt-50">
-				<BackButton />
+		<MediaDetailsLayout
+			backgroundImage={backgroundImage}
+			className="lg:pt-50"
+			poster={
+				<PortraitImage
+					imagePath={collectionData.poster_path}
+					alt={collectionData.name}
+					category="movie"
+					className={MEDIA_DETAILS_POSTER_CLASSES}
+				/>
+			}
+			header={
+				<Card className="shadow-none bg-transparent border-none p-0 ring-0 gap-0">
+					<CardContent className="p-0">
+						<div className="flex flex-col gap-2 px-0.5 py-0.5">
+							<h1 className="text-2xl lg:text-4xl font-bold leading-relaxed">
+								{collectionData.name}
+							</h1>
 
-				<div className="grid lg:grid-cols-[auto_1fr] gap-2 lg:gap-4 pt-2 justify-items-center">
-					<div className="flex flex-col gap-2 items-center lg:items-start max-w-62.5 md:max-w-60 2xl:max-w-75">
-						<PortraitImage
-							imagePath={collectionData.poster_path}
-							alt={collectionData.name}
-							category="movie"
-						/>
-					</div>
+							<div className="flex flex-wrap gap-2">
+								{sortedAggregate.genres.map((genre) => (
+									<Badge key={genre.id} variant="outline">
+										{genre.name}
+									</Badge>
+								))}
+							</div>
+						</div>
+					</CardContent>
+				</Card>
+			}
+			overview={<MediaDetailsOverview overview={collectionData.overview} />}
+		>
+			<MovieCarousel
+				title={m.lush_mint_turtle({
+					number: collectionData.parts.length,
+				})}
+				movies={sortedParts}
+			/>
 
-					<div className="w-full flex flex-col gap-4 overflow-hidden">
-						<Card className="shadow-none bg-transparent border-none p-0 ring-0 gap-0">
-							<CardContent className="p-0">
-								<div className="flex flex-col gap-2 px-0.5 py-0.5">
-									<h1 className="text-2xl lg:text-4xl font-bold leading-relaxed">
-										{collectionData.name}
-									</h1>
-
-									<div className="flex flex-wrap gap-2">
-										{sortedAggregate.genres.map((genre) => (
-											<Badge key={genre.id} variant="outline">
-												{genre.name}
-											</Badge>
-										))}
-									</div>
-
-									<div className="flex flex-col gap-1">
-										<MediaOverview overview={collectionData.overview} />
-									</div>
-								</div>
-							</CardContent>
-						</Card>
-
-						<MovieCarousel
-							title={m.lush_mint_turtle({
-								number: collectionData.parts.length,
-							})}
-							movies={sortedParts}
-						/>
-
-						<CastCrewTabs
-							cast={sortedAggregate.cast}
-							crew={sortedAggregate.crew}
-						/>
-					</div>
-				</div>
-			</div>
-		</>
+			<CastCrewTabs cast={sortedAggregate.cast} crew={sortedAggregate.crew} />
+		</MediaDetailsLayout>
 	);
 }

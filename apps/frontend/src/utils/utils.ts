@@ -96,6 +96,58 @@ export function mergeCrewMemberJobs(
 	}
 }
 
+function mergeUnique(
+	values: Array<string | undefined>,
+	extra: Array<string | undefined> = [],
+): string[] {
+	return [...new Set([...values, ...extra].filter((v): v is string => !!v))];
+}
+
+/**
+ * One entry per person, in first-credit order. A person credited several
+ * times keeps every distinct character in `characters`.
+ */
+export function uniqueCastMembers<T extends Schemas.CastMember>(
+	cast: Array<T & { characters?: string[] }>,
+): Array<T & { characters: string[] }> {
+	const byId = new Map<number, T & { characters: string[] }>();
+	for (const member of cast) {
+		const existing = byId.get(member.id);
+		const characters = member.characters ?? [member.character];
+		byId.set(
+			member.id,
+			existing
+				? {
+						...existing,
+						characters: mergeUnique(existing.characters, characters),
+					}
+				: { ...member, characters: mergeUnique(characters) },
+		);
+	}
+	return [...byId.values()];
+}
+
+/**
+ * One entry per person, in first-credit order. A person credited several
+ * times keeps every distinct job in `jobs`.
+ */
+export function uniqueCrewMembers<T extends Schemas.CrewMember>(
+	crew: Array<T & { jobs?: string[] }>,
+): Array<T & { jobs: string[] }> {
+	const byId = new Map<number, T & { jobs: string[] }>();
+	for (const member of crew) {
+		const existing = byId.get(member.id);
+		const jobs = member.jobs ?? [member.job];
+		byId.set(
+			member.id,
+			existing
+				? { ...existing, jobs: mergeUnique(existing.jobs, jobs) }
+				: { ...member, jobs: mergeUnique(jobs) },
+		);
+	}
+	return [...byId.values()];
+}
+
 // temporary solution until we call the real justwatch api
 // @todo: rework that
 export function getProviderName(name: string | null | undefined): string {

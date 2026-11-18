@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/card";
 import { useCollection } from "@/hooks/useCollection";
 import { localeRegionAtom } from "@/lib/atoms/region";
+import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 
 interface CollectionCardProps {
@@ -31,7 +32,10 @@ export function CollectionCard({ collection }: CollectionCardProps) {
 
 	return (
 		<Card
-			className="relative overflow-hidden min-h-50 ring-0 justify-center text-dark-card-foreground"
+			className={cn(
+				"relative overflow-hidden min-h-50 ring-0 justify-center",
+				backgroundImage ? "text-dark-card-foreground" : "text-card-foreground",
+			)}
 			style={
 				backgroundImage
 					? {
@@ -44,7 +48,13 @@ export function CollectionCard({ collection }: CollectionCardProps) {
 		>
 			<CardHeader>
 				<CardTitle>{collection.name}</CardTitle>
-				<CardDescription className="text-foreground">
+				<CardDescription
+					className={
+						backgroundImage
+							? "text-dark-card-foreground"
+							: "text-muted-foreground"
+					}
+				>
 					{m.loyal_violet_valley({
 						numberOfMovies: collectionData.parts.length,
 					})}
