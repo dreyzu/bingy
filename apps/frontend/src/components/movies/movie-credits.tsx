@@ -1,5 +1,9 @@
-import { useId } from "react";
 import type { Schemas } from "shared";
+import {
+	CREW_SECTION_ID,
+	type CreditsSection,
+	useScrollToCrewSection,
+} from "@/components/credits/crew-section";
 import { ScrollToCrewButton } from "@/components/credits/scroll-to-crew-button";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
@@ -10,16 +14,18 @@ import { m } from "@/paraglide/messages";
 
 interface MovieCreditsViewProps {
 	credits: Schemas.MovieCredits | undefined;
+	section?: CreditsSection;
 	isLoading: boolean;
 	isError: boolean;
 }
 
 export function MovieCreditsView({
 	credits,
+	section,
 	isLoading,
 	isError,
 }: MovieCreditsViewProps) {
-	const crewSectionId = useId();
+	useScrollToCrewSection(section, !isLoading && credits !== undefined);
 	if (isLoading) {
 		return <LoadingCentered />;
 	}
@@ -37,12 +43,12 @@ export function MovieCreditsView({
 				<BackButton />
 
 				{credits.crew.length > 0 && credits.cast.length > 0 ? (
-					<ScrollToCrewButton crewSectionId={crewSectionId} />
+					<ScrollToCrewButton crewSectionId={CREW_SECTION_ID} />
 				) : null}
 			</div>
 			<div className="flex flex-col gap-2 mt-4 text-center md:text-left">
 				<CastSectionMovie people={credits.cast} />
-				<div id={crewSectionId} className="scroll-mt-26 lg:scroll-mt-30">
+				<div id={CREW_SECTION_ID} className="scroll-mt-26 lg:scroll-mt-30">
 					<CrewSectionMovie people={credits.crew} />
 				</div>
 			</div>
