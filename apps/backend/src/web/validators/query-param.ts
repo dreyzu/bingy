@@ -182,6 +182,10 @@ const appendOptions = z.union([
 	z.literal("external_ids,combined_credits,translations"),
 	z.literal("credits,external_ids,watch/providers"),
 	z.literal("aggregate_credits,external_ids,watch/providers"),
+	z.literal("credits,external_ids,watch/providers,alternative_titles"),
+	z.literal(
+		"aggregate_credits,external_ids,watch/providers,alternative_titles,content_ratings",
+	),
 ]);
 
 export const queryParamsAppendToResponse = z.object({

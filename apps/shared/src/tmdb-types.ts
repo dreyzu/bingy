@@ -142,6 +142,8 @@ export namespace Schemas {
 			aggregate_credits?: TvAggregatedCredits;
 			external_ids?: TvExternalIds;
 			"watch/providers"?: WatchProviders;
+			alternative_titles?: TvAlternativeTitles;
+			content_ratings?: TvContentRatings;
 		}
 	>;
 
@@ -484,6 +486,7 @@ export namespace Schemas {
 			credits?: MovieCredits;
 			external_ids?: MovieExternalIds;
 			"watch/providers"?: WatchProviders;
+			alternative_titles?: MovieAlternativeTitles;
 		}
 	>;
 
