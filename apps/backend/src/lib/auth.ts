@@ -78,6 +78,12 @@ const options = {
 				input: false,
 				returned: true,
 			},
+			isPrivate: {
+				type: "boolean",
+				required: false,
+				input: false,
+				returned: true,
+			},
 		},
 		changeEmail: {
 			enabled: true,

@@ -2,6 +2,7 @@ import { relations } from "drizzle-orm";
 import { activity } from "./activity";
 import { accounts } from "./auth";
 import { customLists, favorites, listItems, watchlist } from "./collection";
+import { follows } from "./follow";
 import { media } from "./media";
 import { reviewComments } from "./review";
 import {
@@ -29,6 +30,21 @@ export const usersRelations = relations(users, ({ many }) => ({
 	watchlist: many(watchlist),
 	customLists: many(customLists),
 	favorites: many(favorites),
+	following: many(follows, { relationName: "follower" }),
+	followers: many(follows, { relationName: "following" }),
+}));
+
+export const followsRelations = relations(follows, ({ one }) => ({
+	follower: one(users, {
+		fields: [follows.followerId],
+		references: [users.id],
+		relationName: "follower",
+	}),
+	following: one(users, {
+		fields: [follows.followingId],
+		references: [users.id],
+		relationName: "following",
+	}),
 }));
 
 export const accountsRelations = relations(accounts, ({ one }) => ({

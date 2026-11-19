@@ -1,6 +1,7 @@
 export * from "./activity";
 export * from "./auth";
 export * from "./collection";
+export * from "./follow";
 export * from "./media";
 export * from "./relations";
 export * from "./review";
