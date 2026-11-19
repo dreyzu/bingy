@@ -6,7 +6,7 @@ import { toast } from "@/components/toast/toast";
 import { authClient } from "@/lib/auth-client";
 import { m } from "@/paraglide/messages";
 
-const tabs = ["account", "display"] as const;
+const tabs = ["account", "privacy", "display"] as const;
 export type SettingsTab = (typeof tabs)[number];
 
 const settingsPageSchema = z.object({
