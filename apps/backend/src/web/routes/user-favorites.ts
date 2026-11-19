@@ -10,10 +10,10 @@ import {
 	movieWatchHistory,
 	tvShowProgress,
 	tvShowWatchHistory,
-	users,
 	watchlist,
 } from "../../db/schemas";
 import { db } from "../../lib/database";
+import { loadViewableProfile } from "../../lib/profile-access";
 import { getMediaDetails } from "../../lib/tmdb/get-media-details";
 import { getOrCreateMedia } from "../../web/utils/create-update-media";
 
@@ -186,11 +186,11 @@ userFavoriteRoutes.get(
 		} = c.req.valid("query");
 		const offset = (page - 1) * limit;
 
-		const targetUser = await db.query.users.findFirst({
-			where: eq(users.name, username),
-		});
-
-		if (!targetUser) return c.json("USER_NOT_FOUND", 404);
+		const profile = await loadViewableProfile(c, username);
+		if (!profile.ok) {
+			return c.json({ error: profile.error }, profile.status);
+		}
+		const targetUser = profile.user;
 
 		const baseSelect = {
 			mediaId: media.id,

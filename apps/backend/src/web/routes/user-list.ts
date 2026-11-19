@@ -9,11 +9,11 @@ import {
 	customLists,
 	listItems,
 	media,
-	users,
 	watchlist,
 } from "../../db/schemas";
 import { db } from "../../lib/database";
 import env from "../../lib/env";
+import { loadViewableProfile } from "../../lib/profile-access";
 import { serveNotFound } from "../../lib/responses/error";
 import { serveCreated, serveNoContent } from "../../lib/responses/resp";
 import { createSlug } from "../../lib/slug";
@@ -150,11 +150,11 @@ userListRoutes.get(
 			mediaType: mediaTypeFilter,
 		} = c.req.valid("query");
 
-		const targetUser = await db.query.users.findFirst({
-			where: eq(users.name, username),
-		});
-
-		if (!targetUser) return c.json({ error: "USER_NOT_FOUND" }, 404);
+		const profile = await loadViewableProfile(c, username);
+		if (!profile.ok) {
+			return c.json({ error: profile.error }, profile.status);
+		}
+		const targetUser = profile.user;
 
 		const offset = (page - 1) * limit;
 
@@ -228,24 +228,23 @@ userListRoutes.get(
 		const { username } = c.req.param();
 		const { language, mediaType: mediaTypeFilter } = c.req.valid("query");
 
-		const targetUser = await db.query.users.findFirst({
-			where: eq(users.name, username),
-		});
-
-		if (!targetUser)
+		// RSS readers are anonymous, so a private account's feed is never served.
+		const profile = await loadViewableProfile(c, username);
+		if (!profile.ok)
 			return c.text(
 				[
 					'<?xml version="1.0" encoding="UTF-8"?>',
 					'<rss version="2.0">',
 					"<channel>",
 					"  <title>Error</title>",
-					"  <description>User not found</description>",
+					`  <description>${profile.error === "PRIVATE_PROFILE" ? "This profile is private" : "User not found"}</description>`,
 					"</channel>",
 					"</rss>",
 				].join("\n"),
-				404,
+				profile.status,
 				{ "Content-Type": "application/rss+xml; charset=utf-8" },
 			);
+		const targetUser = profile.user;
 
 		const dbItems = await db
 			.select({ watchlist, media })
@@ -640,11 +639,11 @@ userListRoutes.get(
 		const currentUser = c.get("user");
 		const { limit, page, filter } = c.req.valid("query");
 
-		const targetUser = await db.query.users.findFirst({
-			where: eq(users.name, username.toLocaleLowerCase()),
-		});
-
-		if (!targetUser) return c.json({ error: "USER_NOT_FOUND" }, 404);
+		const profile = await loadViewableProfile(c, username);
+		if (!profile.ok) {
+			return c.json({ error: profile.error }, profile.status);
+		}
+		const targetUser = profile.user;
 
 		const isOwnProfile = currentUser?.id === targetUser.id;
 		const offset = (page - 1) * limit;
@@ -956,11 +955,11 @@ userListRoutes.get(
 		const { language, limit, page } = c.req.valid("query");
 		const currentUser = c.get("user");
 
-		const targetUser = await db.query.users.findFirst({
-			where: eq(users.name, username),
-		});
-
-		if (!targetUser) return c.json({ error: "USER_NOT_FOUND" }, 404);
+		const profile = await loadViewableProfile(c, username);
+		if (!profile.ok) {
+			return c.json({ error: profile.error }, profile.status);
+		}
+		const targetUser = profile.user;
 
 		const isOwner = currentUser?.id === targetUser.id;
 

@@ -1,5 +1,5 @@
 import { zValidator } from "@hono/zod-validator";
-import { asc, desc, eq } from "drizzle-orm";
+import { and, asc, count, desc, eq, type SQL } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
 import type { User } from "../../db/schemas";
@@ -7,6 +7,7 @@ import {
 	activity,
 	customLists,
 	favorites,
+	follows,
 	listItems,
 	media,
 	users,
@@ -14,6 +15,11 @@ import {
 } from "../../db/schemas";
 import { db } from "../../lib/database";
 import { logger } from "../../lib/logger";
+import {
+	getFollowStatus,
+	getProfileAccess,
+	loadViewableProfile,
+} from "../../lib/profile-access";
 import { getMediaDetails } from "../../lib/tmdb/get-media-details";
 import { sessionMiddleware } from "../../web/middlewares/session";
 import { deleteImageByUrl, uploadImage } from "../../web/utils/image";
@@ -29,7 +35,9 @@ const userProfileRoutes = new Hono<{ Variables: Variables }>();
 
 userProfileRoutes.use("*", sessionMiddleware);
 
-// Get basic user info
+// Get basic user info, follow counts and the viewer's relationship to the user.
+// Always returned, even for private profiles, so the page can show who the
+// account is and offer a follow request.
 userProfileRoutes.get(
 	"/:username",
 	zValidator(
@@ -40,16 +48,19 @@ userProfileRoutes.get(
 	),
 	async (c) => {
 		const { username } = c.req.valid("param");
+		const viewer = c.get("user");
 
 		const user = await db.query.users.findFirst({
-			where: eq(users.name, username),
+			where: eq(users.name, username.toLowerCase()),
 			columns: {
+				id: true,
 				name: true,
 				displayName: true,
 				avatarUrl: true,
 				bannerUrl: true,
 				bio: true,
 				location: true,
+				isPrivate: true,
 			},
 		});
 
@@ -57,7 +68,91 @@ userProfileRoutes.get(
 			return c.json({ error: "USER_NOT_FOUND" }, 404);
 		}
 
-		return c.json(user, 200);
+		const countFollows = (filter: SQL | undefined) =>
+			db
+				.select({ count: count() })
+				.from(follows)
+				.where(filter)
+				.then(([row]) => row?.count ?? 0);
+
+		const isOwner = viewer?.id === user.id;
+
+		const [access, followerCount, followingCount, followsYou, requestCount] =
+			await Promise.all([
+				getProfileAccess(viewer, user),
+				countFollows(
+					and(eq(follows.followingId, user.id), eq(follows.status, "accepted")),
+				),
+				countFollows(
+					and(eq(follows.followerId, user.id), eq(follows.status, "accepted")),
+				),
+				viewer && !isOwner
+					? getFollowStatus(user.id, viewer.id).then(
+							(status) => status === "accepted",
+						)
+					: false,
+				isOwner
+					? countFollows(
+							and(
+								eq(follows.followingId, user.id),
+								eq(follows.status, "pending"),
+							),
+						)
+					: null,
+			]);
+
+		const { id: _id, ...profile } = user;
+
+		return c.json(
+			{
+				...profile,
+				followerCount,
+				followingCount,
+				followStatus: access.followStatus,
+				followsYou,
+				canView: access.canView,
+				pendingRequestCount: requestCount,
+			},
+			200,
+		);
+	},
+);
+
+// Make the current user's account private or public
+userProfileRoutes.patch(
+	"/privacy",
+	zValidator("json", z.object({ isPrivate: z.boolean() })),
+	async (c) => {
+		const sessionUser = c.get("user");
+		if (!sessionUser) return c.json({ error: "Unauthorized" }, 401);
+		const { isPrivate } = c.req.valid("json");
+
+		const updated = await db.transaction(async (tx) => {
+			const [row] = await tx
+				.update(users)
+				.set({ isPrivate, updatedAt: new Date() })
+				.where(eq(users.id, sessionUser.id))
+				.returning({ isPrivate: users.isPrivate });
+
+			// Going public lets everyone in, so pending requests become follows.
+			if (row && !isPrivate) {
+				await tx
+					.update(follows)
+					.set({ status: "accepted", acceptedAt: new Date() })
+					.where(
+						and(
+							eq(follows.followingId, sessionUser.id),
+							eq(follows.status, "pending"),
+						),
+					);
+			}
+
+			return row;
+		});
+
+		if (!updated) return c.json({ error: "USER_NOT_FOUND" }, 404);
+
+		return c.json(updated, 200);
 	},
 );
 
@@ -66,13 +161,11 @@ userProfileRoutes.get("/:username/activity", async (c) => {
 	const { username } = c.req.param();
 	const language = c.req.query("language") || "en-US";
 
-	const targetUser = await db.query.users.findFirst({
-		where: eq(users.name, username),
-	});
-
-	if (!targetUser) {
-		return c.json({ error: "USER_NOT_FOUND" }, 404);
+	const profile = await loadViewableProfile(c, username);
+	if (!profile.ok) {
+		return c.json({ error: profile.error }, profile.status);
 	}
+	const targetUser = profile.user;
 
 	const activities = await db.query.activity.findMany({
 		where: eq(activity.userId, targetUser.id),
@@ -149,13 +242,11 @@ userProfileRoutes.get("/:username/favorites", async (c) => {
 	const { username } = c.req.param();
 	const language = c.req.query("language") || "en-US";
 
-	const targetUser = await db.query.users.findFirst({
-		where: eq(users.name, username),
-	});
-
-	if (!targetUser) {
-		return c.json({ error: "USER_NOT_FOUND" }, 404);
+	const profile = await loadViewableProfile(c, username);
+	if (!profile.ok) {
+		return c.json({ error: profile.error }, profile.status);
 	}
+	const targetUser = profile.user;
 
 	const entries = await db
 		.select({
@@ -195,13 +286,11 @@ userProfileRoutes.get("/:username/watchlist", async (c) => {
 	const { username } = c.req.param();
 	const language = c.req.query("language") || "en-US";
 
-	const targetUser = await db.query.users.findFirst({
-		where: eq(users.name, username),
-	});
-
-	if (!targetUser) {
-		return c.json({ error: "USER_NOT_FOUND" }, 404);
+	const profile = await loadViewableProfile(c, username);
+	if (!profile.ok) {
+		return c.json({ error: profile.error }, profile.status);
 	}
+	const targetUser = profile.user;
 
 	const entries = await db
 		.select({
@@ -241,16 +330,19 @@ userProfileRoutes.get("/:username/lists", async (c) => {
 	const { username } = c.req.param();
 	const language = c.req.query("language") || "en-US";
 
-	const targetUser = await db.query.users.findFirst({
-		where: eq(users.name, username),
-	});
-
-	if (!targetUser) {
-		return c.json({ error: "USER_NOT_FOUND" }, 404);
+	const profile = await loadViewableProfile(c, username);
+	if (!profile.ok) {
+		return c.json({ error: profile.error }, profile.status);
 	}
+	const targetUser = profile.user;
 
 	const lists = await db.query.customLists.findMany({
-		where: eq(customLists.userId, targetUser.id),
+		where: profile.access.isOwner
+			? eq(customLists.userId, targetUser.id)
+			: and(
+					eq(customLists.userId, targetUser.id),
+					eq(customLists.visibility, "public"),
+				),
 		orderBy: [desc(customLists.createdAt)],
 		limit: 3,
 	});
