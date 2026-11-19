@@ -35,6 +35,9 @@ export type FollowUsersResponse = PaginatedUsers<FollowUser>;
 
 export type FollowListKind = "followers" | "following";
 
+/** Requests sent to the signed-in user, or sent by them. */
+export type FollowRequestKind = "received" | "sent";
+
 export const followUser = (username: string) =>
 	apiFetch<{ status: FollowStatus }>(`/follows/${username}`, {
 		method: "POST",
@@ -53,11 +56,14 @@ export const fetchFollowUsers = (
 		query: { page },
 	});
 
-export const fetchFollowRequests = (page = 1) =>
-	apiFetch<FollowUsersResponse>("/follows/requests", {
-		method: "GET",
-		query: { page },
-	});
+export const fetchFollowRequests = (kind: FollowRequestKind, page = 1) =>
+	apiFetch<FollowUsersResponse>(
+		kind === "sent" ? "/follows/requests/sent" : "/follows/requests",
+		{
+			method: "GET",
+			query: { page },
+		},
+	);
 
 export const acceptFollowRequest = (username: string) =>
 	apiFetch<{ status: FollowStatus }>(`/follows/requests/${username}/accept`, {

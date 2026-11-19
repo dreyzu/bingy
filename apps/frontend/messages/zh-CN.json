@@ -1059,5 +1059,10 @@
 	"chilly_peach_nectar": "你还没有屏蔽任何人",
 	"steady_periwinkle_parrot": "无法加载已屏蔽的账号，请再试一次。",
 	"golden_violet_mirror": "取消屏蔽",
-	"chilly_sage_maple": "移除"
+	"chilly_sage_maple": "移除",
+	"epic_periwinkle_parrot": "没有待处理的已发送请求",
+	"noble_orange_marmot": "无法加载你发送的请求。",
+	"lush_onyx_mirror": "取消",
+	"joyful_lilac_prairie": "关注中",
+	"lucky_yellow_crystal": "待处理"
 }

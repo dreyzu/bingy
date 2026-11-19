@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 import type { PaginatedUsers, UserSummary } from "@/api/follows";
 import { EmptyUsers } from "@/components/profile/empty-users";
 import { UserCard } from "@/components/profile/user-card";
+import { cn } from "@/lib/utils";
 
 interface FollowUsersListProps<T extends UserSummary> {
 	query: UseInfiniteQueryResult<InfiniteData<PaginatedUsers<T>>>;
@@ -14,6 +15,11 @@ interface FollowUsersListProps<T extends UserSummary> {
 	errorMessage: string;
 	renderActions: (user: T) => ReactNode;
 	onNavigate?: () => void;
+	/**
+	 * Always take the full list height, even while loading or empty, so a
+	 * dialog switching between lists (tabs) keeps the same size.
+	 */
+	fixedHeight?: boolean;
 }
 
 /** Scrollable list of users that loads the next page near the bottom. */
@@ -23,25 +29,44 @@ export function FollowUsersList<T extends UserSummary>({
 	errorMessage,
 	renderActions,
 	onNavigate,
+	fixedHeight = false,
 }: FollowUsersListProps<T>) {
 	const { data, status, hasNextPage, isFetchingNextPage, fetchNextPage } =
 		query;
 
+	const height = fixedHeight
+		? "h-[50vh] lg:h-[30vh]"
+		: "max-h-[50vh] lg:max-h-[30vh]";
+	const stateClassName = cn(
+		"flex items-center justify-center",
+		fixedHeight && height,
+	);
+
 	if (status === "pending") {
 		return (
-			<div className="flex items-center justify-center py-8">
+			<div className={cn(stateClassName, "py-8")}>
 				<IconLoader className="h-5 w-5 animate-spin text-muted-foreground" />
 			</div>
 		);
 	}
 
 	if (status === "error") {
-		return <p className="py-8 text-center text-sm">{errorMessage}</p>;
+		return (
+			<div className={stateClassName}>
+				<p className="py-8 text-center text-sm">{errorMessage}</p>
+			</div>
+		);
 	}
 
 	const users = data.pages.flatMap((page) => page.data);
 
-	if (users.length === 0) return <EmptyUsers message={emptyMessage} />;
+	if (users.length === 0) {
+		return (
+			<div className={stateClassName}>
+				<EmptyUsers message={emptyMessage} />
+			</div>
+		);
+	}
 
 	const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
 		const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
@@ -57,7 +82,7 @@ export function FollowUsersList<T extends UserSummary>({
 	return (
 		<div
 			onScroll={handleScroll}
-			className="-mx-4 no-scrollbar max-h-[50vh] lg:max-h-[30vh] overflow-y-auto px-4"
+			className={cn("-mx-4 no-scrollbar overflow-y-auto px-4", height)}
 		>
 			{users.map((user) => (
 				<UserCard

@@ -19,16 +19,25 @@ import {
 import { m } from "@/paraglide/messages";
 
 interface ProfileFollowRequestsDialogProps {
+	/** Requests waiting for the signed-in user's answer. */
 	count: number;
 }
 
+/**
+ * Follow requests received by the signed-in user. Requests sent to others
+ * live in the following dialog instead.
+ */
 export function ProfileFollowRequestsDialog({
 	count,
 }: ProfileFollowRequestsDialogProps) {
 	const [open, setOpen] = useState(false);
-	const query = useFollowRequests(open);
+	const query = useFollowRequests("received", open);
 	const accept = useAcceptFollowRequest();
 	const decline = useDeclineFollowRequest();
+
+	// Only shown while there are requests, but an open dialog stays open after
+	// answering the last one.
+	if (count === 0 && !open) return null;
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
@@ -52,6 +61,7 @@ export function ProfileFollowRequestsDialog({
 					query={query}
 					emptyMessage={m.loyal_ruby_planet()}
 					errorMessage={m.bubbly_gold_saddle()}
+					fixedHeight
 					onNavigate={() => setOpen(false)}
 					renderActions={(user) => (
 						<>

@@ -8,9 +8,9 @@ interface ProfileFollowStatsProps {
 	followerCount: number;
 	followingCount: number;
 	isOwnProfile: boolean;
-	isPrivate: boolean;
 	canView: boolean;
 	pendingRequestCount: number | null;
+	sentRequestCount: number | null;
 }
 
 export function ProfileFollowStats({
@@ -19,14 +19,12 @@ export function ProfileFollowStats({
 	followerCount,
 	followingCount,
 	isOwnProfile,
-	isPrivate,
 	canView,
 	pendingRequestCount,
+	sentRequestCount,
 }: ProfileFollowStatsProps) {
-	// Requests only exist for private accounts, but keep the entry visible while
-	// some are still pending (e.g. right after switching back to public).
-	const showRequests =
-		isOwnProfile && (isPrivate || (pendingRequestCount ?? 0) > 0);
+	const receivedCount = pendingRequestCount ?? 0;
+	const sentCount = sentRequestCount ?? 0;
 
 	return (
 		<div className="flex flex-row flex-wrap items-center gap-3 text-sm">
@@ -36,6 +34,7 @@ export function ProfileFollowStats({
 				count={followingCount}
 				isOwnProfile={isOwnProfile}
 				canView={canView}
+				sentRequestCount={sentCount}
 			/>
 			<ProfileFollowersDialog
 				username={username}
@@ -44,8 +43,8 @@ export function ProfileFollowStats({
 				isOwnProfile={isOwnProfile}
 				canView={canView}
 			/>
-			{showRequests ? (
-				<ProfileFollowRequestsDialog count={pendingRequestCount ?? 0} />
+			{isOwnProfile ? (
+				<ProfileFollowRequestsDialog count={receivedCount} />
 			) : null}
 		</div>
 	);

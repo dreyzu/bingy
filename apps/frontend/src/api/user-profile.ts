@@ -45,6 +45,8 @@ export type UserProfileInfoResponse = Pretty<{
 	blocksYou: boolean;
 	/** Incoming follow requests, only set on the signed-in user's own profile. */
 	pendingRequestCount: number | null;
+	/** Follow requests waiting for an answer, only set on the signed-in user's own profile. */
+	sentRequestCount: number | null;
 }>;
 
 export type UserActivityResponse = Pretty<{

@@ -1059,5 +1059,10 @@
 	"chilly_peach_nectar": "ブロックしているアカウントはありません",
 	"steady_periwinkle_parrot": "ブロック中のアカウントを読み込めませんでした。もう一度お試しください。",
 	"golden_violet_mirror": "ブロック解除",
-	"chilly_sage_maple": "削除"
+	"chilly_sage_maple": "削除",
+	"epic_periwinkle_parrot": "保留中の送信済みリクエストはありません",
+	"noble_orange_marmot": "送信済みのリクエストを読み込めませんでした。",
+	"lush_onyx_mirror": "取り消し",
+	"joyful_lilac_prairie": "フォロー中",
+	"lucky_yellow_crystal": "保留中"
 }

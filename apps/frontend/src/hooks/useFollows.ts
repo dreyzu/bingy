@@ -9,6 +9,7 @@ import {
 	acceptFollowRequest,
 	declineFollowRequest,
 	type FollowListKind,
+	type FollowRequestKind,
 	type FollowStatus,
 	type FollowUsersResponse,
 	fetchFollowRequests,
@@ -42,10 +43,10 @@ export function useFollowUsers(
 	});
 }
 
-export function useFollowRequests(enabled: boolean) {
+export function useFollowRequests(kind: FollowRequestKind, enabled: boolean) {
 	return useInfiniteQuery({
-		queryKey: ["follow-requests"],
-		queryFn: ({ pageParam }) => fetchFollowRequests(pageParam),
+		queryKey: ["follow-requests", kind],
+		queryFn: ({ pageParam }) => fetchFollowRequests(kind, pageParam),
 		initialPageParam: 1,
 		getNextPageParam,
 		enabled,
@@ -121,11 +122,13 @@ export function useFollowMutation() {
 				});
 			}
 
-			updateFollowListRows(queryClient, ["follows"], (rows) =>
-				rows.map((row) =>
-					row.name === username ? { ...row, followStatus: nextStatus } : row,
-				),
-			);
+			for (const queryKey of [["follows"], ["follow-requests", "sent"]]) {
+				updateFollowListRows(queryClient, queryKey, (rows) =>
+					rows.map((row) =>
+						row.name === username ? { ...row, followStatus: nextStatus } : row,
+					),
+				);
+			}
 
 			return { previousProfile, profileKey };
 		},
@@ -148,8 +151,9 @@ function useRequestMutation(
 	return useMutation({
 		mutationFn: request,
 		onMutate: async (username: string) => {
-			await queryClient.cancelQueries({ queryKey: ["follow-requests"] });
-			updateFollowListRows(queryClient, ["follow-requests"], (rows) =>
+			const receivedKey = ["follow-requests", "received"];
+			await queryClient.cancelQueries({ queryKey: receivedKey });
+			updateFollowListRows(queryClient, receivedKey, (rows) =>
 				rows.filter((row) => row.name !== username),
 			);
 		},

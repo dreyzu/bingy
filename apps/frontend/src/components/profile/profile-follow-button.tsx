@@ -1,4 +1,9 @@
-import { IconClock, IconUserMinus, IconUserPlus } from "@tabler/icons-react";
+import {
+	IconClock,
+	IconUserMinus,
+	IconUserPlus,
+	IconX,
+} from "@tabler/icons-react";
 import { useNavigate, useRouteContext } from "@tanstack/react-router";
 import { useState } from "react";
 import type { FollowStatus } from "@/api/follows";
@@ -61,7 +66,7 @@ export function ProfileFollowButton({
 				size="sm"
 				onClick={handleClick}
 				disabled={followMutation.isPending}
-				className="shrink-0"
+				className="group/follow shrink-0"
 			>
 				{followStatus === "accepted" ? (
 					<>
@@ -69,10 +74,18 @@ export function ProfileFollowButton({
 						{m.witty_indigo_narwhal()}
 					</>
 				) : followStatus === "pending" ? (
-					<>
-						<IconClock className="h-4 w-4 mr-1" />
-						{m.wise_olive_crystal()}
-					</>
+					// Turns into "Cancel" on hover so it reads as cancellable. Both
+					// labels share one grid cell so the button keeps its width.
+					<span className="grid">
+						<span className="col-start-1 row-start-1 inline-flex items-center justify-center group-hover/follow:invisible">
+							<IconClock className="h-4 w-4 mr-1" />
+							{m.wise_olive_crystal()}
+						</span>
+						<span className="invisible col-start-1 row-start-1 inline-flex items-center justify-center text-destructive group-hover/follow:visible">
+							<IconX className="h-4 w-4 mr-1" />
+							{m.lush_onyx_mirror()}
+						</span>
+					</span>
 				) : (
 					<>
 						<IconUserPlus className="h-4 w-4 mr-1" />

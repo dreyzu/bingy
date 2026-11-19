@@ -137,6 +137,33 @@ followRoutes.get("/requests", paginationQuery, async (c) => {
 	return c.json(paginated(data, page, limit, total?.count ?? 0));
 });
 
+// Follow requests the current user sent that are still waiting for an answer
+followRoutes.get("/requests/sent", paginationQuery, async (c) => {
+	const viewer = c.get("user");
+	if (!viewer) return c.json({ error: "Unauthorized" }, 401);
+	const { limit, page } = c.req.valid("query");
+
+	const filters = and(
+		eq(follows.followerId, viewer.id),
+		eq(follows.status, "pending"),
+	);
+
+	const [rows, [total]] = await Promise.all([
+		db
+			.select({ ...userCardColumns, followedAt: follows.createdAt })
+			.from(follows)
+			.innerJoin(users, eq(follows.followingId, users.id))
+			.where(filters)
+			.orderBy(desc(follows.createdAt))
+			.limit(limit)
+			.offset((page - 1) * limit),
+		db.select({ count: count() }).from(follows).where(filters),
+	]);
+
+	const data = await withViewerFollowStatus(viewer.id, rows);
+	return c.json(paginated(data, page, limit, total?.count ?? 0));
+});
+
 // Accept a follow request
 followRoutes.post("/requests/:username/accept", usernameParam, async (c) => {
 	const viewer = c.get("user");

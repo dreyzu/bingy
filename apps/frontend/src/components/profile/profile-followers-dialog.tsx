@@ -66,6 +66,7 @@ export function ProfileFollowersDialog({
 					query={query}
 					emptyMessage={m.modest_gray_beaver()}
 					errorMessage={m.cozy_onyx_violin()}
+					fixedHeight
 					onNavigate={() => setOpen(false)}
 					renderActions={(user) =>
 						user.isViewer ? null : (

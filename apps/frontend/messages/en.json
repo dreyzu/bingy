@@ -1059,5 +1059,10 @@
 	"chilly_peach_nectar": "You haven't blocked anyone",
 	"steady_periwinkle_parrot": "Couldn't load your blocked accounts. Try again.",
 	"golden_violet_mirror": "Unblock",
-	"chilly_sage_maple": "Remove"
+	"chilly_sage_maple": "Remove",
+	"epic_periwinkle_parrot": "No sent requests waiting",
+	"noble_orange_marmot": "Couldn't load your sent requests.",
+	"lush_onyx_mirror": "Cancel",
+	"joyful_lilac_prairie": "Following",
+	"lucky_yellow_crystal": "Pending"
 }

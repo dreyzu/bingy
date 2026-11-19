@@ -98,9 +98,9 @@ export function ProfileInfos({
 					followerCount={profile.followerCount}
 					followingCount={profile.followingCount}
 					isOwnProfile={isOwnProfile}
-					isPrivate={profile.isPrivate}
 					canView={profile.canView}
 					pendingRequestCount={profile.pendingRequestCount}
+					sentRequestCount={profile.sentRequestCount}
 				/>
 			</div>
 		</div>

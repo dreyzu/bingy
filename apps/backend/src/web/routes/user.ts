@@ -77,29 +77,40 @@ userProfileRoutes.get(
 
 		const isOwner = viewer?.id === user.id;
 
-		const [access, followerCount, followingCount, followsYou, requestCount] =
-			await Promise.all([
-				getProfileAccess(viewer, user),
-				countFollows(
-					and(eq(follows.followingId, user.id), eq(follows.status, "accepted")),
-				),
-				countFollows(
-					and(eq(follows.followerId, user.id), eq(follows.status, "accepted")),
-				),
-				viewer && !isOwner
-					? getFollowStatus(user.id, viewer.id).then(
-							(status) => status === "accepted",
-						)
-					: false,
-				isOwner
-					? countFollows(
-							and(
-								eq(follows.followingId, user.id),
-								eq(follows.status, "pending"),
-							),
-						)
-					: null,
-			]);
+		const [
+			access,
+			followerCount,
+			followingCount,
+			followsYou,
+			requestCount,
+			sentRequestCount,
+		] = await Promise.all([
+			getProfileAccess(viewer, user),
+			countFollows(
+				and(eq(follows.followingId, user.id), eq(follows.status, "accepted")),
+			),
+			countFollows(
+				and(eq(follows.followerId, user.id), eq(follows.status, "accepted")),
+			),
+			viewer && !isOwner
+				? getFollowStatus(user.id, viewer.id).then(
+						(status) => status === "accepted",
+					)
+				: false,
+			isOwner
+				? countFollows(
+						and(
+							eq(follows.followingId, user.id),
+							eq(follows.status, "pending"),
+						),
+					)
+				: null,
+			isOwner
+				? countFollows(
+						and(eq(follows.followerId, user.id), eq(follows.status, "pending")),
+					)
+				: null,
+		]);
 
 		const { id: _id, ...profile } = user;
 
@@ -114,6 +125,7 @@ userProfileRoutes.get(
 				blocked: access.blocked,
 				blocksYou: access.blocksYou,
 				pendingRequestCount: requestCount,
+				sentRequestCount,
 			},
 			200,
 		);
