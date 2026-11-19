@@ -1,34 +1,44 @@
-import { IconEdit, IconLocation } from "@tabler/icons-react";
+import { IconEdit, IconLocation, IconLock } from "@tabler/icons-react";
+import type { UserProfileInfoResponse } from "@/api/user-profile";
 import { ProfileFollowButton } from "@/components/profile/profile-follow-button";
 import { ProfileFollowStats } from "@/components/profile/profile-follow-stats";
 import { ProfilePictureDialog } from "@/components/profile/profile-picture-dialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { m } from "@/paraglide/messages";
 
 interface ProfileInfosProps {
-	displayName: string;
-	avatar: string | null;
-	bio?: string | null;
-	location?: string | null;
+	profile: UserProfileInfoResponse;
 	onEditClick?: () => void;
-	showEditButton?: boolean;
+	isOwnProfile?: boolean;
 }
 
 export function ProfileInfos({
-	displayName,
-	avatar,
-	bio,
-	location,
+	profile,
 	onEditClick,
-	showEditButton = false,
+	isOwnProfile = false,
 }: ProfileInfosProps) {
+	const { displayName, avatarUrl, bio, location } = profile;
+
 	return (
 		<div className="flex flex-col md:flex-row gap-2 lg:gap-4 self-center lg:self-start w-full md:w-lg">
-			<ProfilePictureDialog avatar={avatar} displayName={displayName} />
+			<ProfilePictureDialog avatar={avatarUrl} displayName={displayName} />
 			<div className="flex flex-col gap-2 justify-center flex-1 min-w-0">
 				<div className="flex flex-row w-full justify-between gap-2 items-center">
-					<p className="font-extrabold text-sm md:text-base">{displayName}</p>
-					{showEditButton ? (
+					<div className="flex flex-row flex-wrap items-center gap-2 min-w-0">
+						<p className="font-extrabold text-sm md:text-base">{displayName}</p>
+						{profile.isPrivate ? (
+							<IconLock
+								size={16}
+								className="text-muted-foreground"
+								aria-label={m.noble_ivory_mesa()}
+							/>
+						) : null}
+						{profile.followsYou ? (
+							<Badge variant="secondary">{m.peppy_azure_ember()}</Badge>
+						) : null}
+					</div>
+					{isOwnProfile ? (
 						<Button
 							variant="secondary"
 							size="sm"
@@ -39,7 +49,13 @@ export function ProfileInfos({
 							<span className="hidden md:flex">{m.fierce_scarlet_moose()}</span>
 						</Button>
 					) : (
-						<ProfileFollowButton />
+						<ProfileFollowButton
+							username={profile.name}
+							displayName={displayName}
+							isPrivate={profile.isPrivate}
+							followStatus={profile.followStatus}
+							followsYou={profile.followsYou}
+						/>
 					)}
 				</div>
 				{bio?.trim() ? (
@@ -51,7 +67,16 @@ export function ProfileInfos({
 						<p>{location}</p>
 					</div>
 				) : null}
-				<ProfileFollowStats />
+				<ProfileFollowStats
+					username={profile.name}
+					displayName={displayName}
+					followerCount={profile.followerCount}
+					followingCount={profile.followingCount}
+					isOwnProfile={isOwnProfile}
+					isPrivate={profile.isPrivate}
+					canView={profile.canView}
+					pendingRequestCount={profile.pendingRequestCount}
+				/>
 			</div>
 		</div>
 	);

@@ -1,5 +1,6 @@
-import { EmptyUsers } from "@/components/profile/empty-users";
-import { UserCard } from "@/components/profile/user-card";
+import { useState } from "react";
+import { FollowUsersList } from "@/components/profile/follow-users-list";
+import { ProfileFollowButton } from "@/components/profile/profile-follow-button";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -9,51 +10,70 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
+import { useFollowUsers } from "@/hooks/useFollows";
 import { m } from "@/paraglide/messages";
 
-export interface UserItem {
-	name: string;
-	description: string;
-	avatarUrl?: string;
-}
-
 interface ProfileFollowingDialogProps {
-	users: UserItem[];
+	username: string;
+	displayName: string;
+	count: number;
+	isOwnProfile: boolean;
+	/** False for a private profile the viewer does not follow. */
+	canView: boolean;
 }
 
-export function ProfileFollowingDialog({ users }: ProfileFollowingDialogProps) {
-	const hasFollowing = users.length > 0;
+export function ProfileFollowingDialog({
+	username,
+	displayName,
+	count,
+	isOwnProfile,
+	canView,
+}: ProfileFollowingDialogProps) {
+	const [open, setOpen] = useState(false);
+	const query = useFollowUsers(username, "following", open);
+
+	const label = (
+		<span className="font-semibold">
+			{count} {m.steady_white_boulder()}
+		</span>
+	);
+
+	if (!canView) return <span>{label}</span>;
 
 	return (
-		<Dialog>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger
 				render={
 					<Button variant="link" className="flex flex-row items-center p-0">
-						<span className="font-semibold">
-							{users.length ?? 0} {m.steady_white_boulder()}
-						</span>
+						{label}
 					</Button>
 				}
 			/>
 			<DialogContent className="max-w-xs md:max-w-lg">
 				<DialogHeader>
 					<DialogTitle>{m.noble_amber_yak()}</DialogTitle>
-					<DialogDescription>{m.quiet_orange_lantern()}</DialogDescription>
+					<DialogDescription>
+						{isOwnProfile
+							? m.quiet_orange_lantern()
+							: m.fierce_khaki_oasis({ name: displayName })}
+					</DialogDescription>
 				</DialogHeader>
-				{hasFollowing ? (
-					<div className="-mx-4 no-scrollbar max-h-[50vh] lg:max-h-[30vh] overflow-y-auto px-4">
-						{users.map((user) => (
-							<UserCard
-								key={user.name}
-								name={user.name}
-								description={user.description}
-								avatarUrl={user.avatarUrl}
+				<FollowUsersList
+					query={query}
+					emptyMessage={m.alert_turquoise_hazel()}
+					errorMessage={m.wise_topaz_barn()}
+					onNavigate={() => setOpen(false)}
+					renderActions={(user) =>
+						user.isViewer ? null : (
+							<ProfileFollowButton
+								username={user.name}
+								displayName={user.displayName}
+								isPrivate={user.isPrivate}
+								followStatus={user.followStatus}
 							/>
-						))}
-					</div>
-				) : (
-					<EmptyUsers message={m.alert_turquoise_hazel()} />
-				)}
+						)
+					}
+				/>
 			</DialogContent>
 		</Dialog>
 	);

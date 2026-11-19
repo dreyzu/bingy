@@ -1,31 +1,49 @@
-import { IconUserPlus } from "@tabler/icons-react";
+import { IconLock } from "@tabler/icons-react";
+import { Link } from "@tanstack/react-router";
+import type { ReactNode } from "react";
+import type { FollowUser } from "@/api/follows";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { m } from "@/paraglide/messages";
 
 interface UserCardProps {
-	name: string;
-	description: string;
-	avatarUrl?: string;
+	user: FollowUser;
+	/** Buttons shown on the right of the row. */
+	actions?: ReactNode;
+	onNavigate?: () => void;
 }
 
-export function UserCard({ name, description, avatarUrl }: UserCardProps) {
+export function UserCard({ user, actions, onNavigate }: UserCardProps) {
 	return (
 		<div className="flex items-center gap-3 rounded-lg p-2 hover:bg-muted/50">
-			<Avatar className="h-10 w-10 rounded-full">
-				<AvatarImage src={avatarUrl} alt={name} />
-				<AvatarFallback className="rounded-full">
-					{name.charAt(0).toUpperCase()}
-				</AvatarFallback>
-			</Avatar>
-			<div className="flex-1 min-w-0">
-				<p className="text-sm font-medium truncate">{name}</p>
-				<p className="text-xs text-muted-foreground truncate">{description}</p>
-			</div>
-			<Button variant="outline" size="sm" className="shrink-0 gap-1">
-				<IconUserPlus className="h-4 w-4" />
-				{m.candid_pearl_mirror()}
-			</Button>
+			<Link
+				to="/@{$username}"
+				params={{ username: user.name }}
+				onClick={onNavigate}
+				className="flex flex-1 min-w-0 items-center gap-3"
+			>
+				<Avatar className="h-10 w-10 rounded-full">
+					<AvatarImage
+						src={user.avatarUrl ?? undefined}
+						alt={user.displayName}
+					/>
+					<AvatarFallback className="rounded-full">
+						{user.displayName.charAt(0).toUpperCase()}
+					</AvatarFallback>
+				</Avatar>
+				<div className="flex-1 min-w-0">
+					<p className="flex items-center gap-1 text-sm font-medium">
+						<span className="truncate">{user.displayName}</span>
+						{user.isPrivate ? (
+							<IconLock className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+						) : null}
+					</p>
+					<p className="text-xs text-muted-foreground truncate">
+						{user.bio?.trim() || `@${user.name}`}
+					</p>
+				</div>
+			</Link>
+			{actions ? (
+				<div className="flex shrink-0 items-center gap-1">{actions}</div>
+			) : null}
 		</div>
 	);
 }
