@@ -1,9 +1,11 @@
-import { IconBrush, IconUserCog } from "@tabler/icons-react";
+import { IconBrush, IconLock, IconUserCog } from "@tabler/icons-react";
 import { useNavigate, useRouteContext } from "@tanstack/react-router";
 import type { Account } from "better-auth";
+import { BlockedAccountsForm } from "@/components/auth/forms/blocked-accounts-form";
 import { DeleteAccountForm } from "@/components/auth/forms/delete-account-form";
 import { DisableTwoFactorForm } from "@/components/auth/forms/disable-two-factor-form";
 import { EnableTwoFactorForm } from "@/components/auth/forms/enable-two-factor-form";
+import { PrivateAccountForm } from "@/components/auth/forms/private-account-form";
 import { UpdateEmailForm } from "@/components/auth/forms/update-email-form";
 import { UpdatePasswordForm } from "@/components/auth/forms/update-password-form";
 import { LinkAccountComponent } from "@/components/auth/link-account";
@@ -46,6 +48,10 @@ export function SettingsComponent({
 					<IconUserCog />
 					{m.proud_emerald_dolphin()}
 				</TabsTrigger>
+				<TabsTrigger value="privacy">
+					<IconLock />
+					{m.wild_periwinkle_mesa()}
+				</TabsTrigger>
 				<TabsTrigger value="display">
 					<IconBrush />
 					{m.fierce_sage_galaxy()}
@@ -75,6 +81,16 @@ export function SettingsComponent({
 					<UpdatePasswordForm hasPassword={hasPassword} />
 					<Separator />
 					<DeleteAccountForm hasPassword={hasPassword} />
+				</Card>
+			</TabsContent>
+			<TabsContent value="privacy">
+				<Card className="p-4">
+					<CardTitle>{m.zippy_hazel_orchid()}</CardTitle>
+					<CardDescription>{m.humble_yellow_quail()}</CardDescription>
+					<Separator />
+					<PrivateAccountForm />
+					<Separator />
+					<BlockedAccountsForm />
 				</Card>
 			</TabsContent>
 			<TabsContent value="display">

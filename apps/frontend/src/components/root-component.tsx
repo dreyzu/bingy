@@ -1,6 +1,7 @@
 import { TanstackDevtools } from "@tanstack/react-devtools";
 import { HeadContent, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { SessionSync } from "@/components/auth/session-sync";
 import { config } from "@/lib/env";
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import Header from "./header";
@@ -12,6 +13,7 @@ export function RootComponent() {
 	return (
 		<div>
 			<HeadContent />
+			<SessionSync />
 			<Header />
 			<div className="flex flex-col min-h-dvh py-20 lg:py-30 w-full px-4 md:px-6 lg:px-0 lg:max-w-240 xl:max-w-280 3xl:max-w-300 lg:mx-auto">
 				<Outlet />

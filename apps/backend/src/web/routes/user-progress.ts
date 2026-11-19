@@ -2,9 +2,10 @@ import { zValidator } from "@hono/zod-validator";
 import { and, desc, eq, inArray, sql } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
-import { media, tvShowProgress, type User, users } from "../../db/schemas";
+import { media, tvShowProgress, type User } from "../../db/schemas";
 import { db } from "../../lib/database";
 import { logger } from "../../lib/logger";
+import { loadViewableProfile } from "../../lib/profile-access";
 import { TmdbError, tmdbClient } from "../../lib/tmdb/tmdb-client";
 import { getOrCreateMedia } from "../../web/utils/create-update-media";
 import {
@@ -60,11 +61,11 @@ userProgressRoutes.get(
 				? [...TRACKED_SHOW_STATUSES]
 				: [statusQuery as TrackedShowStatus];
 
-		const targetUser = await db.query.users.findFirst({
-			where: eq(users.name, username),
-		});
-
-		if (!targetUser) return c.json("USER_NOT_FOUND", 404);
+		const profile = await loadViewableProfile(c, username);
+		if (!profile.ok) {
+			return c.json({ error: profile.error }, profile.status);
+		}
+		const targetUser = profile.user;
 
 		const filters = and(
 			eq(tvShowProgress.userId, targetUser.id),
@@ -185,11 +186,11 @@ userProgressRoutes.get("/:username/tv/:tmdbId", async (c) => {
 	if (!Number.isInteger(tmdbIdNumber))
 		return c.json({ error: "INVALID_TMDB_ID" }, 400);
 
-	const targetUser = await db.query.users.findFirst({
-		where: eq(users.name, username),
-	});
-
-	if (!targetUser) return c.json("USER_NOT_FOUND", 404);
+	const profile = await loadViewableProfile(c, username);
+	if (!profile.ok) {
+		return c.json({ error: profile.error }, profile.status);
+	}
+	const targetUser = profile.user;
 
 	try {
 		const [row] = await db

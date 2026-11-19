@@ -1,5 +1,6 @@
 import type { Pretty } from "shared";
 import { apiFetch } from "./fetcher";
+import type { FollowStatus } from "./follows";
 
 export type MediaDetails = Pretty<{
 	id: number;
@@ -26,6 +27,26 @@ export type UserProfileInfoResponse = Pretty<{
 	bannerUrl: string | null;
 	bio?: string | null;
 	location?: string | null;
+	isPrivate: boolean;
+	followerCount: number;
+	followingCount: number;
+	/** The signed-in user's follow towards this profile. */
+	followStatus: FollowStatus | null;
+	/** Whether this profile follows the signed-in user. */
+	followsYou: boolean;
+	/**
+	 * False for a private profile the signed-in user does not follow, and on
+	 * either side of a block.
+	 */
+	canView: boolean;
+	/** The signed-in user blocked this profile. */
+	blocked: boolean;
+	/** This profile blocked the signed-in user. */
+	blocksYou: boolean;
+	/** Incoming follow requests, only set on the signed-in user's own profile. */
+	pendingRequestCount: number | null;
+	/** Follow requests waiting for an answer, only set on the signed-in user's own profile. */
+	sentRequestCount: number | null;
 }>;
 
 export type UserActivityResponse = Pretty<{

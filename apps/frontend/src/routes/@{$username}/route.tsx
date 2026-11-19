@@ -8,6 +8,8 @@ import { useState } from "react";
 import { EditProfileDialog } from "@/components/auth/edit-profile-dialog";
 import { CenteredLayout } from "@/components/layout/centered-layout";
 import { LoadingCentered } from "@/components/loading/loading-centered";
+import { BlockedProfile } from "@/components/profile/blocked-profile";
+import { PrivateProfile } from "@/components/profile/private-profile";
 import { ProfileBanner } from "@/components/profile/profile-banner";
 import { ProfileInfos } from "@/components/profile/profile-infos";
 import { ProfileNav } from "@/components/profile/profile-nav";
@@ -59,16 +61,20 @@ function UserProfileLayout() {
 			<div className="w-full gap-4 flex flex-col">
 				<ProfileBanner backgroundImage={backgroundImage} />
 				<ProfileInfos
-					displayName={data.displayName}
-					avatar={data.avatarUrl}
-					bio={data.bio}
-					location={data.location}
-					showEditButton={showEditButton}
+					profile={data}
+					isOwnProfile={showEditButton}
 					onEditClick={onEditClick}
 				/>
-				<ProfileNav username={username} />
-
-				<Outlet />
+				{data.canView ? (
+					<>
+						<ProfileNav username={username} />
+						<Outlet />
+					</>
+				) : data.blocked || data.blocksYou ? (
+					<BlockedProfile username={data.name} blockedByYou={data.blocked} />
+				) : (
+					<PrivateProfile followStatus={data.followStatus} />
+				)}
 				<EditProfileDialog
 					open={isEditDialogOpen}
 					onOpenChange={setIsEditDialogOpen}
