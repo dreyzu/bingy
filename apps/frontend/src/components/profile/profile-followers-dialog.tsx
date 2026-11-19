@@ -45,7 +45,10 @@ export function ProfileFollowersDialog({
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger
 				render={
-					<Button variant="link" className="flex flex-row items-center p-0">
+					<Button
+						variant="link"
+						className="flex h-auto flex-row items-center p-0"
+					>
 						{label}
 					</Button>
 				}
@@ -72,7 +75,7 @@ export function ProfileFollowersDialog({
 									displayName={user.displayName}
 									isPrivate={user.isPrivate}
 									followStatus={user.followStatus}
-									followsYou={isOwnProfile}
+									followsYou={user.followsYou}
 								/>
 								{isOwnProfile ? (
 									<RemoveFollowerButton

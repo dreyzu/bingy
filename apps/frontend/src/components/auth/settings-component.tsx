@@ -1,6 +1,7 @@
 import { IconBrush, IconLock, IconUserCog } from "@tabler/icons-react";
 import { useNavigate, useRouteContext } from "@tanstack/react-router";
 import type { Account } from "better-auth";
+import { BlockedAccountsForm } from "@/components/auth/forms/blocked-accounts-form";
 import { DeleteAccountForm } from "@/components/auth/forms/delete-account-form";
 import { DisableTwoFactorForm } from "@/components/auth/forms/disable-two-factor-form";
 import { EnableTwoFactorForm } from "@/components/auth/forms/enable-two-factor-form";
@@ -88,6 +89,8 @@ export function SettingsComponent({
 					<CardDescription>{m.humble_yellow_quail()}</CardDescription>
 					<Separator />
 					<PrivateAccountForm />
+					<Separator />
+					<BlockedAccountsForm />
 				</Card>
 			</TabsContent>
 			<TabsContent value="display">

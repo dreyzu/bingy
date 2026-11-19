@@ -1,10 +1,13 @@
 import { IconEdit, IconLocation, IconLock } from "@tabler/icons-react";
+import { useRouteContext } from "@tanstack/react-router";
 import type { UserProfileInfoResponse } from "@/api/user-profile";
+import { ProfileActionsMenu } from "@/components/profile/profile-actions-menu";
 import { ProfileFollowButton } from "@/components/profile/profile-follow-button";
 import { ProfileFollowStats } from "@/components/profile/profile-follow-stats";
 import { ProfilePictureDialog } from "@/components/profile/profile-picture-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useUnblockUser } from "@/hooks/useBlocks";
 import { m } from "@/paraglide/messages";
 
 interface ProfileInfosProps {
@@ -19,6 +22,8 @@ export function ProfileInfos({
 	isOwnProfile = false,
 }: ProfileInfosProps) {
 	const { displayName, avatarUrl, bio, location } = profile;
+	const { authData } = useRouteContext({ from: "__root__" });
+	const unblockUser = useUnblockUser();
 
 	return (
 		<div className="flex flex-col md:flex-row gap-2 lg:gap-4 self-center lg:self-start w-full md:w-lg">
@@ -49,13 +54,33 @@ export function ProfileInfos({
 							<span className="hidden md:flex">{m.fierce_scarlet_moose()}</span>
 						</Button>
 					) : (
-						<ProfileFollowButton
-							username={profile.name}
-							displayName={displayName}
-							isPrivate={profile.isPrivate}
-							followStatus={profile.followStatus}
-							followsYou={profile.followsYou}
-						/>
+						<div className="flex shrink-0 items-center gap-2">
+							{profile.blocked ? (
+								<Button
+									variant="secondary"
+									size="sm"
+									disabled={unblockUser.isPending}
+									onClick={() => unblockUser.mutate(profile.name)}
+								>
+									{m.fluffy_khaki_hazel()}
+								</Button>
+							) : profile.blocksYou ? null : (
+								<ProfileFollowButton
+									username={profile.name}
+									displayName={displayName}
+									isPrivate={profile.isPrivate}
+									followStatus={profile.followStatus}
+									followsYou={profile.followsYou}
+								/>
+							)}
+							{authData ? (
+								<ProfileActionsMenu
+									username={profile.name}
+									displayName={displayName}
+									blocked={profile.blocked}
+								/>
+							) : null}
+						</div>
 					)}
 				</div>
 				{bio?.trim() ? (

@@ -1,11 +1,11 @@
 import { IconLock } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import type { FollowUser } from "@/api/follows";
+import type { UserSummary } from "@/api/follows";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface UserCardProps {
-	user: FollowUser;
+	user: UserSummary;
 	/** Buttons shown on the right of the row. */
 	actions?: ReactNode;
 	onNavigate?: () => void;

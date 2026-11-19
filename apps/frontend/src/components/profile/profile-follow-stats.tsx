@@ -29,7 +29,7 @@ export function ProfileFollowStats({
 		isOwnProfile && (isPrivate || (pendingRequestCount ?? 0) > 0);
 
 	return (
-		<div className="flex flex-row flex-wrap gap-3 text-sm">
+		<div className="flex flex-row flex-wrap items-center gap-3 text-sm">
 			<ProfileFollowingDialog
 				username={username}
 				displayName={displayName}

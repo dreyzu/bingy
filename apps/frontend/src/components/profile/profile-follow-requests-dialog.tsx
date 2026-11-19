@@ -36,7 +36,7 @@ export function ProfileFollowRequestsDialog({
 				render={
 					<Button
 						variant="link"
-						className="flex flex-row items-center gap-1 p-0"
+						className="flex h-auto flex-row items-center gap-1 p-0"
 					>
 						<span className="font-semibold">{m.crisp_coral_badger()}</span>
 						{count > 0 ? <Badge>{count}</Badge> : null}

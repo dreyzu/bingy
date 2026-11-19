@@ -111,6 +111,8 @@ userProfileRoutes.get(
 				followStatus: access.followStatus,
 				followsYou,
 				canView: access.canView,
+				blocked: access.blocked,
+				blocksYou: access.blocksYou,
 				pendingRequestCount: requestCount,
 			},
 			200,

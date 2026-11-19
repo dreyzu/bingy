@@ -34,8 +34,15 @@ export type UserProfileInfoResponse = Pretty<{
 	followStatus: FollowStatus | null;
 	/** Whether this profile follows the signed-in user. */
 	followsYou: boolean;
-	/** False for a private profile the signed-in user does not follow. */
+	/**
+	 * False for a private profile the signed-in user does not follow, and on
+	 * either side of a block.
+	 */
 	canView: boolean;
+	/** The signed-in user blocked this profile. */
+	blocked: boolean;
+	/** This profile blocked the signed-in user. */
+	blocksYou: boolean;
 	/** Incoming follow requests, only set on the signed-in user's own profile. */
 	pendingRequestCount: number | null;
 }>;

@@ -1,4 +1,3 @@
-import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import {
 	AlertDialog,
@@ -32,13 +31,13 @@ export function RemoveFollowerButton({
 	return (
 		<>
 			<Button
-				variant="ghost"
-				size="icon-sm"
+				variant="outline"
+				size="sm"
 				onClick={() => setOpen(true)}
 				disabled={removeFollower.isPending}
-				aria-label={m.keen_aqua_arrow({ name: displayName })}
+				className="shrink-0"
 			>
-				<IconX />
+				{m.chilly_sage_maple()}
 			</Button>
 			<AlertDialog open={open} onOpenChange={setOpen}>
 				<AlertDialogContent>

@@ -1,10 +1,14 @@
 import { zValidator } from "@hono/zod-validator";
-import { and, count, desc, eq, inArray } from "drizzle-orm";
+import { and, count, desc, eq, inArray, or } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
 import { type FollowStatus, follows, type User, users } from "../../db/schemas";
 import { db } from "../../lib/database";
-import { loadViewableProfile } from "../../lib/profile-access";
+import {
+	hasBlockBetween,
+	loadViewableProfile,
+	notBlockedWith,
+} from "../../lib/profile-access";
 
 type Variables = {
 	user: User | null;
@@ -48,36 +52,52 @@ const findUserByName = (username: string) =>
 	});
 
 /**
- * Adds the viewer's follow status towards each user of the page, so every row
- * can render the right follow button without an extra request.
+ * Adds the viewer's relationship with each user of the page (follow status
+ * both ways), so every row can render the right follow button without an
+ * extra request.
  */
 async function withViewerFollowStatus(
 	viewerId: string | undefined,
 	rows: UserCardRow[],
 ) {
 	const statuses = new Map<string, FollowStatus>();
+	const followsViewer = new Set<string>();
 
 	if (viewerId && rows.length > 0) {
-		const viewerFollows = await db
-			.select({ followingId: follows.followingId, status: follows.status })
+		const ids = rows.map((row) => row.id);
+		const relations = await db
+			.select({
+				followerId: follows.followerId,
+				followingId: follows.followingId,
+				status: follows.status,
+			})
 			.from(follows)
 			.where(
-				and(
-					eq(follows.followerId, viewerId),
-					inArray(
-						follows.followingId,
-						rows.map((row) => row.id),
+				or(
+					and(
+						eq(follows.followerId, viewerId),
+						inArray(follows.followingId, ids),
+					),
+					and(
+						eq(follows.followingId, viewerId),
+						inArray(follows.followerId, ids),
+						eq(follows.status, "accepted"),
 					),
 				),
 			);
 
-		for (const row of viewerFollows) statuses.set(row.followingId, row.status);
+		for (const row of relations) {
+			if (row.followerId === viewerId)
+				statuses.set(row.followingId, row.status);
+			else followsViewer.add(row.followerId);
+		}
 	}
 
 	return rows.map(({ id, ...row }) => ({
 		...row,
 		isViewer: id === viewerId,
 		followStatus: statuses.get(id) ?? null,
+		followsYou: followsViewer.has(id),
 	}));
 }
 
@@ -193,6 +213,9 @@ followRoutes.post("/:username", usernameParam, async (c) => {
 	if (target.id === viewer.id) {
 		return c.json({ error: "CANNOT_FOLLOW_SELF" }, 400);
 	}
+	if (await hasBlockBetween(viewer.id, target.id)) {
+		return c.json({ error: "BLOCKED" }, 403);
+	}
 
 	const status: FollowStatus = target.isPrivate ? "pending" : "accepted";
 
@@ -250,9 +273,11 @@ followRoutes.get(
 		}
 		const { limit, page } = c.req.valid("query");
 
+		const viewerId = c.get("user")?.id;
 		const filters = and(
 			eq(follows.followingId, profile.user.id),
 			eq(follows.status, "accepted"),
+			notBlockedWith(viewerId),
 		);
 
 		const [rows, [total]] = await Promise.all([
@@ -264,10 +289,14 @@ followRoutes.get(
 				.orderBy(desc(follows.createdAt))
 				.limit(limit)
 				.offset((page - 1) * limit),
-			db.select({ count: count() }).from(follows).where(filters),
+			db
+				.select({ count: count() })
+				.from(follows)
+				.innerJoin(users, eq(follows.followerId, users.id))
+				.where(filters),
 		]);
 
-		const data = await withViewerFollowStatus(c.get("user")?.id, rows);
+		const data = await withViewerFollowStatus(viewerId, rows);
 		return c.json(paginated(data, page, limit, total?.count ?? 0));
 	},
 );
@@ -284,9 +313,11 @@ followRoutes.get(
 		}
 		const { limit, page } = c.req.valid("query");
 
+		const viewerId = c.get("user")?.id;
 		const filters = and(
 			eq(follows.followerId, profile.user.id),
 			eq(follows.status, "accepted"),
+			notBlockedWith(viewerId),
 		);
 
 		const [rows, [total]] = await Promise.all([
@@ -298,10 +329,14 @@ followRoutes.get(
 				.orderBy(desc(follows.createdAt))
 				.limit(limit)
 				.offset((page - 1) * limit),
-			db.select({ count: count() }).from(follows).where(filters),
+			db
+				.select({ count: count() })
+				.from(follows)
+				.innerJoin(users, eq(follows.followingId, users.id))
+				.where(filters),
 		]);
 
-		const data = await withViewerFollowStatus(c.get("user")?.id, rows);
+		const data = await withViewerFollowStatus(viewerId, rows);
 		return c.json(paginated(data, page, limit, total?.count ?? 0));
 	},
 );

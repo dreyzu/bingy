@@ -8,6 +8,7 @@ import { useState } from "react";
 import { EditProfileDialog } from "@/components/auth/edit-profile-dialog";
 import { CenteredLayout } from "@/components/layout/centered-layout";
 import { LoadingCentered } from "@/components/loading/loading-centered";
+import { BlockedProfile } from "@/components/profile/blocked-profile";
 import { PrivateProfile } from "@/components/profile/private-profile";
 import { ProfileBanner } from "@/components/profile/profile-banner";
 import { ProfileInfos } from "@/components/profile/profile-infos";
@@ -69,6 +70,8 @@ function UserProfileLayout() {
 						<ProfileNav username={username} />
 						<Outlet />
 					</>
+				) : data.blocked || data.blocksYou ? (
+					<BlockedProfile username={data.name} blockedByYou={data.blocked} />
 				) : (
 					<PrivateProfile followStatus={data.followStatus} />
 				)}

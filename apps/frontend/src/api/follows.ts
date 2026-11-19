@@ -3,25 +3,35 @@ import { apiFetch } from "./fetcher";
 
 export type FollowStatus = "pending" | "accepted";
 
-export type FollowUser = Pretty<{
+/** What a user row shows: enough to render a card that links to the profile. */
+export type UserSummary = Pretty<{
 	name: string;
 	displayName: string;
 	avatarUrl: string | null;
 	bio: string | null;
 	isPrivate: boolean;
-	followedAt: string;
-	/** True when this row is the signed-in user. */
-	isViewer: boolean;
-	/** The signed-in user's follow towards this row. */
-	followStatus: FollowStatus | null;
 }>;
 
-export type FollowUsersResponse = Pretty<{
-	data: FollowUser[];
+export type FollowUser = Pretty<
+	UserSummary & {
+		followedAt: string;
+		/** True when this row is the signed-in user. */
+		isViewer: boolean;
+		/** The signed-in user's follow towards this row. */
+		followStatus: FollowStatus | null;
+		/** Whether this row follows the signed-in user. */
+		followsYou: boolean;
+	}
+>;
+
+export type PaginatedUsers<T extends UserSummary> = Pretty<{
+	data: T[];
 	page: number;
 	total_pages: number;
 	total_results: number;
 }>;
+
+export type FollowUsersResponse = PaginatedUsers<FollowUser>;
 
 export type FollowListKind = "followers" | "following";
 

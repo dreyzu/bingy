@@ -1,5 +1,6 @@
 export * from "./activity";
 export * from "./auth";
+export * from "./block";
 export * from "./collection";
 export * from "./follow";
 export * from "./media";

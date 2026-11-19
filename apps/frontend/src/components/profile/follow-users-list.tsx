@@ -4,26 +4,26 @@ import type {
 	UseInfiniteQueryResult,
 } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import type { FollowUser, FollowUsersResponse } from "@/api/follows";
+import type { PaginatedUsers, UserSummary } from "@/api/follows";
 import { EmptyUsers } from "@/components/profile/empty-users";
 import { UserCard } from "@/components/profile/user-card";
 
-interface FollowUsersListProps {
-	query: UseInfiniteQueryResult<InfiniteData<FollowUsersResponse>>;
+interface FollowUsersListProps<T extends UserSummary> {
+	query: UseInfiniteQueryResult<InfiniteData<PaginatedUsers<T>>>;
 	emptyMessage: string;
 	errorMessage: string;
-	renderActions: (user: FollowUser) => ReactNode;
+	renderActions: (user: T) => ReactNode;
 	onNavigate?: () => void;
 }
 
 /** Scrollable list of users that loads the next page near the bottom. */
-export function FollowUsersList({
+export function FollowUsersList<T extends UserSummary>({
 	query,
 	emptyMessage,
 	errorMessage,
 	renderActions,
 	onNavigate,
-}: FollowUsersListProps) {
+}: FollowUsersListProps<T>) {
 	const { data, status, hasNextPage, isFetchingNextPage, fetchNextPage } =
 		query;
 
