@@ -1083,5 +1083,12 @@
 	"breezy_fuchsia_garden": "非公開アカウントにフォローリクエストが届いたときに通知します。",
 	"jolly_khaki_bamboo": "承認されたリクエスト",
 	"bright_navy_otter": "フォローリクエストが承認されたときに通知します。",
-	"stellar_sienna_moose": "通知設定を更新できませんでした。もう一度お試しください。"
+	"stellar_sienna_moose": "通知設定を更新できませんでした。もう一度お試しください。",
+	"lucky_sepia_blossom": "通知を削除",
+	"frosty_amber_seal": "すべて消去",
+	"bright_hazel_nectar": "すべての通知を消去しますか？",
+	"dusky_wine_biscuit": "キャンセル",
+	"balmy_topaz_coral": "消去",
+	"humble_cerise_canyon": "通知を削除できませんでした。もう一度お試しください。",
+	"eager_white_crystal": "通知を消去できませんでした。もう一度お試しください。"
 }

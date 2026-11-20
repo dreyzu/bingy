@@ -143,6 +143,47 @@ notificationRoutes.post(
 	},
 );
 
+// Delete all of the signed-in user's notifications
+notificationRoutes.delete("/", async (c) => {
+	const viewer = c.get("user");
+	if (!viewer) return c.json({ error: "Unauthorized" }, 401);
+
+	const deleted = await db
+		.delete(notifications)
+		.where(eq(notifications.recipientId, viewer.id))
+		.returning({ id: notifications.id });
+
+	if (deleted.length > 0) await syncUnread([viewer.id], "removed");
+
+	return c.body(null, 204);
+});
+
+// Delete one notification
+notificationRoutes.delete(
+	"/:id",
+	zValidator("param", z.object({ id: z.uuid() })),
+	async (c) => {
+		const viewer = c.get("user");
+		if (!viewer) return c.json({ error: "Unauthorized" }, 401);
+
+		const [deleted] = await db
+			.delete(notifications)
+			.where(
+				and(
+					eq(notifications.id, c.req.valid("param").id),
+					eq(notifications.recipientId, viewer.id),
+				),
+			)
+			.returning({ id: notifications.id });
+
+		if (!deleted) return c.json({ error: "NOTIFICATION_NOT_FOUND" }, 404);
+
+		await syncUnread([viewer.id], "removed");
+
+		return c.body(null, 204);
+	},
+);
+
 notificationRoutes.get("/preferences", async (c) => {
 	const viewer = c.get("user");
 	if (!viewer) return c.json({ error: "Unauthorized" }, 401);

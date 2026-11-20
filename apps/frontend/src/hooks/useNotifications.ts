@@ -1,4 +1,6 @@
 import {
+	type InfiniteData,
+	type QueryClient,
 	useInfiniteQuery,
 	useMutation,
 	useQuery,
@@ -6,6 +8,8 @@ import {
 } from "@tanstack/react-query";
 import { useEffect } from "react";
 import {
+	clearNotifications,
+	deleteNotification,
 	fetchNotificationPreferences,
 	fetchNotifications,
 	fetchUnreadNotificationCount,
@@ -14,6 +18,7 @@ import {
 	type NotificationPreferences,
 	type NotificationsResponse,
 	notificationStreamUrl,
+	type UserNotification,
 	updateNotificationPreferences,
 } from "@/api/notifications";
 import { toast } from "@/components/toast/toast";
@@ -104,6 +109,68 @@ export function useMarkAllNotificationsRead() {
 			queryClient.invalidateQueries({
 				queryKey: notificationKeys.unreadCount,
 			}),
+	});
+}
+
+type NotificationPages = InfiniteData<NotificationsResponse>;
+
+/** Removes rows from the cached list right away; returns the previous list. */
+async function removeFromList(
+	queryClient: QueryClient,
+	keep: (notification: UserNotification) => boolean,
+) {
+	await queryClient.cancelQueries({ queryKey: notificationKeys.list });
+	const previous = queryClient.getQueryData<NotificationPages>(
+		notificationKeys.list,
+	);
+	if (previous) {
+		queryClient.setQueryData<NotificationPages>(notificationKeys.list, {
+			...previous,
+			pages: previous.pages.map((page) => ({
+				...page,
+				data: page.data.filter(keep),
+			})),
+		});
+	}
+	return previous;
+}
+
+export function useDeleteNotification() {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: deleteNotification,
+		onMutate: async (id: string) => ({
+			previous: await removeFromList(
+				queryClient,
+				(notification) => notification.id !== id,
+			),
+		}),
+		onError: (_error, _id, context) => {
+			if (context?.previous) {
+				queryClient.setQueryData(notificationKeys.list, context.previous);
+			}
+			toast.error({ title: m.humble_cerise_canyon() });
+		},
+	});
+}
+
+export function useClearNotifications() {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: clearNotifications,
+		onMutate: async () => {
+			queryClient.setQueryData(notificationKeys.unreadCount, { count: 0 });
+			return { previous: await removeFromList(queryClient, () => false) };
+		},
+		onError: (_error, _variables, context) => {
+			if (context?.previous) {
+				queryClient.setQueryData(notificationKeys.list, context.previous);
+			}
+			queryClient.invalidateQueries({ queryKey: notificationKeys.unreadCount });
+			toast.error({ title: m.eager_white_crystal() });
+		},
 	});
 }
 

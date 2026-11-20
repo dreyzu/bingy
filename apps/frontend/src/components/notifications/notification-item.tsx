@@ -1,4 +1,4 @@
-import { IconCheck, IconX } from "@tabler/icons-react";
+import { IconCheck, IconTrash, IconX } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import type {
 	NotificationActor,
@@ -12,6 +12,7 @@ import {
 	useAcceptFollowRequest,
 	useDeclineFollowRequest,
 } from "@/hooks/useFollows";
+import { useDeleteNotification } from "@/hooks/useNotifications";
 import { m } from "@/paraglide/messages";
 import { formatDistanceToNow } from "@/utils/format-date";
 
@@ -88,11 +89,12 @@ export function NotificationItem({
 	localeRegion,
 	onNavigate,
 }: NotificationItemProps) {
+	const deleteNotification = useDeleteNotification();
 	const { actor, type } = notification;
 	if (!actor) return null;
 
 	return (
-		<div className="flex items-center gap-3 rounded-lg p-2 hover:bg-muted/50">
+		<div className="group flex items-center gap-3 rounded-lg p-2 hover:bg-muted/50">
 			<Link
 				to="/@{$username}"
 				params={{ username: actor.name }}
@@ -126,8 +128,18 @@ export function NotificationItem({
 					/>
 				)}
 			</Link>
-			<div className="flex shrink-0 items-center gap-1 empty:hidden">
+			<div className="flex shrink-0 items-center gap-1">
 				<NotificationActions type={type} actor={actor} />
+				{/* Only revealed on hover where hovering exists, always shown on touch. */}
+				<Button
+					variant="ghost"
+					size="icon-sm"
+					onClick={() => deleteNotification.mutate(notification.id)}
+					aria-label={m.lucky_sepia_blossom()}
+					className="text-muted-foreground focus-visible:opacity-100 group-hover:opacity-100 [@media(hover:hover)]:opacity-0"
+				>
+					<IconTrash />
+				</Button>
 			</div>
 		</div>
 	);

@@ -1083,5 +1083,12 @@
 	"breezy_fuchsia_garden": "Cuando alguien pide seguir tu cuenta privada.",
 	"jolly_khaki_bamboo": "Solicitudes aceptadas",
 	"bright_navy_otter": "Cuando alguien acepta tu solicitud de seguimiento.",
-	"stellar_sienna_moose": "No se pudo actualizar tu configuración de notificaciones. Inténtalo de nuevo."
+	"stellar_sienna_moose": "No se pudo actualizar tu configuración de notificaciones. Inténtalo de nuevo.",
+	"lucky_sepia_blossom": "Eliminar notificación",
+	"frosty_amber_seal": "Borrar todo",
+	"bright_hazel_nectar": "¿Borrar todas las notificaciones?",
+	"dusky_wine_biscuit": "Cancelar",
+	"balmy_topaz_coral": "Borrar",
+	"humble_cerise_canyon": "No se pudo eliminar la notificación. Inténtalo de nuevo.",
+	"eager_white_crystal": "No se pudieron borrar tus notificaciones. Inténtalo de nuevo."
 }

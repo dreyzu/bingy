@@ -2,7 +2,7 @@ import { IconBell, IconLoader } from "@tabler/icons-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouteContext } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { NotificationItem } from "@/components/notifications/notification-item";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/popover";
 import {
 	notificationKeys,
+	useClearNotifications,
 	useMarkAllNotificationsRead,
 	useNotifications,
 	useUnreadNotificationCount,
@@ -26,6 +27,56 @@ import {
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
+
+interface NotificationsHeaderProps {
+	canClear: boolean;
+}
+
+/** Title with a "Clear all" action that asks for confirmation in place. */
+function NotificationsHeader({ canClear }: NotificationsHeaderProps) {
+	const [confirming, setConfirming] = useState(false);
+	const clear = useClearNotifications();
+
+	if (confirming && canClear) {
+		return (
+			<div className="flex min-h-8 items-center justify-between gap-2 px-2">
+				<p className="text-sm font-medium">{m.bright_hazel_nectar()}</p>
+				<div className="flex shrink-0 items-center gap-1">
+					<Button
+						variant="ghost"
+						size="sm"
+						onClick={() => setConfirming(false)}
+					>
+						{m.dusky_wine_biscuit()}
+					</Button>
+					<Button
+						variant="destructive"
+						size="sm"
+						onClick={() => {
+							clear.mutate();
+							setConfirming(false);
+						}}
+					>
+						{m.balmy_topaz_coral()}
+					</Button>
+				</div>
+			</div>
+		);
+	}
+
+	return (
+		<div className="flex min-h-8 items-center justify-between gap-2 px-2">
+			<PopoverTitle className="text-base">
+				{m.fierce_ivory_hazel()}
+			</PopoverTitle>
+			{canClear ? (
+				<Button variant="ghost" size="sm" onClick={() => setConfirming(true)}>
+					{m.frosty_amber_seal()}
+				</Button>
+			) : null}
+		</div>
+	);
+}
 
 interface NotificationListProps {
 	unreadCount: number;
@@ -46,34 +97,7 @@ function NotificationList({ unreadCount, onNavigate }: NotificationListProps) {
 		if (settled && unreadCount > 0) markAllRead();
 	}, [settled, unreadCount, markAllRead]);
 
-	if (status === "pending") {
-		return (
-			<div className="flex justify-center py-8">
-				<IconLoader className="h-5 w-5 animate-spin text-muted-foreground" />
-			</div>
-		);
-	}
-
-	if (status === "error") {
-		return (
-			<p className="py-8 text-center text-sm">{m.epic_sienna_penguin()}</p>
-		);
-	}
-
-	const notifications = data.pages.flatMap((page) => page.data);
-
-	if (notifications.length === 0) {
-		return (
-			<Empty className="py-8">
-				<EmptyHeader>
-					<EmptyMedia variant="icon">
-						<IconBell />
-					</EmptyMedia>
-					<EmptyTitle>{m.gallant_emerald_jaguar()}</EmptyTitle>
-				</EmptyHeader>
-			</Empty>
-		);
-	}
+	const notifications = data?.pages.flatMap((page) => page.data) ?? [];
 
 	const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
 		const { scrollTop, scrollHeight, clientHeight } = event.currentTarget;
@@ -86,25 +110,56 @@ function NotificationList({ unreadCount, onNavigate }: NotificationListProps) {
 		}
 	};
 
+	let content: ReactNode;
+	if (status === "pending") {
+		content = (
+			<div className="flex justify-center py-8">
+				<IconLoader className="h-5 w-5 animate-spin text-muted-foreground" />
+			</div>
+		);
+	} else if (status === "error") {
+		content = (
+			<p className="py-8 text-center text-sm">{m.epic_sienna_penguin()}</p>
+		);
+	} else if (notifications.length === 0) {
+		content = (
+			<Empty className="py-8">
+				<EmptyHeader>
+					<EmptyMedia variant="icon">
+						<IconBell />
+					</EmptyMedia>
+					<EmptyTitle>{m.gallant_emerald_jaguar()}</EmptyTitle>
+				</EmptyHeader>
+			</Empty>
+		);
+	} else {
+		content = (
+			<div
+				onScroll={handleScroll}
+				className="no-scrollbar max-h-[60vh] overflow-y-auto"
+			>
+				{notifications.map((notification) => (
+					<NotificationItem
+						key={notification.id}
+						notification={notification}
+						localeRegion={localeRegion}
+						onNavigate={onNavigate}
+					/>
+				))}
+				{isFetchingNextPage ? (
+					<div className="flex justify-center py-2">
+						<IconLoader className="h-5 w-5 animate-spin text-muted-foreground" />
+					</div>
+				) : null}
+			</div>
+		);
+	}
+
 	return (
-		<div
-			onScroll={handleScroll}
-			className="no-scrollbar max-h-[60vh] overflow-y-auto"
-		>
-			{notifications.map((notification) => (
-				<NotificationItem
-					key={notification.id}
-					notification={notification}
-					localeRegion={localeRegion}
-					onNavigate={onNavigate}
-				/>
-			))}
-			{isFetchingNextPage ? (
-				<div className="flex justify-center py-2">
-					<IconLoader className="h-5 w-5 animate-spin text-muted-foreground" />
-				</div>
-			) : null}
-		</div>
+		<>
+			<NotificationsHeader canClear={notifications.length > 0} />
+			{content}
+		</>
 	);
 }
 
@@ -150,9 +205,6 @@ export function NotificationBell({ className }: { className?: string }) {
 				sideOffset={8}
 				className="w-[min(24rem,calc(100vw-2rem))] gap-1"
 			>
-				<PopoverTitle className="px-2 pt-1 text-base">
-					{m.fierce_ivory_hazel()}
-				</PopoverTitle>
 				<NotificationList
 					unreadCount={unreadCount}
 					onNavigate={() => onOpenChange(false)}

@@ -60,6 +60,12 @@ export const markNotificationsRead = (ids?: string[]) =>
 		body: { ids },
 	});
 
+export const deleteNotification = (id: string) =>
+	apiFetch<void>(`/notifications/${id}`, { method: "DELETE" });
+
+export const clearNotifications = () =>
+	apiFetch<void>("/notifications", { method: "DELETE" });
+
 export const fetchNotificationPreferences = () =>
 	apiFetch<NotificationPreferences>("/notifications/preferences", {
 		method: "GET",
