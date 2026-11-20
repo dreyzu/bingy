@@ -5,12 +5,14 @@ import { serveStatic } from "hono/bun";
 import { cors } from "hono/cors";
 import { logger as httpLogger } from "hono/logger";
 import { trimTrailingSlash } from "hono/trailing-slash";
+import { jobs } from "./jobs";
 import type { auth } from "./lib/auth";
 import { cacheClient } from "./lib/cache-client";
 import { connection } from "./lib/database";
 import env from "./lib/env";
 import { logger } from "./lib/logger";
 import { serveInternalServerError } from "./lib/responses/error";
+import { startScheduler } from "./lib/scheduler";
 import { sessionMiddleware } from "./web/middlewares/session";
 import authRoutes from "./web/routes/auth";
 import blockRoutes from "./web/routes/block";
@@ -75,6 +77,7 @@ const pingDB = async () => {
 };
 
 pingDB();
+startScheduler(jobs);
 
 app.use("*", sessionMiddleware);
 const api = new Hono();
