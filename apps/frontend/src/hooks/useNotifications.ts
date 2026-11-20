@@ -1,0 +1,150 @@
+import {
+	useInfiniteQuery,
+	useMutation,
+	useQuery,
+	useQueryClient,
+} from "@tanstack/react-query";
+import { useEffect } from "react";
+import {
+	fetchNotificationPreferences,
+	fetchNotifications,
+	fetchUnreadNotificationCount,
+	markNotificationsRead,
+	type NotificationEvent,
+	type NotificationPreferences,
+	type NotificationsResponse,
+	notificationStreamUrl,
+	updateNotificationPreferences,
+} from "@/api/notifications";
+import { toast } from "@/components/toast/toast";
+import { m } from "@/paraglide/messages";
+
+export const notificationKeys = {
+	all: ["notifications"],
+	list: ["notifications", "list"],
+	unreadCount: ["notifications", "unread-count"],
+	preferences: ["notification-preferences"],
+} as const;
+
+const getNextPageParam = (lastPage: NotificationsResponse) =>
+	lastPage.page < lastPage.total_pages ? lastPage.page + 1 : undefined;
+
+export function useNotifications(enabled: boolean) {
+	return useInfiniteQuery({
+		queryKey: notificationKeys.list,
+		queryFn: ({ pageParam }) => fetchNotifications(pageParam),
+		initialPageParam: 1,
+		getNextPageParam,
+		enabled,
+	});
+}
+
+export function useUnreadNotificationCount(enabled: boolean) {
+	return useQuery({
+		queryKey: notificationKeys.unreadCount,
+		queryFn: fetchUnreadNotificationCount,
+		enabled,
+		// Kept up to date by the notification stream; refetching on focus
+		// covers the time the stream was disconnected.
+		staleTime: 1000 * 60,
+		refetchOnWindowFocus: true,
+	});
+}
+
+/**
+ * Listens to the server's notification stream while signed in, so the badge
+ * and the list update as soon as something happens.
+ */
+export function useNotificationStream(userId: string | undefined) {
+	const queryClient = useQueryClient();
+
+	useEffect(() => {
+		if (!userId) return;
+
+		const source = new EventSource(notificationStreamUrl, {
+			withCredentials: true,
+		});
+
+		const onEvent = (message: MessageEvent<string>) => {
+			let event: NotificationEvent;
+			try {
+				event = JSON.parse(message.data);
+			} catch {
+				return;
+			}
+
+			queryClient.setQueryData(notificationKeys.unreadCount, {
+				count: event.unreadCount,
+			});
+
+			// Reading changes no row's content: an open list keeps showing which
+			// notifications were new until it's closed.
+			if (event.reason === "read") return;
+			queryClient.invalidateQueries({ queryKey: notificationKeys.list });
+			queryClient.invalidateQueries({ queryKey: ["follow-requests"] });
+		};
+
+		source.addEventListener("notifications", onEvent);
+		return () => {
+			source.removeEventListener("notifications", onEvent);
+			source.close();
+		};
+	}, [userId, queryClient]);
+}
+
+export function useMarkAllNotificationsRead() {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: () => markNotificationsRead(),
+		onMutate: () => {
+			queryClient.setQueryData(notificationKeys.unreadCount, { count: 0 });
+		},
+		onError: () =>
+			queryClient.invalidateQueries({
+				queryKey: notificationKeys.unreadCount,
+			}),
+	});
+}
+
+export function useNotificationPreferences() {
+	return useQuery({
+		queryKey: notificationKeys.preferences,
+		queryFn: fetchNotificationPreferences,
+	});
+}
+
+export function useUpdateNotificationPreferences() {
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: updateNotificationPreferences,
+		onMutate: async (changes) => {
+			await queryClient.cancelQueries({
+				queryKey: notificationKeys.preferences,
+			});
+			const previous = queryClient.getQueryData<NotificationPreferences>(
+				notificationKeys.preferences,
+			);
+			if (previous) {
+				queryClient.setQueryData(notificationKeys.preferences, {
+					...previous,
+					...changes,
+				});
+			}
+			return { previous };
+		},
+		onSuccess: (preferences) => {
+			queryClient.setQueryData(notificationKeys.preferences, preferences);
+		},
+		onError: (_error, _changes, context) => {
+			if (context?.previous) {
+				queryClient.setQueryData(
+					notificationKeys.preferences,
+					context.previous,
+				);
+			}
+			toast.error({ title: m.stellar_sienna_moose() });
+		},
+	});
+}

@@ -1,10 +1,16 @@
-import { IconBrush, IconLock, IconUserCog } from "@tabler/icons-react";
+import {
+	IconBell,
+	IconBrush,
+	IconLock,
+	IconUserCog,
+} from "@tabler/icons-react";
 import { useNavigate, useRouteContext } from "@tanstack/react-router";
 import type { Account } from "better-auth";
 import { BlockedAccountsForm } from "@/components/auth/forms/blocked-accounts-form";
 import { DeleteAccountForm } from "@/components/auth/forms/delete-account-form";
 import { DisableTwoFactorForm } from "@/components/auth/forms/disable-two-factor-form";
 import { EnableTwoFactorForm } from "@/components/auth/forms/enable-two-factor-form";
+import { NotificationPreferencesForm } from "@/components/auth/forms/notification-preferences-form";
 import { PrivateAccountForm } from "@/components/auth/forms/private-account-form";
 import { UpdateEmailForm } from "@/components/auth/forms/update-email-form";
 import { UpdatePasswordForm } from "@/components/auth/forms/update-password-form";
@@ -52,6 +58,10 @@ export function SettingsComponent({
 					<IconLock />
 					{m.wild_periwinkle_mesa()}
 				</TabsTrigger>
+				<TabsTrigger value="notifications">
+					<IconBell />
+					{m.swift_cerise_octopus()}
+				</TabsTrigger>
 				<TabsTrigger value="display">
 					<IconBrush />
 					{m.fierce_sage_galaxy()}
@@ -91,6 +101,14 @@ export function SettingsComponent({
 					<PrivateAccountForm />
 					<Separator />
 					<BlockedAccountsForm />
+				</Card>
+			</TabsContent>
+			<TabsContent value="notifications">
+				<Card className="p-4">
+					<CardTitle>{m.dapper_topaz_canyon()}</CardTitle>
+					<CardDescription>{m.kind_mauve_meerkat()}</CardDescription>
+					<Separator />
+					<NotificationPreferencesForm />
 				</Card>
 			</TabsContent>
 			<TabsContent value="display">

@@ -78,6 +78,8 @@ export function invalidateFollowData(queryClient: QueryClient) {
 	queryClient.invalidateQueries({ queryKey: ["user-profile"] });
 	queryClient.invalidateQueries({ queryKey: ["follows"] });
 	queryClient.invalidateQueries({ queryKey: ["follow-requests"] });
+	// Notification rows show follow buttons and answerable requests.
+	queryClient.invalidateQueries({ queryKey: ["notifications"] });
 }
 
 type FollowVariables = {
