@@ -214,7 +214,7 @@ notificationRoutes.get("/stream", async (c) => {
 		| undefined;
 	server?.timeout?.(c.req.raw, 0);
 
-	return streamSSE(
+	const response = streamSSE(
 		c,
 		async (stream) => {
 			const send = (event: NotificationEvent) =>
@@ -241,6 +241,11 @@ notificationRoutes.get("/stream", async (c) => {
 			logger.error(error, "Notification stream failed");
 		},
 	);
+
+	// Keep proxies (Cloudflare, nginx) from compressing or buffering events.
+	response.headers.set("Cache-Control", "no-cache, no-transform");
+	response.headers.set("X-Accel-Buffering", "no");
+	return response;
 });
 
 export default notificationRoutes;

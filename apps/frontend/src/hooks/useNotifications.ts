@@ -56,6 +56,8 @@ export function useUnreadNotificationCount(enabled: boolean) {
 	});
 }
 
+const MAX_RECONNECT_DELAY_MS = 30_000;
+
 /**
  * Listens to the server's notification stream while signed in, so the badge
  * and the list update as soon as something happens.
@@ -66,9 +68,9 @@ export function useNotificationStream(userId: string | undefined) {
 	useEffect(() => {
 		if (!userId) return;
 
-		const source = new EventSource(notificationStreamUrl, {
-			withCredentials: true,
-		});
+		let source: EventSource | null = null;
+		let retryTimer: ReturnType<typeof setTimeout> | undefined;
+		let attempt = 0;
 
 		const onEvent = (message: MessageEvent<string>) => {
 			let event: NotificationEvent;
@@ -89,10 +91,41 @@ export function useNotificationStream(userId: string | undefined) {
 			queryClient.invalidateQueries({ queryKey: ["follow-requests"] });
 		};
 
-		source.addEventListener("notifications", onEvent);
+		const connect = () => {
+			clearTimeout(retryTimer);
+			source?.close();
+
+			const current = new EventSource(notificationStreamUrl, {
+				withCredentials: true,
+			});
+			source = current;
+
+			current.addEventListener("notifications", onEvent);
+			current.addEventListener("open", () => {
+				attempt = 0;
+			});
+			// The browser retries a dropped connection by itself, but gives up
+			// for good after an error response (such as a 502 while the server
+			// restarts). Retry with a growing, jittered delay in that case.
+			current.addEventListener("error", () => {
+				if (current.readyState !== EventSource.CLOSED) return;
+				const delay = Math.min(MAX_RECONNECT_DELAY_MS, 1000 * 2 ** attempt);
+				attempt++;
+				retryTimer = setTimeout(connect, delay * (0.5 + Math.random() / 2));
+			});
+		};
+
+		// Back online: don't wait for the next retry.
+		const onOnline = () => {
+			if (source?.readyState === EventSource.CLOSED) connect();
+		};
+
+		connect();
+		window.addEventListener("online", onOnline);
 		return () => {
-			source.removeEventListener("notifications", onEvent);
-			source.close();
+			window.removeEventListener("online", onOnline);
+			clearTimeout(retryTimer);
+			source?.close();
 		};
 	}, [userId, queryClient]);
 }
