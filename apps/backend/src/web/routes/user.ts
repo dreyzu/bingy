@@ -15,6 +15,7 @@ import {
 } from "../../db/schemas";
 import { db } from "../../lib/database";
 import { logger } from "../../lib/logger";
+import { notify, resolveFollowRequests } from "../../lib/notifications";
 import {
 	getFollowStatus,
 	getProfileAccess,
@@ -141,7 +142,7 @@ userProfileRoutes.patch(
 		if (!sessionUser) return c.json({ error: "Unauthorized" }, 401);
 		const { isPrivate } = c.req.valid("json");
 
-		const updated = await db.transaction(async (tx) => {
+		const { updated, acceptedIds } = await db.transaction(async (tx) => {
 			const [row] = await tx
 				.update(users)
 				.set({ isPrivate, updatedAt: new Date() })
@@ -149,22 +150,38 @@ userProfileRoutes.patch(
 				.returning({ isPrivate: users.isPrivate });
 
 			// Going public lets everyone in, so pending requests become follows.
-			if (row && !isPrivate) {
-				await tx
-					.update(follows)
-					.set({ status: "accepted", acceptedAt: new Date() })
-					.where(
-						and(
-							eq(follows.followingId, sessionUser.id),
-							eq(follows.status, "pending"),
-						),
-					);
-			}
+			const accepted =
+				row && !isPrivate
+					? await tx
+							.update(follows)
+							.set({ status: "accepted", acceptedAt: new Date() })
+							.where(
+								and(
+									eq(follows.followingId, sessionUser.id),
+									eq(follows.status, "pending"),
+								),
+							)
+							.returning({ followerId: follows.followerId })
+					: [];
 
-			return row;
+			return {
+				updated: row,
+				acceptedIds: accepted.map((follow) => follow.followerId),
+			};
 		});
 
 		if (!updated) return c.json({ error: "USER_NOT_FOUND" }, 404);
+
+		await Promise.all([
+			resolveFollowRequests(sessionUser.id, acceptedIds),
+			notify(
+				...acceptedIds.map((followerId) => ({
+					recipientId: followerId,
+					actorId: sessionUser.id,
+					type: "follow_request_accepted" as const,
+				})),
+			),
+		]);
 
 		return c.json(updated, 200);
 	},

@@ -1,9 +1,15 @@
 import { zValidator } from "@hono/zod-validator";
-import { and, count, desc, eq, inArray, or } from "drizzle-orm";
+import { and, count, desc, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { z } from "zod";
 import { type FollowStatus, follows, type User, users } from "../../db/schemas";
 import { db } from "../../lib/database";
+import { getViewerRelations } from "../../lib/follow-relations";
+import {
+	notify,
+	resolveFollowRequests,
+	retract,
+} from "../../lib/notifications";
 import {
 	hasBlockBetween,
 	loadViewableProfile,
@@ -51,53 +57,21 @@ const findUserByName = (username: string) =>
 		where: eq(users.name, username.toLowerCase()),
 	});
 
-/**
- * Adds the viewer's relationship with each user of the page (follow status
- * both ways), so every row can render the right follow button without an
- * extra request.
- */
+/** Adds the viewer's relationship with each user of the page. */
 async function withViewerFollowStatus(
 	viewerId: string | undefined,
 	rows: UserCardRow[],
 ) {
-	const statuses = new Map<string, FollowStatus>();
-	const followsViewer = new Set<string>();
-
-	if (viewerId && rows.length > 0) {
-		const ids = rows.map((row) => row.id);
-		const relations = await db
-			.select({
-				followerId: follows.followerId,
-				followingId: follows.followingId,
-				status: follows.status,
-			})
-			.from(follows)
-			.where(
-				or(
-					and(
-						eq(follows.followerId, viewerId),
-						inArray(follows.followingId, ids),
-					),
-					and(
-						eq(follows.followingId, viewerId),
-						inArray(follows.followerId, ids),
-						eq(follows.status, "accepted"),
-					),
-				),
-			);
-
-		for (const row of relations) {
-			if (row.followerId === viewerId)
-				statuses.set(row.followingId, row.status);
-			else followsViewer.add(row.followerId);
-		}
-	}
+	const relations = await getViewerRelations(
+		viewerId,
+		rows.map((row) => row.id),
+	);
 
 	return rows.map(({ id, ...row }) => ({
 		...row,
 		isViewer: id === viewerId,
-		followStatus: statuses.get(id) ?? null,
-		followsYou: followsViewer.has(id),
+		followStatus: relations.get(id)?.followStatus ?? null,
+		followsYou: relations.get(id)?.followsYou ?? false,
 	}));
 }
 
@@ -186,6 +160,15 @@ followRoutes.post("/requests/:username/accept", usernameParam, async (c) => {
 
 	if (!accepted) return c.json({ error: "REQUEST_NOT_FOUND" }, 404);
 
+	await Promise.all([
+		resolveFollowRequests(viewer.id, [requester.id]),
+		notify({
+			recipientId: requester.id,
+			actorId: viewer.id,
+			type: "follow_request_accepted",
+		}),
+	]);
+
 	return c.json({ status: accepted.status });
 });
 
@@ -207,6 +190,8 @@ followRoutes.delete("/requests/:username", usernameParam, async (c) => {
 			),
 		);
 
+	await retract(viewer.id, requester.id, ["follow_request"]);
+
 	return c.body(null, 204);
 });
 
@@ -227,6 +212,8 @@ followRoutes.delete("/followers/:username", usernameParam, async (c) => {
 			),
 		);
 
+	await retract(viewer.id, follower.id, ["new_follower", "follow_request"]);
+
 	return c.body(null, 204);
 });
 
@@ -246,7 +233,7 @@ followRoutes.post("/:username", usernameParam, async (c) => {
 
 	const status: FollowStatus = target.isPrivate ? "pending" : "accepted";
 
-	await db
+	const [created] = await db
 		.insert(follows)
 		.values({
 			followerId: viewer.id,
@@ -254,7 +241,16 @@ followRoutes.post("/:username", usernameParam, async (c) => {
 			status,
 			acceptedAt: status === "accepted" ? new Date() : null,
 		})
-		.onConflictDoNothing();
+		.onConflictDoNothing()
+		.returning({ status: follows.status });
+
+	if (created) {
+		await notify({
+			recipientId: target.id,
+			actorId: viewer.id,
+			type: created.status === "pending" ? "follow_request" : "new_follower",
+		});
+	}
 
 	// Following again is a no-op: return whatever status already exists.
 	const current = await db.query.follows.findFirst({
@@ -284,6 +280,8 @@ followRoutes.delete("/:username", usernameParam, async (c) => {
 				eq(follows.followingId, target.id),
 			),
 		);
+
+	await retract(target.id, viewer.id, ["new_follower", "follow_request"]);
 
 	return c.body(null, 204);
 });

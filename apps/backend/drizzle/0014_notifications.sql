@@ -1,3 +1,4 @@
+
 CREATE TABLE "notification_preferences" (
 	"user_id" uuid NOT NULL,
 	"type" varchar(50) NOT NULL,

@@ -4,6 +4,10 @@ import { Hono } from "hono";
 import { z } from "zod";
 import { blocks, follows, type User, users } from "../../db/schemas";
 import { db } from "../../lib/database";
+import {
+	deleteNotificationsBetween,
+	syncUnread,
+} from "../../lib/notifications";
 
 type Variables = {
 	user: User | null;
@@ -66,7 +70,8 @@ blockRoutes.get(
 	},
 );
 
-// Block a user. Removes every follow and follow request between the two.
+// Block a user. Removes every follow, follow request and notification between
+// the two.
 blockRoutes.post("/:username", usernameParam, async (c) => {
 	const viewer = c.get("user");
 	if (!viewer) return c.json({ error: "Unauthorized" }, 401);
@@ -97,7 +102,11 @@ blockRoutes.post("/:username", usernameParam, async (c) => {
 					),
 				),
 			);
+
+		await deleteNotificationsBetween(tx, viewer.id, target.id);
 	});
+
+	await syncUnread([viewer.id, target.id], "removed");
 
 	return c.body(null, 204);
 });
