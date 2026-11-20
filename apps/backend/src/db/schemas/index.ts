@@ -4,6 +4,7 @@ export * from "./block";
 export * from "./collection";
 export * from "./follow";
 export * from "./media";
+export * from "./notification";
 export * from "./relations";
 export * from "./review";
 export * from "./tracking";
