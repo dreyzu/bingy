@@ -45,6 +45,8 @@ export const notifications = pgTable(
 			table.recipientId,
 			table.createdAt,
 		),
+		// For the cleanup of expired notifications, across every user.
+		index("idx_notifications_created").on(table.createdAt),
 		index("idx_notifications_recipient_unread")
 			.on(table.recipientId)
 			.where(sql`${table.readAt} is null`),
