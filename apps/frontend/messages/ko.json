@@ -1090,5 +1090,10 @@
 	"dusky_wine_biscuit": "취소",
 	"balmy_topaz_coral": "지우기",
 	"humble_cerise_canyon": "알림을 삭제하지 못했어요. 다시 시도해 주세요.",
-	"eager_white_crystal": "알림을 지우지 못했어요. 다시 시도해 주세요."
+	"eager_white_crystal": "알림을 지우지 못했어요. 다시 시도해 주세요.",
+	"icy_coral_moose": "{first} 님, {second} 님 외 {count}명이 회원님을 팔로우하기 시작했어요",
+	"hardy_azure_tiger": "{first} 님, {second} 님 외 {count}명이 팔로우 요청을 수락했어요",
+	"gentle_gray_violin": "모두 보기",
+	"lush_fuchsia_tulip": "알림",
+	"lush_gold_quail": "알림"
 }

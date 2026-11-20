@@ -1090,5 +1090,10 @@
 	"dusky_wine_biscuit": "Cancelar",
 	"balmy_topaz_coral": "Limpar",
 	"humble_cerise_canyon": "Não foi possível excluir a notificação. Tente novamente.",
-	"eager_white_crystal": "Não foi possível limpar suas notificações. Tente novamente."
+	"eager_white_crystal": "Não foi possível limpar suas notificações. Tente novamente.",
+	"icy_coral_moose": "{first}, {second} e outras {count} pessoas começaram a seguir você",
+	"hardy_azure_tiger": "{first}, {second} e outras {count} pessoas aceitaram sua solicitação para seguir",
+	"gentle_gray_violin": "Ver tudo",
+	"lush_fuchsia_tulip": "Notificações",
+	"lush_gold_quail": "Notificações"
 }

@@ -32,6 +32,94 @@ async function safely(task: () => Promise<void>, message: string) {
 	}
 }
 
+/** More notifications than this of one groupable type on one day are grouped. */
+export const GROUP_THRESHOLD = 3;
+
+/** Most recent actors returned with a group. */
+const MAX_GROUP_ACTORS = 50;
+
+/** Types that don't need an answer, so several can be shown as one entry. */
+const groupableTypes: NotificationType[] = [
+	"new_follower",
+	"follow_request_accepted",
+];
+
+export type NotificationListEntry = {
+	/** The notification id, or `type:day` for a group. */
+	id: string;
+	type: NotificationType;
+	/** ISO date of the most recent notification of the entry. */
+	createdAt: string;
+	read: boolean;
+	/** Every notification of the entry, to delete it. */
+	ids: string[];
+	actorCount: number;
+	/** Most recent actors first, at most MAX_GROUP_ACTORS. */
+	actorIds: string[];
+};
+
+/**
+ * A page of a user's notifications, most recent first. When more than
+ * GROUP_THRESHOLD notifications of a groupable type happened on the same day
+ * in `timeZone`, they're returned as one entry.
+ */
+export async function listNotificationEntries(
+	recipientId: string,
+	options: { timeZone: string; limit: number; offset: number },
+) {
+	const groupable = sql.join(
+		groupableTypes.map((type) => sql`${type}`),
+		sql`, `,
+	);
+
+	const rows = await db.execute<
+		Omit<NotificationListEntry, "actorIds"> & {
+			actorIds: string[] | null;
+			total: number;
+		}
+	>(sql`
+		with bucketed as (
+			select id, type, actor_id, read_at, created_at,
+				date_trunc('day', (created_at at time zone 'UTC') at time zone ${options.timeZone}) as day
+			from notifications
+			where recipient_id = ${recipientId}
+		),
+		keyed as (
+			select *,
+				case
+					when type in (${groupable})
+						and count(*) over (partition by type, day) > ${sql.raw(String(GROUP_THRESHOLD))}
+					then type || ':' || to_char(day, 'YYYY-MM-DD')
+					else id::text
+				end as key
+			from bucketed
+		)
+		select
+			key as "id",
+			type,
+			to_char(max(created_at), 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"') as "createdAt",
+			bool_and(read_at is not null) as "read",
+			array_agg(id order by created_at desc) as "ids",
+			count(*)::int as "actorCount",
+			(array_agg(actor_id order by created_at desc) filter (where actor_id is not null))[1:${sql.raw(String(MAX_GROUP_ACTORS))}] as "actorIds",
+			(count(*) over ())::int as "total"
+		from keyed
+		group by key, type
+		order by max(created_at) desc, key desc
+		limit ${options.limit}
+		offset ${options.offset}
+	`);
+
+	const entries: NotificationListEntry[] = rows.map(
+		({ total: _total, actorIds, ...entry }) => ({
+			...entry,
+			actorIds: actorIds ?? [],
+		}),
+	);
+
+	return { entries, total: rows[0]?.total ?? 0 };
+}
+
 export async function countUnread(userId: string) {
 	const [row] = await db
 		.select({ count: count() })

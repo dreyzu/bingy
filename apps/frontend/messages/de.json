@@ -1090,5 +1090,10 @@
 	"dusky_wine_biscuit": "Abbrechen",
 	"balmy_topaz_coral": "Löschen",
 	"humble_cerise_canyon": "Die Benachrichtigung konnte nicht gelöscht werden. Versuche es erneut.",
-	"eager_white_crystal": "Deine Benachrichtigungen konnten nicht gelöscht werden. Versuche es erneut."
+	"eager_white_crystal": "Deine Benachrichtigungen konnten nicht gelöscht werden. Versuche es erneut.",
+	"icy_coral_moose": "{first}, {second} und {count} weitere folgen dir jetzt",
+	"hardy_azure_tiger": "{first}, {second} und {count} weitere haben deine Folgeanfrage angenommen",
+	"gentle_gray_violin": "Alle anzeigen",
+	"lush_fuchsia_tulip": "Benachrichtigungen",
+	"lush_gold_quail": "Benachrichtigungen"
 }

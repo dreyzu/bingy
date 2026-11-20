@@ -1,11 +1,18 @@
-import { IconCheck, IconTrash, IconX } from "@tabler/icons-react";
+import {
+	IconCheck,
+	IconChevronDown,
+	IconTrash,
+	IconX,
+} from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
+import { type ReactNode, useState } from "react";
 import type {
 	NotificationActor,
 	NotificationType,
 	UserNotification,
 } from "@/api/notifications";
 import { ProfileFollowButton } from "@/components/profile/profile-follow-button";
+import { UserCard } from "@/components/profile/user-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,6 +20,7 @@ import {
 	useDeclineFollowRequest,
 } from "@/hooks/useFollows";
 import { useDeleteNotification } from "@/hooks/useNotifications";
+import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 import { formatDistanceToNow } from "@/utils/format-date";
 
@@ -24,6 +32,34 @@ const notificationText: Record<
 	follow_request: m.quiet_slate_clover,
 	follow_request_accepted: m.eager_plum_violin,
 };
+
+/** Only these types are grouped by the server. */
+const groupText: Partial<
+	Record<
+		NotificationType,
+		(params: { first: string; second: string; count: number }) => string
+	>
+> = {
+	new_follower: m.icy_coral_moose,
+	follow_request_accepted: m.hardy_azure_tiger,
+};
+
+function ActorAvatar({
+	actor,
+	className,
+}: {
+	actor: NotificationActor;
+	className?: string;
+}) {
+	return (
+		<Avatar className={cn("h-10 w-10 shrink-0 rounded-full", className)}>
+			<AvatarImage src={actor.avatarUrl ?? undefined} alt={actor.displayName} />
+			<AvatarFallback className="rounded-full">
+				{actor.displayName.charAt(0).toUpperCase()}
+			</AvatarFallback>
+		</Avatar>
+	);
+}
 
 function FollowRequestActions({ actor }: { actor: NotificationActor }) {
 	const accept = useAcceptFollowRequest();
@@ -53,6 +89,21 @@ function FollowRequestActions({ actor }: { actor: NotificationActor }) {
 	);
 }
 
+/** "Follow back" until the viewer follows this new follower. */
+function FollowBackButton({ actor }: { actor: NotificationActor }) {
+	if (actor.followStatus === "accepted") return null;
+
+	return (
+		<ProfileFollowButton
+			username={actor.name}
+			displayName={actor.displayName}
+			isPrivate={actor.isPrivate}
+			followStatus={actor.followStatus}
+			followsYou={actor.followsYou}
+		/>
+	);
+}
+
 function NotificationActions({
 	type,
 	actor,
@@ -61,20 +112,7 @@ function NotificationActions({
 	actor: NotificationActor;
 }) {
 	if (type === "follow_request") return <FollowRequestActions actor={actor} />;
-
-	// Offer to follow back until the viewer follows the new follower.
-	if (type === "new_follower" && actor.followStatus !== "accepted") {
-		return (
-			<ProfileFollowButton
-				username={actor.name}
-				displayName={actor.displayName}
-				isPrivate={actor.isPrivate}
-				followStatus={actor.followStatus}
-				followsYou={actor.followsYou}
-			/>
-		);
-	}
-
+	if (type === "new_follower") return <FollowBackButton actor={actor} />;
 	return null;
 }
 
@@ -90,57 +128,112 @@ export function NotificationItem({
 	onNavigate,
 }: NotificationItemProps) {
 	const deleteNotification = useDeleteNotification();
-	const { actor, type } = notification;
-	if (!actor) return null;
+	const [expanded, setExpanded] = useState(false);
+	const { actors, type } = notification;
+	const [first, second] = actors;
+	if (!first) return null;
+
+	const groupMessage = groupText[type];
+	const isGroup = !!second && !!groupMessage;
+
+	const body: ReactNode = (
+		<>
+			{isGroup ? (
+				<div className="relative h-10 w-10 shrink-0">
+					<ActorAvatar
+						actor={first}
+						className="absolute top-0 left-0 h-7 w-7"
+					/>
+					<ActorAvatar
+						actor={second}
+						className="absolute right-0 bottom-0 h-7 w-7 ring-2 ring-popover"
+					/>
+				</div>
+			) : (
+				<ActorAvatar actor={first} />
+			)}
+			<div className="min-w-0 flex-1">
+				<p className="line-clamp-2 text-sm">
+					{isGroup
+						? groupMessage({
+								first: first.displayName,
+								second: second.displayName,
+								count: notification.actorCount - 2,
+							})
+						: notificationText[type]({ name: first.displayName })}
+				</p>
+				<p className="text-xs text-muted-foreground">
+					{formatDistanceToNow(new Date(notification.createdAt), localeRegion)}
+				</p>
+			</div>
+			{notification.read ? null : (
+				<span
+					className="h-2 w-2 shrink-0 rounded-full bg-primary"
+					aria-hidden="true"
+				/>
+			)}
+		</>
+	);
 
 	return (
-		<div className="group flex items-center gap-3 rounded-lg p-2 hover:bg-muted/50">
-			<Link
-				to="/@{$username}"
-				params={{ username: actor.name }}
-				onClick={onNavigate}
-				className="flex min-w-0 flex-1 items-center gap-3"
-			>
-				<Avatar className="h-10 w-10 shrink-0 rounded-full">
-					<AvatarImage
-						src={actor.avatarUrl ?? undefined}
-						alt={actor.displayName}
-					/>
-					<AvatarFallback className="rounded-full">
-						{actor.displayName.charAt(0).toUpperCase()}
-					</AvatarFallback>
-				</Avatar>
-				<div className="min-w-0 flex-1">
-					<p className="line-clamp-2 text-sm">
-						{notificationText[type]({ name: actor.displayName })}
-					</p>
-					<p className="text-xs text-muted-foreground">
-						{formatDistanceToNow(
-							new Date(notification.createdAt),
-							localeRegion,
-						)}
-					</p>
-				</div>
-				{notification.read ? null : (
-					<span
-						className="h-2 w-2 shrink-0 rounded-full bg-primary"
-						aria-hidden="true"
-					/>
+		<div>
+			<div className="group flex items-center gap-3 rounded-lg p-2 hover:bg-muted/50">
+				{isGroup ? (
+					<button
+						type="button"
+						aria-expanded={expanded}
+						onClick={() => setExpanded((value) => !value)}
+						className="flex min-w-0 flex-1 cursor-pointer items-center gap-3 text-left"
+					>
+						{body}
+						<IconChevronDown
+							aria-hidden="true"
+							className={cn(
+								"h-4 w-4 shrink-0 text-muted-foreground transition-transform",
+								expanded && "rotate-180",
+							)}
+						/>
+					</button>
+				) : (
+					<Link
+						to="/@{$username}"
+						params={{ username: first.name }}
+						onClick={onNavigate}
+						className="flex min-w-0 flex-1 items-center gap-3"
+					>
+						{body}
+					</Link>
 				)}
-			</Link>
-			<div className="flex shrink-0 items-center gap-1">
-				<NotificationActions type={type} actor={actor} />
-				{/* Only revealed on hover where hovering exists, always shown on touch. */}
-				<Button
-					variant="ghost"
-					size="icon-sm"
-					onClick={() => deleteNotification.mutate(notification.id)}
-					aria-label={m.lucky_sepia_blossom()}
-					className="text-muted-foreground focus-visible:opacity-100 group-hover:opacity-100 [@media(hover:hover)]:opacity-0"
-				>
-					<IconTrash />
-				</Button>
+				<div className="flex shrink-0 items-center gap-1">
+					{isGroup ? null : <NotificationActions type={type} actor={first} />}
+					{/* Only revealed on hover where hovering exists, always shown on touch. */}
+					<Button
+						variant="ghost"
+						size="icon-sm"
+						onClick={() => deleteNotification.mutate(notification)}
+						aria-label={m.lucky_sepia_blossom()}
+						className="text-muted-foreground focus-visible:opacity-100 group-hover:opacity-100 [@media(hover:hover)]:opacity-0"
+					>
+						<IconTrash />
+					</Button>
+				</div>
 			</div>
+			{isGroup && expanded ? (
+				<div className="ml-7 border-l pl-2">
+					{actors.map((actor) => (
+						<UserCard
+							key={actor.name}
+							user={{ ...actor, bio: null }}
+							onNavigate={onNavigate}
+							actions={
+								type === "new_follower" ? (
+									<FollowBackButton actor={actor} />
+								) : null
+							}
+						/>
+					))}
+				</div>
+			) : null}
 		</div>
 	);
 }

@@ -1090,5 +1090,10 @@
 	"dusky_wine_biscuit": "Cancel",
 	"balmy_topaz_coral": "Clear",
 	"humble_cerise_canyon": "Couldn't delete the notification. Try again.",
-	"eager_white_crystal": "Couldn't clear your notifications. Try again."
+	"eager_white_crystal": "Couldn't clear your notifications. Try again.",
+	"icy_coral_moose": "{first}, {second} and {count} others started following you",
+	"hardy_azure_tiger": "{first}, {second} and {count} others accepted your follow request",
+	"gentle_gray_violin": "View all",
+	"lush_fuchsia_tulip": "Notifications",
+	"lush_gold_quail": "Notifications"
 }

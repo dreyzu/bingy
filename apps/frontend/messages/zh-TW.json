@@ -1090,5 +1090,10 @@
 	"dusky_wine_biscuit": "取消",
 	"balmy_topaz_coral": "清除",
 	"humble_cerise_canyon": "無法刪除通知，請再試一次。",
-	"eager_white_crystal": "無法清除通知，請再試一次。"
+	"eager_white_crystal": "無法清除通知，請再試一次。",
+	"icy_coral_moose": "{first}、{second} 和另外 {count} 人開始追蹤你",
+	"hardy_azure_tiger": "{first}、{second} 和另外 {count} 人接受了你的追蹤請求",
+	"gentle_gray_violin": "查看全部",
+	"lush_fuchsia_tulip": "通知",
+	"lush_gold_quail": "通知"
 }

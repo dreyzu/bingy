@@ -7,7 +7,10 @@ import {
 import { useRouteContext } from "@tanstack/react-router";
 import { useState } from "react";
 import { LocaleRegionDropdown } from "@/components/locale-region-dropdown";
-import { NotificationBell } from "@/components/notifications/notification-bell";
+import {
+	NotificationBell,
+	NotificationNavIcon,
+} from "@/components/notifications/notification-bell";
 import { ProfileDropdown } from "@/components/profile/profile-dropdown";
 import { ProfileDrawer } from "@/components/profile-drawer";
 import { SearchCommand } from "@/components/search/search-command";
@@ -89,6 +92,12 @@ export default function Header() {
 			requiresAuth: false,
 		},
 		{
+			name: m.lush_fuchsia_tulip(),
+			link: "/notifications",
+			icon: <NotificationNavIcon />,
+			requiresAuth: true,
+		},
+		{
 			name: authData?.user.displayName ?? "",
 			link: `/@${authData?.user.name}`,
 			icon: (
@@ -139,12 +148,7 @@ export default function Header() {
 						)
 					}
 					center={<MobileNavbarLogo />}
-					right={
-						<div className="flex items-center gap-1">
-							<LocaleRegionDropdown />
-							<NotificationBell />
-						</div>
-					}
+					right={<LocaleRegionDropdown />}
 				/>
 			) : null}
 

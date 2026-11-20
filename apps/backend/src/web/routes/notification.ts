@@ -1,5 +1,5 @@
 import { zValidator } from "@hono/zod-validator";
-import { and, count, desc, eq, inArray, isNull } from "drizzle-orm";
+import { and, eq, inArray, isNull } from "drizzle-orm";
 import { Hono } from "hono";
 import { streamSSE } from "hono/streaming";
 import { z } from "zod";
@@ -19,6 +19,7 @@ import {
 import {
 	countUnread,
 	getPreferences,
+	listNotificationEntries,
 	syncUnread,
 	updatePreferences,
 } from "../../lib/notifications";
@@ -33,7 +34,18 @@ const notificationRoutes = new Hono<{ Variables: Variables }>();
 /** Keeps proxies from closing a stream that has nothing to send. */
 const HEARTBEAT_MS = 25_000;
 
-// The signed-in user's notifications, most recent first
+const isTimeZone = (timeZone: string) => {
+	try {
+		new Intl.DateTimeFormat("en-US", { timeZone });
+		return true;
+	} catch {
+		return false;
+	}
+};
+
+// The signed-in user's notifications, most recent first. On a given day
+// (in the viewer's time zone), more than GROUP_THRESHOLD notifications of a
+// groupable type are returned as one entry.
 notificationRoutes.get(
 	"/",
 	zValidator(
@@ -41,66 +53,60 @@ notificationRoutes.get(
 		z.object({
 			limit: z.coerce.number().int().min(1).max(50).default(20),
 			page: z.coerce.number().int().min(1).default(1),
+			tz: z.string().max(64).refine(isTimeZone).default("UTC"),
 		}),
 	),
 	async (c) => {
 		const viewer = c.get("user");
 		if (!viewer) return c.json({ error: "Unauthorized" }, 401);
-		const { limit, page } = c.req.valid("query");
+		const { limit, page, tz } = c.req.valid("query");
 
-		const filter = eq(notifications.recipientId, viewer.id);
+		const { entries, total } = await listNotificationEntries(viewer.id, {
+			timeZone: tz,
+			limit,
+			offset: (page - 1) * limit,
+		});
 
-		const [rows, [total]] = await Promise.all([
-			db
-				.select({
-					id: notifications.id,
-					type: notifications.type,
-					readAt: notifications.readAt,
-					createdAt: notifications.createdAt,
-					actorId: users.id,
-					actorName: users.name,
-					actorDisplayName: users.displayName,
-					actorAvatarUrl: users.avatarUrl,
-					actorIsPrivate: users.isPrivate,
-				})
-				.from(notifications)
-				.leftJoin(users, eq(notifications.actorId, users.id))
-				.where(filter)
-				.orderBy(desc(notifications.createdAt), desc(notifications.id))
-				.limit(limit)
-				.offset((page - 1) * limit),
-			db.select({ count: count() }).from(notifications).where(filter),
+		const actorIds = [...new Set(entries.flatMap((entry) => entry.actorIds))];
+		const [actorRows, relations] = await Promise.all([
+			actorIds.length > 0
+				? db
+						.select({
+							id: users.id,
+							name: users.name,
+							displayName: users.displayName,
+							avatarUrl: users.avatarUrl,
+							isPrivate: users.isPrivate,
+						})
+						.from(users)
+						.where(inArray(users.id, actorIds))
+				: [],
+			getViewerRelations(viewer.id, actorIds),
 		]);
-
-		const relations = await getViewerRelations(
-			viewer.id,
-			rows.flatMap((row) => (row.actorId ? [row.actorId] : [])),
+		const actorsById = new Map(
+			actorRows.map(({ id, ...actor }) => [
+				id,
+				{
+					...actor,
+					followStatus: relations.get(id)?.followStatus ?? null,
+					followsYou: relations.get(id)?.followsYou ?? false,
+				},
+			]),
 		);
 
-		const data = rows.map((row) => ({
-			id: row.id,
-			type: row.type,
-			createdAt: row.createdAt,
-			read: row.readAt !== null,
-			actor:
-				row.actorId && row.actorName
-					? {
-							name: row.actorName,
-							displayName: row.actorDisplayName,
-							avatarUrl: row.actorAvatarUrl,
-							isPrivate: row.actorIsPrivate,
-							followStatus: relations.get(row.actorId)?.followStatus ?? null,
-							followsYou: relations.get(row.actorId)?.followsYou ?? false,
-						}
-					: null,
+		const data = entries.map(({ actorIds, ...entry }) => ({
+			...entry,
+			actors: actorIds.flatMap((id) => {
+				const actor = actorsById.get(id);
+				return actor ? [actor] : [];
+			}),
 		}));
 
-		const totalResults = total?.count ?? 0;
 		return c.json({
 			data,
 			page,
-			total_pages: Math.ceil(totalResults / limit),
-			total_results: totalResults,
+			total_pages: Math.ceil(total / limit),
+			total_results: total,
 		});
 	},
 );
@@ -158,27 +164,25 @@ notificationRoutes.delete("/", async (c) => {
 	return c.body(null, 204);
 });
 
-// Delete one notification
-notificationRoutes.delete(
-	"/:id",
-	zValidator("param", z.object({ id: z.uuid() })),
+// Delete some notifications: a single one, or every one of a group
+notificationRoutes.post(
+	"/delete",
+	zValidator("json", z.object({ ids: z.array(z.uuid()).min(1).max(1000) })),
 	async (c) => {
 		const viewer = c.get("user");
 		if (!viewer) return c.json({ error: "Unauthorized" }, 401);
 
-		const [deleted] = await db
+		const deleted = await db
 			.delete(notifications)
 			.where(
 				and(
-					eq(notifications.id, c.req.valid("param").id),
 					eq(notifications.recipientId, viewer.id),
+					inArray(notifications.id, c.req.valid("json").ids),
 				),
 			)
 			.returning({ id: notifications.id });
 
-		if (!deleted) return c.json({ error: "NOTIFICATION_NOT_FOUND" }, 404);
-
-		await syncUnread([viewer.id], "removed");
+		if (deleted.length > 0) await syncUnread([viewer.id], "removed");
 
 		return c.body(null, 204);
 	},

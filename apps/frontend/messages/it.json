@@ -1090,5 +1090,10 @@
 	"dusky_wine_biscuit": "Annulla",
 	"balmy_topaz_coral": "Cancella",
 	"humble_cerise_canyon": "Impossibile eliminare la notifica. Riprova.",
-	"eager_white_crystal": "Impossibile cancellare le notifiche. Riprova."
+	"eager_white_crystal": "Impossibile cancellare le notifiche. Riprova.",
+	"icy_coral_moose": "{first}, {second} e altre {count} persone hanno iniziato a seguirti",
+	"hardy_azure_tiger": "{first}, {second} e altre {count} persone hanno accettato la tua richiesta di follow",
+	"gentle_gray_violin": "Vedi tutto",
+	"lush_fuchsia_tulip": "Notifiche",
+	"lush_gold_quail": "Notifiche"
 }

@@ -9,7 +9,7 @@ import {
 import { useEffect } from "react";
 import {
 	clearNotifications,
-	deleteNotification,
+	deleteNotifications,
 	fetchNotificationPreferences,
 	fetchNotifications,
 	fetchUnreadNotificationCount,
@@ -172,14 +172,14 @@ export function useDeleteNotification() {
 	const queryClient = useQueryClient();
 
 	return useMutation({
-		mutationFn: deleteNotification,
-		onMutate: async (id: string) => ({
+		mutationFn: (entry: UserNotification) => deleteNotifications(entry.ids),
+		onMutate: async (entry: UserNotification) => ({
 			previous: await removeFromList(
 				queryClient,
-				(notification) => notification.id !== id,
+				(notification) => notification.id !== entry.id,
 			),
 		}),
-		onError: (_error, _id, context) => {
+		onError: (_error, _entry, context) => {
 			if (context?.previous) {
 				queryClient.setQueryData(notificationKeys.list, context.previous);
 			}

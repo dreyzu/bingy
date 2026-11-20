@@ -1090,5 +1090,10 @@
 	"dusky_wine_biscuit": "Annuler",
 	"balmy_topaz_coral": "Effacer",
 	"humble_cerise_canyon": "Impossible de supprimer la notification. Réessaie.",
-	"eager_white_crystal": "Impossible d’effacer tes notifications. Réessaie."
+	"eager_white_crystal": "Impossible d’effacer tes notifications. Réessaie.",
+	"icy_coral_moose": "{first}, {second} et {count} autres personnes te suivent désormais",
+	"hardy_azure_tiger": "{first}, {second} et {count} autres personnes ont accepté ta demande d’abonnement",
+	"gentle_gray_violin": "Tout voir",
+	"lush_fuchsia_tulip": "Notifications",
+	"lush_gold_quail": "Notifications"
 }

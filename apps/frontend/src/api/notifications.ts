@@ -17,12 +17,22 @@ export type NotificationActor = Pretty<
 	}
 >;
 
+/**
+ * One notification, or a group of notifications of the same type from one
+ * day (when more than 3 people did the same thing).
+ */
 export type UserNotification = Pretty<{
+	/** The notification id, or a `type:day` key for a group. */
 	id: string;
 	type: NotificationType;
+	/** When the most recent notification of the entry happened. */
 	createdAt: string;
 	read: boolean;
-	actor: NotificationActor | null;
+	/** Every notification of the entry, to delete it. */
+	ids: string[];
+	actorCount: number;
+	/** Most recent first; at most 50 for a group. */
+	actors: NotificationActor[];
 }>;
 
 export type NotificationsResponse = Pretty<{
@@ -42,10 +52,13 @@ export type NotificationEvent = {
 
 export const notificationStreamUrl = `${config.apiUrl}/api/notifications/stream`;
 
+/** Groups are made per day of the viewer's time zone. */
+const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
 export const fetchNotifications = (page = 1) =>
 	apiFetch<NotificationsResponse>("/notifications", {
 		method: "GET",
-		query: { page },
+		query: { page, tz: timeZone },
 	});
 
 export const fetchUnreadNotificationCount = () =>
@@ -60,8 +73,11 @@ export const markNotificationsRead = (ids?: string[]) =>
 		body: { ids },
 	});
 
-export const deleteNotification = (id: string) =>
-	apiFetch<void>(`/notifications/${id}`, { method: "DELETE" });
+export const deleteNotifications = (ids: string[]) =>
+	apiFetch<void>("/notifications/delete", {
+		method: "POST",
+		body: { ids },
+	});
 
 export const clearNotifications = () =>
 	apiFetch<void>("/notifications", { method: "DELETE" });

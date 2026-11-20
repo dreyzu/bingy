@@ -1090,5 +1090,10 @@
 	"dusky_wine_biscuit": "キャンセル",
 	"balmy_topaz_coral": "消去",
 	"humble_cerise_canyon": "通知を削除できませんでした。もう一度お試しください。",
-	"eager_white_crystal": "通知を消去できませんでした。もう一度お試しください。"
+	"eager_white_crystal": "通知を消去できませんでした。もう一度お試しください。",
+	"icy_coral_moose": "{first}さん、{second}さん、他{count}人にフォローされました",
+	"hardy_azure_tiger": "{first}さん、{second}さん、他{count}人がフォローリクエストを承認しました",
+	"gentle_gray_violin": "すべて表示",
+	"lush_fuchsia_tulip": "通知",
+	"lush_gold_quail": "通知"
 }
