@@ -1,12 +1,12 @@
 import { useId } from "react";
 import type { NotificationType } from "@/api/notifications";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
 	Field,
 	FieldContent,
 	FieldDescription,
 	FieldLabel,
 } from "@/components/ui/field";
+import { Switch } from "@/components/ui/switch";
 import {
 	useNotificationPreferences,
 	useUpdateNotificationPreferences,
@@ -54,16 +54,16 @@ function PreferenceField({
 
 	return (
 		<Field orientation="horizontal" className="py-2">
-			<Checkbox
-				id={id}
-				checked={checked}
-				disabled={disabled}
-				onCheckedChange={(value) => onCheckedChange(value === true)}
-			/>
 			<FieldContent>
 				<FieldLabel htmlFor={id}>{label}</FieldLabel>
 				<FieldDescription>{description}</FieldDescription>
 			</FieldContent>
+			<Switch
+				id={id}
+				checked={checked}
+				disabled={disabled}
+				onCheckedChange={onCheckedChange}
+			/>
 		</Field>
 	);
 }

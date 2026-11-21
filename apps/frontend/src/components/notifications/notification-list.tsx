@@ -2,6 +2,17 @@ import { IconBell, IconLoader } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
 import { type ReactNode, useCallback, useEffect, useState } from "react";
 import { NotificationItem } from "@/components/notifications/notification-item";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+	AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import {
 	Empty,
@@ -9,6 +20,7 @@ import {
 	EmptyMedia,
 	EmptyTitle,
 } from "@/components/ui/empty";
+import { ItemGroup } from "@/components/ui/item";
 import {
 	useClearNotifications,
 	useMarkAllNotificationsRead,
@@ -24,45 +36,44 @@ interface NotificationsHeaderProps {
 	canClear: boolean;
 }
 
-/** Title with a "Clear all" action that asks for confirmation in place. */
+/** Title with a "Clear all" action that asks for confirmation. */
 function NotificationsHeader({ title, canClear }: NotificationsHeaderProps) {
 	const [confirming, setConfirming] = useState(false);
 	const clear = useClearNotifications();
-
-	if (confirming && canClear) {
-		return (
-			<div className="flex min-h-8 items-center justify-between gap-2">
-				<p className="text-sm font-medium">{m.bright_hazel_nectar()}</p>
-				<div className="flex shrink-0 items-center gap-1">
-					<Button
-						variant="ghost"
-						size="sm"
-						onClick={() => setConfirming(false)}
-					>
-						{m.dusky_wine_biscuit()}
-					</Button>
-					<Button
-						variant="destructive"
-						size="sm"
-						onClick={() => {
-							clear.mutate();
-							setConfirming(false);
-						}}
-					>
-						{m.balmy_topaz_coral()}
-					</Button>
-				</div>
-			</div>
-		);
-	}
 
 	return (
 		<div className="flex min-h-8 items-center justify-between gap-2">
 			{title}
 			{canClear ? (
-				<Button variant="ghost" size="sm" onClick={() => setConfirming(true)}>
-					{m.frosty_amber_seal()}
-				</Button>
+				<AlertDialog open={confirming} onOpenChange={setConfirming}>
+					<AlertDialogTrigger
+						render={
+							<Button variant="ghost" size="sm">
+								{m.frosty_amber_seal()}
+							</Button>
+						}
+					/>
+					<AlertDialogContent>
+						<AlertDialogHeader>
+							<AlertDialogTitle>{m.bright_hazel_nectar()}</AlertDialogTitle>
+							<AlertDialogDescription>
+								{m.rapid_periwinkle_canyon()}
+							</AlertDialogDescription>
+						</AlertDialogHeader>
+						<AlertDialogFooter>
+							<AlertDialogCancel>{m.dusky_wine_biscuit()}</AlertDialogCancel>
+							<AlertDialogAction
+								variant="destructive"
+								onClick={() => {
+									clear.mutate();
+									setConfirming(false);
+								}}
+							>
+								{m.balmy_topaz_coral()}
+							</AlertDialogAction>
+						</AlertDialogFooter>
+					</AlertDialogContent>
+				</AlertDialog>
 			) : null}
 		</div>
 	);
@@ -144,19 +155,20 @@ export function NotificationList({
 		content = (
 			<div
 				className={cn(
-					// The padding keeps the scroll container from clipping the rings.
-					"mx-auto flex w-full max-w-2xl flex-col gap-2 p-px",
+					"mx-auto w-full max-w-2xl",
 					scrollable && "no-scrollbar max-h-[60vh] overflow-y-auto",
 				)}
 			>
-				{notifications.map((notification) => (
-					<NotificationItem
-						key={notification.id}
-						notification={notification}
-						localeRegion={localeRegion}
-						onNavigate={onNavigate}
-					/>
-				))}
+				<ItemGroup className="has-data-[size=sm]:gap-2">
+					{notifications.map((notification) => (
+						<NotificationItem
+							key={notification.id}
+							notification={notification}
+							localeRegion={localeRegion}
+							onNavigate={onNavigate}
+						/>
+					))}
+				</ItemGroup>
 				{hasNextPage && !isFetchingNextPage ? <div ref={loadMoreRef} /> : null}
 				{isFetchingNextPage ? (
 					<div className="flex justify-center py-2">

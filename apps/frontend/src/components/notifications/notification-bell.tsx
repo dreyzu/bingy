@@ -2,6 +2,7 @@ import { IconBell } from "@tabler/icons-react";
 import { Link, useRouteContext } from "@tanstack/react-router";
 import { useState } from "react";
 import { NotificationList } from "@/components/notifications/notification-list";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
 	Popover,
@@ -17,9 +18,9 @@ function UnreadBadge({ count }: { count: number }) {
 	if (count === 0) return null;
 
 	return (
-		<span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-semibold text-primary-foreground">
+		<Badge className="absolute -top-0.5 -right-0.5 h-4 min-w-4 justify-center px-1 py-0 text-[10px]">
 			{count > 99 ? "99+" : count}
-		</span>
+		</Badge>
 	);
 }
 

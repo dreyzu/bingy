@@ -5,7 +5,7 @@ import {
 	IconX,
 } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { type ReactNode, useState } from "react";
+import type { ReactNode } from "react";
 import type {
 	NotificationActor,
 	NotificationType,
@@ -13,14 +13,31 @@ import type {
 } from "@/api/notifications";
 import { ProfileFollowButton } from "@/components/profile/profile-follow-button";
 import { UserCard } from "@/components/profile/user-card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+	Avatar,
+	AvatarFallback,
+	AvatarGroup,
+	AvatarImage,
+} from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
+	Item,
+	ItemActions,
+	ItemContent,
+	ItemDescription,
+	ItemMedia,
+	ItemTitle,
+} from "@/components/ui/item";
 import {
 	useAcceptFollowRequest,
 	useDeclineFollowRequest,
 } from "@/hooks/useFollows";
 import { useDeleteNotification } from "@/hooks/useNotifications";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 import { formatDistanceToNow } from "@/utils/format-date";
 
@@ -46,15 +63,15 @@ const groupText: Partial<
 
 function ActorAvatar({
 	actor,
-	className,
+	size,
 }: {
 	actor: NotificationActor;
-	className?: string;
+	size?: "default" | "lg";
 }) {
 	return (
-		<Avatar className={cn("h-10 w-10 shrink-0 rounded-full", className)}>
+		<Avatar size={size}>
 			<AvatarImage src={actor.avatarUrl ?? undefined} alt={actor.displayName} />
-			<AvatarFallback className="rounded-full">
+			<AvatarFallback>
 				{actor.displayName.charAt(0).toUpperCase()}
 			</AvatarFallback>
 		</Avatar>
@@ -128,7 +145,6 @@ export function NotificationItem({
 	onNavigate,
 }: NotificationItemProps) {
 	const deleteNotification = useDeleteNotification();
-	const [expanded, setExpanded] = useState(false);
 	const { actors, type } = notification;
 	const [first, second] = actors;
 	if (!first) return null;
@@ -138,22 +154,18 @@ export function NotificationItem({
 
 	const body: ReactNode = (
 		<>
-			{isGroup ? (
-				<div className="relative h-10 w-10 shrink-0">
-					<ActorAvatar
-						actor={first}
-						className="absolute top-0 left-0 h-7 w-7"
-					/>
-					<ActorAvatar
-						actor={second}
-						className="absolute right-0 bottom-0 h-7 w-7 ring-2 ring-popover"
-					/>
-				</div>
-			) : (
-				<ActorAvatar actor={first} />
-			)}
-			<div className="min-w-0 flex-1">
-				<p className="line-clamp-2 text-sm">
+			<ItemMedia>
+				{isGroup ? (
+					<AvatarGroup>
+						<ActorAvatar actor={first} />
+						<ActorAvatar actor={second} />
+					</AvatarGroup>
+				) : (
+					<ActorAvatar actor={first} size="lg" />
+				)}
+			</ItemMedia>
+			<ItemContent className="min-w-0">
+				<ItemTitle className="line-clamp-2 font-normal">
 					{isGroup
 						? groupMessage({
 								first: first.displayName,
@@ -161,65 +173,69 @@ export function NotificationItem({
 								count: notification.actorCount - 2,
 							})
 						: notificationText[type]({ name: first.displayName })}
-				</p>
-				<p className="text-xs text-muted-foreground">
+				</ItemTitle>
+				<ItemDescription className="text-xs">
 					{formatDistanceToNow(new Date(notification.createdAt), localeRegion)}
-				</p>
-			</div>
+				</ItemDescription>
+			</ItemContent>
 			{notification.read ? null : (
 				<span
-					className="h-2 w-2 shrink-0 rounded-full bg-primary"
+					className="size-2 shrink-0 rounded-full bg-primary"
 					aria-hidden="true"
 				/>
 			)}
 		</>
 	);
 
+	const deleteButton = (
+		// Only revealed on hover where hovering exists, always shown on touch.
+		<Button
+			variant="ghost"
+			size="icon-sm"
+			onClick={() => deleteNotification.mutate(notification)}
+			aria-label={m.lucky_sepia_blossom()}
+			className="text-muted-foreground focus-visible:opacity-100 group-hover/item:opacity-100 [@media(hover:hover)]:opacity-0"
+		>
+			<IconTrash />
+		</Button>
+	);
+
+	if (!isGroup) {
+		return (
+			<Item variant="outline" size="sm" className="hover:bg-muted/50">
+				<Link
+					to="/@{$username}"
+					params={{ username: first.name }}
+					onClick={onNavigate}
+					className="flex min-w-0 flex-1 items-center gap-2.5"
+				>
+					{body}
+				</Link>
+				<ItemActions className="gap-1">
+					<NotificationActions type={type} actor={first} />
+					{deleteButton}
+				</ItemActions>
+			</Item>
+		);
+	}
+
+	// The people of a group are listed below it, inside the same card.
 	return (
-		<div className="rounded-lg ring-1 ring-foreground/10">
-			<div className="group flex items-center gap-3 rounded-lg p-2 hover:bg-muted/50">
-				{isGroup ? (
-					<button
-						type="button"
-						aria-expanded={expanded}
-						onClick={() => setExpanded((value) => !value)}
-						className="flex min-w-0 flex-1 cursor-pointer items-center gap-3 text-left"
-					>
-						{body}
-						<IconChevronDown
-							aria-hidden="true"
-							className={cn(
-								"h-4 w-4 shrink-0 text-muted-foreground transition-transform",
-								expanded && "rotate-180",
-							)}
-						/>
-					</button>
-				) : (
-					<Link
-						to="/@{$username}"
-						params={{ username: first.name }}
-						onClick={onNavigate}
-						className="flex min-w-0 flex-1 items-center gap-3"
-					>
-						{body}
-					</Link>
-				)}
-				<div className="flex shrink-0 items-center gap-1">
-					{isGroup ? null : <NotificationActions type={type} actor={first} />}
-					{/* Only revealed on hover where hovering exists, always shown on touch. */}
-					<Button
-						variant="ghost"
-						size="icon-sm"
-						onClick={() => deleteNotification.mutate(notification)}
-						aria-label={m.lucky_sepia_blossom()}
-						className="text-muted-foreground focus-visible:opacity-100 group-hover:opacity-100 [@media(hover:hover)]:opacity-0"
-					>
-						<IconTrash />
-					</Button>
-				</div>
-			</div>
-			{isGroup && expanded ? (
-				<div className="ml-7 border-l pl-2">
+		<Collapsible>
+			<Item
+				variant="outline"
+				size="sm"
+				className="hover:bg-muted/50 has-data-panel-open:hover:bg-transparent"
+			>
+				<CollapsibleTrigger className="flex min-w-0 flex-1 cursor-pointer items-center gap-2.5 text-left">
+					{body}
+					<IconChevronDown
+						aria-hidden="true"
+						className="size-4 shrink-0 text-muted-foreground transition-transform in-data-panel-open:rotate-180"
+					/>
+				</CollapsibleTrigger>
+				<ItemActions className="gap-1">{deleteButton}</ItemActions>
+				<CollapsibleContent className="ml-4 basis-full border-l pl-2">
 					{actors.map((actor) => (
 						<UserCard
 							key={actor.name}
@@ -232,8 +248,8 @@ export function NotificationItem({
 							}
 						/>
 					))}
-				</div>
-			) : null}
-		</div>
+				</CollapsibleContent>
+			</Item>
+		</Collapsible>
 	);
 }
