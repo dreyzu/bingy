@@ -159,6 +159,7 @@ export const sendEmail = async (
 		"expirationMinutes" in params ? params.expirationMinutes : undefined;
 	const date = "date" in params ? params.date : undefined;
 	const days = "days" in params ? params.days : undefined;
+	const newEmail = "newEmail" in params ? params.newEmail : undefined;
 	const subject = params.subject ?? getDefaultSubject(type);
 
 	try {
@@ -186,7 +187,7 @@ export const sendEmail = async (
 				url,
 				expirationMinutes,
 				date,
-				undefined,
+				newEmail,
 				days,
 			),
 		});
