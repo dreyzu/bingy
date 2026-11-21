@@ -4,14 +4,54 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    allow:
-      - dependency-name: "@biomejs/biome"
+      day: monday
+    open-pull-requests-limit: 10
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+      semver-minor-days: 7
+      semver-patch-days: 3
+    groups:
+      # Security fixes ignore the schedule and cooldown: they open as soon as an advisory lands.
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      # Majors stay out of this group so each one gets its own PR.
+      minor-and-patch:
+        applies-to: version-updates
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    commit-message:
+      prefix: chore
+
+  - package-ecosystem: docker
+    directories:
+      - /apps/backend
+      - /apps/frontend
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    groups:
+      docker:
+        patterns:
+          - "*"
     commit-message:
       prefix: chore
 
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
+      interval: monthly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns:
+          - "*"
     commit-message:
       prefix: chore
