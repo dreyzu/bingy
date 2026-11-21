@@ -1015,7 +1015,7 @@
 	"zippy_hazel_orchid": "プライバシー",
 	"chilly_silver_falcon": "プライバシー設定を更新できませんでした。もう一度お試しください。",
 	"wild_periwinkle_mesa": "プライバシー",
-	"bold_navy_oasis": "承認したフォロワーだけが、リスト、ウォッチリスト、履歴などのプロフィールの内容を見られます。名前、写真、バナー、自己紹介、所在地、フォロワー数とフォロー数は全員に表示されます。公開に戻すと、保留中のリクエストはすべて承認されます。",
+	"bold_navy_oasis": "承認したフォロワーだけが、リスト、ウォッチリスト、履歴を見られます。",
 	"noble_ivory_mesa": "非公開アカウント",
 	"chilly_olive_fern": "非公開アカウント",
 	"brave_cobalt_valley": "リスト、ウォッチリスト、履歴を見るには、このアカウントをフォローしてください。",
@@ -1095,5 +1095,6 @@
 	"hardy_azure_tiger": "{first}さん、{second}さん、他{count}人がフォローリクエストを承認しました",
 	"gentle_gray_violin": "すべて表示",
 	"lush_fuchsia_tulip": "通知",
-	"lush_gold_quail": "通知"
+	"lush_gold_quail": "通知",
+	"rapid_periwinkle_canyon": "すべての通知が完全に削除されます。この操作は元に戻せません。"
 }

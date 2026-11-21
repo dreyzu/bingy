@@ -1015,7 +1015,7 @@
 	"zippy_hazel_orchid": "Privacy",
 	"chilly_silver_falcon": "Couldn't update your privacy settings. Try again.",
 	"wild_periwinkle_mesa": "Privacy",
-	"bold_navy_oasis": "Only followers you approve can see your profile content, like your lists, watchlist and history. Your name, picture, banner, bio, location and follower counts stay visible to everyone. Switching back to public accepts all pending requests.",
+	"bold_navy_oasis": "Only followers you approve can see your lists, watchlist and history.",
 	"noble_ivory_mesa": "Private account",
 	"chilly_olive_fern": "Private account",
 	"brave_cobalt_valley": "Follow this account to see its lists, watchlist and history.",
@@ -1095,5 +1095,6 @@
 	"hardy_azure_tiger": "{first}, {second} and {count} others accepted your follow request",
 	"gentle_gray_violin": "View all",
 	"lush_fuchsia_tulip": "Notifications",
-	"lush_gold_quail": "Notifications"
+	"lush_gold_quail": "Notifications",
+	"rapid_periwinkle_canyon": "Every notification will be permanently deleted. This can't be undone."
 }

@@ -1015,7 +1015,7 @@
 	"zippy_hazel_orchid": "隱私",
 	"chilly_silver_falcon": "無法更新隱私設定，請再試一次。",
 	"wild_periwinkle_mesa": "隱私",
-	"bold_navy_oasis": "只有你核准的追蹤者才能查看你的個人資料內容，例如清單、待看清單和紀錄。你的名稱、頭像、橫幅、簡介、所在地以及追蹤者和追蹤中人數對所有人可見。切換回公開後，所有待處理的請求都會被接受。",
+	"bold_navy_oasis": "只有你核准的追蹤者才能查看你的清單、待看清單和紀錄。",
 	"noble_ivory_mesa": "私人帳號",
 	"chilly_olive_fern": "私人帳號",
 	"brave_cobalt_valley": "追蹤此帳號即可查看其清單、待看清單和紀錄。",
@@ -1095,5 +1095,6 @@
 	"hardy_azure_tiger": "{first}、{second} 和另外 {count} 人接受了你的追蹤請求",
 	"gentle_gray_violin": "查看全部",
 	"lush_fuchsia_tulip": "通知",
-	"lush_gold_quail": "通知"
+	"lush_gold_quail": "通知",
+	"rapid_periwinkle_canyon": "所有通知都將被永久刪除。此操作無法復原。"
 }

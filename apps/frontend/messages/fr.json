@@ -1015,7 +1015,7 @@
 	"zippy_hazel_orchid": "Confidentialité",
 	"chilly_silver_falcon": "Impossible de mettre à jour tes paramètres de confidentialité. Réessaie.",
 	"wild_periwinkle_mesa": "Confidentialité",
-	"bold_navy_oasis": "Seuls les abonnés que tu acceptes peuvent voir le contenu de ton profil, comme tes listes, ta watchlist et ton historique. Ton nom, ta photo, ta bannière, ta bio, ta localisation et ton nombre d’abonnés et d’abonnements restent visibles par tous. Repasser en public accepte toutes les demandes en attente.",
+	"bold_navy_oasis": "Seuls les abonnés que tu acceptes peuvent voir tes listes, ta watchlist et ton historique.",
 	"noble_ivory_mesa": "Compte privé",
 	"chilly_olive_fern": "Compte privé",
 	"brave_cobalt_valley": "Abonne-toi à ce compte pour voir ses listes, sa watchlist et son historique.",
@@ -1095,5 +1095,6 @@
 	"hardy_azure_tiger": "{first}, {second} et {count} autres personnes ont accepté ta demande d’abonnement",
 	"gentle_gray_violin": "Tout voir",
 	"lush_fuchsia_tulip": "Notifications",
-	"lush_gold_quail": "Notifications"
+	"lush_gold_quail": "Notifications",
+	"rapid_periwinkle_canyon": "Toutes tes notifications seront supprimées définitivement. Cette action est irréversible."
 }

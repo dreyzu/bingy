@@ -1015,7 +1015,7 @@
 	"zippy_hazel_orchid": "Privacidad",
 	"chilly_silver_falcon": "No se ha podido actualizar tu configuración de privacidad. Inténtalo de nuevo.",
 	"wild_periwinkle_mesa": "Privacidad",
-	"bold_navy_oasis": "Solo los seguidores que apruebes pueden ver el contenido de tu perfil, como tus listas, tu lista para ver y tu historial. Tu nombre, foto, banner, biografía, ubicación y número de seguidores y seguidos siguen visibles para todos. Si vuelves a la cuenta pública, se aceptarán todas las solicitudes pendientes.",
+	"bold_navy_oasis": "Solo los seguidores que apruebes pueden ver tus listas, tu lista para ver y tu historial.",
 	"noble_ivory_mesa": "Cuenta privada",
 	"chilly_olive_fern": "Cuenta privada",
 	"brave_cobalt_valley": "Sigue esta cuenta para ver sus listas, su lista para ver y su historial.",
@@ -1095,5 +1095,6 @@
 	"hardy_azure_tiger": "{first}, {second} y {count} personas más han aceptado tu solicitud de seguimiento",
 	"gentle_gray_violin": "Ver todo",
 	"lush_fuchsia_tulip": "Notificaciones",
-	"lush_gold_quail": "Notificaciones"
+	"lush_gold_quail": "Notificaciones",
+	"rapid_periwinkle_canyon": "Se borrarán todas tus notificaciones de forma definitiva. Esta acción no se puede deshacer."
 }

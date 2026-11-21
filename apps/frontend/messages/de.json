@@ -1015,7 +1015,7 @@
 	"zippy_hazel_orchid": "Privatsphäre",
 	"chilly_silver_falcon": "Deine Privatsphäre-Einstellungen konnten nicht aktualisiert werden. Versuche es erneut.",
 	"wild_periwinkle_mesa": "Privatsphäre",
-	"bold_navy_oasis": "Nur Follower, die du bestätigst, können die Inhalte deines Profils sehen, etwa deine Listen, deine Watchlist und deinen Verlauf. Dein Name, dein Bild, dein Banner, deine Bio, dein Standort und die Anzahl deiner Follower und gefolgten Konten bleiben für alle sichtbar. Wenn du wieder öffentlich wirst, werden alle offenen Anfragen angenommen.",
+	"bold_navy_oasis": "Nur Follower, die du bestätigst, können deine Listen, deine Watchlist und deinen Verlauf sehen.",
 	"noble_ivory_mesa": "Privates Konto",
 	"chilly_olive_fern": "Privates Konto",
 	"brave_cobalt_valley": "Folge diesem Konto, um seine Listen, seine Watchlist und seinen Verlauf zu sehen.",
@@ -1095,5 +1095,6 @@
 	"hardy_azure_tiger": "{first}, {second} und {count} weitere haben deine Folgeanfrage angenommen",
 	"gentle_gray_violin": "Alle anzeigen",
 	"lush_fuchsia_tulip": "Benachrichtigungen",
-	"lush_gold_quail": "Benachrichtigungen"
+	"lush_gold_quail": "Benachrichtigungen",
+	"rapid_periwinkle_canyon": "Alle deine Benachrichtigungen werden endgültig gelöscht. Das kann nicht rückgängig gemacht werden."
 }
