@@ -11,7 +11,7 @@ export const Route = createFileRoute("/_auth/notifications")({
 
 function NotificationsPage() {
 	return (
-		<div className="flex w-full flex-col">
+		<div className="flex w-full flex-col gap-8">
 			<NotificationList
 				title={<h1 className="text-2xl font-bold">{m.lush_gold_quail()}</h1>}
 			/>

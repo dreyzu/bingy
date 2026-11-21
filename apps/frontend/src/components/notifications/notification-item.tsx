@@ -176,7 +176,7 @@ export function NotificationItem({
 	);
 
 	return (
-		<div>
+		<div className="rounded-lg ring-1 ring-foreground/10">
 			<div className="group flex items-center gap-3 rounded-lg p-2 hover:bg-muted/50">
 				{isGroup ? (
 					<button
