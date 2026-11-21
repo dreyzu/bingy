@@ -1,4 +1,4 @@
-FROM oven/bun:latest AS builder
+FROM oven/bun:1.4.5 AS builder
 
 WORKDIR /app
 
@@ -25,7 +25,7 @@ ENV VITE_APP_URL=${VITE_APP_URL}
 
 RUN bun run build
 
-FROM caddy:alpine
+FROM caddy:2.11.9-alpine
 
 COPY --from=builder /app/apps/frontend/dist /usr/share/caddy
 COPY apps/frontend/Caddyfile /etc/caddy/Caddyfile
