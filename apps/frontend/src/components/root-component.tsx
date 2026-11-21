@@ -1,14 +1,16 @@
-import { TanstackDevtools } from "@tanstack/react-devtools";
 import { HeadContent, Outlet, useRouteContext } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
-import { Fragment } from "react";
-import { config } from "@/lib/env";
-import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
+import { Fragment, lazy, Suspense } from "react";
 import Header from "./header";
 import { GlobalLoadingIndicator } from "./loading/loading-global";
 
+// Read import.meta.env directly rather than through config: Vite inlines it
+// at build time, so production builds drop the devtools chunk entirely.
+const Devtools =
+	import.meta.env.VITE_APP_ENV !== "production"
+		? lazy(() => import("./devtools"))
+		: null;
+
 export function RootComponent() {
-	const isProd = config.appEnv === "production";
 	// The route context switches account once the route guards have run for
 	// the new one. Remounting on that change drops every bit of component state
 	// (forms, dialogs) that was built for the previous account.
@@ -25,20 +27,10 @@ export function RootComponent() {
 					<GlobalLoadingIndicator />
 				</div>
 			</Fragment>
-			{!isProd ? (
-				<TanstackDevtools
-					config={{
-						position: "top-left",
-						hideUntilHover: true,
-					}}
-					plugins={[
-						{
-							name: "Tanstack Router",
-							render: <TanStackRouterDevtoolsPanel />,
-						},
-						TanStackQueryDevtools,
-					]}
-				/>
+			{Devtools ? (
+				<Suspense>
+					<Devtools />
+				</Suspense>
 			) : null}
 		</div>
 	);

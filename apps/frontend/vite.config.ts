@@ -6,6 +6,9 @@ import viteReact from "@vitejs/plugin-react";
 import { defineConfig, type PluginOption } from "vite";
 
 export default defineConfig({
+	build: {
+		chunkSizeWarningLimit: 600,
+	},
 	optimizeDeps: {
 		force: true,
 	},
@@ -29,7 +32,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			"@": resolve(__dirname, "./src"),
+			"@": resolve(import.meta.dirname, "./src"),
 		},
 	},
 });
