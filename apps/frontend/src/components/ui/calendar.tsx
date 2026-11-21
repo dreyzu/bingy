@@ -3,6 +3,7 @@ import {
 	IconChevronLeft,
 	IconChevronRight,
 } from "@tabler/icons-react";
+import { cn } from "cn";
 import * as React from "react";
 import {
 	type DayButton,
@@ -11,7 +12,6 @@ import {
 	type Locale,
 } from "react-day-picker";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 function Calendar({
 	className,

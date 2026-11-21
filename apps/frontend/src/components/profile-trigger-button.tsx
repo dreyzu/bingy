@@ -1,6 +1,6 @@
+import { cn } from "cn";
 import type { ComponentPropsWithoutRef } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { cn } from "@/lib/utils";
 
 interface ProfileTriggerButtonProps extends ComponentPropsWithoutRef<"button"> {
 	username: string;

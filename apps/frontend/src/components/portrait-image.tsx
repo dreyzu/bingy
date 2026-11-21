@@ -4,11 +4,11 @@ import {
 	IconMovie,
 	IconUser,
 } from "@tabler/icons-react";
+import { cn } from "cn";
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Drawer, DrawerBody, DrawerContent } from "@/components/ui/drawer";
 import { useMediaQuery } from "@/integrations/media-query";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 import { getTmdbImageUrl, type ImageSize } from "@/utils/utils";
 

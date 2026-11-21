@@ -1,4 +1,5 @@
 import { IconBell, IconLoader } from "@tabler/icons-react";
+import { cn } from "cn";
 import { useAtomValue } from "jotai";
 import { type ReactNode, useCallback, useEffect, useState } from "react";
 import { NotificationItem } from "@/components/notifications/notification-item";
@@ -27,7 +28,6 @@ import {
 	useUnreadNotificationCount,
 } from "@/hooks/useNotifications";
 import { localeRegionAtom } from "@/lib/atoms/region";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 
 interface NotificationsHeaderProps {

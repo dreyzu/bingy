@@ -1,5 +1,6 @@
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
+import { cn } from "cn";
 import { buttonVariants } from "@/components/ui/button";
 import {
 	Pagination,
@@ -7,7 +8,6 @@ import {
 	PaginationEllipsis,
 	PaginationItem,
 } from "@/components/ui/pagination";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 
 interface SearchPaginationProps {

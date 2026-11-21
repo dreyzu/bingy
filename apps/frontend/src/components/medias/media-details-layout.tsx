@@ -1,7 +1,7 @@
+import { cn } from "cn";
 import type { ReactNode } from "react";
 import { MediaBackgroundImage } from "@/components/medias/media-background-image";
 import { BackButton } from "@/components/ui/back-button";
-import { cn } from "@/lib/utils";
 
 /** Poster size for detail pages: small beside the header below `lg`. */
 export const MEDIA_DETAILS_POSTER_CLASSES =

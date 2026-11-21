@@ -1,11 +1,11 @@
 import { Link } from "@tanstack/react-router";
 import type { VariantProps } from "class-variance-authority";
+import { cn } from "cn";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import React, { useRef, useState } from "react";
 import logo from "@/assets/bingy-icon.svg";
 import logoFull from "@/assets/bingy-icon_text.svg";
 import { Button, type buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 interface NavbarProps {
 	children: React.ReactNode;

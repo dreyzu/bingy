@@ -1,5 +1,6 @@
 import { IconSearch } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
+import { cn } from "cn";
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 import type { Schemas } from "shared";
@@ -19,7 +20,6 @@ import { LoaderFive } from "@/components/ui/loader";
 import { useSearchQuery } from "@/hooks/useSearch";
 import { useMediaQuery } from "@/integrations/media-query";
 import { localeRegionAtom } from "@/lib/atoms/region";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 import { getRelevanceScore } from "@/utils/search-relevance-score";
 import { isMacOS } from "@/utils/utils";

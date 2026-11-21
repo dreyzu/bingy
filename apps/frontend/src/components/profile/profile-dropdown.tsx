@@ -16,6 +16,7 @@ import {
 	useRouteContext,
 	useRouter,
 } from "@tanstack/react-router";
+import { cn } from "cn";
 import { useState } from "react";
 import { ProfileTriggerButton } from "@/components/profile-trigger-button";
 import { toast } from "@/components/toast/toast";
@@ -30,7 +31,6 @@ import {
 import { queryClient } from "@/integrations/tanstack-query/root-provider";
 import { authClient } from "@/lib/auth-client";
 import { sessionQueryOptions } from "@/lib/queries/session";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 
 interface ProfileDropdownProps extends React.HTMLAttributes<HTMLDivElement> {}

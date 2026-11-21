@@ -1,5 +1,6 @@
 import { IconStopwatch } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
+import { cn } from "cn";
 import { isFuture } from "date-fns";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
@@ -7,7 +8,6 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { localeRegionAtom } from "@/lib/atoms/region";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 import { formatDate } from "@/utils/format-date";
 import { formatRuntime } from "@/utils/format-runtime";

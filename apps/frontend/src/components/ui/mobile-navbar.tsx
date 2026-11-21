@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
+import { cn } from "cn";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useRef, useState } from "react";
-import { cn } from "@/lib/utils";
 
 interface BottomNavProps {
 	items: {
