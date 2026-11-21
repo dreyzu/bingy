@@ -223,3 +223,8 @@ Use **shadcn/ui components** for all UI elements whenever an appropriate compone
 - If a required component does not exist in the project, check whether shadcn/ui provides it before implementing a custom solution.
 - Maintain consistent styling, accessibility, keyboard navigation, and responsive behavior.
 - Do not replace existing project-specific components unnecessarily when they already provide the required functionality.
+- When a required shadcn/ui component is not installed, install it using the shadcn CLI rather than manually recreating it.
+- Before installing, check whether the component already exists in the project.
+- When the shadcn CLI prompts whether to overwrite an existing component, **always answer no**. Never overwrite existing components automatically.
+- If installation would overwrite an existing component, stop and resolve the conflict manually. Preserve existing customizations and behavior.
+- Use the project's existing package manager (Bun or pnpm) when running installation commands.
