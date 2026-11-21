@@ -210,3 +210,16 @@ Follow Japanese typography:
 ## UI copy
 
 When a component has a title and a description below it, the description must not repeat the title's text. For example, an empty state titled "Empty watchlist" should not have a description that starts with or restates "empty watchlist".
+
+## UI components
+
+Use **shadcn/ui components** for all UI elements whenever an appropriate component exists.
+
+- Prefer existing shadcn/ui components over building custom UI components from scratch.
+- Before creating a new component, check whether an existing shadcn/ui component already covers the use case.
+- Use the project's existing shadcn/ui components and conventions. Do not introduce a second component library.
+- Compose existing shadcn/ui components when building more complex interfaces.
+- Customize shadcn/ui components through their supported props, variants, and Tailwind CSS classes rather than reimplementing their behavior.
+- If a required component does not exist in the project, check whether shadcn/ui provides it before implementing a custom solution.
+- Maintain consistent styling, accessibility, keyboard navigation, and responsive behavior.
+- Do not replace existing project-specific components unnecessarily when they already provide the required functionality.
