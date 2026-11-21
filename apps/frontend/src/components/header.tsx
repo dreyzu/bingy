@@ -7,6 +7,10 @@ import {
 import { useRouteContext } from "@tanstack/react-router";
 import { useState } from "react";
 import { LocaleRegionDropdown } from "@/components/locale-region-dropdown";
+import {
+	NotificationBell,
+	NotificationNavIcon,
+} from "@/components/notifications/notification-bell";
 import { ProfileDropdown } from "@/components/profile/profile-dropdown";
 import { ProfileDrawer } from "@/components/profile-drawer";
 import { SearchCommand } from "@/components/search/search-command";
@@ -20,6 +24,7 @@ import {
 	NavbarLogo,
 	NavItems,
 } from "@/components/ui/resizable-navbar";
+import { useNotificationStream } from "@/hooks/useNotifications";
 import { useShowTopMobileNavbar } from "@/hooks/useShowTopMobileNavbar";
 import { m } from "@/paraglide/messages";
 
@@ -27,6 +32,7 @@ export default function Header() {
 	const { authData } = useRouteContext({ from: "__root__" });
 	const [searchOpen, setSearchOpen] = useState(false);
 	const showTopMobileNavbar = useShowTopMobileNavbar();
+	useNotificationStream(authData?.user.id);
 
 	const allNavItems = [
 		{
@@ -86,6 +92,12 @@ export default function Header() {
 			requiresAuth: false,
 		},
 		{
+			name: m.lush_fuchsia_tulip(),
+			link: "/notifications",
+			icon: <NotificationNavIcon />,
+			requiresAuth: true,
+		},
+		{
 			name: authData?.user.displayName ?? "",
 			link: `/@${authData?.user.name}`,
 			icon: (
@@ -112,6 +124,7 @@ export default function Header() {
 					<NavItems items={desktopNavItems} />
 					<div className="flex items-center gap-1">
 						<LocaleRegionDropdown />
+						<NotificationBell />
 
 						{authData ? (
 							<ProfileDropdown />

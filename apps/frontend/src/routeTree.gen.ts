@@ -24,6 +24,7 @@ import { Route as AtChar123usernameChar125HistoryRouteImport } from './routes/@{
 import { Route as AtChar123usernameChar125ShowsRouteImport } from './routes/@{$username}/shows'
 import { Route as AtChar123usernameChar125WatchlistRouteImport } from './routes/@{$username}/watchlist'
 import { Route as AuthHomeRouteImport } from './routes/_auth/home'
+import { Route as AuthNotificationsRouteImport } from './routes/_auth/notifications'
 import { Route as AuthSettingsRouteImport } from './routes/_auth/settings'
 import { Route as AuthVerifyEmailRouteImport } from './routes/_auth/verify-email'
 import { Route as AuthWelcomeRouteImport } from './routes/_auth/welcome'
@@ -125,6 +126,11 @@ const AtChar123usernameChar125WatchlistRoute =
 const AuthHomeRoute = AuthHomeRouteImport.update({
   id: '/home',
   path: '/home',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthNotificationsRoute = AuthNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
   getParentRoute: () => AuthRoute,
 } as any)
 const AuthSettingsRoute = AuthSettingsRouteImport.update({
@@ -260,6 +266,7 @@ export interface FileRoutesByFullPath {
   '/@{$username}/shows': typeof AtChar123usernameChar125ShowsRoute
   '/@{$username}/watchlist': typeof AtChar123usernameChar125WatchlistRoute
   '/home': typeof AuthHomeRoute
+  '/notifications': typeof AuthNotificationsRoute
   '/settings': typeof AuthSettingsRoute
   '/verify-email': typeof AuthVerifyEmailRoute
   '/welcome': typeof AuthWelcomeRoute
@@ -297,6 +304,7 @@ export interface FileRoutesByTo {
   '/@{$username}/shows': typeof AtChar123usernameChar125ShowsRoute
   '/@{$username}/watchlist': typeof AtChar123usernameChar125WatchlistRoute
   '/home': typeof AuthHomeRoute
+  '/notifications': typeof AuthNotificationsRoute
   '/settings': typeof AuthSettingsRoute
   '/verify-email': typeof AuthVerifyEmailRoute
   '/welcome': typeof AuthWelcomeRoute
@@ -337,6 +345,7 @@ export interface FileRoutesById {
   '/@{$username}/shows': typeof AtChar123usernameChar125ShowsRoute
   '/@{$username}/watchlist': typeof AtChar123usernameChar125WatchlistRoute
   '/_auth/home': typeof AuthHomeRoute
+  '/_auth/notifications': typeof AuthNotificationsRoute
   '/_auth/settings': typeof AuthSettingsRoute
   '/_auth/verify-email': typeof AuthVerifyEmailRoute
   '/_auth/welcome': typeof AuthWelcomeRoute
@@ -377,6 +386,7 @@ export interface FileRouteTypes {
     | '/@{$username}/shows'
     | '/@{$username}/watchlist'
     | '/home'
+    | '/notifications'
     | '/settings'
     | '/verify-email'
     | '/welcome'
@@ -414,6 +424,7 @@ export interface FileRouteTypes {
     | '/@{$username}/shows'
     | '/@{$username}/watchlist'
     | '/home'
+    | '/notifications'
     | '/settings'
     | '/verify-email'
     | '/welcome'
@@ -453,6 +464,7 @@ export interface FileRouteTypes {
     | '/@{$username}/shows'
     | '/@{$username}/watchlist'
     | '/_auth/home'
+    | '/_auth/notifications'
     | '/_auth/settings'
     | '/_auth/verify-email'
     | '/_auth/welcome'
@@ -609,6 +621,13 @@ declare module '@tanstack/react-router' {
       path: '/home'
       fullPath: '/home'
       preLoaderRoute: typeof AuthHomeRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/_auth/notifications': {
+      id: '/_auth/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AuthNotificationsRouteImport
       parentRoute: typeof AuthRoute
     }
     '/_auth/settings': {
@@ -803,6 +822,7 @@ const AtChar123usernameChar125RouteRouteWithChildren =
 
 interface AuthRouteChildren {
   AuthHomeRoute: typeof AuthHomeRoute
+  AuthNotificationsRoute: typeof AuthNotificationsRoute
   AuthSettingsRoute: typeof AuthSettingsRoute
   AuthVerifyEmailRoute: typeof AuthVerifyEmailRoute
   AuthWelcomeRoute: typeof AuthWelcomeRoute
@@ -812,6 +832,7 @@ interface AuthRouteChildren {
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthHomeRoute: AuthHomeRoute,
+  AuthNotificationsRoute: AuthNotificationsRoute,
   AuthSettingsRoute: AuthSettingsRoute,
   AuthVerifyEmailRoute: AuthVerifyEmailRoute,
   AuthWelcomeRoute: AuthWelcomeRoute,

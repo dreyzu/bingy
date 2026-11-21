@@ -5,6 +5,7 @@ import { logger } from "../lib/logger";
 import DeleteAccountEmail from "./delete-account";
 import DeletedAccountEmail from "./deleted-account";
 import ResetPasswordEmail from "./reset-password";
+import UnverifiedAccountDeletedEmail from "./unverified-account-deleted";
 import UpdateEmailEmail from "./update-email";
 import VerificationEmail from "./verification-email";
 
@@ -33,6 +34,11 @@ type EmailType =
 			type: "deleted-account";
 			subject?: string;
 			date: string;
+	  }
+	| {
+			type: "unverified-account-deleted";
+			subject?: string;
+			days: number;
 	  }
 	| {
 			type: "update-email";
@@ -64,6 +70,7 @@ const getEmailComponent = (
 	expirationMinutes?: number,
 	date?: string,
 	newEmail?: string,
+	days?: number,
 ): ReactElement => {
 	const logoUrl =
 		env.NODE_ENV === "production"
@@ -105,6 +112,14 @@ const getEmailComponent = (
 					logoUrl={logoUrl}
 				/>
 			);
+		case "unverified-account-deleted":
+			return (
+				<UnverifiedAccountDeletedEmail
+					days={days}
+					userName={userName}
+					logoUrl={logoUrl}
+				/>
+			);
 		case "update-email":
 			return (
 				<UpdateEmailEmail
@@ -128,6 +143,8 @@ const getDefaultSubject = (type: EmailType["type"]): string => {
 			return "Confirm the deletion of your account";
 		case "deleted-account":
 			return "Your account has been deleted";
+		case "unverified-account-deleted":
+			return "Your account has been deleted";
 		case "update-email":
 			return "Confirm email change";
 	}
@@ -141,6 +158,8 @@ export const sendEmail = async (
 	const expirationMinutes =
 		"expirationMinutes" in params ? params.expirationMinutes : undefined;
 	const date = "date" in params ? params.date : undefined;
+	const days = "days" in params ? params.days : undefined;
+	const newEmail = "newEmail" in params ? params.newEmail : undefined;
 	const subject = params.subject ?? getDefaultSubject(type);
 
 	try {
@@ -162,7 +181,15 @@ export const sendEmail = async (
 			from: `${fromName} <${fromEmail}>`,
 			to: [to],
 			subject,
-			react: getEmailComponent(type, userName, url, expirationMinutes, date),
+			react: getEmailComponent(
+				type,
+				userName,
+				url,
+				expirationMinutes,
+				date,
+				newEmail,
+				days,
+			),
 		});
 
 		if (error) {

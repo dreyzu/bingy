@@ -5,12 +5,14 @@ import { serveStatic } from "hono/bun";
 import { cors } from "hono/cors";
 import { logger as httpLogger } from "hono/logger";
 import { trimTrailingSlash } from "hono/trailing-slash";
+import { jobs } from "./jobs";
 import type { auth } from "./lib/auth";
 import { cacheClient } from "./lib/cache-client";
 import { connection } from "./lib/database";
 import env from "./lib/env";
 import { logger } from "./lib/logger";
 import { serveInternalServerError } from "./lib/responses/error";
+import { startScheduler } from "./lib/scheduler";
 import { sessionMiddleware } from "./web/middlewares/session";
 import authRoutes from "./web/routes/auth";
 import blockRoutes from "./web/routes/block";
@@ -25,6 +27,7 @@ import genreRoutes from "./web/routes/genre";
 import healthRoutes from "./web/routes/health";
 import movieRoutes from "./web/routes/movie";
 import networkRoutes from "./web/routes/network";
+import notificationRoutes from "./web/routes/notification";
 import personRoutes from "./web/routes/person";
 import ratingRoutes from "./web/routes/rating";
 import searchRoutes from "./web/routes/search";
@@ -74,6 +77,7 @@ const pingDB = async () => {
 };
 
 pingDB();
+startScheduler(jobs);
 
 app.use("*", sessionMiddleware);
 const api = new Hono();
@@ -87,6 +91,7 @@ api.route("/rating", ratingRoutes);
 api.route("/user", userProfileRoutes);
 api.route("/follows", followRoutes);
 api.route("/blocks", blockRoutes);
+api.route("/notifications", notificationRoutes);
 api.route("/movies", movieRoutes);
 api.route("/tv", tvRoutes);
 api.route("/person", personRoutes);
