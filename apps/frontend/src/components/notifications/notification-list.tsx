@@ -1,7 +1,6 @@
 import { IconBell, IconLoader } from "@tabler/icons-react";
-import { useQueryClient } from "@tanstack/react-query";
 import { useAtomValue } from "jotai";
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useCallback, useEffect, useState } from "react";
 import { NotificationItem } from "@/components/notifications/notification-item";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,7 +10,6 @@ import {
 	EmptyTitle,
 } from "@/components/ui/empty";
 import {
-	notificationKeys,
 	useClearNotifications,
 	useMarkAllNotificationsRead,
 	useNotifications,
@@ -87,7 +85,6 @@ export function NotificationList({
 	onNavigate,
 }: NotificationListProps) {
 	const localeRegion = useAtomValue(localeRegionAtom);
-	const queryClient = useQueryClient();
 	const query = useNotifications(true);
 	const { data: unread } = useUnreadNotificationCount(true);
 	const { mutate: markAllRead } = useMarkAllNotificationsRead();
@@ -102,29 +99,22 @@ export function NotificationList({
 		if (settled && unreadCount > 0) markAllRead();
 	}, [settled, unreadCount, markAllRead]);
 
-	// Read state is refreshed once the list is closed.
-	useEffect(
-		() => () => {
-			queryClient.invalidateQueries({ queryKey: notificationKeys.list });
+	// Loads the next page when the end of the list gets close. Observed
+	// rather than read from a scroll event: the popover scrolls the list, but
+	// the page scrolls the window.
+	const loadMoreRef = useCallback(
+		(element: HTMLDivElement) => {
+			const observer = new IntersectionObserver(
+				([entry]) => {
+					if (entry?.isIntersecting) fetchNextPage();
+				},
+				{ rootMargin: "200px" },
+			);
+			observer.observe(element);
+			return () => observer.disconnect();
 		},
-		[queryClient],
+		[fetchNextPage],
 	);
-
-	// Loads the next page when the end of the list gets close.
-	const sentinel = useRef<HTMLDivElement>(null);
-	useEffect(() => {
-		const element = sentinel.current;
-		if (!element || !hasNextPage) return;
-
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				if (entry?.isIntersecting && !isFetchingNextPage) fetchNextPage();
-			},
-			{ rootMargin: "200px" },
-		);
-		observer.observe(element);
-		return () => observer.disconnect();
-	}, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
 	const notifications = data?.pages.flatMap((page) => page.data) ?? [];
 
@@ -154,6 +144,8 @@ export function NotificationList({
 		content = (
 			<div
 				className={cn(
+					// The padding keeps the scroll container from clipping the rings.
+					"mx-auto flex w-full max-w-2xl flex-col gap-2 p-px",
 					scrollable && "no-scrollbar max-h-[60vh] overflow-y-auto",
 				)}
 			>
@@ -165,7 +157,7 @@ export function NotificationList({
 						onNavigate={onNavigate}
 					/>
 				))}
-				<div ref={sentinel} />
+				{hasNextPage && !isFetchingNextPage ? <div ref={loadMoreRef} /> : null}
 				{isFetchingNextPage ? (
 					<div className="flex justify-center py-2">
 						<IconLoader className="h-5 w-5 animate-spin text-muted-foreground" />

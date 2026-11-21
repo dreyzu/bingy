@@ -56,6 +56,13 @@ export function useUnreadNotificationCount(enabled: boolean) {
 	});
 }
 
+/** Refetches the list the next time it's shown, without touching an open one. */
+const markListStale = (queryClient: QueryClient) =>
+	queryClient.invalidateQueries({
+		queryKey: notificationKeys.list,
+		refetchType: "none",
+	});
+
 const MAX_RECONNECT_DELAY_MS = 30_000;
 
 /**
@@ -84,9 +91,12 @@ export function useNotificationStream(userId: string | undefined) {
 				count: event.unreadCount,
 			});
 
-			// Reading changes no row's content: an open list keeps showing which
-			// notifications were new until it's closed.
-			if (event.reason === "read") return;
+			// An open list keeps showing which notifications were new; it's
+			// refetched the next time it's shown.
+			if (event.reason === "read") {
+				markListStale(queryClient);
+				return;
+			}
 			queryClient.invalidateQueries({ queryKey: notificationKeys.list });
 			queryClient.invalidateQueries({ queryKey: ["follow-requests"] });
 		};
@@ -138,6 +148,8 @@ export function useMarkAllNotificationsRead() {
 		onMutate: () => {
 			queryClient.setQueryData(notificationKeys.unreadCount, { count: 0 });
 		},
+		// The open list keeps its unread dots until it's shown again.
+		onSuccess: () => markListStale(queryClient),
 		onError: () =>
 			queryClient.invalidateQueries({
 				queryKey: notificationKeys.unreadCount,
