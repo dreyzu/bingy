@@ -1052,7 +1052,7 @@
 	"fluffy_khaki_hazel": "Débloquer",
 	"rustic_bronze_zebra": "Tu as bloqué @{username}",
 	"tender_peach_marmot": "Ses listes, sa watchlist et son historique restent masqués tant que ce compte est bloqué.",
-	"dusky_sepia_bamboo": "@{username} a bloqué ton compte",
+	"dusky_sepia_bamboo": "@{username} t'a bloqué",
 	"vibrant_navy_pine": "Tu ne peux pas t’abonner à ce compte ni voir ses listes, sa watchlist et son historique.",
 	"quick_emerald_heron": "Comptes bloqués",
 	"primal_aqua_cactus": "Les personnes que tu bloques ne peuvent pas s’abonner à toi ni voir tes listes, ta watchlist et ton historique, et tu ne vois plus les leurs.",
@@ -1097,5 +1097,6 @@
 	"lush_fuchsia_tulip": "Notifications",
 	"lush_gold_quail": "Notifications",
 	"rapid_periwinkle_canyon": "Toutes tes notifications seront supprimées définitivement. Cette action est irréversible.",
+	"golden_khaki_seal": "Impossible de te déconnecter, réessaie",
 	"silent_sapphire_salmon": "Fermer"
 }

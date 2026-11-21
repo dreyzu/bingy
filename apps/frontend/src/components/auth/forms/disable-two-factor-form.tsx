@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/toast";
 import { queryClient } from "@/integrations/tanstack-query/root-provider";
 import { authClient } from "@/lib/auth-client";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { refreshSession } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
 import { twoFactorSchema } from "@/schemas/two-factor-schema";
 
@@ -41,10 +41,7 @@ export function DisableTwoFactorForm() {
 			});
 
 			if (data) {
-				const { data: freshSession } = await authClient.getSession({
-					query: { disableCookieCache: true },
-				});
-				queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
+				await refreshSession(queryClient);
 
 				toast.add({ type: "success", title: m.dapper_lemon_daisy() });
 				navigate({ to: "/settings" });

@@ -4,7 +4,6 @@ import {
 	IconSearch,
 	IconSmartHome,
 } from "@tabler/icons-react";
-import { useRouteContext } from "@tanstack/react-router";
 import { useState } from "react";
 import { LocaleRegionDropdown } from "@/components/locale-region-dropdown";
 import {
@@ -25,19 +24,20 @@ import {
 	NavItems,
 } from "@/components/ui/resizable-navbar";
 import { useNotificationStream } from "@/hooks/useNotifications";
+import { useSession } from "@/hooks/useSession";
 import { useShowTopMobileNavbar } from "@/hooks/useShowTopMobileNavbar";
 import { m } from "@/paraglide/messages";
 
 export default function Header() {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const [searchOpen, setSearchOpen] = useState(false);
 	const showTopMobileNavbar = useShowTopMobileNavbar();
-	useNotificationStream(authData?.user.id);
+	useNotificationStream(session?.user.id);
 
 	const allNavItems = [
 		{
 			name: m.kind_saffron_penguin(),
-			link: authData ? "/home" : "/",
+			link: session ? "/home" : "/",
 			requiresAuth: false,
 			hideWhenAuth: false,
 		},
@@ -61,15 +61,15 @@ export default function Header() {
 	] as const;
 
 	const desktopNavItems = allNavItems.filter((item) => {
-		if ("requiresAuth" in item && item.requiresAuth && !authData) return false;
-		if ("hideWhenAuth" in item && item.hideWhenAuth && authData) return false;
+		if ("requiresAuth" in item && item.requiresAuth && !session) return false;
+		if ("hideWhenAuth" in item && item.hideWhenAuth && session) return false;
 		return true;
 	});
 
 	const allMobileBottomItems = [
 		{
 			name: m.kind_saffron_penguin(),
-			link: authData ? "/home" : "/",
+			link: session ? "/home" : "/",
 			icon: <IconSmartHome className="h-6 w-6" />,
 			requiresAuth: false,
 		},
@@ -98,12 +98,12 @@ export default function Header() {
 			requiresAuth: true,
 		},
 		{
-			name: authData?.user.displayName ?? "",
-			link: `/@${authData?.user.name}`,
+			name: session?.user.displayName ?? "",
+			link: `/@${session?.user.name}`,
 			icon: (
 				<Avatar className="h-6 w-6">
-					<AvatarImage src={authData?.user.image ?? ""} />
-					<AvatarFallback>{authData?.user.name ?? "U"}</AvatarFallback>
+					<AvatarImage src={session?.user.image ?? ""} />
+					<AvatarFallback>{session?.user.name ?? "U"}</AvatarFallback>
 				</Avatar>
 			),
 			requiresAuth: true,
@@ -111,7 +111,7 @@ export default function Header() {
 	] as const;
 
 	const mobileBottomItems = allMobileBottomItems.filter((item) => {
-		if ("requiresAuth" in item && item.requiresAuth && !authData) return false;
+		if ("requiresAuth" in item && item.requiresAuth && !session) return false;
 		return true;
 	});
 
@@ -126,7 +126,7 @@ export default function Header() {
 						<LocaleRegionDropdown />
 						<NotificationBell />
 
-						{authData ? (
+						{session ? (
 							<ProfileDropdown />
 						) : (
 							<NavbarButton to="/signin">{m.vivid_coral_cedar()}</NavbarButton>
@@ -139,7 +139,7 @@ export default function Header() {
 			{showTopMobileNavbar ? (
 				<MobileTopBar
 					left={
-						authData ? (
+						session ? (
 							<ProfileDrawer />
 						) : (
 							<NavbarButton to="/signin" size="sm">

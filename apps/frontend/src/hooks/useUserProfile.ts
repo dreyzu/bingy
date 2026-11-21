@@ -14,8 +14,7 @@ import {
 	updateUserProfile,
 } from "@/api/user-profile";
 import { toast } from "@/components/ui/toast";
-import { authClient } from "@/lib/auth-client";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { refreshSession } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
 
 export function useUserProfileInfo(username: string) {
@@ -76,10 +75,7 @@ export function useUpdateAvatar() {
 				exact: false,
 			});
 
-			const { data: freshSession } = await authClient.getSession({
-				query: { disableCookieCache: true },
-			});
-			queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
+			await refreshSession(queryClient);
 
 			toast.add({ type: "success", title: m.peppy_wine_cherry() });
 		},
@@ -102,10 +98,7 @@ export function useDeleteAvatar() {
 				exact: false,
 			});
 
-			const { data: freshSession } = await authClient.getSession({
-				query: { disableCookieCache: true },
-			});
-			queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
+			await refreshSession(queryClient);
 
 			toast.add({ type: "success", title: m.zesty_pink_valley() });
 		},
@@ -126,9 +119,6 @@ export function useUpdateUserProfile() {
 			queryClient.invalidateQueries({
 				queryKey: ["user-profile"],
 				exact: false,
-			});
-			queryClient.invalidateQueries({
-				queryKey: ["session"],
 			});
 
 			toast.add({ type: "success", title: m.steady_copper_cactus() });
@@ -152,10 +142,7 @@ export function useUpdateBanner() {
 				exact: false,
 			});
 
-			const { data: freshSession } = await authClient.getSession({
-				query: { disableCookieCache: true },
-			});
-			queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
+			await refreshSession(queryClient);
 
 			toast.add({ type: "success", title: m.dapper_azure_coral() });
 		},
@@ -178,10 +165,7 @@ export function useDeleteBanner() {
 				exact: false,
 			});
 
-			const { data: freshSession } = await authClient.getSession({
-				query: { disableCookieCache: true },
-			});
-			queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
+			await refreshSession(queryClient);
 
 			toast.add({ type: "success", title: m.icy_slate_beaver() });
 		},

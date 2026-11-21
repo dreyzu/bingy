@@ -1,5 +1,4 @@
 import { IconClock, IconClockOff, IconClockPlus } from "@tabler/icons-react";
-import { useRouteContext } from "@tanstack/react-router";
 import {
 	Tooltip,
 	TooltipContent,
@@ -10,6 +9,7 @@ import {
 	useIsInWatchlist,
 	useRemoveFromWatchlist,
 } from "@/hooks/useLists";
+import { useSession } from "@/hooks/useSession";
 import { m } from "@/paraglide/messages";
 
 interface WatchlistToggleButtonProps {
@@ -35,7 +35,7 @@ export function WatchlistToggleButton({
 	size = 8,
 	username,
 }: WatchlistToggleButtonProps) {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 
 	const addToWatchlist = useAddMediaToWatchlist(username);
 	const removeFromWatchlist = useRemoveFromWatchlist(username);
@@ -72,7 +72,7 @@ export function WatchlistToggleButton({
 		}
 	};
 
-	if (!authData) {
+	if (!session) {
 		return <span className="invisible" aria-hidden="true" />;
 	}
 

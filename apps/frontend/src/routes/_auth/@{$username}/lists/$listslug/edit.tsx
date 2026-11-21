@@ -2,7 +2,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
 	createFileRoute,
 	useNavigate,
-	useRouteContext,
 	useRouter,
 } from "@tanstack/react-router";
 import { useAtom, useAtomValue } from "jotai";
@@ -33,6 +32,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/toast";
 import { useListBySlug, useUpdateList } from "@/hooks/useLists";
+import { useSession } from "@/hooks/useSession";
 import { editListDraftItemsAtom } from "@/lib/atoms/draft-list";
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
@@ -48,7 +48,7 @@ type EditListFormValues = z.infer<typeof createListSchema>;
 
 function EditListPage() {
 	const { username, listslug } = Route.useParams();
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const localeRegion = useAtomValue(localeRegionAtom);
 	const navigate = useNavigate();
 	const router = useRouter();
@@ -64,7 +64,7 @@ function EditListPage() {
 	const [selectedItems, setSelectedItems] = useAtom(editListDraftItemsAtom);
 	const hasInitialized = useRef(false);
 
-	const userNameFromSession = authData?.user?.name;
+	const userNameFromSession = session?.user?.name;
 	const isOwnProfile =
 		userNameFromSession?.toLowerCase() === username.toLowerCase();
 

@@ -4,7 +4,7 @@ import {
 	IconLock,
 	IconUserCog,
 } from "@tabler/icons-react";
-import { useNavigate, useRouteContext } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import type { Account } from "better-auth";
 import { BlockedAccountsForm } from "@/components/auth/forms/blocked-accounts-form";
 import { DeleteAccountForm } from "@/components/auth/forms/delete-account-form";
@@ -19,6 +19,7 @@ import { ModeToggle } from "@/components/theme/theme-toggle";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useSession } from "@/hooks/useSession";
 import { m } from "@/paraglide/messages";
 import type { SettingsTab } from "@/routes/_auth/settings";
 
@@ -31,13 +32,13 @@ export function SettingsComponent({
 	accounts,
 	currentTab,
 }: SettingsComponentProps) {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const navigate = useNavigate();
 
-	if (!authData) return null;
+	if (!session) return null;
 
 	const hasPassword = accounts.some((c) => c.providerId === "credential");
-	const twoFactorEnabled = authData.user.twoFactorEnabled;
+	const twoFactorEnabled = session.user.twoFactorEnabled;
 
 	return (
 		<Tabs

@@ -1,6 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconLoader } from "@tabler/icons-react";
-import { useRouteContext } from "@tanstack/react-router";
 import { useId, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
@@ -21,13 +20,14 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/toast";
+import { useSession } from "@/hooks/useSession";
 import { authClient } from "@/lib/auth-client";
 import { config } from "@/lib/env";
 import { m } from "@/paraglide/messages";
 import { updateEmailSchema } from "@/schemas/update-email-schema";
 
 export function UpdateEmailForm() {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [open, setOpen] = useState(false);
 	const id = useId();
@@ -39,9 +39,9 @@ export function UpdateEmailForm() {
 		},
 	});
 
-	if (!authData) return null;
+	if (!session) return null;
 
-	const user = authData.user;
+	const user = session.user;
 
 	const onFormSubmit: SubmitHandler<z.infer<typeof updateEmailSchema>> = async (
 		formData,

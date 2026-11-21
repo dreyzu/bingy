@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IconExclamationCircleFilled, IconLoader } from "@tabler/icons-react";
-import { useRouteContext, useRouter } from "@tanstack/react-router";
+import { useRouter } from "@tanstack/react-router";
 import { useId, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
@@ -15,14 +15,15 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/toast";
+import { useSession } from "@/hooks/useSession";
 import { queryClient } from "@/integrations/tanstack-query/root-provider";
 import { authClient } from "@/lib/auth-client";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { refreshSession } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
 import { twoFactorSchema } from "@/schemas/two-factor-schema";
 
 export function EnableTwoFactorForm() {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const router = useRouter();
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,7 +31,7 @@ export function EnableTwoFactorForm() {
 	const [totpUri, setTotpUri] = useState("");
 	const id = useId();
 
-	const isEmailVerified = authData?.user?.emailVerified ?? false;
+	const isEmailVerified = session?.user?.emailVerified ?? false;
 
 	const form = useForm<z.infer<typeof twoFactorSchema>>({
 		resolver: zodResolver(twoFactorSchema),
@@ -103,10 +104,7 @@ export function EnableTwoFactorForm() {
 			}
 
 			if (data) {
-				const { data: freshSession } = await authClient.getSession({
-					query: { disableCookieCache: true },
-				});
-				queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
+				await refreshSession(queryClient);
 
 				toast.add({ type: "success", title: m.silent_emerald_maple() });
 				setShowDialog(false);

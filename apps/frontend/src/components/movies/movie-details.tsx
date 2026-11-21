@@ -1,5 +1,4 @@
 import { IconCalendarWeekFilled, IconStopwatch } from "@tabler/icons-react";
-import { useRouteContext } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import { CollectionCard } from "@/components/collections/collection-card";
@@ -22,6 +21,7 @@ import { getMovieFacts } from "@/components/movies/movie-facts";
 import { PortraitImage } from "@/components/portrait-image";
 import { Card, CardContent } from "@/components/ui/card";
 import { WatchProvidersSection } from "@/components/watch-providers/watch-providers-section";
+import { useSession } from "@/hooks/useSession";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
 import { formatDate } from "@/utils/format-date";
@@ -53,7 +53,7 @@ export function MovieDetailView({
 	isLoading,
 	isError,
 }: MovieDetailViewProps) {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const localeRegion = useAtomValue(localeRegionAtom);
 	const region = useAtomValue(regionAtom);
 
@@ -123,9 +123,9 @@ export function MovieDetailView({
 				</Card>
 			}
 			actions={
-				authData ? (
+				session ? (
 					<MediaActionMenu
-						username={authData.user.name}
+						username={session.user.name}
 						movie={{
 							id: movie.id,
 							title: movie.title,

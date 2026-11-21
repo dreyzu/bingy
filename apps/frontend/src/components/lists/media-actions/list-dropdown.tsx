@@ -1,5 +1,4 @@
 import { IconDots } from "@tabler/icons-react";
-import { useRouteContext } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { AddToHistoryItem } from "@/components/lists/history/add-to-history-item";
 import { RemoveFromHistoryItem } from "@/components/lists/history/remove-from-history-item";
@@ -24,6 +23,7 @@ import {
 	useRateTvShow,
 	useTvRating,
 } from "@/hooks/useRating";
+import { useSession } from "@/hooks/useSession";
 import { useTv } from "@/hooks/useTv";
 import { m } from "@/paraglide/messages";
 import { getTvShowProgress } from "@/utils/season-helper";
@@ -47,8 +47,8 @@ interface ListDropdownProps {
 }
 
 export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
-	const { authData } = useRouteContext({ from: "__root__" });
-	const username = authData?.user.name ?? "";
+	const session = useSession();
+	const username = session?.user.name ?? "";
 	const isTvShow = !!tvShow;
 	const tmdbId = isTvShow ? tvShow.id : (movie?.id ?? 0);
 
@@ -68,7 +68,7 @@ export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
 	const [showAddToListDialog, setShowAddToListDialog] = useState(false);
 	const [showRemoveHistoryDialog, setShowRemoveHistoryDialog] = useState(false);
 
-	if (!authData) return null;
+	if (!session) return null;
 
 	const existingRating = isTvShow ? tvRating : movieRating;
 
