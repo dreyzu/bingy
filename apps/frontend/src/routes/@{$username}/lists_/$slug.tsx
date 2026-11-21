@@ -7,7 +7,7 @@ import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { ListContainer } from "@/components/lists/custom-lists/list-container";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { useListBySlug } from "@/hooks/useLists";
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
@@ -34,7 +34,7 @@ function ListPage() {
 
 	if (isLoading) return <LoadingCentered />;
 	if (!list || error) {
-		toast.error({ title: m.sweet_peach_valley() });
+		toast.add({ type: "error", title: m.sweet_peach_valley() });
 		navigate({ to: "/@{$username}/lists", params: { username } });
 		return;
 	}

@@ -13,7 +13,7 @@ import {
 	updateBanner,
 	updateUserProfile,
 } from "@/api/user-profile";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { authClient } from "@/lib/auth-client";
 import { sessionQueryOptions } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
@@ -81,10 +81,10 @@ export function useUpdateAvatar() {
 			});
 			queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
 
-			toast.success({ title: m.peppy_wine_cherry() });
+			toast.add({ type: "success", title: m.peppy_wine_cherry() });
 		},
 		onError: () => {
-			toast.error({ title: m.stellar_sienna_cricket() });
+			toast.add({ type: "error", title: m.stellar_sienna_cricket() });
 		},
 	});
 }
@@ -107,10 +107,10 @@ export function useDeleteAvatar() {
 			});
 			queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
 
-			toast.success({ title: m.zesty_pink_valley() });
+			toast.add({ type: "success", title: m.zesty_pink_valley() });
 		},
 		onError: () => {
-			toast.error({ title: m.clever_azure_barn() });
+			toast.add({ type: "error", title: m.clever_azure_barn() });
 		},
 	});
 }
@@ -131,10 +131,10 @@ export function useUpdateUserProfile() {
 				queryKey: ["session"],
 			});
 
-			toast.success({ title: m.steady_copper_cactus() });
+			toast.add({ type: "success", title: m.steady_copper_cactus() });
 		},
 		onError: () => {
-			toast.error({ title: m.cozy_mauve_zebra() });
+			toast.add({ type: "error", title: m.cozy_mauve_zebra() });
 		},
 	});
 }
@@ -157,10 +157,10 @@ export function useUpdateBanner() {
 			});
 			queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
 
-			toast.success({ title: m.dapper_azure_coral() });
+			toast.add({ type: "success", title: m.dapper_azure_coral() });
 		},
 		onError: () => {
-			toast.error({ title: m.fancy_pink_jaguar() });
+			toast.add({ type: "error", title: m.fancy_pink_jaguar() });
 		},
 	});
 }
@@ -183,10 +183,10 @@ export function useDeleteBanner() {
 			});
 			queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
 
-			toast.success({ title: m.icy_slate_beaver() });
+			toast.add({ type: "success", title: m.icy_slate_beaver() });
 		},
 		onError: () => {
-			toast.error({ title: m.agile_topaz_clover() });
+			toast.add({ type: "error", title: m.agile_topaz_clover() });
 		},
 	});
 }

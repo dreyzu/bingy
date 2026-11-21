@@ -12,7 +12,7 @@ import {
 	unblockUser,
 } from "@/api/blocks";
 import type { UserProfileInfoResponse } from "@/api/user-profile";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { invalidateFollowData } from "@/hooks/useFollows";
 import { m } from "@/paraglide/messages";
 
@@ -76,12 +76,12 @@ export function useBlockUser() {
 		onMutate: (username: string) =>
 			setProfileBlocked(queryClient, username, true),
 		onSuccess: (_data, username) =>
-			toast.success({ title: m.breezy_onyx_seal({ username }) }),
+			toast.add({ type: "success", title: m.breezy_onyx_seal({ username }) }),
 		onError: (_error, _username, context) => {
 			if (context?.previous) {
 				queryClient.setQueryData(context.profileKey, context.previous);
 			}
-			toast.error({ title: m.brisk_umber_glacier() });
+			toast.add({ type: "error", title: m.brisk_umber_glacier() });
 		},
 		onSettled: () => invalidateBlockData(queryClient),
 	});
@@ -110,12 +110,12 @@ export function useUnblockUser() {
 			return setProfileBlocked(queryClient, username, false);
 		},
 		onSuccess: (_data, username) =>
-			toast.success({ title: m.nifty_rust_fox({ username }) }),
+			toast.add({ type: "success", title: m.nifty_rust_fox({ username }) }),
 		onError: (_error, _username, context) => {
 			if (context?.previous) {
 				queryClient.setQueryData(context.profileKey, context.previous);
 			}
-			toast.error({ title: m.tender_yellow_island() });
+			toast.add({ type: "error", title: m.tender_yellow_island() });
 		},
 		onSettled: () => invalidateBlockData(queryClient),
 	});

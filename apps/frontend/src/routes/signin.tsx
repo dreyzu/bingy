@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { z } from "zod";
 import { SignInForm } from "@/components/auth/forms/signin-form";
 import { CenteredLayout } from "@/components/layout/centered-layout";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { m } from "@/paraglide/messages";
 
 export const Route = createFileRoute("/signin")({
@@ -36,7 +36,7 @@ function SigninPage() {
 	const message = errorMessages[search.error ?? "default"] ?? defaultMessage;
 
 	if (search.error) {
-		toast.error({ title: message });
+		toast.add({ type: "error", title: message });
 	}
 
 	return (

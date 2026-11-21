@@ -17,7 +17,6 @@ import {
 } from "@tanstack/react-router";
 import { useState } from "react";
 import { MobileProfileTriggerButton } from "@/components/mobile-profile-trigger";
-import { toast } from "@/components/toast/toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,6 +30,7 @@ import {
 	DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Separator } from "@/components/ui/separator";
+import { toast } from "@/components/ui/toast";
 import { queryClient } from "@/integrations/tanstack-query/root-provider";
 import { authClient } from "@/lib/auth-client";
 import { sessionQueryOptions } from "@/lib/queries/session";
@@ -53,7 +53,7 @@ export function ProfileDrawer() {
 		queryClient.setQueryData(sessionQueryOptions.queryKey, null);
 		queryClient.removeQueries({ queryKey: ["accounts"] });
 
-		toast.success({ title: m.epic_azure_mesa() });
+		toast.add({ type: "success", title: m.epic_azure_mesa() });
 
 		await router.navigate({ to: "/" });
 	};

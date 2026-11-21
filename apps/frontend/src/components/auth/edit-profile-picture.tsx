@@ -3,7 +3,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { CropImageDialog } from "@/components/auth/crop-image-dialog";
 import { ProfilePicture } from "@/components/profile/profile-picture";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { useDeleteAvatar, useUpdateAvatar } from "@/hooks/useUserProfile";
 import { m } from "@/paraglide/messages";
 
@@ -65,7 +65,7 @@ export function EditProfilePicture({
 			},
 			onError: () => {
 				setPreview(null);
-				toast.error({ title: m.joyful_jade_garden() });
+				toast.add({ type: "error", title: m.joyful_jade_garden() });
 			},
 		});
 	};

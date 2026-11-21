@@ -1,7 +1,7 @@
 import type { Schemas } from "shared";
 import { LoadingSection } from "@/components/loading/loading-section";
 import { MovieCarousel } from "@/components/movies/movie-carousel";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { m } from "@/paraglide/messages";
 
 interface NowPlayingMovieProps {
@@ -22,7 +22,7 @@ export const NowPlayingMovies = ({
 	}
 
 	if (isError) {
-		toast.error({ title: m.gleeful_amber_lynx({ title }) });
+		toast.add({ type: "error", title: m.gleeful_amber_lynx({ title }) });
 		return null;
 	}
 

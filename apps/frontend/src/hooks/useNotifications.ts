@@ -21,7 +21,7 @@ import {
 	type UserNotification,
 	updateNotificationPreferences,
 } from "@/api/notifications";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { m } from "@/paraglide/messages";
 
 export const notificationKeys = {
@@ -195,7 +195,7 @@ export function useDeleteNotification() {
 			if (context?.previous) {
 				queryClient.setQueryData(notificationKeys.list, context.previous);
 			}
-			toast.error({ title: m.humble_cerise_canyon() });
+			toast.add({ type: "error", title: m.humble_cerise_canyon() });
 		},
 	});
 }
@@ -214,7 +214,7 @@ export function useClearNotifications() {
 				queryClient.setQueryData(notificationKeys.list, context.previous);
 			}
 			queryClient.invalidateQueries({ queryKey: notificationKeys.unreadCount });
-			toast.error({ title: m.eager_white_crystal() });
+			toast.add({ type: "error", title: m.eager_white_crystal() });
 		},
 	});
 }
@@ -256,7 +256,7 @@ export function useUpdateNotificationPreferences() {
 					context.previous,
 				);
 			}
-			toast.error({ title: m.stellar_sienna_moose() });
+			toast.add({ type: "error", title: m.stellar_sienna_moose() });
 		},
 	});
 }

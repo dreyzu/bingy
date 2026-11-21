@@ -1,8 +1,8 @@
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import { LoadingSection } from "@/components/loading/loading-section";
-import { toast } from "@/components/toast/toast";
 import { TvCarousel } from "@/components/tv/tv-carousel";
+import { toast } from "@/components/ui/toast";
 import { useTrendingWeekTv } from "@/hooks/useTv";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
@@ -25,7 +25,7 @@ export const TrendingWeekTv = ({ title }: TrendingWeekTvProps) => {
 	}
 
 	if (error) {
-		toast.error({ title: m.sunny_green_acorn({ title }) });
+		toast.add({ type: "error", title: m.sunny_green_acorn({ title }) });
 		return;
 	}
 

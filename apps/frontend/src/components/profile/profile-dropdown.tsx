@@ -19,7 +19,6 @@ import {
 import { cn } from "cn";
 import { useState } from "react";
 import { ProfileTriggerButton } from "@/components/profile-trigger-button";
-import { toast } from "@/components/toast/toast";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -28,6 +27,7 @@ import {
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "@/components/ui/toast";
 import { queryClient } from "@/integrations/tanstack-query/root-provider";
 import { authClient } from "@/lib/auth-client";
 import { sessionQueryOptions } from "@/lib/queries/session";
@@ -55,7 +55,7 @@ export const ProfileDropdown = ({
 		queryClient.setQueryData(sessionQueryOptions.queryKey, null);
 		queryClient.removeQueries({ queryKey: ["accounts"] });
 
-		toast.success({ title: m.epic_azure_mesa() });
+		toast.add({ type: "success", title: m.epic_azure_mesa() });
 
 		await router.navigate({ to: "/" });
 	};

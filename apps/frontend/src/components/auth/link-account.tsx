@@ -2,10 +2,10 @@ import { IconBrandGoogle } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import type { Account } from "better-auth";
 import { useState } from "react";
+import { toast } from "@/components/ui/toast";
 import { authClient } from "@/lib/auth-client";
 import { config } from "@/lib/env";
 import { m } from "@/paraglide/messages";
-import { toast } from "../toast/toast";
 import { OAuthButton } from "../ui/oauth-button";
 
 type LinkAccountComponentProps = {
@@ -34,7 +34,8 @@ export function LinkAccountComponent({ accounts }: LinkAccountComponentProps) {
 
 			if (googleConnected) {
 				if (accounts.length <= 1) {
-					toast.error({
+					toast.add({
+						type: "error",
 						title: m.noble_lime_jasmine({ provider: "Google" }),
 					});
 					return;
@@ -48,7 +49,8 @@ export function LinkAccountComponent({ accounts }: LinkAccountComponentProps) {
 					await authClient.unlinkAccount({ accountId: account.id });
 				}
 
-				toast.success({
+				toast.add({
+					type: "success",
 					title: m.zippy_beige_bagel({ provider: "Google" }),
 				});
 				navigate({ to: "/settings" });
@@ -60,7 +62,7 @@ export function LinkAccountComponent({ accounts }: LinkAccountComponentProps) {
 				});
 			}
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsLoading(false);
 		}

@@ -4,7 +4,6 @@ import { useNavigate } from "@tanstack/react-router";
 import React, { useId } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
-import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -20,6 +19,7 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { authClient } from "@/lib/auth-client";
 import { m } from "@/paraglide/messages";
 import { resetPasswordFormSchema } from "@/schemas/password/reset-password-form-schema";
@@ -50,14 +50,14 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
 				token,
 			});
 
-			error && toast.error({ title: m.swift_slate_dune() });
+			error && toast.add({ type: "error", title: m.swift_slate_dune() });
 
 			if (data) {
-				toast.success({ title: m.gallant_copper_anchor() });
+				toast.add({ type: "success", title: m.gallant_copper_anchor() });
 				navigate({ to: "/signin" });
 			}
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}

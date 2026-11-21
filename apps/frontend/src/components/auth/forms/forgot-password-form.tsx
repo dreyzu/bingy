@@ -4,7 +4,6 @@ import { useNavigate } from "@tanstack/react-router";
 import React, { useId } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
-import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -21,6 +20,7 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { MagicCard } from "@/components/ui/magic-card";
+import { toast } from "@/components/ui/toast";
 import { authClient } from "@/lib/auth-client";
 import { config } from "@/lib/env";
 import { m } from "@/paraglide/messages";
@@ -54,16 +54,17 @@ export function ForgotPasswordForm({ email }: ForgotPasswordFormProps) {
 			});
 
 			error &&
-				toast.error({
+				toast.add({
+					type: "error",
 					title: m.cozy_crimson_saddle() ?? m.candid_beige_yak(),
 				});
 
 			if (data?.status) {
 				navigate({ to: "/signin" });
-				toast.success({ title: m.dreamy_azure_wolf() });
+				toast.add({ type: "success", title: m.dreamy_azure_wolf() });
 			}
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}

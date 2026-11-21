@@ -6,7 +6,7 @@ import {
 	type VisibilityFilter,
 } from "@/components/lists/custom-lists/lists-container";
 import { GlobalLoadingIndicator } from "@/components/loading/loading-global";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { useLists } from "@/hooks/useLists";
 import { m } from "@/paraglide/messages";
 
@@ -44,7 +44,7 @@ function ListsPage() {
 	}
 
 	if (!data || isError) {
-		return toast.error({ title: m.sunny_jade_fox() });
+		return toast.add({ type: "error", title: m.sunny_jade_fox() });
 	}
 
 	return (
