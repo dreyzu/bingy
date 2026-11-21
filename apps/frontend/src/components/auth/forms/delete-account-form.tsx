@@ -3,7 +3,6 @@ import { IconLoader } from "@tabler/icons-react";
 import { useId, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
-import { toast } from "@/components/toast/toast";
 import {
 	AlertDialog,
 	AlertDialogCancel,
@@ -17,6 +16,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { authClient } from "@/lib/auth-client";
 import { config } from "@/lib/env";
 import { m } from "@/paraglide/messages";
@@ -48,19 +48,19 @@ export function DeleteAccountForm({ hasPassword }: DeleteAccountFormProps) {
 			});
 
 			if (data) {
-				toast.success({ title: m.gleeful_jade_basil() });
+				toast.add({ type: "success", title: m.gleeful_jade_basil() });
 				setOpen(false);
 			}
 
 			if (error) {
 				if (error.code === "INVALID_PASSWORD") {
-					toast.error({ title: m.bright_copper_otter() });
+					toast.add({ type: "error", title: m.bright_copper_otter() });
 				} else {
-					toast.error({ title: m.candid_beige_yak() });
+					toast.add({ type: "error", title: m.candid_beige_yak() });
 				}
 			}
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}

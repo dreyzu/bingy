@@ -8,7 +8,7 @@ import {
 	type TrackMoviePayload,
 	type TrackTvPayload,
 } from "@/api/history";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { m } from "@/paraglide/messages";
 
 export function useAddMovieToHistory(username: string) {
@@ -31,21 +31,23 @@ export function useAddMovieToHistory(username: string) {
 				queryKey: ["user-profile", username],
 			});
 
-			toast.success({
+			const toastId = toast.add({
+				type: "success",
 				title: m.grand_hazel_salmon(),
-				button: {
-					label: m.vivid_violet_pebble(),
+				actionProps: {
+					children: m.vivid_violet_pebble(),
 					onClick: () => {
 						navigate({
 							to: "/@{$username}/history",
 							params: { username },
 						});
+						toast.close(toastId);
 					},
 				},
 			});
 		},
 		onError: () => {
-			toast.error({ title: m.bubbly_rose_mesa() });
+			toast.add({ type: "error", title: m.bubbly_rose_mesa() });
 		},
 	});
 }
@@ -73,21 +75,23 @@ export function useAddTvToHistory(username: string) {
 				queryKey: ["tracked-shows", username],
 			});
 
-			toast.success({
+			const toastId = toast.add({
+				type: "success",
 				title: m.joyful_copper_pebble(),
-				button: {
-					label: m.vivid_violet_pebble(),
+				actionProps: {
+					children: m.vivid_violet_pebble(),
 					onClick: () => {
 						navigate({
 							to: "/@{$username}/history",
 							params: { username },
 						});
+						toast.close(toastId);
 					},
 				},
 			});
 		},
 		onError: () => {
-			toast.error({ title: m.loyal_purple_ember() });
+			toast.add({ type: "error", title: m.loyal_purple_ember() });
 		},
 	});
 }
@@ -114,10 +118,10 @@ export function useRemoveMovieHistory() {
 				queryKey: ["user-profile"],
 			});
 
-			toast.success({ title: m.proud_maroon_cricket() });
+			toast.add({ type: "success", title: m.proud_maroon_cricket() });
 		},
 		onError: () => {
-			toast.error({ title: m.jaunty_tan_willow() });
+			toast.add({ type: "error", title: m.jaunty_tan_willow() });
 		},
 	});
 }
@@ -147,10 +151,10 @@ export function useRemoveTvHistory(username: string) {
 				queryKey: ["tracked-shows", username],
 			});
 
-			toast.success({ title: m.happy_onyx_hazel() });
+			toast.add({ type: "success", title: m.happy_onyx_hazel() });
 		},
 		onError: () => {
-			toast.error({ title: m.stellar_gray_canyon() });
+			toast.add({ type: "error", title: m.stellar_gray_canyon() });
 		},
 	});
 }

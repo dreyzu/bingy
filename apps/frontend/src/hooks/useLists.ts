@@ -25,7 +25,7 @@ import {
 	type RemoveMediaFromWatchlistPayload,
 	type UpdateListPayload,
 } from "@/api/lists";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { m } from "@/paraglide/messages";
 
 export type AddMediaToListMutationVariables = Pretty<
@@ -87,22 +87,25 @@ export function useAddMediaToWatchlist(username: string) {
 			});
 
 			const title = variables.title || variables.name;
-			toast.success({
+			const toastId = toast.add({
+				type: "success",
 				title: m.nimble_green_canyon({ media: `"${title}"` }),
-				button: {
-					label: m.smart_sage_mesa(),
+				actionProps: {
+					children: m.smart_sage_mesa(),
 					onClick: () => {
 						navigate({
 							to: "/@{$username}/watchlist",
 							params: { username },
 						});
+						toast.close(toastId);
 					},
 				},
 			});
 		},
 		onError: (_, variables) => {
 			const title = variables.title || variables.name;
-			toast.error({
+			toast.add({
+				type: "error",
 				title: m.polite_copper_clover({ media: `"${title}"` }),
 			});
 		},
@@ -125,13 +128,15 @@ export function useRemoveFromWatchlist(username: string) {
 			});
 
 			const title = variables.title || variables.name;
-			toast.success({
+			toast.add({
+				type: "success",
 				title: m.grand_gray_meerkat({ media: `"${title}"` }),
 			});
 		},
 		onError: (_, variables) => {
 			const title = variables.title || variables.name;
-			toast.error({
+			toast.add({
+				type: "error",
 				title: m.rapid_amber_anchor({ media: `"${title}"` }),
 			});
 		},
@@ -233,10 +238,10 @@ export function useDeleteList(username: string) {
 				queryKey: ["user-profile", username],
 			});
 
-			toast.success({ title: m.fierce_ivory_fern() });
+			toast.add({ type: "success", title: m.fierce_ivory_fern() });
 		},
 		onError: () => {
-			toast.error({ title: m.velvet_periwinkle_banjo() });
+			toast.add({ type: "error", title: m.velvet_periwinkle_banjo() });
 		},
 	});
 }
@@ -264,13 +269,14 @@ export function useAddMediaToList() {
 			});
 
 			const mediaTitle = variables.title || variables.name;
-			toast.success({
+			const toastId = toast.add({
+				type: "success",
 				title: m.frosty_cerise_heron({
 					media: `"${mediaTitle}"`,
 					list: variables.listName,
 				}),
-				button: {
-					label: m.modest_fuchsia_salmon(),
+				actionProps: {
+					children: m.modest_fuchsia_salmon(),
 					onClick: () => {
 						navigate({
 							to: "/@{$username}/lists/$slug",
@@ -279,13 +285,15 @@ export function useAddMediaToList() {
 								slug: variables.listSlug,
 							},
 						});
+						toast.close(toastId);
 					},
 				},
 			});
 		},
 		onError: (_, variables) => {
 			const mediaTitle = variables.title || variables.name;
-			toast.error({
+			toast.add({
+				type: "error",
 				title: m.tender_white_pelican({
 					media: `"${mediaTitle}"`,
 					list: variables.listName,
@@ -311,7 +319,8 @@ export function useRemoveFromList(username: string) {
 			});
 
 			const title = variables.title || variables.name;
-			toast.success({
+			toast.add({
+				type: "success",
 				title: m.candid_pink_ember({
 					media: `"${title}"`,
 					list: variables.listName,
@@ -320,7 +329,8 @@ export function useRemoveFromList(username: string) {
 		},
 		onError: (_, variables) => {
 			const title = variables.title || variables.name;
-			toast.error({
+			toast.add({
+				type: "error",
 				title: m.chilly_gold_jasmine({
 					media: `"${title}"`,
 					list: variables.listName,

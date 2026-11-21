@@ -8,7 +8,6 @@ import { Link, useRouter } from "@tanstack/react-router";
 import { useId, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
-import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -27,6 +26,7 @@ import { Input } from "@/components/ui/input";
 import { MagicCard } from "@/components/ui/magic-card";
 import { OAuthButton } from "@/components/ui/oauth-button";
 import { SeparatorWithText } from "@/components/ui/separator-text";
+import { toast } from "@/components/ui/toast";
 import {
 	Tooltip,
 	TooltipContent,
@@ -75,13 +75,13 @@ export function SignUpForm() {
 				switch (error.code) {
 					case "USER_ALREADY_EXISTS":
 					case "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL":
-						toast.error({ title: m.lean_periwinkle_crystal() });
+						toast.add({ type: "error", title: m.lean_periwinkle_crystal() });
 						break;
 					case "USERNAME_ALREADY_EXISTS":
-						toast.error({ title: m.modest_magenta_lemur() });
+						toast.add({ type: "error", title: m.modest_magenta_lemur() });
 						break;
 					default:
-						toast.error({ title: m.candid_beige_yak() });
+						toast.add({ type: "error", title: m.candid_beige_yak() });
 				}
 				return;
 			}
@@ -91,7 +91,8 @@ export function SignUpForm() {
 			if (data.user) {
 				await refreshSession(queryClient);
 
-				toast.success({
+				toast.add({
+					type: "success",
 					title: m.icy_aqua_turtle({
 						email: data.user.email,
 					}),
@@ -99,7 +100,7 @@ export function SignUpForm() {
 				await router.navigate({ to: "/verify-email" });
 			}
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -108,7 +109,8 @@ export function SignUpForm() {
 	const handleOAuthRegister = async (provider: "google") => {
 		const providerCapitalized = capitalize(provider);
 		try {
-			toast.loading({
+			toast.add({
+				type: "loading",
 				title: m.noble_gray_dune({
 					provider: providerCapitalized,
 				}),
@@ -121,7 +123,8 @@ export function SignUpForm() {
 				newUserCallbackURL: `${config.appUrl}/welcome`,
 			});
 		} catch {
-			toast.error({
+			toast.add({
+				type: "error",
 				title: m.steady_ochre_salmon({
 					provider: providerCapitalized,
 				}),

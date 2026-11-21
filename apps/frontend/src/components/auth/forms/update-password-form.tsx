@@ -3,7 +3,6 @@ import { IconLoader } from "@tabler/icons-react";
 import React, { useId } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
-import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -20,6 +19,7 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { authClient } from "@/lib/auth-client";
 import { m } from "@/paraglide/messages";
 import { updatePasswordFormSchema } from "@/schemas/password/update-password";
@@ -54,16 +54,16 @@ export function UpdatePasswordForm({ hasPassword }: UpdatePasswordFormProps) {
 			});
 
 			if (error) {
-				toast.error({ title: m.swift_ochre_hazel() });
+				toast.add({ type: "error", title: m.swift_ochre_hazel() });
 				return;
 			}
 
 			if (data) {
-				toast.success({ title: m.fierce_turquoise_spruce() });
+				toast.add({ type: "success", title: m.fierce_turquoise_spruce() });
 				setIsSuccess(true);
 			}
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}

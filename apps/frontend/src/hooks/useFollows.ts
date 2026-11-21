@@ -20,7 +20,7 @@ import {
 	updatePrivacy,
 } from "@/api/follows";
 import type { UserProfileInfoResponse } from "@/api/user-profile";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { refreshSession } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
 
@@ -137,7 +137,7 @@ export function useFollowMutation() {
 			if (context?.previousProfile) {
 				queryClient.setQueryData(context.profileKey, context.previousProfile);
 			}
-			toast.error({ title: m.mighty_ruby_lemur() });
+			toast.add({ type: "error", title: m.mighty_ruby_lemur() });
 		},
 		onSettled: () => invalidateFollowData(queryClient),
 	});
@@ -158,7 +158,7 @@ function useRequestMutation(
 				rows.filter((row) => row.name !== username),
 			);
 		},
-		onError: () => toast.error({ title: errorMessage() }),
+		onError: () => toast.add({ type: "error", title: errorMessage() }),
 		onSettled: () => invalidateFollowData(queryClient),
 	});
 }
@@ -184,7 +184,7 @@ export function useRemoveFollower(ownUsername: string) {
 				rows.filter((row) => row.name !== username),
 			);
 		},
-		onError: () => toast.error({ title: m.humble_onyx_saddle() }),
+		onError: () => toast.add({ type: "error", title: m.humble_onyx_saddle() }),
 		onSettled: () => invalidateFollowData(queryClient),
 	});
 }
@@ -199,10 +199,12 @@ export function useUpdatePrivacy() {
 
 			await refreshSession(queryClient);
 
-			toast.success({
+			toast.add({
+				type: "success",
 				title: isPrivate ? m.steady_slate_pine() : m.hasty_scarlet_dolphin(),
 			});
 		},
-		onError: () => toast.error({ title: m.chilly_silver_falcon() }),
+		onError: () =>
+			toast.add({ type: "error", title: m.chilly_silver_falcon() }),
 	});
 }

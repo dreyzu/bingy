@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
 import Cropper, { type Area } from "react-easy-crop";
-import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogFooter } from "@/components/ui/dialog";
+import { toast } from "@/components/ui/toast";
 import { m } from "@/paraglide/messages";
 import { getCroppedImg, type ImageFormat } from "@/utils/image";
 import { Label } from "../ui/label";
@@ -46,7 +46,7 @@ export function CropImageDialog({
 
 			onCropComplete(croppedImage);
 		} catch {
-			toast.error({ title: m.crisp_yellow_beacon() });
+			toast.add({ type: "error", title: m.crisp_yellow_beacon() });
 		}
 	};
 

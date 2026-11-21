@@ -1,6 +1,6 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import {
 	type Session,
 	sessionQueryOptions,
@@ -27,11 +27,11 @@ export function useSignOut() {
 		try {
 			await signOut(queryClient);
 		} catch {
-			toast.error({ title: m.golden_khaki_seal() });
+			toast.add({ type: "error", title: m.golden_khaki_seal() });
 			return;
 		}
 
-		toast.success({ title: m.epic_azure_mesa() });
+		toast.add({ type: "success", title: m.epic_azure_mesa() });
 		await router.navigate({ to: "/" });
 	};
 }

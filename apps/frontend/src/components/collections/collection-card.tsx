@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { cn } from "cn";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,6 @@ import {
 } from "@/components/ui/card";
 import { useCollection } from "@/hooks/useCollection";
 import { localeRegionAtom } from "@/lib/atoms/region";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 
 interface CollectionCardProps {

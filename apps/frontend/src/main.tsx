@@ -12,7 +12,7 @@ import { routeTree } from "./routeTree.gen";
 import "@/styles/app.css";
 import "@/styles/autofill.css";
 import "flag-icons/css/flag-icons.min.css";
-import { Toaster } from "./components/ui/sonner.tsx";
+import { Toaster } from "./components/ui/toast.tsx";
 
 const router = createRouter({
 	routeTree,
@@ -44,16 +44,7 @@ if (rootElement && !rootElement.innerHTML) {
 			<TanStackQueryProvider>
 				<ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
 					<RouterProvider router={router} />
-					<Toaster
-						position="bottom-center"
-						expand={false}
-						richColors={false}
-						closeButton={false}
-						duration={3000}
-						toastOptions={{
-							unstyled: true,
-						}}
-					/>
+					<Toaster />
 				</ThemeProvider>
 			</TanStackQueryProvider>
 		</StrictMode>,

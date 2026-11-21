@@ -3,7 +3,6 @@ import { IconLoader } from "@tabler/icons-react";
 import { useId, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
-import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
 import {
 	Dialog,
@@ -20,6 +19,7 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { useSession } from "@/hooks/useSession";
 import { authClient } from "@/lib/auth-client";
 import { config } from "@/lib/env";
@@ -54,23 +54,24 @@ export function UpdateEmailForm() {
 			});
 
 			if (error) {
-				toast.error({ title: m.light_navy_bridge() });
+				toast.add({ type: "error", title: m.light_navy_bridge() });
 				return;
 			}
 
 			if (data) {
 				if (data.status) {
-					toast.success({
+					toast.add({
+						type: "success",
 						title: m.gleeful_coral_octopus({
 							userEmail: user.email,
 						}),
 					});
 				} else {
-					toast.success({ title: m.silent_indigo_prairie() });
+					toast.add({ type: "success", title: m.silent_indigo_prairie() });
 				}
 			}
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}

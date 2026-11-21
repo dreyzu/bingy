@@ -11,7 +11,7 @@ import {
 	type TrackedShowStatus,
 	updateTvProgressStatus,
 } from "@/api/tracked-shows";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { m } from "@/paraglide/messages";
 
 export function useTrackedShows(
@@ -77,10 +77,10 @@ export function useTrackShow(username: string) {
 				queryKey: ["user-profile", username],
 			});
 
-			toast.success({ title: m.noble_sepia_parrot() });
+			toast.add({ type: "success", title: m.noble_sepia_parrot() });
 		},
 		onError: () => {
-			toast.error({ title: m.fierce_pink_pelican() });
+			toast.add({ type: "error", title: m.fierce_pink_pelican() });
 		},
 	});
 }
@@ -110,10 +110,10 @@ export function useUpdateTvProgressStatus(username: string) {
 		}) => updateTvProgressStatus(tmdbId, status),
 		onSuccess: (_res, { tmdbId }) => {
 			invalidateTvProgress(queryClient, username, tmdbId);
-			toast.success({ title: m.nifty_azure_panda() });
+			toast.add({ type: "success", title: m.nifty_azure_panda() });
 		},
 		onError: () => {
-			toast.error({ title: m.joyful_emerald_island() });
+			toast.add({ type: "error", title: m.joyful_emerald_island() });
 		},
 	});
 }
@@ -125,10 +125,10 @@ export function useRemoveTvProgress(username: string) {
 		mutationFn: (tmdbId: number) => removeTvProgress(tmdbId),
 		onSuccess: (_res, tmdbId) => {
 			invalidateTvProgress(queryClient, username, tmdbId);
-			toast.success({ title: m.velvet_cobalt_maple() });
+			toast.add({ type: "success", title: m.velvet_cobalt_maple() });
 		},
 		onError: () => {
-			toast.error({ title: m.merry_cerise_banjo() });
+			toast.add({ type: "error", title: m.merry_cerise_banjo() });
 		},
 	});
 }
@@ -140,10 +140,10 @@ export function useRewatchTvShow(username: string) {
 		mutationFn: (tmdbId: number) => rewatchTvShow(tmdbId),
 		onSuccess: (_res, tmdbId) => {
 			invalidateTvProgress(queryClient, username, tmdbId);
-			toast.success({ title: m.lucky_gold_yak() });
+			toast.add({ type: "success", title: m.lucky_gold_yak() });
 		},
 		onError: () => {
-			toast.error({ title: m.snappy_sepia_rabbit() });
+			toast.add({ type: "error", title: m.snappy_sepia_rabbit() });
 		},
 	});
 }

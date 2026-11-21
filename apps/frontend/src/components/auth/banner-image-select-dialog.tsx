@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Schemas } from "shared";
 import { BackdropImagesEmptyState } from "@/components/auth/banner-images-empty-state";
@@ -10,7 +11,6 @@ import {
 import { LoaderFive } from "@/components/ui/loader";
 import { useMovieResource } from "@/hooks/useMovies";
 import { useTvResources } from "@/hooks/useTv";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 import { getTmdbImageUrl } from "@/utils/utils";
 

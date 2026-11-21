@@ -8,7 +8,7 @@ import { PrivateProfile } from "@/components/profile/private-profile";
 import { ProfileBanner } from "@/components/profile/profile-banner";
 import { ProfileInfos } from "@/components/profile/profile-infos";
 import { ProfileNav } from "@/components/profile/profile-nav";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { useSession } from "@/hooks/useSession";
 import { useUserProfileInfo } from "@/hooks/useUserProfile";
 import { m } from "@/paraglide/messages";
@@ -47,7 +47,7 @@ function UserProfileLayout() {
 
 	if (error) {
 		navigate({ to: ".." });
-		return toast.error({ title: m.sturdy_mint_canyon() });
+		return toast.add({ type: "error", title: m.sturdy_mint_canyon() });
 	}
 
 	const backgroundImage = getTmdbImageUrl(data.bannerUrl);

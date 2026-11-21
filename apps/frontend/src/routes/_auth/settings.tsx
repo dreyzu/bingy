@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { createFileRoute, useSearch } from "@tanstack/react-router";
 import z from "zod";
 import { SettingsComponent } from "@/components/auth/settings-component";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { authClient } from "@/lib/auth-client";
 import { m } from "@/paraglide/messages";
 
@@ -48,7 +48,7 @@ function SettingsPage() {
 
 	if (error) {
 		const message = errorMessages[error] ?? m.steady_purple_orchid();
-		toast.error({ title: message }, { duration: 8000, closeButton: true });
+		toast.add({ type: "error", title: message, timeout: 8000 });
 	}
 
 	if (!data) return null;

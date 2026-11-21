@@ -12,7 +12,7 @@ import {
 	removeMovieRating,
 	removeTvRating,
 } from "@/api/rating";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { m } from "@/paraglide/messages";
 
 export function useRatings(
@@ -70,24 +70,26 @@ export function useRateMovie(username: string) {
 			});
 
 			if (res.rating) {
-				toast.success({
+				const toastId = toast.add({
+					type: "success",
 					title: m.smart_ruby_compass(),
-					button: {
-						label: m.vivid_violet_pebble(),
+					actionProps: {
+						children: m.vivid_violet_pebble(),
 						onClick: () => {
 							navigate({
 								to: "/@{$username}/history",
 								params: { username },
 							});
+							toast.close(toastId);
 						},
 					},
 				});
 			} else {
-				toast.success({ title: m.grand_hazel_salmon() });
+				toast.add({ type: "success", title: m.grand_hazel_salmon() });
 			}
 		},
 		onError: () => {
-			toast.error({ title: m.balmy_mauve_dune() });
+			toast.add({ type: "error", title: m.balmy_mauve_dune() });
 		},
 	});
 }
@@ -119,35 +121,39 @@ export function useRateTvShow(username: string) {
 			});
 
 			if (res.rating) {
-				toast.success({
+				const toastId = toast.add({
+					type: "success",
 					title: m.grand_purple_jaguar(),
-					button: {
-						label: m.vivid_violet_pebble(),
+					actionProps: {
+						children: m.vivid_violet_pebble(),
 						onClick: () => {
 							navigate({
 								to: "/@{$username}/history",
 								params: { username },
 							});
+							toast.close(toastId);
 						},
 					},
 				});
 			} else {
-				toast.success({
+				const toastId = toast.add({
+					type: "success",
 					title: m.joyful_copper_pebble(),
-					button: {
-						label: m.vivid_violet_pebble(),
+					actionProps: {
+						children: m.vivid_violet_pebble(),
 						onClick: () => {
 							navigate({
 								to: "/@{$username}/history",
 								params: { username },
 							});
+							toast.close(toastId);
 						},
 					},
 				});
 			}
 		},
 		onError: () => {
-			toast.error({ title: m.dusky_ruby_lagoon() });
+			toast.add({ type: "error", title: m.dusky_ruby_lagoon() });
 		},
 	});
 }
@@ -171,10 +177,10 @@ export function useRemoveMovieRating() {
 				queryKey: ["user-profile"],
 			});
 
-			toast.success({ title: m.fancy_sienna_coral() });
+			toast.add({ type: "success", title: m.fancy_sienna_coral() });
 		},
 		onError: () => {
-			toast.error({ title: m.proud_sepia_iguana() });
+			toast.add({ type: "error", title: m.proud_sepia_iguana() });
 		},
 	});
 }
@@ -201,10 +207,10 @@ export function useRemoveTvRating(username: string) {
 				queryKey: ["tracked-shows", username],
 			});
 
-			toast.success({ title: m.brisk_topaz_island() });
+			toast.add({ type: "success", title: m.brisk_topaz_island() });
 		},
 		onError: () => {
-			toast.error({ title: m.vivid_cobalt_island() });
+			toast.add({ type: "error", title: m.vivid_cobalt_island() });
 		},
 	});
 }

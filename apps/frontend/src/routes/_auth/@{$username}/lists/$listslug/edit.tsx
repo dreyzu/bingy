@@ -11,7 +11,6 @@ import type { z } from "zod";
 import { ListItemsPreview } from "@/components/lists/custom-lists/list-items-preview";
 import { ListSearchAddInput } from "@/components/lists/custom-lists/list-search-add";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -31,6 +30,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/toast";
 import { useListBySlug, useUpdateList } from "@/hooks/useLists";
 import { useSession } from "@/hooks/useSession";
 import { editListDraftItemsAtom } from "@/lib/atoms/draft-list";
@@ -153,7 +153,8 @@ function EditListPage() {
 			{ listId: list.id, payload },
 			{
 				onSuccess: (data) => {
-					toast.success({
+					toast.add({
+						type: "success",
 						title: m.lively_lilac_moose({ list_name: values.name }),
 					});
 
@@ -163,7 +164,8 @@ function EditListPage() {
 					});
 				},
 				onError: () => {
-					toast.error({
+					toast.add({
+						type: "error",
 						title: m.keen_scarlet_lemur({ list_name: values.name }),
 					});
 				},
@@ -172,7 +174,7 @@ function EditListPage() {
 	};
 
 	if (!isOwnProfile) {
-		toast.error({ title: m.glossy_plum_tiger() });
+		toast.add({ type: "error", title: m.glossy_plum_tiger() });
 		navigate({
 			to: "/@{$username}/lists/$slug",
 			params: { username, slug: listslug },
@@ -185,7 +187,7 @@ function EditListPage() {
 	}
 
 	if (error || !list) {
-		toast.error({ title: m.sweet_peach_valley() });
+		toast.add({ type: "error", title: m.sweet_peach_valley() });
 		navigate({
 			to: "/@{$username}/lists/$slug",
 			params: { username, slug: listslug },

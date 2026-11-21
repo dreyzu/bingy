@@ -1,6 +1,6 @@
 import { IconMenu2 } from "@tabler/icons-react";
+import { cn } from "cn";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 interface MobileProfileTriggerButtonProps {
 	className?: string;

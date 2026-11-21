@@ -12,6 +12,7 @@ import {
 	IconUser,
 } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
+import { cn } from "cn";
 import { useState } from "react";
 import { ProfileTriggerButton } from "@/components/profile-trigger-button";
 import {
@@ -23,7 +24,6 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useSession, useSignOut } from "@/hooks/useSession";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 
 interface ProfileDropdownProps extends React.HTMLAttributes<HTMLDivElement> {}

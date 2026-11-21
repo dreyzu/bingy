@@ -15,8 +15,8 @@ import {
 	InputOTPSeparator,
 	InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { toast } from "@/components/ui/toast";
 import { m } from "@/paraglide/messages";
-import { toast } from "../toast/toast";
 
 export function SetupTwoFactorDialog({
 	open,
@@ -44,7 +44,10 @@ export function SetupTwoFactorDialog({
 
 	const copyText = () => {
 		navigator.clipboard.writeText(secret);
-		toast.success({ title: m.proud_coral_meerkat({ x: "Secret" }) });
+		toast.add({
+			type: "success",
+			title: m.proud_coral_meerkat({ x: "Secret" }),
+		});
 	};
 
 	return (

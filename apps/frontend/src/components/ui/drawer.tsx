@@ -1,7 +1,6 @@
 import { Drawer as DrawerPrimitive } from "@base-ui/react/drawer";
+import { cn } from "cn";
 import type * as React from "react";
-
-import { cn } from "@/lib/utils";
 
 function Drawer({
 	...props

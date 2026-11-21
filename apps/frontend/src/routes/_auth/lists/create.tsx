@@ -5,7 +5,6 @@ import { Controller, useForm } from "react-hook-form";
 import type { z } from "zod";
 import { ListItemsPreview } from "@/components/lists/custom-lists/list-items-preview";
 import { ListSearchAddInput } from "@/components/lists/custom-lists/list-search-add";
-import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -25,6 +24,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/toast";
 import { useCreateList } from "@/hooks/useLists";
 import { useSession } from "@/hooks/useSession";
 import { createListDraftItemsAtom } from "@/lib/atoms/draft-list";
@@ -103,7 +103,8 @@ function CreateListPage() {
 			onSuccess: (data) => {
 				setSelectedItems([]);
 
-				toast.success({
+				toast.add({
+					type: "success",
 					title: m.lucky_sapphire_tulip({ list_name: values.name }),
 				});
 				navigate({
@@ -112,7 +113,8 @@ function CreateListPage() {
 				});
 			},
 			onError: () => {
-				toast.error({
+				toast.add({
+					type: "error",
 					title: m.rustic_rust_barn({ list_name: values.name }),
 				});
 			},

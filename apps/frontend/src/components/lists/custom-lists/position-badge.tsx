@@ -4,7 +4,7 @@ import {
 	IconRosetteNumber2,
 	IconRosetteNumber3,
 } from "@tabler/icons-react";
-import { cn } from "@/lib/utils";
+import { cn } from "cn";
 
 interface PositionBadgeProps {
 	position: number;

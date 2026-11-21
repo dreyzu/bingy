@@ -1,6 +1,5 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
-import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
 import {
 	Card,
@@ -9,6 +8,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { toast } from "@/components/ui/toast";
 import { useSession } from "@/hooks/useSession";
 import { authClient } from "@/lib/auth-client";
 import { config } from "@/lib/env";
@@ -41,14 +41,13 @@ function VerifyEmailPage() {
 				email: session.user.email,
 				callbackURL: `${config.appUrl}/welcome`,
 			});
-			toast.success({
+			toast.add({
+				type: "success",
 				title: m.agile_umber_barn(),
 				description: m.quiet_khaki_flute(),
 			});
 		} catch {
-			toast.error({
-				title: m.daring_lemon_fern(),
-			});
+			toast.add({ type: "error", title: m.daring_lemon_fern() });
 		} finally {
 			setIsResending(false);
 		}

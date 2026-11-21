@@ -1,8 +1,8 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { IconCheck, IconChevronDown, IconX } from "@tabler/icons-react";
+import { cn } from "cn";
 import * as React from "react";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import {
 	InputGroup,
 	InputGroupAddon,

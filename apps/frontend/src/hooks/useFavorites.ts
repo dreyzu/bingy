@@ -7,7 +7,7 @@ import {
 	getFavorites,
 	removeFromFavorites,
 } from "@/api/favorites";
-import { toast } from "@/components/toast/toast";
+import { toast } from "@/components/ui/toast";
 import { m } from "@/paraglide/messages";
 
 export function useFavorites(
@@ -53,21 +53,24 @@ export function useAddToFavorites(username: string) {
 				queryKey: ["user-profile", username],
 			});
 
-			toast.success({
+			const toastId = toast.add({
+				type: "success",
 				title: m.keen_gold_raven({ name: variables.mediaName }),
-				button: {
-					label: m.nifty_sage_meerkat(),
+				actionProps: {
+					children: m.nifty_sage_meerkat(),
 					onClick: () => {
 						navigate({
 							to: "/@{$username}/favorites",
 							params: { username },
 						});
+						toast.close(toastId);
 					},
 				},
 			});
 		},
 		onError: (_error, variables) => {
-			toast.error({
+			toast.add({
+				type: "error",
 				title: m.zesty_sepia_koala({ name: variables.mediaName }),
 			});
 		},
@@ -94,14 +97,16 @@ export function useRemoveFromFavorites(username: string) {
 				queryKey: ["user-profile", username],
 			});
 
-			toast.success({
+			toast.add({
+				type: "success",
 				title: m.warm_umber_forest({
 					name: variables.mediaName,
 				}),
 			});
 		},
 		onError: (_error, variables) => {
-			toast.error({
+			toast.add({
+				type: "error",
 				title: m.loyal_azure_bridge({
 					name: variables.mediaName,
 				}),

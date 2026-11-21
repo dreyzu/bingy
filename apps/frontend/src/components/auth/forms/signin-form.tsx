@@ -5,7 +5,6 @@ import { useId, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
 import { TwoFactorDialog } from "@/components/auth/two-factor-dialog";
-import { toast } from "@/components/toast/toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { MagicCard } from "@/components/ui/magic-card";
 import { OAuthButton } from "@/components/ui/oauth-button";
 import { SeparatorWithText } from "@/components/ui/separator-text";
+import { toast } from "@/components/ui/toast";
 import { queryClient } from "@/integrations/tanstack-query/root-provider";
 import { authClient } from "@/lib/auth-client";
 import { config } from "@/lib/env";
@@ -70,7 +70,7 @@ export function SignInForm() {
 				// normal sign-in flow (no 2FA)
 				const session = await refreshSession(queryClient);
 				if (!session) {
-					toast.error({ title: m.candid_beige_yak() });
+					toast.add({ type: "error", title: m.candid_beige_yak() });
 					return;
 				}
 
@@ -87,13 +87,13 @@ export function SignInForm() {
 					error.code === "INVALID_EMAIL_OR_PASSWORD" ||
 					error.code === "INVALID_PASSWORD"
 				) {
-					toast.error({ title: m.icy_white_barn() });
+					toast.add({ type: "error", title: m.icy_white_barn() });
 				} else {
-					toast.error({ title: m.candid_beige_yak() });
+					toast.add({ type: "error", title: m.candid_beige_yak() });
 				}
 			}
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -108,7 +108,7 @@ export function SignInForm() {
 				newUserCallbackURL: `${config.appUrl}/welcome`,
 			});
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -124,21 +124,22 @@ export function SignInForm() {
 			authClient.$ERROR_CODES;
 
 			if (error?.message === "Invalid two factor cookie") {
-				toast.error({ title: m.sweet_silver_dolphin() });
+				toast.add({ type: "error", title: m.sweet_silver_dolphin() });
 				return;
 			} else if (error) {
-				toast.error({ title: m.candid_beige_yak() });
+				toast.add({ type: "error", title: m.candid_beige_yak() });
 				return;
 			}
 
 			if (data) {
 				const session = await refreshSession(queryClient);
 				if (!session) {
-					toast.error({ title: m.candid_beige_yak() });
+					toast.add({ type: "error", title: m.candid_beige_yak() });
 					return;
 				}
 
-				toast.success({
+				toast.add({
+					type: "success",
 					title: m.swift_olive_pine({ username: data.user.name }),
 				});
 				setShowDialog(false);
@@ -146,7 +147,7 @@ export function SignInForm() {
 				await router.navigate({ to: "/home" });
 			}
 		} catch {
-			toast.error({ title: m.tidy_beige_bridge() });
+			toast.add({ type: "error", title: m.tidy_beige_bridge() });
 		}
 	};
 

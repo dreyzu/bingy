@@ -5,7 +5,6 @@ import { useId, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
 import { SetupTwoFactorDialog } from "@/components/auth/setup-two-factor-dialog";
-import { toast } from "@/components/toast/toast";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +14,7 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { useSession } from "@/hooks/useSession";
 import { queryClient } from "@/integrations/tanstack-query/root-provider";
 import { authClient } from "@/lib/auth-client";
@@ -51,7 +51,8 @@ export function EnableTwoFactorForm() {
 				});
 
 			if (enableError) {
-				toast.error({
+				toast.add({
+					type: "error",
 					title: enableError.message || m.peppy_yellow_moose(),
 				});
 				return;
@@ -64,7 +65,8 @@ export function EnableTwoFactorForm() {
 					});
 
 				if (totpError) {
-					toast.error({
+					toast.add({
+						type: "error",
 						title: totpError.message || m.sweet_silver_dolphin(),
 					});
 					return;
@@ -76,7 +78,7 @@ export function EnableTwoFactorForm() {
 				}
 			}
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -91,23 +93,26 @@ export function EnableTwoFactorForm() {
 			});
 
 			if (error?.message === "Invalid two factor cookie") {
-				toast.error({ title: m.sweet_silver_dolphin() });
+				toast.add({ type: "error", title: m.sweet_silver_dolphin() });
 				return;
 			} else if (error) {
-				toast.error({ title: error.message ?? m.candid_beige_yak() });
+				toast.add({
+					type: "error",
+					title: error.message ?? m.candid_beige_yak(),
+				});
 				return;
 			}
 
 			if (data) {
 				await refreshSession(queryClient);
 
-				toast.success({ title: m.silent_emerald_maple() });
+				toast.add({ type: "success", title: m.silent_emerald_maple() });
 				setShowDialog(false);
 				form.reset();
 				router.navigate({ to: "/settings" });
 			}
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		}
 	};
 

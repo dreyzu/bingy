@@ -3,11 +3,11 @@ import type {
 	InfiniteData,
 	UseInfiniteQueryResult,
 } from "@tanstack/react-query";
+import { cn } from "cn";
 import type { ReactNode } from "react";
 import type { PaginatedUsers, UserSummary } from "@/api/follows";
 import { EmptyUsers } from "@/components/profile/empty-users";
 import { UserCard } from "@/components/profile/user-card";
-import { cn } from "@/lib/utils";
 
 interface FollowUsersListProps<T extends UserSummary> {
 	query: UseInfiniteQueryResult<InfiniteData<PaginatedUsers<T>>>;

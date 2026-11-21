@@ -1,5 +1,6 @@
 import { IconBell } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
+import { cn } from "cn";
 import { useState } from "react";
 import { NotificationList } from "@/components/notifications/notification-list";
 import { Badge } from "@/components/ui/badge";
@@ -12,7 +13,6 @@ import {
 } from "@/components/ui/popover";
 import { useUnreadNotificationCount } from "@/hooks/useNotifications";
 import { useSession } from "@/hooks/useSession";
-import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 
 function UnreadBadge({ count }: { count: number }) {

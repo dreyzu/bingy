@@ -4,7 +4,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { useId, useState } from "react";
 import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 import type * as z from "zod";
-import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
 import {
 	Field,
@@ -13,6 +12,7 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/toast";
 import { queryClient } from "@/integrations/tanstack-query/root-provider";
 import { authClient } from "@/lib/auth-client";
 import { refreshSession } from "@/lib/queries/session";
@@ -43,13 +43,13 @@ export function DisableTwoFactorForm() {
 			if (data) {
 				await refreshSession(queryClient);
 
-				toast.success({ title: m.dapper_lemon_daisy() });
+				toast.add({ type: "success", title: m.dapper_lemon_daisy() });
 				navigate({ to: "/settings" });
 			}
 
-			error && toast.error({ title: m.primal_beige_seal() });
+			error && toast.add({ type: "error", title: m.primal_beige_seal() });
 		} catch {
-			toast.error({ title: m.candid_beige_yak() });
+			toast.add({ type: "error", title: m.candid_beige_yak() });
 		} finally {
 			setIsSubmitting(false);
 		}

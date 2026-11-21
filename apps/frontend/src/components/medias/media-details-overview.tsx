@@ -1,5 +1,5 @@
+import { cn } from "cn";
 import { useLayoutEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 
 /**
  * Overview for media detail pages, clamped to three lines that fade out.
