@@ -1,9 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-	createFileRoute,
-	useNavigate,
-	useRouteContext,
-} from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAtom } from "jotai";
 import { Controller, useForm } from "react-hook-form";
 import type { z } from "zod";
@@ -20,7 +16,6 @@ import {
 	FieldError,
 	FieldLabel,
 } from "@/components/ui/field";
-
 import { Input } from "@/components/ui/input";
 import {
 	Select,
@@ -31,6 +26,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useCreateList } from "@/hooks/useLists";
+import { useSession } from "@/hooks/useSession";
 import { createListDraftItemsAtom } from "@/lib/atoms/draft-list";
 import { m } from "@/paraglide/messages";
 import { createListSchema } from "@/schemas/create-list-schema";
@@ -42,10 +38,10 @@ export const Route = createFileRoute("/_auth/lists/create")({
 type CreateListFormValues = z.infer<typeof createListSchema>;
 
 function CreateListPage() {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const navigate = useNavigate();
 
-	const username = authData?.user.name ?? "";
+	const username = session?.user.name ?? "";
 
 	const createList = useCreateList(username);
 	const [selectedItems, setSelectedItems] = useAtom(createListDraftItemsAtom);
@@ -123,7 +119,7 @@ function CreateListPage() {
 		});
 	};
 
-	if (!authData) return null;
+	if (!session) return null;
 
 	return (
 		<div className="flex flex-col gap-6 w-full">

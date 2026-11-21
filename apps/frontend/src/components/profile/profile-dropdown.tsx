@@ -11,14 +11,9 @@ import {
 	IconPlayerPlay,
 	IconUser,
 } from "@tabler/icons-react";
-import {
-	useNavigate,
-	useRouteContext,
-	useRouter,
-} from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { ProfileTriggerButton } from "@/components/profile-trigger-button";
-import { toast } from "@/components/toast/toast";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -27,9 +22,7 @@ import {
 	DropdownMenuShortcut,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { queryClient } from "@/integrations/tanstack-query/root-provider";
-import { authClient } from "@/lib/auth-client";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { useSession, useSignOut } from "@/hooks/useSession";
 import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 
@@ -39,26 +32,15 @@ export const ProfileDropdown = ({
 	className,
 	...props
 }: ProfileDropdownProps) => {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const navigate = useNavigate();
-	const router = useRouter();
+	const logout = useSignOut();
 	const [isOpen, setIsOpen] = useState(false);
 
-	if (!authData) return null;
-	const username = authData.user.name;
-	const displayName = authData.user.displayName;
-	const image = authData.user.image;
-
-	const logout = async () => {
-		await authClient.signOut();
-
-		queryClient.setQueryData(sessionQueryOptions.queryKey, null);
-		queryClient.removeQueries({ queryKey: ["accounts"] });
-
-		toast.success({ title: m.epic_azure_mesa() });
-
-		await router.navigate({ to: "/" });
-	};
+	if (!session) return null;
+	const username = session.user.name;
+	const displayName = session.user.displayName;
+	const image = session.user.image;
 
 	return (
 		<div className={cn("relative", className)} {...props}>

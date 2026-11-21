@@ -1,4 +1,4 @@
-import { createFileRoute, useRouteContext } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 import {
@@ -8,6 +8,7 @@ import {
 import { GlobalLoadingIndicator } from "@/components/loading/loading-global";
 import { toast } from "@/components/toast/toast";
 import { useLists } from "@/hooks/useLists";
+import { useSession } from "@/hooks/useSession";
 import { m } from "@/paraglide/messages";
 
 const listsSearchSchema = z.object({
@@ -27,8 +28,8 @@ function ListsPage() {
 	const { filter = "all" } = Route.useSearch();
 	const navigate = Route.useNavigate();
 	const [page, setPage] = useState(1);
-	const { authData } = useRouteContext({ from: "__root__" });
-	const userNameFromSession = authData?.user?.name;
+	const session = useSession();
+	const userNameFromSession = session?.user?.name;
 
 	const handleFilterChange = (newFilter: VisibilityFilter) => {
 		navigate({

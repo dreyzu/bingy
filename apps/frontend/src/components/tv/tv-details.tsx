@@ -3,7 +3,7 @@ import {
 	IconDeviceTv,
 	IconStack2,
 } from "@tabler/icons-react";
-import { Link, useRouteContext } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
@@ -26,6 +26,7 @@ import { TVStatusCard } from "@/components/tv/tv-details/status-card";
 import { getTvFacts } from "@/components/tv/tv-facts";
 import { Card, CardContent } from "@/components/ui/card";
 import { WatchProvidersSection } from "@/components/watch-providers/watch-providers-section";
+import { useSession } from "@/hooks/useSession";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
 import { formatDate } from "@/utils/format-date";
@@ -48,7 +49,7 @@ export function TvDetailsView({
 	isLoading,
 	isError,
 }: TvDetailViewProps) {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const localeRegion = useAtomValue(localeRegionAtom);
 	const region = useAtomValue(regionAtom);
 
@@ -109,9 +110,9 @@ export function TvDetailsView({
 				</Card>
 			}
 			actions={
-				authData ? (
+				session ? (
 					<MediaActionMenu
-						username={authData.user.name}
+						username={session.user.name}
 						tvShow={{
 							id: tv.id,
 							name: tv.name,

@@ -28,7 +28,7 @@ import { SeparatorWithText } from "@/components/ui/separator-text";
 import { queryClient } from "@/integrations/tanstack-query/root-provider";
 import { authClient } from "@/lib/auth-client";
 import { config } from "@/lib/env";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { refreshSession } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
 import { signinFormSchema } from "@/schemas/signin-form-schema";
 
@@ -68,14 +68,13 @@ export function SignInForm() {
 
 			if (data && !("twoFactorRedirect" in data)) {
 				// normal sign-in flow (no 2FA)
-				await queryClient.invalidateQueries({
-					queryKey: sessionQueryOptions.queryKey,
-				});
-				await queryClient.refetchQueries({
-					queryKey: sessionQueryOptions.queryKey,
-				});
+				const session = await refreshSession(queryClient);
+				if (!session) {
+					toast.error({ title: m.candid_beige_yak() });
+					return;
+				}
 
-				if (!data.user.emailVerified) {
+				if (!session.user.emailVerified) {
 					await router.navigate({ to: "/verify-email" });
 					return;
 				}
@@ -133,12 +132,11 @@ export function SignInForm() {
 			}
 
 			if (data) {
-				await queryClient.invalidateQueries({
-					queryKey: sessionQueryOptions.queryKey,
-				});
-				await queryClient.refetchQueries({
-					queryKey: sessionQueryOptions.queryKey,
-				});
+				const session = await refreshSession(queryClient);
+				if (!session) {
+					toast.error({ title: m.candid_beige_yak() });
+					return;
+				}
 
 				toast.success({
 					title: m.swift_olive_pine({ username: data.user.name }),

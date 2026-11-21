@@ -1,4 +1,4 @@
-import { createFileRoute, useRouteContext } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { z } from "zod";
@@ -6,6 +6,7 @@ import { HistoryContainer } from "@/components/lists/history/history-container";
 import type { MediaFilter } from "@/components/lists/media-toggle-group";
 import { GlobalLoadingIndicator } from "@/components/loading/loading-global";
 import { useRatings } from "@/hooks/useRating";
+import { useSession } from "@/hooks/useSession";
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
 import { isOwnProfile } from "@/utils/utils";
@@ -23,8 +24,8 @@ function HistoryPage() {
 	const { username } = Route.useParams();
 	const { filter = "all" } = Route.useSearch();
 	const navigate = Route.useNavigate();
-	const { authData } = useRouteContext({ from: "__root__" });
-	const isOwnProfileFlag = isOwnProfile(authData?.user?.name, username);
+	const session = useSession();
+	const isOwnProfileFlag = isOwnProfile(session?.user?.name, username);
 	const localeRegion = useAtomValue(localeRegionAtom);
 	const [page, setPage] = useState(1);
 

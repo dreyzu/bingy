@@ -1,14 +1,11 @@
-import {
-	createFileRoute,
-	useNavigate,
-	useRouteContext,
-} from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
 import { ListContainer } from "@/components/lists/custom-lists/list-container";
 import { LoadingCentered } from "@/components/loading/loading-centered";
 import { toast } from "@/components/toast/toast";
 import { useListBySlug } from "@/hooks/useLists";
+import { useSession } from "@/hooks/useSession";
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
 
@@ -20,8 +17,8 @@ function ListPage() {
 	const { username, slug } = Route.useParams();
 	const navigate = useNavigate();
 	const localeRegion = useAtomValue(localeRegionAtom);
-	const { authData } = useRouteContext({ from: "__root__" });
-	const userNameFromSession = authData?.user?.name;
+	const session = useSession();
+	const userNameFromSession = session?.user?.name;
 	const isOwnProfile =
 		userNameFromSession?.toLowerCase() === username.toLowerCase();
 

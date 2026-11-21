@@ -36,7 +36,7 @@ import {
 import { queryClient } from "@/integrations/tanstack-query/root-provider";
 import { authClient } from "@/lib/auth-client";
 import { config } from "@/lib/env";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { refreshSession } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
 import { signUpFormSchema } from "@/schemas/signup-form-schema";
 import { getRandomAvatarUrl } from "@/utils/image";
@@ -89,12 +89,7 @@ export function SignUpForm() {
 			if (!data) return;
 
 			if (data.user) {
-				await queryClient.invalidateQueries({
-					queryKey: sessionQueryOptions.queryKey,
-				});
-				await queryClient.refetchQueries({
-					queryKey: sessionQueryOptions.queryKey,
-				});
+				await refreshSession(queryClient);
 
 				toast.success({
 					title: m.icy_aqua_turtle({

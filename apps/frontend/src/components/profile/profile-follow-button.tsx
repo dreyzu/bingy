@@ -4,7 +4,7 @@ import {
 	IconUserPlus,
 	IconX,
 } from "@tabler/icons-react";
-import { useNavigate, useRouteContext } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import type { FollowStatus } from "@/api/follows";
 import {
@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { useFollowMutation } from "@/hooks/useFollows";
+import { useSession } from "@/hooks/useSession";
 import { m } from "@/paraglide/messages";
 
 interface ProfileFollowButtonProps {
@@ -37,7 +38,7 @@ export function ProfileFollowButton({
 	followStatus,
 	followsYou = false,
 }: ProfileFollowButtonProps) {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const navigate = useNavigate();
 	const followMutation = useFollowMutation();
 	const [confirmOpen, setConfirmOpen] = useState(false);
@@ -46,7 +47,7 @@ export function ProfileFollowButton({
 		followMutation.mutate({ username, isPrivate, follow });
 
 	const handleClick = () => {
-		if (!authData) {
+		if (!session) {
 			navigate({ to: "/signin" });
 			return;
 		}

@@ -1,5 +1,4 @@
 import { IconEdit, IconLocation, IconLock } from "@tabler/icons-react";
-import { useRouteContext } from "@tanstack/react-router";
 import type { UserProfileInfoResponse } from "@/api/user-profile";
 import { ProfileActionsMenu } from "@/components/profile/profile-actions-menu";
 import { ProfileFollowButton } from "@/components/profile/profile-follow-button";
@@ -8,6 +7,7 @@ import { ProfilePictureDialog } from "@/components/profile/profile-picture-dialo
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useUnblockUser } from "@/hooks/useBlocks";
+import { useSession } from "@/hooks/useSession";
 import { m } from "@/paraglide/messages";
 
 interface ProfileInfosProps {
@@ -22,7 +22,7 @@ export function ProfileInfos({
 	isOwnProfile = false,
 }: ProfileInfosProps) {
 	const { displayName, avatarUrl, bio, location } = profile;
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const unblockUser = useUnblockUser();
 
 	return (
@@ -73,7 +73,7 @@ export function ProfileInfos({
 									followsYou={profile.followsYou}
 								/>
 							)}
-							{authData ? (
+							{session ? (
 								<ProfileActionsMenu
 									username={profile.name}
 									displayName={displayName}

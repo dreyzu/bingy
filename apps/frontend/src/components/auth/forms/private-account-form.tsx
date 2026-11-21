@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { useId } from "react";
 import {
 	Field,
@@ -8,11 +7,11 @@ import {
 } from "@/components/ui/field";
 import { Switch } from "@/components/ui/switch";
 import { useUpdatePrivacy } from "@/hooks/useFollows";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { useSession } from "@/hooks/useSession";
 import { m } from "@/paraglide/messages";
 
 export function PrivateAccountForm() {
-	const { data: session } = useQuery(sessionQueryOptions);
+	const session = useSession();
 	const updatePrivacy = useUpdatePrivacy();
 	const id = useId();
 

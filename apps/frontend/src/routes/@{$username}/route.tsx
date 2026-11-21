@@ -1,9 +1,4 @@
-import {
-	createFileRoute,
-	Outlet,
-	useNavigate,
-	useRouteContext,
-} from "@tanstack/react-router";
+import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { EditProfileDialog } from "@/components/auth/edit-profile-dialog";
 import { CenteredLayout } from "@/components/layout/centered-layout";
@@ -14,6 +9,7 @@ import { ProfileBanner } from "@/components/profile/profile-banner";
 import { ProfileInfos } from "@/components/profile/profile-infos";
 import { ProfileNav } from "@/components/profile/profile-nav";
 import { toast } from "@/components/toast/toast";
+import { useSession } from "@/hooks/useSession";
 import { useUserProfileInfo } from "@/hooks/useUserProfile";
 import { m } from "@/paraglide/messages";
 import { getTmdbImageUrl, isOwnProfile } from "@/utils/utils";
@@ -24,10 +20,10 @@ export const Route = createFileRoute("/@{$username}")({
 
 function UserProfileLayout() {
 	const { username } = Route.useParams();
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 
-	const showEditButton = authData
-		? isOwnProfile(authData.user.name, username)
+	const showEditButton = session
+		? isOwnProfile(session.user.name, username)
 		: false;
 	const navigate = useNavigate();
 
@@ -75,13 +71,16 @@ function UserProfileLayout() {
 				) : (
 					<PrivateProfile followStatus={data.followStatus} />
 				)}
-				<EditProfileDialog
-					open={isEditDialogOpen}
-					onOpenChange={setIsEditDialogOpen}
-					bio={data.bio}
-					location={data.location}
-					bannerUrl={data.bannerUrl}
-				/>
+				{showEditButton ? (
+					<EditProfileDialog
+						key={data.name}
+						open={isEditDialogOpen}
+						onOpenChange={setIsEditDialogOpen}
+						bio={data.bio}
+						location={data.location}
+						bannerUrl={data.bannerUrl}
+					/>
+				) : null}
 			</div>
 		</div>
 	);

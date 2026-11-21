@@ -21,8 +21,7 @@ import {
 } from "@/api/follows";
 import type { UserProfileInfoResponse } from "@/api/user-profile";
 import { toast } from "@/components/toast/toast";
-import { authClient } from "@/lib/auth-client";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { refreshSession } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
 
 const getNextPageParam = (lastPage: FollowUsersResponse) =>
@@ -198,10 +197,7 @@ export function useUpdatePrivacy() {
 		onSuccess: async ({ isPrivate }) => {
 			invalidateFollowData(queryClient);
 
-			const { data: freshSession } = await authClient.getSession({
-				query: { disableCookieCache: true },
-			});
-			queryClient.setQueryData(sessionQueryOptions.queryKey, freshSession);
+			await refreshSession(queryClient);
 
 			toast.success({
 				title: isPrivate ? m.steady_slate_pine() : m.hasty_scarlet_dolphin(),
