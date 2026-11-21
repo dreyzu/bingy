@@ -1,5 +1,5 @@
 import { IconBell } from "@tabler/icons-react";
-import { Link, useRouteContext } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { NotificationList } from "@/components/notifications/notification-list";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,7 @@ import {
 	PopoverTrigger,
 } from "@/components/ui/popover";
 import { useUnreadNotificationCount } from "@/hooks/useNotifications";
+import { useSession } from "@/hooks/useSession";
 import { cn } from "@/lib/utils";
 import { m } from "@/paraglide/messages";
 
@@ -38,11 +39,11 @@ export function NotificationNavIcon() {
 
 /** Bell with the unread count, opening the signed-in user's notifications. */
 export function NotificationBell({ className }: { className?: string }) {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const [open, setOpen] = useState(false);
-	const { data } = useUnreadNotificationCount(!!authData);
+	const { data } = useUnreadNotificationCount(!!session);
 
-	if (!authData) return null;
+	if (!session) return null;
 
 	return (
 		<Popover open={open} onOpenChange={setOpen}>

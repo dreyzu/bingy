@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouteContext } from "@tanstack/react-router";
 import { useId } from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import type { z } from "zod";
@@ -23,6 +22,7 @@ import {
 	DrawerTitle,
 } from "@/components/ui/drawer";
 import { Separator } from "@/components/ui/separator";
+import { useSession } from "@/hooks/useSession";
 import { useUpdateUserProfile } from "@/hooks/useUserProfile";
 import { useMediaQuery } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
@@ -45,7 +45,7 @@ export function EditProfileDialog({
 	location,
 	bannerUrl,
 }: EditProfileDialogProps) {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const id = useId();
 	const isMobile = useMediaQuery("(pointer: coarse)");
 	const updateProfile = useUpdateUserProfile();
@@ -53,10 +53,14 @@ export function EditProfileDialog({
 	const form = useForm<ProfileFormValues>({
 		resolver: zodResolver(profileSchema),
 		mode: "onTouched",
-		defaultValues: {
+		// `values` (not `defaultValues`) follows the profile as it changes, so
+		// the form never keeps showing an earlier bio or location. Fields the
+		// user is editing are left alone.
+		values: {
 			bio: bio ?? "",
 			location: location ?? "",
 		},
+		resetOptions: { keepDirtyValues: true },
 	});
 
 	const onFormSubmit: SubmitHandler<ProfileFormValues> = async (formData) => {
@@ -71,9 +75,9 @@ export function EditProfileDialog({
 		});
 	};
 
-	if (!authData) return null;
+	if (!session) return null;
 
-	const { displayName, image: avatar } = authData.user;
+	const { displayName, image: avatar } = session.user;
 	const isSubmitting = updateProfile.isPending;
 
 	const formContent = (

@@ -6,6 +6,7 @@ import {
 	queryClient,
 	Provider as TanStackQueryProvider,
 } from "./integrations/tanstack-query/root-provider.tsx";
+import { syncSessionChanges } from "./lib/session-sync.ts";
 import reportWebVitals from "./reportWebVitals.ts";
 import { routeTree } from "./routeTree.gen";
 import "@/styles/app.css";
@@ -25,6 +26,8 @@ const router = createRouter({
 	defaultPendingMinMs: 30_000,
 	pathParamsAllowedCharacters: ["@"],
 });
+
+syncSessionChanges(queryClient, router);
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {

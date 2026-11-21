@@ -1,9 +1,6 @@
-import {
-	createFileRoute,
-	redirect,
-	useRouteContext,
-} from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { useSession } from "@/hooks/useSession";
 import { m } from "@/paraglide/messages";
 
 export const Route = createFileRoute("/_auth/welcome")({
@@ -18,17 +15,17 @@ export const Route = createFileRoute("/_auth/welcome")({
 });
 
 function WelcomePage() {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 
-	if (!authData) return null;
+	if (!session) return null;
 
-	if (!authData.user?.emailVerified) return null;
+	if (!session.user?.emailVerified) return null;
 
 	return (
 		<div className="flex flex-col gap-6">
 			<h1 className="text-3xl font-bold mt-2">
 				{m.tender_lime_badger({
-					username: authData.user.displayName ?? authData.user.name,
+					username: session.user.displayName ?? session.user.name,
 				})}
 			</h1>
 			<Card>

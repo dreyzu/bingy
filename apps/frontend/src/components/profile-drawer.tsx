@@ -10,14 +10,9 @@ import {
 	IconLogout,
 	IconUser,
 } from "@tabler/icons-react";
-import {
-	useNavigate,
-	useRouteContext,
-	useRouter,
-} from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { MobileProfileTriggerButton } from "@/components/mobile-profile-trigger";
-import { toast } from "@/components/toast/toast";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,32 +26,19 @@ import {
 	DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Separator } from "@/components/ui/separator";
-import { queryClient } from "@/integrations/tanstack-query/root-provider";
-import { authClient } from "@/lib/auth-client";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { useSession, useSignOut } from "@/hooks/useSession";
 import { m } from "@/paraglide/messages";
 
 export function ProfileDrawer() {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const navigate = useNavigate();
-	const router = useRouter();
+	const logout = useSignOut();
 	const [isOpen, setIsOpen] = useState(false);
 
-	if (!authData) return null;
-	const username = authData.user.name;
-	const displayName = authData.user.displayName;
-	const image = authData.user.image;
-
-	const logout = async () => {
-		await authClient.signOut();
-
-		queryClient.setQueryData(sessionQueryOptions.queryKey, null);
-		queryClient.removeQueries({ queryKey: ["accounts"] });
-
-		toast.success({ title: m.epic_azure_mesa() });
-
-		await router.navigate({ to: "/" });
-	};
+	if (!session) return null;
+	const username = session.user.name;
+	const displayName = session.user.displayName;
+	const image = session.user.image;
 
 	return (
 		<Drawer swipeDirection="left" open={isOpen} onOpenChange={setIsOpen}>
@@ -84,7 +66,7 @@ export function ProfileDrawer() {
 						{displayName}
 					</DrawerTitle>
 					<DrawerDescription className="line-clamp-1 leading-relaxed">
-						{authData.user.email}
+						{session.user.email}
 					</DrawerDescription>
 				</DrawerHeader>
 				<DrawerBody>

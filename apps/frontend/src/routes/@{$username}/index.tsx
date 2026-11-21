@@ -1,9 +1,10 @@
-import { createFileRoute, useRouteContext } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import { EmptyProfile } from "@/components/profile/empty-profile";
 import { ProfileFavoritesSection } from "@/components/profile/profile-favorites-section";
 import { ProfileListsSection } from "@/components/profile/profile-lists-section";
 import { ProfileWatchlistSection } from "@/components/profile/profile-watchlist-section";
+import { useSession } from "@/hooks/useSession";
 import {
 	useUserFavorites,
 	useUserLists,
@@ -17,9 +18,9 @@ export const Route = createFileRoute("/@{$username}/")({
 });
 
 function ProfilePage() {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const { username } = Route.useParams();
-	const ownProfile = isOwnProfile(authData?.user.name, username);
+	const ownProfile = isOwnProfile(session?.user.name, username);
 	const localeRegion = useAtomValue(localeRegionAtom);
 
 	const { data: favoritesData, isLoading: isFavoritesLoading } =

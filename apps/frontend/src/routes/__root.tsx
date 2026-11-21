@@ -3,20 +3,29 @@ import { createRootRouteWithContext } from "@tanstack/react-router";
 import { GlobalError } from "@/components/errors/global-error";
 import { NotFoundComponent } from "@/components/errors/not-found";
 import { RootComponent } from "@/components/root-component";
-import type { authClient } from "@/lib/auth-client";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { type Session, sessionQueryOptions } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
 import appCss from "@/styles/app.css?url";
 
 export interface MyRouterContext {
 	queryClient: QueryClient;
-	authData?: ReturnType<typeof authClient.useSession>["data"];
+	/**
+	 * For route guards only. Components use `useSession`, which updates as soon
+	 * as the session changes instead of on the next navigation.
+	 */
+	authData?: Session | null;
 }
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
 	beforeLoad: async ({ context }) => {
-		const authData =
-			await context.queryClient.ensureQueryData(sessionQueryOptions);
+		const authData = await context.queryClient
+			.ensureQueryData(sessionQueryOptions)
+			.catch(() => {
+				// The session couldn't be loaded: start signed out. A later
+				// successful check (on focus) switches to the real account.
+				context.queryClient.setQueryData(sessionQueryOptions.queryKey, null);
+				return null;
+			});
 
 		return { authData };
 	},

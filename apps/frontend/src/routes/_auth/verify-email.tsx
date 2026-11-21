@@ -1,8 +1,4 @@
-import {
-	createFileRoute,
-	redirect,
-	useRouteContext,
-} from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "@/components/toast/toast";
 import { Button } from "@/components/ui/button";
@@ -13,44 +9,36 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { useSession } from "@/hooks/useSession";
 import { authClient } from "@/lib/auth-client";
 import { config } from "@/lib/env";
-import { sessionQueryOptions } from "@/lib/queries/session";
+import { refreshSession } from "@/lib/queries/session";
 import { m } from "@/paraglide/messages";
 
 export const Route = createFileRoute("/_auth/verify-email")({
 	component: VerifyEmailPage,
 	beforeLoad: async ({ context }) => {
-		// Fetch fresh session data
-		const { data: freshSession } = await authClient.getSession({
-			query: { disableCookieCache: true },
-		});
-
-		if (freshSession) {
-			context.queryClient.setQueryData(
-				sessionQueryOptions.queryKey,
-				freshSession,
-			);
-		}
+		// The email may have been verified from another tab or device.
+		const freshSession = await refreshSession(context.queryClient);
 
 		// Redirect verified users to welcome page
-		if (freshSession?.user?.emailVerified) {
+		if (freshSession?.user.emailVerified) {
 			throw redirect({ to: "/welcome" });
 		}
 	},
 });
 
 function VerifyEmailPage() {
-	const { authData } = useRouteContext({ from: "__root__" });
+	const session = useSession();
 	const [isResending, setIsResending] = useState(false);
 
 	const handleResendEmail = async () => {
-		if (!authData?.user?.email) return;
+		if (!session?.user?.email) return;
 
 		setIsResending(true);
 		try {
 			await authClient.sendVerificationEmail({
-				email: authData.user.email,
+				email: session.user.email,
 				callbackURL: `${config.appUrl}/welcome`,
 			});
 			toast.success({
@@ -66,7 +54,7 @@ function VerifyEmailPage() {
 		}
 	};
 
-	if (!authData) {
+	if (!session) {
 		return null;
 	}
 
@@ -86,7 +74,7 @@ function VerifyEmailPage() {
 					>
 						{isResending
 							? m.noble_coral_planet()
-							: m.zippy_green_tulip({ email: authData.user.email })}
+							: m.zippy_green_tulip({ email: session.user.email })}
 					</Button>
 				</CardContent>
 			</Card>
