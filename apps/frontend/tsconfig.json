@@ -13,5 +13,6 @@
 		}
 	},
 	"include": ["**/*.ts", "**/*.tsx", "**/*.js"],
+	"exclude": ["dist"],
 	"references": [{ "path": "../shared" }, { "path": "../backend" }]
 }
