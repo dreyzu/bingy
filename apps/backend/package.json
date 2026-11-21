@@ -38,7 +38,7 @@
 		"@types/react": "^19.3.0",
 		"@types/react-dom": "^19.3.0",
 		"drizzle-kit": "^0.31.10",
-		"react-email": "4.2.11"
+		"react-email": "6.11.3"
 	},
 	"imports": {
 		"#web/": "./src/web/*",
