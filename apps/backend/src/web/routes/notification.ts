@@ -164,30 +164,6 @@ notificationRoutes.delete("/", async (c) => {
 	return c.body(null, 204);
 });
 
-// Delete some notifications: a single one, or every one of a group
-notificationRoutes.post(
-	"/delete",
-	zValidator("json", z.object({ ids: z.array(z.uuid()).min(1).max(1000) })),
-	async (c) => {
-		const viewer = c.get("user");
-		if (!viewer) return c.json({ error: "Unauthorized" }, 401);
-
-		const deleted = await db
-			.delete(notifications)
-			.where(
-				and(
-					eq(notifications.recipientId, viewer.id),
-					inArray(notifications.id, c.req.valid("json").ids),
-				),
-			)
-			.returning({ id: notifications.id });
-
-		if (deleted.length > 0) await syncUnread([viewer.id], "removed");
-
-		return c.body(null, 204);
-	},
-);
-
 notificationRoutes.get("/preferences", async (c) => {
 	const viewer = c.get("user");
 	if (!viewer) return c.json({ error: "Unauthorized" }, 401);

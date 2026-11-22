@@ -1,9 +1,4 @@
-import {
-	IconCheck,
-	IconChevronDown,
-	IconTrash,
-	IconX,
-} from "@tabler/icons-react";
+import { IconCheck, IconChevronDown, IconX } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import type {
@@ -37,7 +32,6 @@ import {
 	useAcceptFollowRequest,
 	useDeclineFollowRequest,
 } from "@/hooks/useFollows";
-import { useDeleteNotification } from "@/hooks/useNotifications";
 import { m } from "@/paraglide/messages";
 import { formatDistanceToNow } from "@/utils/format-date";
 
@@ -78,7 +72,13 @@ function ActorAvatar({
 	);
 }
 
-function FollowRequestActions({ actor }: { actor: NotificationActor }) {
+function FollowRequestActions({
+	actor,
+	compact,
+}: {
+	actor: NotificationActor;
+	compact: boolean;
+}) {
 	const accept = useAcceptFollowRequest();
 	const decline = useDeclineFollowRequest();
 	const pending = accept.isPending || decline.isPending;
@@ -86,12 +86,15 @@ function FollowRequestActions({ actor }: { actor: NotificationActor }) {
 	return (
 		<>
 			<Button
-				size="sm"
+				size={compact ? "icon-sm" : "sm"}
 				disabled={pending}
 				onClick={() => accept.mutate(actor.name)}
+				aria-label={
+					compact ? m.dreamy_gray_tiger({ name: actor.displayName }) : undefined
+				}
 			>
 				<IconCheck className="h-4 w-4" />
-				{m.lively_khaki_rabbit()}
+				{compact ? null : m.lively_khaki_rabbit()}
 			</Button>
 			<Button
 				variant="ghost"
@@ -137,7 +140,8 @@ function NotificationActions({
 	actor: NotificationActor;
 	compact: boolean;
 }) {
-	if (type === "follow_request") return <FollowRequestActions actor={actor} />;
+	if (type === "follow_request")
+		return <FollowRequestActions actor={actor} compact={compact} />;
 	if (type === "new_follower")
 		return <FollowBackButton actor={actor} compact={compact} />;
 	return null;
@@ -157,7 +161,6 @@ export function NotificationItem({
 	compact = false,
 	onNavigate,
 }: NotificationItemProps) {
-	const deleteNotification = useDeleteNotification();
 	const { actors, type } = notification;
 	const [first, second] = actors;
 	if (!first) return null;
@@ -200,19 +203,6 @@ export function NotificationItem({
 		</>
 	);
 
-	// The popover has no room for it: deleting is done from the full page.
-	const deleteButton = compact ? null : (
-		<Button
-			variant="ghost"
-			size="icon-sm"
-			onClick={() => deleteNotification.mutate(notification)}
-			aria-label={m.lucky_sepia_blossom()}
-			className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive dark:hover:bg-destructive/20"
-		>
-			<IconTrash />
-		</Button>
-	);
-
 	if (!isGroup) {
 		return (
 			<Item variant="outline" size="sm" className="hover:bg-muted/50">
@@ -226,7 +216,6 @@ export function NotificationItem({
 				</Link>
 				<ItemActions className="gap-1 empty:hidden">
 					<NotificationActions type={type} actor={first} compact={compact} />
-					{deleteButton}
 				</ItemActions>
 			</Item>
 		);
@@ -250,9 +239,6 @@ export function NotificationItem({
 						/>
 					</span>
 				</CollapsibleTrigger>
-				{deleteButton ? (
-					<ItemActions className="gap-1">{deleteButton}</ItemActions>
-				) : null}
 				<CollapsibleContent className="ml-4 basis-full border-l pl-2">
 					{actors.map((actor) => (
 						<UserCard

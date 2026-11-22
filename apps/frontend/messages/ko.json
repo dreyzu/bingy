@@ -1084,12 +1084,10 @@
 	"jolly_khaki_bamboo": "수락된 요청",
 	"bright_navy_otter": "누군가 회원님의 팔로우 요청을 수락하면 알려 드려요.",
 	"stellar_sienna_moose": "알림 설정을 변경하지 못했어요. 다시 시도해 주세요.",
-	"lucky_sepia_blossom": "알림 삭제",
 	"frosty_amber_seal": "모두 지우기",
 	"bright_hazel_nectar": "알림을 모두 지울까요?",
 	"dusky_wine_biscuit": "취소",
 	"balmy_topaz_coral": "지우기",
-	"humble_cerise_canyon": "알림을 삭제하지 못했어요. 다시 시도해 주세요.",
 	"eager_white_crystal": "알림을 지우지 못했어요. 다시 시도해 주세요.",
 	"icy_coral_moose": "{first} 님, {second} 님 외 {count}명이 회원님을 팔로우하기 시작했어요",
 	"hardy_azure_tiger": "{first} 님, {second} 님 외 {count}명이 팔로우 요청을 수락했어요",
@@ -1109,5 +1107,6 @@
 	"breezy_sapphire_pine": "{name} 님 맞팔로우",
 	"bold_plum_blossom": "{name} 님 팔로우",
 	"daring_saffron_banjo": "{name} 님에게 보낸 팔로우 요청 취소",
-	"merry_peach_pine": "{name} 님 팔로우 취소"
+	"merry_peach_pine": "{name} 님 팔로우 취소",
+	"dreamy_gray_tiger": "{name} 님의 요청 수락"
 }

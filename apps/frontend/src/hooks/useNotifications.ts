@@ -9,7 +9,6 @@ import {
 import { useEffect } from "react";
 import {
 	clearNotifications,
-	deleteNotifications,
 	fetchNotificationPreferences,
 	fetchNotifications,
 	fetchUnreadNotificationCount,
@@ -178,26 +177,6 @@ async function removeFromList(
 		});
 	}
 	return previous;
-}
-
-export function useDeleteNotification() {
-	const queryClient = useQueryClient();
-
-	return useMutation({
-		mutationFn: (entry: UserNotification) => deleteNotifications(entry.ids),
-		onMutate: async (entry: UserNotification) => ({
-			previous: await removeFromList(
-				queryClient,
-				(notification) => notification.id !== entry.id,
-			),
-		}),
-		onError: (_error, _entry, context) => {
-			if (context?.previous) {
-				queryClient.setQueryData(notificationKeys.list, context.previous);
-			}
-			toast.add({ type: "error", title: m.humble_cerise_canyon() });
-		},
-	});
 }
 
 export function useClearNotifications() {

@@ -1084,12 +1084,10 @@
 	"jolly_khaki_bamboo": "Solicitudes aceptadas",
 	"bright_navy_otter": "Cuando alguien acepta tu solicitud de seguimiento.",
 	"stellar_sienna_moose": "No se pudo actualizar tu configuración de notificaciones. Inténtalo de nuevo.",
-	"lucky_sepia_blossom": "Eliminar notificación",
 	"frosty_amber_seal": "Borrar todo",
 	"bright_hazel_nectar": "¿Borrar todas las notificaciones?",
 	"dusky_wine_biscuit": "Cancelar",
 	"balmy_topaz_coral": "Borrar",
-	"humble_cerise_canyon": "No se pudo eliminar la notificación. Inténtalo de nuevo.",
 	"eager_white_crystal": "No se pudieron borrar tus notificaciones. Inténtalo de nuevo.",
 	"icy_coral_moose": "{first}, {second} y {count} personas más comenzaron a seguirte",
 	"hardy_azure_tiger": "{first}, {second} y {count} personas más aceptaron tu solicitud de seguimiento",
@@ -1109,5 +1107,6 @@
 	"breezy_sapphire_pine": "Seguir también a {name}",
 	"bold_plum_blossom": "Seguir a {name}",
 	"daring_saffron_banjo": "Cancelar tu solicitud para seguir a {name}",
-	"merry_peach_pine": "Dejar de seguir a {name}"
+	"merry_peach_pine": "Dejar de seguir a {name}",
+	"dreamy_gray_tiger": "Aceptar la solicitud de {name}"
 }

@@ -73,12 +73,6 @@ export const markNotificationsRead = (ids?: string[]) =>
 		body: { ids },
 	});
 
-export const deleteNotifications = (ids: string[]) =>
-	apiFetch<void>("/notifications/delete", {
-		method: "POST",
-		body: { ids },
-	});
-
 export const clearNotifications = () =>
 	apiFetch<void>("/notifications", { method: "DELETE" });
 

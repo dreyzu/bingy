@@ -1084,12 +1084,10 @@
 	"jolly_khaki_bamboo": "Accepted requests",
 	"bright_navy_otter": "When someone accepts your follow request.",
 	"stellar_sienna_moose": "Couldn't update your notification settings. Try again.",
-	"lucky_sepia_blossom": "Delete notification",
 	"frosty_amber_seal": "Clear all",
 	"bright_hazel_nectar": "Clear all notifications?",
 	"dusky_wine_biscuit": "Cancel",
 	"balmy_topaz_coral": "Clear",
-	"humble_cerise_canyon": "Couldn't delete the notification. Try again.",
 	"eager_white_crystal": "Couldn't clear your notifications. Try again.",
 	"icy_coral_moose": "{first}, {second} and {count} others started following you",
 	"hardy_azure_tiger": "{first}, {second} and {count} others accepted your follow request",
@@ -1109,5 +1107,6 @@
 	"breezy_sapphire_pine": "Follow back {name}",
 	"bold_plum_blossom": "Follow {name}",
 	"daring_saffron_banjo": "Cancel your request to follow {name}",
-	"merry_peach_pine": "Unfollow {name}"
+	"merry_peach_pine": "Unfollow {name}",
+	"dreamy_gray_tiger": "Accept {name}'s request"
 }

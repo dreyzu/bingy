@@ -1084,12 +1084,10 @@
 	"jolly_khaki_bamboo": "已接受的请求",
 	"bright_navy_otter": "有人接受你的关注请求时通知你。",
 	"stellar_sienna_moose": "无法更新通知设置，请再试一次。",
-	"lucky_sepia_blossom": "删除通知",
 	"frosty_amber_seal": "全部清除",
 	"bright_hazel_nectar": "清除所有通知？",
 	"dusky_wine_biscuit": "取消",
 	"balmy_topaz_coral": "清除",
-	"humble_cerise_canyon": "无法删除通知，请再试一次。",
 	"eager_white_crystal": "无法清除通知，请再试一次。",
 	"icy_coral_moose": "{first}、{second} 和另外 {count} 人关注了你",
 	"hardy_azure_tiger": "{first}、{second} 和另外 {count} 人接受了你的关注请求",
@@ -1109,5 +1107,6 @@
 	"breezy_sapphire_pine": "回关 {name}",
 	"bold_plum_blossom": "关注 {name}",
 	"daring_saffron_banjo": "撤回对 {name} 的关注请求",
-	"merry_peach_pine": "取消关注 {name}"
+	"merry_peach_pine": "取消关注 {name}",
+	"dreamy_gray_tiger": "接受 {name} 的请求"
 }
