@@ -25,6 +25,9 @@ export function useAddMovieToHistory(username: string) {
 				queryKey: ["ratings", "movie", variables.tmdbId],
 			});
 			queryClient.invalidateQueries({
+				queryKey: ["average-rating", "movie", variables.tmdbId],
+			});
+			queryClient.invalidateQueries({
 				queryKey: ["lists", "watchlist"],
 			});
 			queryClient.invalidateQueries({
@@ -66,6 +69,9 @@ export function useAddTvToHistory(username: string) {
 				queryKey: ["ratings", "tv", variables.tmdbId],
 			});
 			queryClient.invalidateQueries({
+				queryKey: ["average-rating", "tv", variables.tmdbId],
+			});
+			queryClient.invalidateQueries({
 				queryKey: ["lists", "watchlist"],
 			});
 			queryClient.invalidateQueries({
@@ -73,6 +79,9 @@ export function useAddTvToHistory(username: string) {
 			});
 			queryClient.invalidateQueries({
 				queryKey: ["tracked-shows", username],
+			});
+			queryClient.invalidateQueries({
+				queryKey: ["progress", username, "tv", variables.tmdbId],
 			});
 
 			const toastId = toast.add({
@@ -109,6 +118,9 @@ export function useRemoveMovieHistory() {
 				queryKey: ["ratings", "movie", tmdbId],
 			});
 			queryClient.invalidateQueries({
+				queryKey: ["average-rating", "movie", tmdbId],
+			});
+			queryClient.invalidateQueries({
 				queryKey: ["lists", "watchlist"],
 			});
 			queryClient.invalidateQueries({
@@ -139,6 +151,9 @@ export function useRemoveTvHistory(username: string) {
 				queryKey: ["ratings", "tv", tmdbId],
 			});
 			queryClient.invalidateQueries({
+				queryKey: ["average-rating", "tv", tmdbId],
+			});
+			queryClient.invalidateQueries({
 				queryKey: ["lists", "watchlist"],
 			});
 			queryClient.invalidateQueries({
@@ -149,6 +164,9 @@ export function useRemoveTvHistory(username: string) {
 			});
 			queryClient.invalidateQueries({
 				queryKey: ["tracked-shows", username],
+			});
+			queryClient.invalidateQueries({
+				queryKey: ["progress", username, "tv", tmdbId],
 			});
 
 			toast.add({ type: "success", title: m.happy_onyx_hazel() });

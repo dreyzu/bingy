@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { AddToHistoryItem } from "@/components/lists/history/add-to-history-item";
 import { RemoveFromHistoryItem } from "@/components/lists/history/remove-from-history-item";
 import { AddToListDialog } from "@/components/lists/media-actions/add-to-list-dialog";
-import { LogReviewDialog } from "@/components/lists/media-actions/log-review-dialog";
+import { LogReviewModal } from "@/components/lists/media-actions/log-review-modal";
 import { RemoveHistoryAlertDialog } from "@/components/lists/media-actions/remove-history-alert-dialog";
 import { RemoveRatingDropdownItem } from "@/components/lists/media-actions/remove-rating-dropdown-item";
 import { StarRating } from "@/components/lists/media-actions/star-rating";
@@ -64,7 +64,7 @@ export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
 	const removeMovieHistory = useRemoveMovieHistory();
 	const removeTvHistory = useRemoveTvHistory(username);
 
-	const [showLogReviewDialog, setShowLogReviewDialog] = useState(false);
+	const [showLogReviewModal, setShowLogReviewModal] = useState(false);
 	const [showAddToListDialog, setShowAddToListDialog] = useState(false);
 	const [showRemoveHistoryDialog, setShowRemoveHistoryDialog] = useState(false);
 
@@ -128,7 +128,7 @@ export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
 						/>
 					</div>
 					<DropdownMenuSeparator />
-					<DropdownMenuItem onClick={() => setShowLogReviewDialog(true)}>
+					<DropdownMenuItem onClick={() => setShowLogReviewModal(true)}>
 						{existingRating ? m.peppy_onyx_falcon() : m.icy_mauve_otter()}
 					</DropdownMenuItem>
 					<DropdownMenuItem onClick={() => setShowAddToListDialog(true)}>
@@ -161,10 +161,10 @@ export function ListDropdown({ movie, tvShow, imageUrl }: ListDropdownProps) {
 				</DropdownMenuContent>
 			</DropdownMenu>
 
-			<LogReviewDialog
+			<LogReviewModal
 				username={username}
-				open={showLogReviewDialog}
-				onOpenChange={setShowLogReviewDialog}
+				open={showLogReviewModal}
+				onOpenChange={setShowLogReviewModal}
 				movie={movie}
 				tvShow={tvShow}
 				imageUrl={imageUrl}

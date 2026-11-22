@@ -1,7 +1,22 @@
-import { IconPlayerPlay } from "@tabler/icons-react";
+import { IconDots, IconPlayerPlay } from "@tabler/icons-react";
 import { useMemo, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import {
+	Drawer,
+	DrawerBody,
+	DrawerContent,
+	DrawerTitle,
+	DrawerTrigger,
+} from "@/components/ui/drawer";
+import {
+	Item,
+	ItemActions,
+	ItemContent,
+	ItemMedia,
+	ItemTitle,
+} from "@/components/ui/item";
 import { Separator } from "@/components/ui/separator";
 import {
 	useMovieRating,
@@ -9,8 +24,10 @@ import {
 	useRateTvShow,
 	useTvRating,
 } from "@/hooks/useRating";
+import { useSession } from "@/hooks/useSession";
 import { useUserTvProgress } from "@/hooks/useTrackedShows";
 import { useTv } from "@/hooks/useTv";
+import { useMediaQuery } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
 import { getTvShowProgress } from "@/utils/season-helper";
 import { getTmdbImageUrl } from "@/utils/utils";
@@ -21,7 +38,7 @@ import { ShareButton } from "./action-bar/share-button";
 import { AddToListDialog } from "./add-to-list-dialog";
 import { AddToTrackedShowsDialog } from "./add-to-tracked-shows-dialog";
 import { FavoriteToggleButton } from "./favorite-toggle-button";
-import { LogReviewDialog } from "./log-review-dialog";
+import { LogReviewModal } from "./log-review-modal";
 import { StarRating } from "./star-rating";
 import { WatchToggleButton } from "./watch-toggle-button";
 
@@ -96,8 +113,14 @@ export const MediaActionMenu = ({
 		});
 	};
 
+	const session = useSession();
+	// Matches the `lg` breakpoint where the details layout moves the actions
+	// beside the header.
+	const isDesktop = useMediaQuery("(min-width: 64rem)");
+	const [menuOpen, setMenuOpen] = useState(false);
+
 	const [showAddToListDialog, setShowAddToListDialog] = useState(false);
-	const [showLogReviewDialog, setShowLogReviewDialog] = useState(false);
+	const [showLogReviewModal, setShowLogReviewModal] = useState(false);
 	const [showAddToTrackedShowsDialog, setShowAddToTrackedShowsDialog] =
 		useState(false);
 
@@ -110,66 +133,141 @@ export const MediaActionMenu = ({
 			? new Date(tvShow.releaseDate).getFullYear()
 			: "N/A";
 
+	// Dialogs open on top of the page, so the mobile drawer closes first.
+	const openDialog = (open: (value: boolean) => void) => {
+		setMenuOpen(false);
+		open(true);
+	};
+
+	const quickActions = (
+		<>
+			<div className="flex w-full flex-row justify-around items-center gap-4">
+				<WatchToggleButton {...passProps} />
+				<FavoriteToggleButton {...passProps} />
+				<WatchlistToggleButton {...passProps} />
+			</div>
+			<Separator />
+			<div className="flex w-full justify-center">
+				<StarRating
+					movie={movie}
+					tvShow={tvShow}
+					fetchRating={true}
+					onRatingChange={handleRatingChange}
+					username={username}
+					gapSize={2}
+					iconSize={8}
+				/>
+			</div>
+		</>
+	);
+
+	// On mobile this opens as a drawer nested in the actions drawer, so the
+	// actions drawer stays open behind it until the log or review is saved.
+	const logReviewModal = (
+		<LogReviewModal
+			username={username}
+			open={showLogReviewModal}
+			onOpenChange={setShowLogReviewModal}
+			onSaved={() => setMenuOpen(false)}
+			movie={movie}
+			tvShow={tvShow}
+			imageUrl={imageUrl}
+			existingData={existingRating}
+		/>
+	);
+
+	const actionButtons = (
+		<>
+			<LogReviewButton
+				existingRating={!!existingRating}
+				onClick={() => setShowLogReviewModal(true)}
+			/>
+			{tvShow ? (
+				<Button
+					variant="ghost"
+					onClick={() => openDialog(setShowAddToTrackedShowsDialog)}
+					className="flex gap-2"
+				>
+					<span>
+						{userTvProgress
+							? m.humble_turquoise_moose()
+							: m.lush_pink_blossom()}
+					</span>
+					<IconPlayerPlay className="ml-auto" />
+				</Button>
+			) : null}
+			<AddToListButton onClick={() => openDialog(setShowAddToListDialog)} />
+			<ShareButton
+				text={m.silent_ochre_pine({
+					media_name: title,
+					year: year,
+				})}
+			/>
+		</>
+	);
+
+	const displayName = session?.user.displayName ?? username;
+
 	return (
 		<>
-			<Card className="min-w-3xs">
-				<CardHeader className="flex flex-col w-full gap-4">
-					<div className="flex w-full flex-row justify-around items-center gap-4">
-						<WatchToggleButton {...passProps} />
-						<FavoriteToggleButton {...passProps} />
-						<WatchlistToggleButton {...passProps} />
-					</div>
-					<Separator />
-					<div className="flex w-full justify-center">
-						<StarRating
-							movie={movie}
-							tvShow={tvShow}
-							fetchRating={true}
-							onRatingChange={handleRatingChange}
-							username={username}
-							gapSize={2}
-							iconSize={8}
-						/>
-					</div>
-				</CardHeader>
-				<CardContent className="flex flex-col gap-2">
-					<LogReviewButton
-						existingRating={!!existingRating}
-						onClick={() => setShowLogReviewDialog(true)}
-					/>
-					{tvShow ? (
-						<Button
-							variant="ghost"
-							onClick={() => setShowAddToTrackedShowsDialog(true)}
-							className="flex gap-2"
-						>
-							<span>
-								{userTvProgress
-									? m.humble_turquoise_moose()
-									: m.lush_pink_blossom()}
-							</span>
-							<IconPlayerPlay className="ml-auto" />
-						</Button>
-					) : null}
-					<AddToListButton onClick={() => setShowAddToListDialog(true)} />
-					<ShareButton
-						text={m.silent_ochre_pine({
-							media_name: title,
-							year: year,
-						})}
-					/>
-				</CardContent>
-			</Card>
+			{isDesktop ? (
+				<Card className="min-w-3xs">
+					<CardHeader className="flex flex-col w-full gap-4">
+						{quickActions}
+					</CardHeader>
+					<CardContent className="flex flex-col gap-2">
+						{actionButtons}
+					</CardContent>
+				</Card>
+			) : (
+				<Drawer
+					open={menuOpen}
+					onOpenChange={setMenuOpen}
+					swipeDirection="down"
+				>
+					{/* `dark` keeps the trigger dark in light mode too. */}
+					<DrawerTrigger
+						render={
+							<Item
+								variant="outline"
+								size="sm"
+								render={<button type="button" />}
+								className="dark px-4 bg-card text-left text-card-foreground cursor-pointer hover:bg-muted data-popup-open:bg-muted"
+							/>
+						}
+					>
+						<ItemMedia>
+							<Avatar className="size-7">
+								<AvatarImage
+									src={session?.user.image ?? ""}
+									alt={displayName}
+								/>
+								<AvatarFallback>{displayName.charAt(0)}</AvatarFallback>
+							</Avatar>
+						</ItemMedia>
+						<ItemContent className="min-w-0">
+							<ItemTitle className="block w-full truncate font-normal">
+								{m.daring_lilac_harbor()}
+							</ItemTitle>
+						</ItemContent>
+						<ItemActions>
+							<IconDots className="size-5 text-muted-foreground" />
+						</ItemActions>
+					</DrawerTrigger>
+					<DrawerContent>
+						<DrawerTitle className="sr-only">{title}</DrawerTitle>
+						<DrawerBody>
+							<div className="flex flex-col gap-4 p-4 pb-[calc(1rem+env(safe-area-inset-bottom))]">
+								{quickActions}
+								<div className="flex flex-col gap-2">{actionButtons}</div>
+							</div>
+						</DrawerBody>
+						{logReviewModal}
+					</DrawerContent>
+				</Drawer>
+			)}
 
-			<LogReviewDialog
-				username={username}
-				open={showLogReviewDialog}
-				onOpenChange={setShowLogReviewDialog}
-				movie={movie}
-				tvShow={tvShow}
-				imageUrl={imageUrl}
-				existingData={existingRating}
-			/>
+			{isDesktop ? logReviewModal : null}
 			{tvShow ? (
 				<AddToTrackedShowsDialog
 					open={showAddToTrackedShowsDialog}
