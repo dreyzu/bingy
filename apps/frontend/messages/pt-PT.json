@@ -107,7 +107,7 @@
 	"bubbly_aqua_puma": "Editar conta",
 	"happy_khaki_iguana": "Gere o teu e-mail, palavra-passe e definições de segurança",
 	"hazy_azure_island": "Editar visualização",
-	"kind_white_jasmine": "Seleciona o tema que preferes",
+	"kind_white_jasmine": "Escolhe o teu tema, idioma e região.",
 	"daring_ivory_tiger": "Claro",
 	"nifty_emerald_iguana": "Escuro",
 	"wild_teal_pelican": "Sistema",
@@ -1098,5 +1098,11 @@
 	"lush_gold_quail": "Notificações",
 	"rapid_periwinkle_canyon": "Todas as tuas notificações serão eliminadas permanentemente. Esta ação não pode ser anulada.",
 	"golden_khaki_seal": "Não foi possível terminar a sessão, tenta novamente",
-	"silent_sapphire_salmon": "Fechar"
+	"silent_sapphire_salmon": "Fechar",
+	"fluffy_periwinkle_dolphin": "Tema",
+	"quiet_jade_dolphin": "Escolhe o aspeto do Bingy neste dispositivo.",
+	"bright_coral_heron": "Idioma",
+	"jolly_aqua_whale": "Usado na interface e nas informações de filmes e séries.",
+	"modest_khaki_fox": "Região",
+	"shiny_umber_nectar": "Define as datas de estreia, onde ver e o formato da data."
 }

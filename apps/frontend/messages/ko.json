@@ -107,7 +107,7 @@
 	"bubbly_aqua_puma": "계정 편집",
 	"happy_khaki_iguana": "이메일, 비밀번호 및 보안 설정을 관리하세요",
 	"hazy_azure_island": "화면 편집",
-	"kind_white_jasmine": "원하는 테마를 선택해 주세요",
+	"kind_white_jasmine": "테마, 언어, 지역을 선택하세요.",
 	"daring_ivory_tiger": "밝게",
 	"nifty_emerald_iguana": "어둡게",
 	"wild_teal_pelican": "시스템",
@@ -1098,5 +1098,11 @@
 	"lush_gold_quail": "알림",
 	"rapid_periwinkle_canyon": "모든 알림이 영구적으로 삭제돼요. 이 작업은 되돌릴 수 없어요.",
 	"golden_khaki_seal": "로그아웃하지 못했어요. 다시 시도해 주세요",
-	"silent_sapphire_salmon": "닫기"
+	"silent_sapphire_salmon": "닫기",
+	"fluffy_periwinkle_dolphin": "테마",
+	"quiet_jade_dolphin": "이 기기에서 Bingy가 보이는 방식을 선택하세요.",
+	"bright_coral_heron": "언어",
+	"jolly_aqua_whale": "앱 화면과 영화 및 시리즈 정보에 사용돼요.",
+	"modest_khaki_fox": "지역",
+	"shiny_umber_nectar": "개봉일, 시청 가능한 서비스, 날짜 형식에 적용돼요."
 }

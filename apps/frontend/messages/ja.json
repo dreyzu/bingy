@@ -107,7 +107,7 @@
 	"bubbly_aqua_puma": "アカウントを編集",
 	"happy_khaki_iguana": "メール、パスワード、セキュリティの設定を管理できます",
 	"hazy_azure_island": "表示設定を編集",
-	"kind_white_jasmine": "テーマを選択してください",
+	"kind_white_jasmine": "テーマ、言語、地域を選択してください。",
 	"daring_ivory_tiger": "ライト",
 	"nifty_emerald_iguana": "ダーク",
 	"wild_teal_pelican": "システム",
@@ -1098,5 +1098,11 @@
 	"lush_gold_quail": "通知",
 	"rapid_periwinkle_canyon": "すべての通知が完全に削除されます。この操作は元に戻せません。",
 	"golden_khaki_seal": "ログアウトできませんでした。もう一度お試しください",
-	"silent_sapphire_salmon": "閉じる"
+	"silent_sapphire_salmon": "閉じる",
+	"fluffy_periwinkle_dolphin": "テーマ",
+	"quiet_jade_dolphin": "この端末でのBingyの見た目を選択してください。",
+	"bright_coral_heron": "言語",
+	"jolly_aqua_whale": "画面表示と映画・シリーズの情報に使われます。",
+	"modest_khaki_fox": "地域",
+	"shiny_umber_nectar": "公開日、視聴できるサービス、日付の形式に反映されます。"
 }

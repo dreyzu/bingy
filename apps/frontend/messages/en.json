@@ -107,7 +107,7 @@
 	"bubbly_aqua_puma": "Edit account",
 	"happy_khaki_iguana": "Manage your email, password, and security settings",
 	"hazy_azure_island": "Edit display",
-	"kind_white_jasmine": "Select your preferred theme",
+	"kind_white_jasmine": "Choose your theme, language and region.",
 	"daring_ivory_tiger": "Light",
 	"nifty_emerald_iguana": "Dark",
 	"wild_teal_pelican": "System",
@@ -1098,5 +1098,11 @@
 	"lush_gold_quail": "Notifications",
 	"rapid_periwinkle_canyon": "Every notification will be permanently deleted. This can't be undone.",
 	"golden_khaki_seal": "Couldn't log out, try again",
-	"silent_sapphire_salmon": "Close"
+	"silent_sapphire_salmon": "Close",
+	"fluffy_periwinkle_dolphin": "Theme",
+	"quiet_jade_dolphin": "Choose how Bingy looks on this device.",
+	"bright_coral_heron": "Language",
+	"jolly_aqua_whale": "Used for the interface and for movie and show details.",
+	"modest_khaki_fox": "Region",
+	"shiny_umber_nectar": "Sets release dates, where to watch and date formats."
 }
