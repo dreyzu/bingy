@@ -107,7 +107,7 @@
 	"bubbly_aqua_puma": "Konto bearbeiten",
 	"happy_khaki_iguana": "Verwalte deine E-Mail-Adresse, dein Passwort und deine Sicherheitseinstellungen",
 	"hazy_azure_island": "Anzeige bearbeiten",
-	"kind_white_jasmine": "Wähle dein bevorzugtes Design",
+	"kind_white_jasmine": "Wähle dein Design, deine Sprache und deine Region.",
 	"daring_ivory_tiger": "Hell",
 	"nifty_emerald_iguana": "Dunkel",
 	"wild_teal_pelican": "System",
@@ -1098,5 +1098,11 @@
 	"lush_gold_quail": "Benachrichtigungen",
 	"rapid_periwinkle_canyon": "Alle deine Benachrichtigungen werden endgültig gelöscht. Das kann nicht rückgängig gemacht werden.",
 	"golden_khaki_seal": "Abmelden fehlgeschlagen, versuche es erneut",
-	"silent_sapphire_salmon": "Schließen"
+	"silent_sapphire_salmon": "Schließen",
+	"fluffy_periwinkle_dolphin": "Design",
+	"quiet_jade_dolphin": "Wähle, wie Bingy auf diesem Gerät aussieht.",
+	"bright_coral_heron": "Sprache",
+	"jolly_aqua_whale": "Gilt für die Oberfläche und für Infos zu Filmen und Serien.",
+	"modest_khaki_fox": "Region",
+	"shiny_umber_nectar": "Bestimmt Erscheinungstermine, Streaminganbieter und Datumsformat."
 }

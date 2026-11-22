@@ -10,12 +10,13 @@ import { BlockedAccountsForm } from "@/components/auth/forms/blocked-accounts-fo
 import { DeleteAccountForm } from "@/components/auth/forms/delete-account-form";
 import { DisableTwoFactorForm } from "@/components/auth/forms/disable-two-factor-form";
 import { EnableTwoFactorForm } from "@/components/auth/forms/enable-two-factor-form";
+import { LocaleRegionForm } from "@/components/auth/forms/locale-region-form";
 import { NotificationPreferencesForm } from "@/components/auth/forms/notification-preferences-form";
 import { PrivateAccountForm } from "@/components/auth/forms/private-account-form";
 import { UpdateEmailForm } from "@/components/auth/forms/update-email-form";
 import { UpdatePasswordForm } from "@/components/auth/forms/update-password-form";
 import { LinkAccountComponent } from "@/components/auth/link-account";
-import { ModeToggle } from "@/components/theme/theme-toggle";
+import { ThemePicker } from "@/components/theme/theme-picker";
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -50,22 +51,30 @@ export function SettingsComponent({
 				});
 			}}
 		>
-			<TabsList className="self-center">
-				<TabsTrigger value="account">
+			<TabsList className="w-full sm:w-fit sm:self-center">
+				<TabsTrigger value="account" className="group/tab">
 					<IconUserCog />
-					{m.proud_emerald_dolphin()}
+					<span className="max-sm:group-not-data-active/tab:sr-only">
+						{m.proud_emerald_dolphin()}
+					</span>
 				</TabsTrigger>
-				<TabsTrigger value="privacy">
+				<TabsTrigger value="privacy" className="group/tab">
 					<IconLock />
-					{m.wild_periwinkle_mesa()}
+					<span className="max-sm:group-not-data-active/tab:sr-only">
+						{m.wild_periwinkle_mesa()}
+					</span>
 				</TabsTrigger>
-				<TabsTrigger value="notifications">
+				<TabsTrigger value="notifications" className="group/tab">
 					<IconBell />
-					{m.swift_cerise_octopus()}
+					<span className="max-sm:group-not-data-active/tab:sr-only">
+						{m.swift_cerise_octopus()}
+					</span>
 				</TabsTrigger>
-				<TabsTrigger value="display">
+				<TabsTrigger value="display" className="group/tab">
 					<IconBrush />
-					{m.fierce_sage_galaxy()}
+					<span className="max-sm:group-not-data-active/tab:sr-only">
+						{m.fierce_sage_galaxy()}
+					</span>
 				</TabsTrigger>
 			</TabsList>
 			<TabsContent value="account">
@@ -116,9 +125,10 @@ export function SettingsComponent({
 				<Card className="p-4">
 					<CardTitle>{m.hazy_azure_island()}</CardTitle>
 					<CardDescription>{m.kind_white_jasmine()}</CardDescription>
-					<div className="flex flex-col py-2">
-						<ModeToggle />
-					</div>
+					<Separator />
+					<ThemePicker />
+					<Separator />
+					<LocaleRegionForm />
 				</Card>
 			</TabsContent>
 		</Tabs>

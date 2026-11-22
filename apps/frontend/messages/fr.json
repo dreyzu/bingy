@@ -107,8 +107,8 @@
 	"fierce_sage_galaxy": "Affichage",
 	"bubbly_aqua_puma": "Modifier les paramètres du compte",
 	"happy_khaki_iguana": "Gère tes informations personnelles, tes méthodes de connexion et la sécurité de ton compte.",
-	"hazy_azure_island": "Modifier les paramètres d'affichage",
-	"kind_white_jasmine": "Choisis ton thème préféré",
+	"hazy_azure_island": "Modifier les paramètres d’affichage",
+	"kind_white_jasmine": "Choisis ton thème, ta langue et ta région.",
 	"daring_ivory_tiger": "Clair",
 	"nifty_emerald_iguana": "Sombre",
 	"wild_teal_pelican": "Système",
@@ -1098,5 +1098,11 @@
 	"lush_gold_quail": "Notifications",
 	"rapid_periwinkle_canyon": "Toutes tes notifications seront supprimées définitivement. Cette action est irréversible.",
 	"golden_khaki_seal": "Impossible de te déconnecter, réessaie",
-	"silent_sapphire_salmon": "Fermer"
+	"silent_sapphire_salmon": "Fermer",
+	"fluffy_periwinkle_dolphin": "Thème",
+	"quiet_jade_dolphin": "Choisis l’apparence de Bingy sur cet appareil.",
+	"bright_coral_heron": "Langue",
+	"jolly_aqua_whale": "Utilisée pour l’interface et les informations des films et séries.",
+	"modest_khaki_fox": "Région",
+	"shiny_umber_nectar": "Définit les dates de sortie, les plateformes de streaming et le format des dates."
 }

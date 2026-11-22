@@ -107,7 +107,7 @@
 	"bubbly_aqua_puma": "编辑账号",
 	"happy_khaki_iguana": "管理你的邮箱、密码和安全设置",
 	"hazy_azure_island": "编辑显示设置",
-	"kind_white_jasmine": "选择你偏好的主题",
+	"kind_white_jasmine": "选择你的主题、语言和地区。",
 	"daring_ivory_tiger": "浅色",
 	"nifty_emerald_iguana": "深色",
 	"wild_teal_pelican": "跟随系统",
@@ -1098,5 +1098,11 @@
 	"lush_gold_quail": "通知",
 	"rapid_periwinkle_canyon": "所有通知都将被永久删除。此操作无法撤销。",
 	"golden_khaki_seal": "退出登录失败，再试一次",
-	"silent_sapphire_salmon": "关闭"
+	"silent_sapphire_salmon": "关闭",
+	"fluffy_periwinkle_dolphin": "主题",
+	"quiet_jade_dolphin": "选择 Bingy 在这台设备上的外观。",
+	"bright_coral_heron": "语言",
+	"jolly_aqua_whale": "用于界面以及电影和剧集信息。",
+	"modest_khaki_fox": "地区",
+	"shiny_umber_nectar": "决定上映日期、观看平台和日期格式。"
 }
