@@ -1,11 +1,15 @@
 import type { Context } from "hono";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 
-const serveData = <T>(c: Context, data: T) => {
+const serveData = <T>(c: Context, data: T): Response => {
 	return c.json({ data });
 };
 
-const serve = <T>(c: Context, data: T, status: ContentfulStatusCode) => {
+const serve = <T>(
+	c: Context,
+	data: T,
+	status: ContentfulStatusCode,
+): Response => {
 	return c.json({ data }, status);
 };
 
@@ -13,7 +17,11 @@ const serveNoContent = (c: Context) => {
 	return c.body(null, 204);
 };
 
-const serveCreated = <T>(c: Context, data: T, status: ContentfulStatusCode) => {
+const serveCreated = <T>(
+	c: Context,
+	data: T,
+	status: ContentfulStatusCode,
+): Response => {
 	return c.json({ data }, status);
 };
 
