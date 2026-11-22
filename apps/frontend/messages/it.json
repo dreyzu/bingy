@@ -1084,12 +1084,10 @@
 	"jolly_khaki_bamboo": "Richieste accettate",
 	"bright_navy_otter": "Quando qualcuno accetta la tua richiesta di follow.",
 	"stellar_sienna_moose": "Impossibile aggiornare le impostazioni delle notifiche. Riprova.",
-	"lucky_sepia_blossom": "Elimina notifica",
 	"frosty_amber_seal": "Cancella tutto",
 	"bright_hazel_nectar": "Cancellare tutte le notifiche?",
 	"dusky_wine_biscuit": "Annulla",
 	"balmy_topaz_coral": "Cancella",
-	"humble_cerise_canyon": "Impossibile eliminare la notifica. Riprova.",
 	"eager_white_crystal": "Impossibile cancellare le notifiche. Riprova.",
 	"icy_coral_moose": "{first}, {second} e altre {count} persone hanno iniziato a seguirti",
 	"hardy_azure_tiger": "{first}, {second} e altre {count} persone hanno accettato la tua richiesta di follow",
@@ -1105,5 +1103,10 @@
 	"jolly_aqua_whale": "Usata per l’interfaccia e per le informazioni su film e serie.",
 	"modest_khaki_fox": "Regione",
 	"shiny_umber_nectar": "Imposta le date di uscita, dove guardare e il formato delle date.",
-	"daring_lilac_harbor": "Valuta, recensisci e altro"
+	"daring_lilac_harbor": "Valuta, recensisci e altro",
+	"breezy_sapphire_pine": "Segui anche tu {name}",
+	"bold_plum_blossom": "Segui {name}",
+	"daring_saffron_banjo": "Annulla la tua richiesta di seguire {name}",
+	"merry_peach_pine": "Smetti di seguire {name}",
+	"dreamy_gray_tiger": "Accetta la richiesta di {name}"
 }

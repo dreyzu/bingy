@@ -14,7 +14,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { useMediaQuery } from "@/integrations/media-query";
+import { useIsMobile } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
 
 type TrackedShowsToggleGroupProps = {
@@ -33,7 +33,7 @@ export function TrackedShowsToggleGroup({
 	value,
 	onValueChange,
 }: TrackedShowsToggleGroupProps) {
-	const isMobile = useMediaQuery("(pointer: coarse)");
+	const isMobile = useIsMobile();
 
 	const options: {
 		value: TrackedShowFilter;

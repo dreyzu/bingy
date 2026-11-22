@@ -1,9 +1,4 @@
-import {
-	IconCheck,
-	IconChevronDown,
-	IconTrash,
-	IconX,
-} from "@tabler/icons-react";
+import { IconCheck, IconChevronDown, IconX } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import type {
@@ -37,7 +32,6 @@ import {
 	useAcceptFollowRequest,
 	useDeclineFollowRequest,
 } from "@/hooks/useFollows";
-import { useDeleteNotification } from "@/hooks/useNotifications";
 import { m } from "@/paraglide/messages";
 import { formatDistanceToNow } from "@/utils/format-date";
 
@@ -78,7 +72,13 @@ function ActorAvatar({
 	);
 }
 
-function FollowRequestActions({ actor }: { actor: NotificationActor }) {
+function FollowRequestActions({
+	actor,
+	compact,
+}: {
+	actor: NotificationActor;
+	compact: boolean;
+}) {
 	const accept = useAcceptFollowRequest();
 	const decline = useDeclineFollowRequest();
 	const pending = accept.isPending || decline.isPending;
@@ -86,12 +86,15 @@ function FollowRequestActions({ actor }: { actor: NotificationActor }) {
 	return (
 		<>
 			<Button
-				size="sm"
+				size={compact ? "icon-sm" : "sm"}
 				disabled={pending}
 				onClick={() => accept.mutate(actor.name)}
+				aria-label={
+					compact ? m.dreamy_gray_tiger({ name: actor.displayName }) : undefined
+				}
 			>
 				<IconCheck className="h-4 w-4" />
-				{m.lively_khaki_rabbit()}
+				{compact ? null : m.lively_khaki_rabbit()}
 			</Button>
 			<Button
 				variant="ghost"
@@ -107,7 +110,13 @@ function FollowRequestActions({ actor }: { actor: NotificationActor }) {
 }
 
 /** "Follow back" until the viewer follows this new follower. */
-function FollowBackButton({ actor }: { actor: NotificationActor }) {
+function FollowBackButton({
+	actor,
+	compact,
+}: {
+	actor: NotificationActor;
+	compact: boolean;
+}) {
 	if (actor.followStatus === "accepted") return null;
 
 	return (
@@ -117,6 +126,7 @@ function FollowBackButton({ actor }: { actor: NotificationActor }) {
 			isPrivate={actor.isPrivate}
 			followStatus={actor.followStatus}
 			followsYou={actor.followsYou}
+			iconOnly={compact}
 		/>
 	);
 }
@@ -124,27 +134,33 @@ function FollowBackButton({ actor }: { actor: NotificationActor }) {
 function NotificationActions({
 	type,
 	actor,
+	compact,
 }: {
 	type: NotificationType;
 	actor: NotificationActor;
+	compact: boolean;
 }) {
-	if (type === "follow_request") return <FollowRequestActions actor={actor} />;
-	if (type === "new_follower") return <FollowBackButton actor={actor} />;
+	if (type === "follow_request")
+		return <FollowRequestActions actor={actor} compact={compact} />;
+	if (type === "new_follower")
+		return <FollowBackButton actor={actor} compact={compact} />;
 	return null;
 }
 
 interface NotificationItemProps {
 	notification: UserNotification;
 	localeRegion: string;
+	/** Icon-only actions, for narrow spaces like the popover. */
+	compact?: boolean;
 	onNavigate?: () => void;
 }
 
 export function NotificationItem({
 	notification,
 	localeRegion,
+	compact = false,
 	onNavigate,
 }: NotificationItemProps) {
-	const deleteNotification = useDeleteNotification();
 	const { actors, type } = notification;
 	const [first, second] = actors;
 	if (!first) return null;
@@ -187,19 +203,6 @@ export function NotificationItem({
 		</>
 	);
 
-	const deleteButton = (
-		// Only revealed on hover where hovering exists, always shown on touch.
-		<Button
-			variant="ghost"
-			size="icon-sm"
-			onClick={() => deleteNotification.mutate(notification)}
-			aria-label={m.lucky_sepia_blossom()}
-			className="text-muted-foreground focus-visible:opacity-100 group-hover/item:opacity-100 [@media(hover:hover)]:opacity-0"
-		>
-			<IconTrash />
-		</Button>
-	);
-
 	if (!isGroup) {
 		return (
 			<Item variant="outline" size="sm" className="hover:bg-muted/50">
@@ -211,9 +214,8 @@ export function NotificationItem({
 				>
 					{body}
 				</Link>
-				<ItemActions className="gap-1">
-					<NotificationActions type={type} actor={first} />
-					{deleteButton}
+				<ItemActions className="gap-1 empty:hidden">
+					<NotificationActions type={type} actor={first} compact={compact} />
 				</ItemActions>
 			</Item>
 		);
@@ -229,12 +231,14 @@ export function NotificationItem({
 			>
 				<CollapsibleTrigger className="flex min-w-0 flex-1 cursor-pointer items-center gap-2.5 text-left">
 					{body}
-					<IconChevronDown
-						aria-hidden="true"
-						className="size-4 shrink-0 text-muted-foreground transition-transform in-data-panel-open:rotate-180"
-					/>
+					{/* Sized like an icon-sm button so it lines up with other items' actions. */}
+					<span className="flex size-7 shrink-0 items-center justify-center">
+						<IconChevronDown
+							aria-hidden="true"
+							className="size-4 text-muted-foreground transition-transform in-data-panel-open:rotate-180"
+						/>
+					</span>
 				</CollapsibleTrigger>
-				<ItemActions className="gap-1">{deleteButton}</ItemActions>
 				<CollapsibleContent className="ml-4 basis-full border-l pl-2">
 					{actors.map((actor) => (
 						<UserCard
@@ -243,7 +247,7 @@ export function NotificationItem({
 							onNavigate={onNavigate}
 							actions={
 								type === "new_follower" ? (
-									<FollowBackButton actor={actor} />
+									<FollowBackButton actor={actor} compact={compact} />
 								) : null
 							}
 						/>

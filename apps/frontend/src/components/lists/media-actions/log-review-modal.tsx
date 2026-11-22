@@ -27,7 +27,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { useRateMovie, useRateTvShow } from "@/hooks/useRating";
 import { useTv } from "@/hooks/useTv";
-import { useMediaQuery } from "@/integrations/media-query";
+import { useIsMobile } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
 import { getTvShowProgress } from "@/utils/season-helper";
 
@@ -91,7 +91,7 @@ export function LogReviewModal({
 	existingData,
 }: LogReviewModalProps) {
 	// Same `lg` breakpoint as the media actions, so both are drawers together.
-	const isDesktop = useMediaQuery("(min-width: 64rem)");
+	const isDesktop = !useIsMobile();
 	const isTvShow = !!tvShow;
 	const tmdbId = isTvShow ? tvShow.id : (movie?.id ?? 0);
 	const rating = existingData?.rating ?? 0;

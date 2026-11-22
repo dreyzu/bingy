@@ -18,7 +18,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useMediaQuery } from "@/integrations/media-query";
+import { useIsMobile } from "@/integrations/media-query";
 import { localeAtom, setLocaleAtom } from "@/lib/atoms/locale";
 import { regionAtom, SUPPORTED_REGIONS } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
@@ -80,7 +80,7 @@ export const LocaleRegionDropdown = () => {
 	const changeLocale = useSetAtom(setLocaleAtom);
 	const changeRegion = useSetAtom(regionAtom);
 	const [open, setOpen] = useState(false);
-	const isMobile = useMediaQuery("(pointer: coarse)");
+	const isMobile = useIsMobile();
 
 	if (isMobile) {
 		return (

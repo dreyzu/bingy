@@ -1084,12 +1084,10 @@
 	"jolly_khaki_bamboo": "Angenommene Anfragen",
 	"bright_navy_otter": "Wenn jemand deine Folgeanfrage annimmt.",
 	"stellar_sienna_moose": "Deine Benachrichtigungseinstellungen konnten nicht aktualisiert werden. Versuche es erneut.",
-	"lucky_sepia_blossom": "Benachrichtigung löschen",
 	"frosty_amber_seal": "Alle löschen",
 	"bright_hazel_nectar": "Alle Benachrichtigungen löschen?",
 	"dusky_wine_biscuit": "Abbrechen",
 	"balmy_topaz_coral": "Löschen",
-	"humble_cerise_canyon": "Die Benachrichtigung konnte nicht gelöscht werden. Versuche es erneut.",
 	"eager_white_crystal": "Deine Benachrichtigungen konnten nicht gelöscht werden. Versuche es erneut.",
 	"icy_coral_moose": "{first}, {second} und {count} weitere folgen dir jetzt",
 	"hardy_azure_tiger": "{first}, {second} und {count} weitere haben deine Folgeanfrage angenommen",
@@ -1105,5 +1103,10 @@
 	"jolly_aqua_whale": "Gilt für die Oberfläche und für Infos zu Filmen und Serien.",
 	"modest_khaki_fox": "Region",
 	"shiny_umber_nectar": "Bestimmt Erscheinungstermine, Streaminganbieter und Datumsformat.",
-	"daring_lilac_harbor": "Bewerten, rezensieren und mehr"
+	"daring_lilac_harbor": "Bewerten, rezensieren und mehr",
+	"breezy_sapphire_pine": "{name} zurückfolgen",
+	"bold_plum_blossom": "{name} folgen",
+	"daring_saffron_banjo": "Deine Anfrage an {name} zurückziehen",
+	"merry_peach_pine": "{name} entfolgen",
+	"dreamy_gray_tiger": "Anfrage von {name} annehmen"
 }

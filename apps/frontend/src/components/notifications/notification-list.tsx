@@ -87,6 +87,8 @@ interface NotificationListProps {
 	title: ReactNode;
 	/** Scroll inside the list (popover) instead of with the page. */
 	scrollable?: boolean;
+	/** Icon-only item actions, for narrow spaces like the popover. */
+	compact?: boolean;
 	onNavigate?: () => void;
 }
 
@@ -97,6 +99,7 @@ interface NotificationListProps {
 export function NotificationList({
 	title,
 	scrollable = false,
+	compact = false,
 	onNavigate,
 }: NotificationListProps) {
 	const localeRegion = useAtomValue(localeRegionAtom);
@@ -160,7 +163,7 @@ export function NotificationList({
 			<div
 				className={cn(
 					"mx-auto w-full max-w-2xl",
-					scrollable && "no-scrollbar max-h-[60vh] overflow-y-auto",
+					scrollable && "no-scrollbar max-h-[70vh] overflow-y-auto",
 				)}
 			>
 				<ItemGroup className="has-data-[size=sm]:gap-2">
@@ -169,6 +172,7 @@ export function NotificationList({
 							key={notification.id}
 							notification={notification}
 							localeRegion={localeRegion}
+							compact={compact}
 							onNavigate={onNavigate}
 						/>
 					))}

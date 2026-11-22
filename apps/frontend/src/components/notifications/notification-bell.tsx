@@ -63,10 +63,11 @@ export function NotificationBell({ className }: { className?: string }) {
 			<PopoverContent
 				align="end"
 				sideOffset={8}
-				className="w-[min(24rem,calc(100vw-2rem))] gap-1"
+				className="w-[min(28rem,calc(100vw-2rem))] gap-1"
 			>
 				<NotificationList
 					scrollable
+					compact
 					title={
 						<PopoverTitle className="text-base">
 							{m.fierce_ivory_hazel()}

@@ -1084,12 +1084,10 @@
 	"jolly_khaki_bamboo": "Pedidos aceites",
 	"bright_navy_otter": "Quando alguém aceita o teu pedido para seguir.",
 	"stellar_sienna_moose": "Não foi possível atualizar as tuas definições de notificações. Tenta novamente.",
-	"lucky_sepia_blossom": "Eliminar notificação",
 	"frosty_amber_seal": "Limpar tudo",
 	"bright_hazel_nectar": "Limpar todas as notificações?",
 	"dusky_wine_biscuit": "Cancelar",
 	"balmy_topaz_coral": "Limpar",
-	"humble_cerise_canyon": "Não foi possível eliminar a notificação. Tenta novamente.",
 	"eager_white_crystal": "Não foi possível limpar as tuas notificações. Tenta novamente.",
 	"icy_coral_moose": "{first}, {second} e outras {count} pessoas começaram a seguir-te",
 	"hardy_azure_tiger": "{first}, {second} e outras {count} pessoas aceitaram o teu pedido para seguir",
@@ -1105,5 +1103,10 @@
 	"jolly_aqua_whale": "Usado na interface e nas informações de filmes e séries.",
 	"modest_khaki_fox": "Região",
 	"shiny_umber_nectar": "Define as datas de estreia, onde ver e o formato da data.",
-	"daring_lilac_harbor": "Avaliar, criticar e mais"
+	"daring_lilac_harbor": "Avaliar, criticar e mais",
+	"breezy_sapphire_pine": "Seguir {name} de volta",
+	"bold_plum_blossom": "Seguir {name}",
+	"daring_saffron_banjo": "Cancelar o teu pedido para seguir {name}",
+	"merry_peach_pine": "Deixar de seguir {name}",
+	"dreamy_gray_tiger": "Aceitar o pedido de {name}"
 }

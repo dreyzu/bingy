@@ -6,7 +6,7 @@ import {
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { useMediaQuery } from "@/integrations/media-query";
+import { useIsMobile } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
 import { getTruncatedContent } from "@/utils/truncate-content";
 
@@ -16,7 +16,7 @@ interface ListDescriptionProps {
 
 export const ListDescription = ({ description }: ListDescriptionProps) => {
 	const [isExpanded, setIsExpanded] = useState(false);
-	const isMobile = useMediaQuery("(pointer: coarse)");
+	const isMobile = useIsMobile();
 	const searchWindow = isMobile ? 120 : 300;
 
 	if (!description) {

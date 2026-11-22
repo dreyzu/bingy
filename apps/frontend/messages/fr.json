@@ -1084,12 +1084,10 @@
 	"jolly_khaki_bamboo": "Demandes acceptées",
 	"bright_navy_otter": "Quand quelqu’un accepte ta demande d’abonnement.",
 	"stellar_sienna_moose": "Impossible de mettre à jour tes paramètres de notification. Réessaie.",
-	"lucky_sepia_blossom": "Supprimer la notification",
 	"frosty_amber_seal": "Tout effacer",
 	"bright_hazel_nectar": "Effacer toutes les notifications ?",
 	"dusky_wine_biscuit": "Annuler",
 	"balmy_topaz_coral": "Effacer",
-	"humble_cerise_canyon": "Impossible de supprimer la notification. Réessaie.",
 	"eager_white_crystal": "Impossible d’effacer tes notifications. Réessaie.",
 	"icy_coral_moose": "{first}, {second} et {count} autres personnes te suivent désormais",
 	"hardy_azure_tiger": "{first}, {second} et {count} autres personnes ont accepté ta demande d’abonnement",
@@ -1105,5 +1103,10 @@
 	"jolly_aqua_whale": "Utilisée pour l’interface et les informations des films et séries.",
 	"modest_khaki_fox": "Région",
 	"shiny_umber_nectar": "Définit les dates de sortie, les plateformes de streaming et le format des dates.",
-	"daring_lilac_harbor": "Noter, donner ton avis et plus"
+	"daring_lilac_harbor": "Noter, donner ton avis et plus",
+	"breezy_sapphire_pine": "Suivre {name} en retour",
+	"bold_plum_blossom": "Suivre {name}",
+	"daring_saffron_banjo": "Annuler ta demande pour suivre {name}",
+	"merry_peach_pine": "Ne plus suivre {name}",
+	"dreamy_gray_tiger": "Accepter la demande de {name}"
 }

@@ -24,7 +24,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useSession } from "@/hooks/useSession";
 import { useUpdateUserProfile } from "@/hooks/useUserProfile";
-import { useMediaQuery } from "@/integrations/media-query";
+import { useIsMobile } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
 import { profileSchema } from "@/schemas/edit-profile-schema";
 
@@ -47,7 +47,7 @@ export function EditProfileDialog({
 }: EditProfileDialogProps) {
 	const session = useSession();
 	const id = useId();
-	const isMobile = useMediaQuery("(pointer: coarse)");
+	const isMobile = useIsMobile();
 	const updateProfile = useUpdateUserProfile();
 
 	const form = useForm<ProfileFormValues>({

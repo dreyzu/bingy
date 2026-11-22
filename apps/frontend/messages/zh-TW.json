@@ -1084,12 +1084,10 @@
 	"jolly_khaki_bamboo": "已接受的請求",
 	"bright_navy_otter": "有人接受你的追蹤請求時通知你。",
 	"stellar_sienna_moose": "無法更新通知設定，請再試一次。",
-	"lucky_sepia_blossom": "刪除通知",
 	"frosty_amber_seal": "全部清除",
 	"bright_hazel_nectar": "清除所有通知？",
 	"dusky_wine_biscuit": "取消",
 	"balmy_topaz_coral": "清除",
-	"humble_cerise_canyon": "無法刪除通知，請再試一次。",
 	"eager_white_crystal": "無法清除通知，請再試一次。",
 	"icy_coral_moose": "{first}、{second} 和另外 {count} 人開始追蹤你",
 	"hardy_azure_tiger": "{first}、{second} 和另外 {count} 人接受了你的追蹤請求",
@@ -1105,5 +1103,10 @@
 	"jolly_aqua_whale": "用於介面以及電影和影集資訊。",
 	"modest_khaki_fox": "地區",
 	"shiny_umber_nectar": "決定上映日期、觀看平台和日期格式。",
-	"daring_lilac_harbor": "評分、記錄、評論等"
+	"daring_lilac_harbor": "評分、記錄、評論等",
+	"breezy_sapphire_pine": "回追蹤 {name}",
+	"bold_plum_blossom": "追蹤 {name}",
+	"daring_saffron_banjo": "收回對 {name} 的追蹤要求",
+	"merry_peach_pine": "取消追蹤 {name}",
+	"dreamy_gray_tiger": "接受 {name} 的請求"
 }

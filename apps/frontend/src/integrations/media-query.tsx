@@ -18,3 +18,12 @@ export function useMediaQuery(query: string): boolean {
 		() => false,
 	);
 }
+
+/**
+ * Below Tailwind's `lg` breakpoint, where the mobile navigation shows: phones,
+ * tablets, and narrow desktop windows. For layout; use `(pointer: coarse)`
+ * only for what depends on touch itself, like hover or native pickers.
+ */
+export function useIsMobile(): boolean {
+	return useMediaQuery("(width < 64rem)");
+}
