@@ -35,6 +35,10 @@ interface MediaDetailsLayoutProps {
  * also grow when the content below is short, and the gap above the content
  * would change when switching tabs.
  *
+ * The right column clips its overflow from `lg` up, which would also cut off
+ * the 1px ring drawn outside the actions card at the column's right edge, so
+ * the actions cell has a 1px padding to keep the ring inside it.
+ *
  * Without actions (signed out, or collections), the overview would span the
  * whole right column from `lg` up, so it is capped at three quarters of it to
  * keep lines readable.
@@ -85,7 +89,7 @@ export function MediaDetailsLayout({
 							</div>
 						) : null}
 						{actions ? (
-							<div className="order-5 col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:self-start lg:mt-3">
+							<div className="order-5 col-span-2 lg:col-span-1 lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:self-start lg:mt-3 lg:p-px">
 								{actions}
 							</div>
 						) : null}
