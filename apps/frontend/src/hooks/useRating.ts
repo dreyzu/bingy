@@ -119,6 +119,9 @@ export function useRateTvShow(username: string) {
 			queryClient.invalidateQueries({
 				queryKey: ["tracked-shows", username],
 			});
+			queryClient.invalidateQueries({
+				queryKey: ["progress", username, "tv", variables.tmdbId],
+			});
 
 			if (res.rating) {
 				const toastId = toast.add({
