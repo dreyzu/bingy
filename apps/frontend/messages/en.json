@@ -1105,5 +1105,9 @@
 	"jolly_aqua_whale": "Used for the interface and for movie and show details.",
 	"modest_khaki_fox": "Region",
 	"shiny_umber_nectar": "Sets release dates, where to watch and date formats.",
-	"daring_lilac_harbor": "Rate, log, review and more"
+	"daring_lilac_harbor": "Rate, log, review and more",
+	"breezy_sapphire_pine": "Follow back {name}",
+	"bold_plum_blossom": "Follow {name}",
+	"daring_saffron_banjo": "Cancel your request to follow {name}",
+	"merry_peach_pine": "Unfollow {name}"
 }

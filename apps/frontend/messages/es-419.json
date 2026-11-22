@@ -1105,5 +1105,9 @@
 	"jolly_aqua_whale": "Se usa en la interfaz y en la información de películas y series.",
 	"modest_khaki_fox": "Región",
 	"shiny_umber_nectar": "Define las fechas de estreno, dónde ver y el formato de fecha.",
-	"daring_lilac_harbor": "Calificar, reseñar y más"
+	"daring_lilac_harbor": "Calificar, reseñar y más",
+	"breezy_sapphire_pine": "Seguir también a {name}",
+	"bold_plum_blossom": "Seguir a {name}",
+	"daring_saffron_banjo": "Cancelar tu solicitud para seguir a {name}",
+	"merry_peach_pine": "Dejar de seguir a {name}"
 }

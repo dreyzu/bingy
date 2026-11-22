@@ -1105,5 +1105,9 @@
 	"jolly_aqua_whale": "Utilisée pour l’interface et les informations des films et séries.",
 	"modest_khaki_fox": "Région",
 	"shiny_umber_nectar": "Définit les dates de sortie, les plateformes de streaming et le format des dates.",
-	"daring_lilac_harbor": "Noter, donner ton avis et plus"
+	"daring_lilac_harbor": "Noter, donner ton avis et plus",
+	"breezy_sapphire_pine": "Suivre {name} en retour",
+	"bold_plum_blossom": "Suivre {name}",
+	"daring_saffron_banjo": "Annuler ta demande pour suivre {name}",
+	"merry_peach_pine": "Ne plus suivre {name}"
 }

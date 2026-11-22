@@ -1105,5 +1105,9 @@
 	"jolly_aqua_whale": "用于界面以及电影和剧集信息。",
 	"modest_khaki_fox": "地区",
 	"shiny_umber_nectar": "决定上映日期、观看平台和日期格式。",
-	"daring_lilac_harbor": "评分、记录、评价等"
+	"daring_lilac_harbor": "评分、记录、评价等",
+	"breezy_sapphire_pine": "回关 {name}",
+	"bold_plum_blossom": "关注 {name}",
+	"daring_saffron_banjo": "撤回对 {name} 的关注请求",
+	"merry_peach_pine": "取消关注 {name}"
 }

@@ -107,7 +107,13 @@ function FollowRequestActions({ actor }: { actor: NotificationActor }) {
 }
 
 /** "Follow back" until the viewer follows this new follower. */
-function FollowBackButton({ actor }: { actor: NotificationActor }) {
+function FollowBackButton({
+	actor,
+	compact,
+}: {
+	actor: NotificationActor;
+	compact: boolean;
+}) {
 	if (actor.followStatus === "accepted") return null;
 
 	return (
@@ -117,6 +123,7 @@ function FollowBackButton({ actor }: { actor: NotificationActor }) {
 			isPrivate={actor.isPrivate}
 			followStatus={actor.followStatus}
 			followsYou={actor.followsYou}
+			iconOnly={compact}
 		/>
 	);
 }
@@ -124,24 +131,30 @@ function FollowBackButton({ actor }: { actor: NotificationActor }) {
 function NotificationActions({
 	type,
 	actor,
+	compact,
 }: {
 	type: NotificationType;
 	actor: NotificationActor;
+	compact: boolean;
 }) {
 	if (type === "follow_request") return <FollowRequestActions actor={actor} />;
-	if (type === "new_follower") return <FollowBackButton actor={actor} />;
+	if (type === "new_follower")
+		return <FollowBackButton actor={actor} compact={compact} />;
 	return null;
 }
 
 interface NotificationItemProps {
 	notification: UserNotification;
 	localeRegion: string;
+	/** Icon-only actions, for narrow spaces like the popover. */
+	compact?: boolean;
 	onNavigate?: () => void;
 }
 
 export function NotificationItem({
 	notification,
 	localeRegion,
+	compact = false,
 	onNavigate,
 }: NotificationItemProps) {
 	const deleteNotification = useDeleteNotification();
@@ -187,14 +200,14 @@ export function NotificationItem({
 		</>
 	);
 
-	const deleteButton = (
-		// Only revealed on hover where hovering exists, always shown on touch.
+	// The popover has no room for it: deleting is done from the full page.
+	const deleteButton = compact ? null : (
 		<Button
 			variant="ghost"
 			size="icon-sm"
 			onClick={() => deleteNotification.mutate(notification)}
 			aria-label={m.lucky_sepia_blossom()}
-			className="text-muted-foreground focus-visible:opacity-100 group-hover/item:opacity-100 [@media(hover:hover)]:opacity-0"
+			className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive dark:hover:bg-destructive/20"
 		>
 			<IconTrash />
 		</Button>
@@ -211,8 +224,8 @@ export function NotificationItem({
 				>
 					{body}
 				</Link>
-				<ItemActions className="gap-1">
-					<NotificationActions type={type} actor={first} />
+				<ItemActions className="gap-1 empty:hidden">
+					<NotificationActions type={type} actor={first} compact={compact} />
 					{deleteButton}
 				</ItemActions>
 			</Item>
@@ -229,12 +242,17 @@ export function NotificationItem({
 			>
 				<CollapsibleTrigger className="flex min-w-0 flex-1 cursor-pointer items-center gap-2.5 text-left">
 					{body}
-					<IconChevronDown
-						aria-hidden="true"
-						className="size-4 shrink-0 text-muted-foreground transition-transform in-data-panel-open:rotate-180"
-					/>
+					{/* Sized like an icon-sm button so it lines up with other items' actions. */}
+					<span className="flex size-7 shrink-0 items-center justify-center">
+						<IconChevronDown
+							aria-hidden="true"
+							className="size-4 text-muted-foreground transition-transform in-data-panel-open:rotate-180"
+						/>
+					</span>
 				</CollapsibleTrigger>
-				<ItemActions className="gap-1">{deleteButton}</ItemActions>
+				{deleteButton ? (
+					<ItemActions className="gap-1">{deleteButton}</ItemActions>
+				) : null}
 				<CollapsibleContent className="ml-4 basis-full border-l pl-2">
 					{actors.map((actor) => (
 						<UserCard
@@ -243,7 +261,7 @@ export function NotificationItem({
 							onNavigate={onNavigate}
 							actions={
 								type === "new_follower" ? (
-									<FollowBackButton actor={actor} />
+									<FollowBackButton actor={actor} compact={compact} />
 								) : null
 							}
 						/>

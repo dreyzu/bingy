@@ -29,6 +29,8 @@ interface ProfileFollowButtonProps {
 	followStatus: FollowStatus | null;
 	/** Shows "Follow back" instead of "Follow". */
 	followsYou?: boolean;
+	/** Shows only the icon, for tight spaces. */
+	iconOnly?: boolean;
 }
 
 export function ProfileFollowButton({
@@ -37,6 +39,7 @@ export function ProfileFollowButton({
 	isPrivate,
 	followStatus,
 	followsYou = false,
+	iconOnly = false,
 }: ProfileFollowButtonProps) {
 	const session = useSession();
 	const navigate = useNavigate();
@@ -60,16 +63,38 @@ export function ProfileFollowButton({
 		setFollow(false);
 	};
 
+	const iconLabel =
+		followStatus === "accepted"
+			? m.merry_peach_pine({ name: displayName })
+			: followStatus === "pending"
+				? m.daring_saffron_banjo({ name: displayName })
+				: followsYou
+					? m.breezy_sapphire_pine({ name: displayName })
+					: m.bold_plum_blossom({ name: displayName });
+
 	return (
 		<>
 			<Button
 				variant={followStatus === null ? "default" : "secondary"}
-				size="sm"
+				size={iconOnly ? "icon-sm" : "sm"}
 				onClick={handleClick}
 				disabled={followMutation.isPending}
+				aria-label={iconOnly ? iconLabel : undefined}
 				className="group/follow shrink-0"
 			>
-				{followStatus === "accepted" ? (
+				{iconOnly ? (
+					followStatus === "accepted" ? (
+						<IconUserMinus />
+					) : followStatus === "pending" ? (
+						// Turns into a cross on hover so it reads as cancellable.
+						<span className="grid">
+							<IconClock className="col-start-1 row-start-1 group-hover/follow:invisible" />
+							<IconX className="invisible col-start-1 row-start-1 text-destructive group-hover/follow:visible" />
+						</span>
+					) : (
+						<IconUserPlus />
+					)
+				) : followStatus === "accepted" ? (
 					<>
 						<IconUserMinus className="h-4 w-4 mr-1" />
 						{m.witty_indigo_narwhal()}
