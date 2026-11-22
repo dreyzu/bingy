@@ -34,7 +34,7 @@ function DrawerBackdrop({
 		<DrawerPrimitive.Backdrop
 			data-slot="drawer-backdrop"
 			className={cn(
-				"fixed inset-0 z-[60] bg-black/20 backdrop-blur-sm transition-opacity duration-300 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
+				"fixed inset-0 z-50 bg-black/20 backdrop-blur-sm transition-opacity duration-300 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
 				className,
 			)}
 			{...props}
@@ -49,7 +49,7 @@ function DrawerViewport({
 	return (
 		<DrawerPrimitive.Viewport
 			data-slot="drawer-viewport"
-			className={cn("fixed inset-0 z-[70] flex items-stretch", className)}
+			className={cn("fixed inset-0 z-50 flex items-stretch", className)}
 			{...props}
 		/>
 	);
