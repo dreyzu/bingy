@@ -8,7 +8,7 @@ import { cn } from "cn";
 import { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Drawer, DrawerBody, DrawerContent } from "@/components/ui/drawer";
-import { useMediaQuery } from "@/integrations/media-query";
+import { useIsMobile } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
 import { getTmdbImageUrl, type ImageSize } from "@/utils/utils";
 
@@ -66,7 +66,7 @@ export function PortraitImage({
 }: PortraitImageProps) {
 	const imageUrl = getTmdbImageUrl(imagePath, imageSize);
 	const fullImageUrl = getTmdbImageUrl(imagePath, "original");
-	const isMobile = useMediaQuery("(pointer: coarse)");
+	const isMobile = useIsMobile();
 	const [open, setOpen] = useState(false);
 
 	const containerClasses = cn(

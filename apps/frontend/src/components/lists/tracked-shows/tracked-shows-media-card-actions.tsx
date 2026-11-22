@@ -47,7 +47,7 @@ import {
 	useRewatchTvShow,
 	useUpdateTvProgressStatus,
 } from "@/hooks/useTrackedShows";
-import { useMediaQuery } from "@/integrations/media-query";
+import { useIsMobile } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
 
 interface TrackedShowsMediaCardActionsProps {
@@ -64,7 +64,7 @@ export const TrackedShowsMediaCardActions = ({
 }: TrackedShowsMediaCardActionsProps) => {
 	const [open, setOpen] = useState(false);
 	const [confirmRemoveOpen, setConfirmRemoveOpen] = useState(false);
-	const isMobile = useMediaQuery("(pointer: coarse)");
+	const isMobile = useIsMobile();
 	const markWatched = useMarkEpisodeWatched(username);
 	const updateStatus = useUpdateTvProgressStatus(username);
 	const removeProgress = useRemoveTvProgress(username);

@@ -27,7 +27,7 @@ import {
 import { useSession } from "@/hooks/useSession";
 import { useUserTvProgress } from "@/hooks/useTrackedShows";
 import { useTv } from "@/hooks/useTv";
-import { useMediaQuery } from "@/integrations/media-query";
+import { useIsMobile } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
 import { getTvShowProgress } from "@/utils/season-helper";
 import { getTmdbImageUrl } from "@/utils/utils";
@@ -116,7 +116,7 @@ export const MediaActionMenu = ({
 	const session = useSession();
 	// Matches the `lg` breakpoint where the details layout moves the actions
 	// beside the header.
-	const isDesktop = useMediaQuery("(min-width: 64rem)");
+	const isDesktop = !useIsMobile();
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	const [showAddToListDialog, setShowAddToListDialog] = useState(false);

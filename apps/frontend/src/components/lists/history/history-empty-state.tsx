@@ -8,7 +8,7 @@ import {
 	EmptyHeader,
 	EmptyTitle,
 } from "@/components/ui/empty";
-import { useMediaQuery } from "@/integrations/media-query";
+import { useIsMobile } from "@/integrations/media-query";
 import { m } from "@/paraglide/messages";
 
 type MediaFilter = "all" | "movie" | "tv";
@@ -54,7 +54,7 @@ export function HistoryEmptyState({
 				}),
 			};
 
-	const isMobile = useMediaQuery("(pointer: coarse)");
+	const isMobile = useIsMobile();
 
 	return (
 		<Empty className="min-h-100 w-full">
