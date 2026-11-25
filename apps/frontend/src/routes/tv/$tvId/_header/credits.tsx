@@ -3,7 +3,7 @@ import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import { creditsSearchSchema } from "@/components/credits/crew-section";
 import { TvCreditsView } from "@/components/tv/tv-credits";
-import { useTvResources } from "@/hooks/useTv";
+import { useTv, useTvResources } from "@/hooks/useTv";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 
 export const Route = createFileRoute("/tv/$tvId/_header/credits")({
@@ -17,6 +17,12 @@ function TvCreditsPage() {
 	const localeRegion = useAtomValue(localeRegionAtom);
 	const region = useAtomValue(regionAtom);
 
+	// Same query as the header layout, so the request is shared.
+	const { data: tv } = useTv(Number(tvId), {
+		language: localeRegion,
+		region,
+	});
+
 	const {
 		data: credits,
 		isLoading,
@@ -29,6 +35,8 @@ function TvCreditsPage() {
 
 	return (
 		<TvCreditsView
+			tvId={Number(tvId)}
+			tvName={tv?.name}
 			credits={credits}
 			section={section}
 			isLoading={isLoading}

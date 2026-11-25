@@ -56,17 +56,17 @@ export function WatchProvidersSection({
 									className="w-10 h-10 shrink-0 rounded"
 								/>
 							)}
-							<div className="flex min-w-0 flex-col h-10 justify-center">
-								<span className="truncate text-sm leading-relaxed">
+							<div className="flex min-w-0 flex-col min-h-10 justify-center">
+								<span className="truncate text-sm leading-tight">
 									{m.candid_rose_crystal()}
 								</span>
-								<span className="text-base font-bold leading-relaxed md:hidden">
+								<span className="text-base font-bold leading-tight md:hidden">
 									{providerName.length > 12
 										? `${providerName.slice(0, 12)}...`
 										: providerName}
 								</span>
 								<span
-									className="truncate text-base font-bold leading-relaxed hidden md:inline"
+									className="truncate text-base font-bold leading-tight hidden md:inline"
 									title={providerName}
 								>
 									{providerName}

@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet, useParams } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
-import { TvShowLayout } from "@/components/tv/tv-show-layout";
+import { MediaHeaderLayout } from "@/components/medias/media-header-layout";
 import {
 	useTv,
 	useTvEpisodeResources,
@@ -58,8 +58,18 @@ function TvShowHeaderLayout() {
 		);
 
 	return (
-		<TvShowLayout
-			tv={tv}
+		<MediaHeaderLayout
+			media={
+				tv
+					? {
+							type: "tv",
+							id: tv.id,
+							title: tv.name,
+							posterPath: tv.poster_path,
+							releaseDate: tv.first_air_date,
+						}
+					: undefined
+			}
 			isLoading={isLoading}
 			watchProviders={hasSeason ? seasonProviders : showProviders}
 			region={region}
@@ -69,6 +79,6 @@ function TvShowHeaderLayout() {
 			isBackgroundLoading={isLoading || isEpisodeLoading}
 		>
 			<Outlet />
-		</TvShowLayout>
+		</MediaHeaderLayout>
 	);
 }
