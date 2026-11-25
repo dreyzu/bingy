@@ -509,6 +509,12 @@ export namespace Schemas {
 		crew: PersonFromCrew[];
 	}>;
 
+	/**
+	 * Movie credits as served by our API, with the movie's title so the credits
+	 * page can name the movie without loading its details.
+	 */
+	export type MovieCreditsWithTitle = Pretty<MovieCredits & { title: string }>;
+
 	export type MovieExternalIds = Pretty<{
 		id: number;
 		imdb_id: string | null;

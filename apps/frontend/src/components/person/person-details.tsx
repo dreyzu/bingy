@@ -7,7 +7,6 @@ import { PersonBiography } from "@/components/person/person-biography";
 import { PersonTimeline } from "@/components/person/person-timeline";
 import { PortraitImage } from "@/components/portrait-image";
 import { SocialLinks } from "@/components/social-links";
-import { BackButton } from "@/components/ui/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { localeRegionAtom } from "@/lib/atoms/region";
@@ -51,8 +50,6 @@ export const PersonDetailsView = ({
 
 	return (
 		<div className="w-full">
-			<BackButton />
-
 			<div className="grid lg:grid-cols-[auto_1fr] gap-2 lg:gap-4 pt-2 justify-items-center">
 				<div className="flex flex-col gap-2 items-center lg:items-start max-w-62.5 md:max-w-60 2xl:max-w-75">
 					<PortraitImage

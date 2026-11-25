@@ -1,78 +1,61 @@
 import { Link } from "@tanstack/react-router";
 import type { Schemas } from "shared";
-import { PortraitImage } from "@/components/portrait-image";
-import { BackButton } from "@/components/ui/back-button";
-import { Card, CardContent } from "@/components/ui/card";
+import { CREATOR_LINK_CLASSES } from "@/components/medias/media-creators";
 import { m } from "@/paraglide/messages";
 import { CreditEpisodeCard } from "./credit-episode-card";
 
+// Private-use character, so it never collides with translated text.
+const NAME_PLACEHOLDER = String.fromCodePoint(0xe000);
+
 interface CreditEpisodesListProps {
 	tvId: number;
-	personName: string;
+	person: { id: number; name: string };
 	character: string;
 	job?: string;
-	showName: string;
-	posterPath: string | null;
 	guestEpisodeIds: Set<number>;
 	episodes: Omit<Schemas.Episode, "media_type">[];
 }
 
 export const CreditEpisodesList = ({
 	tvId,
-	personName,
+	person,
 	character,
 	job,
-	showName,
-	posterPath,
 	guestEpisodeIds,
 	episodes,
 }: CreditEpisodesListProps) => {
 	const role = character || job || m.balmy_jade_forest();
 
+	// The name is a link, so the message is rendered around it instead of
+	// receiving it as plain text. This keeps the translated word order.
+	const [before, after = ""] = m
+		.humble_khaki_saddle({ name: NAME_PLACEHOLDER, role })
+		.split(NAME_PLACEHOLDER);
+
 	return (
-		<div className="w-full">
-			<BackButton />
+		<div className="w-full flex flex-col gap-4">
+			<h1 className="text-xl text-muted-foreground">
+				{before}
+				<Link
+					to="/person/$personId"
+					params={{ personId: person.id.toString() }}
+					className={CREATOR_LINK_CLASSES}
+				>
+					{person.name}
+				</Link>
+				{after}
+			</h1>
 
-			<div className="grid lg:grid-cols-[auto_1fr] gap-2 lg:gap-4 pt-2 justify-items-center">
-				<div className="flex flex-col gap-2 items-center lg:items-start max-w-62.5 md:max-w-60 2xl:max-w-75">
-					<PortraitImage
-						alt={showName}
-						imagePath={posterPath}
-						imageSize="w500"
-						category="tv"
-					/>
-				</div>
-
-				<div className="w-full flex flex-col gap-4 overflow-hidden px-0.5">
-					<Card className="shadow-none bg-transparent pt-0 lg:p-0 border-none ring-0 rounded-none">
-						<CardContent>
-							<div className="flex flex-col gap-2">
-								<Link to="/tv/$tvId" params={{ tvId: tvId.toString() }}>
-									<h1 className="text-4xl font-bold leading-relaxed">
-										{showName}
-									</h1>
-								</Link>
-
-								<p className="text-xl text-muted-foreground mt-2">
-									<span className="text-foreground">{personName}</span>{" "}
-									{m.happy_hazel_compass({ role: role })}
-								</p>
-							</div>
-						</CardContent>
-					</Card>
-
-					{episodes.map((episode) => (
-						<CreditEpisodeCard
-							key={episode.id}
-							episode={episode}
-							tvId={tvId}
-							isGuestAppearance={
-								character ? guestEpisodeIds.has(episode.id) : false
-							}
-						/>
-					))}
-				</div>
-			</div>
+			{episodes.map((episode) => (
+				<CreditEpisodeCard
+					key={episode.id}
+					episode={episode}
+					tvId={tvId}
+					isGuestAppearance={
+						character ? guestEpisodeIds.has(episode.id) : false
+					}
+				/>
+			))}
 		</div>
 	);
 };

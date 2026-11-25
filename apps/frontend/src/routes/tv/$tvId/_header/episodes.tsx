@@ -7,7 +7,7 @@ import { CreditEpisodesContainer } from "@/components/tv/episodes/credit-episode
 import { useCredit } from "@/hooks/useCredit";
 import { localeRegionAtom } from "@/lib/atoms/region";
 
-export const Route = createFileRoute("/tv/$tvId_/episodes")({
+export const Route = createFileRoute("/tv/$tvId/_header/episodes")({
 	component: CreditEpisodesPage,
 	validateSearch: z.object({
 		credit_id: z.string().optional(),

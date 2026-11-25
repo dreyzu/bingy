@@ -124,7 +124,6 @@
 	"quick_copper_planet": "수익:",
 	"nifty_aqua_clover": "간략히 보기",
 	"hazy_maroon_galaxy": "더 보기",
-	"happy_slate_whale": "줄거리가 없어요",
 	"winsome_sage_nectar": "찾으시는 페이지가 존재하지 않거나 이동되었어요",
 	"hasty_periwinkle_lynx": "홈으로 가기",
 	"quiet_turquoise_cedar": "검색...",
@@ -162,12 +161,10 @@
 	"gleeful_amber_lynx": "{title}을(를) 불러오지 못했어요",
 	"lush_mint_turtle": "컬렉션의 영화 ({number})",
 	"quiet_orange_anchor": "제작진",
-	"warm_fuchsia_planet": "제작진으로 이동",
+	"warm_fuchsia_planet": "제작진",
+	"lush_purple_coral": "맨 위로",
 	"elegant_gold_violin": "전체 출연진 및 제작진 보기",
 	"alert_sepia_cactus": "{primaryRole} (외 {numberOfOtherRoles}개 역할)",
-	"eager_lilac_willow": "{primaryRole}",
-	"fair_orange_maple": "에피소드",
-	"mighty_coral_kettle": "에피소드",
 	"witty_sepia_spruce": "에피소드",
 	"rapid_lemon_rabbit": "에피소드",
 	"shiny_lilac_meadow": "약력이 없어요",
@@ -276,7 +273,7 @@
 	"eager_lavender_rocket": "이 출연 정보는 TV 프로그램이 아니에요",
 	"velvet_sapphire_nectar": "에피소드를 찾을 수 없어요",
 	"eager_indigo_marmot": "이 출연 정보에 대한 에피소드 정보가 없어요",
-	"happy_hazel_compass": "{role} 역",
+	"humble_khaki_saddle": "{name} ({role})",
 	"balmy_jade_forest": "알 수 없음",
 	"jaunty_sage_beacon": "이런!",
 	"zesty_fuchsia_dolphin": "현재 출연 정보를 이용할 수 없어요",
@@ -284,9 +281,10 @@
 	"elegant_lavender_mesa": "에피소드를 찾을 수 없어요",
 	"joyful_amber_comet": "찾으시는 에피소드를 찾을 수 없어요",
 	"bubbly_fuchsia_puma": "{episodeNumber}화",
-	"steady_scarlet_meerkat": "줄거리",
-	"eager_khaki_dune": "상영 시간",
-	"lean_maroon_coral": "방영일",
+	"vibrant_pink_violin": "시즌 {seasonNumber}",
+	"lively_coral_bamboo": "연출: {names}",
+	"fierce_olive_tiger": "각본: {names}",
+	"grand_amber_mesa": "연출: {directors}, 각본: {writers}",
 	"quick_beige_meadow": "제작진",
 	"golden_cerise_boulder": "게스트 출연진",
 	"nifty_cerise_panda": [
@@ -294,8 +292,8 @@
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "에피소드",
-				"countPlural=other": "에피소드"
+				"countPlural=one": "에피소드 {count}개",
+				"countPlural=other": "에피소드 {count}개"
 			}
 		}
 	],
@@ -309,15 +307,13 @@
 	"steady_ruby_mesa": "시즌을 찾을 수 없어요",
 	"quiet_sepia_spruce": "찾으시는 시즌을 찾을 수 없어요",
 	"brave_khaki_island": "시즌 {seasonNumber}",
-	"velvet_beige_blossom": "평점",
-	"cozy_lemon_forest": "방영일",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "에피소드",
-				"countPlural=other": "에피소드"
+				"countPlural=one": "에피소드 {count}개",
+				"countPlural=other": "에피소드 {count}개"
 			}
 		}
 	],
@@ -333,6 +329,18 @@
 	],
 	"candid_rose_crystal": "지금 스트리밍 중",
 	"elegant_lemon_planet": "시즌",
+	"zesty_cerise_prairie": "전체 시즌",
+	"smart_bronze_anchor": "이전 시즌",
+	"brisk_tan_clover": "다음 시즌",
+	"gleeful_pink_beaver": "{episodeNumber}화",
+	"polite_navy_planet": "시즌 {seasonNumber} · {episodeNumber}화",
+	"brave_maroon_bagel": "시즌 {seasonNumber}",
+	"breezy_sienna_iguana": "전체 회차",
+	"rapid_yellow_kettle": "이전 회차",
+	"hardy_orange_daisy": "다음 회차",
+	"keen_sienna_spruce": "포스터",
+	"bubbly_onyx_heron": "첫 방송",
+	"noble_indigo_cherry": "마지막 방송",
 	"vivid_rust_sunflower": "TV 프로그램 시즌을 찾을 수 없어요",
 	"epic_lemon_jaguar": "찾으시는 TV 프로그램 시즌을 찾을 수 없어요.",
 	"wise_orange_cedar": "모든 결과",
@@ -894,8 +902,10 @@
 	"upbeat_magenta_cactus": "배경 이미지가 없어요",
 	"stellar_purple_pine": "이 작품에 사용할 수 있는 배경 이미지가 없어요",
 	"tidy_beige_bridge": "코드가 잘못된 것 같아요. 다시 시도해 주세요!",
-	"fierce_scarlet_mesa": "방영일: ",
-	"agile_topaz_jasmine": "방영 예정: ",
+	"proud_scarlet_valley": "방영일: {date}",
+	"nimble_orange_crystal": "방영 예정: {date}",
+	"peppy_lemon_mesa": "방영일: {date}",
+	"joyful_peach_barn": "방영 예정: {date}",
 	"lush_periwinkle_salmon": "사용할 수 있는 이미지가 없어요",
 	"fair_cerise_wombat": "에피소드를 시청 완료로 표시",
 	"dreamy_white_meerkat": "더 많은 작업",
@@ -953,16 +963,6 @@
 	"bold_amber_pine": "이런!",
 	"wise_turquoise_lemur": "이런!",
 	"airy_ruby_coral": "홈",
-	"chilly_saffron_galaxy": [
-		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
-			"match": {
-				"countPlural=one": "{count}명 평가",
-				"countPlural=other": "{count}명 평가"
-			}
-		}
-	],
 	"alert_sienna_cherry": "해당 없음",
 	"swift_saffron_daisy": "감독: {names}",
 	"elegant_lilac_mesa": "크리에이터: {names}",
@@ -1108,5 +1108,27 @@
 	"bold_plum_blossom": "{name} 님 팔로우",
 	"daring_saffron_banjo": "{name} 님에게 보낸 팔로우 요청 취소",
 	"merry_peach_pine": "{name} 님 팔로우 취소",
-	"dreamy_gray_tiger": "{name} 님의 요청 수락"
+	"dreamy_gray_tiger": "{name} 님의 요청 수락",
+	"nifty_hazel_maple": "{primaryJob} (외 {numberOfOtherJobs}개 직무)",
+	"clever_bronze_sunflower": "프로필 보기",
+	"hardy_periwinkle_lantern": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "에피소드 {count}개에 출연",
+				"countPlural=other": "에피소드 {count}개에 출연"
+			}
+		}
+	],
+	"wise_teal_banjo": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "에피소드 {count}개에 참여",
+				"countPlural=other": "에피소드 {count}개에 참여"
+			}
+		}
+	]
 }

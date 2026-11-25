@@ -1,14 +1,22 @@
+import { IconChevronLeft } from "@tabler/icons-react";
+import { Link } from "@tanstack/react-router";
 import { useId } from "react";
 import type { Schemas } from "shared";
+import { CastCreditsSection } from "@/components/credits/cast-credits-section";
+import {
+	castFromAggregatedCredits,
+	crewFromAggregatedCredits,
+} from "@/components/credits/credit-people";
+import { CrewCreditsSection } from "@/components/credits/crew-credits-section";
 import { ScrollToCrewButton } from "@/components/credits/scroll-to-crew-button";
+import { ScrollToTopButton } from "@/components/credits/scroll-to-top-button";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { CastSectionAggregated } from "@/components/person/aggregated/cast-section-aggregated";
-import { CrewSectionAggregated } from "@/components/person/aggregated/crew-section-aggregated";
-import { BackButton } from "@/components/ui/back-button";
+import { buttonVariants } from "@/components/ui/button";
 import { m } from "@/paraglide/messages";
 
 interface TvSeasonCreditsViewProps {
+	tvId: number;
 	seasonNumber: number;
 	credits: Schemas.TvAggregatedCredits | undefined;
 	isLoading: boolean;
@@ -17,6 +25,7 @@ interface TvSeasonCreditsViewProps {
 
 export function TvSeasonCreditsView({
 	credits,
+	tvId,
 	seasonNumber,
 	isLoading,
 	isError,
@@ -38,25 +47,44 @@ export function TvSeasonCreditsView({
 
 	return (
 		<div className="w-full scroll-smooth">
-			<div className="flex justify-between">
-				<BackButton />
-
-				{credits.crew.length > 0 && credits.cast.length > 0 ? (
-					<ScrollToCrewButton crewSectionId={crewSectionId} />
-				) : null}
-			</div>
-			<div className="flex flex-col gap-8 pt-2 text-center md:text-left">
-				<h2 className="text-2xl font-bold">
+			<div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+				<Link
+					to="/tv/$tvId/season/$seasonNumber"
+					params={{
+						tvId: tvId.toString(),
+						seasonNumber: seasonNumber.toString(),
+					}}
+					className={buttonVariants({
+						variant: "ghost",
+						className: "-ml-2 w-fit text-muted-foreground",
+					})}
+				>
+					<IconChevronLeft data-icon="inline-start" />
 					{seasonNumber === 0
 						? m.hasty_onyx_wolf()
 						: m.modest_sapphire_barn({ seasonNumber: seasonNumber })}
-				</h2>
+				</Link>
+				{credits.crew.length > 0 && credits.cast.length > 0 ? (
+					<>
+						<ScrollToCrewButton
+							crewSectionId={crewSectionId}
+							className="-mr-2 ml-auto"
+						/>
+						<ScrollToTopButton crewSectionId={crewSectionId} />
+					</>
+				) : null}
+			</div>
+			<div className="flex flex-col gap-8 pt-2 text-center md:text-left">
 				{credits.cast.length > 0 ? (
-					<CastSectionAggregated people={credits.cast} />
+					<CastCreditsSection
+						people={castFromAggregatedCredits(credits.cast)}
+					/>
 				) : null}
 				{credits.crew.length > 0 ? (
 					<div id={crewSectionId} className="scroll-mt-26 lg:scroll-mt-30">
-						<CrewSectionAggregated people={credits.crew} />
+						<CrewCreditsSection
+							people={crewFromAggregatedCredits(credits.crew)}
+						/>
 					</div>
 				) : null}
 				{credits.cast.length === 0 && credits.crew.length === 0 ? (

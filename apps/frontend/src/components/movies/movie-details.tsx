@@ -1,4 +1,4 @@
-import { IconCalendarWeekFilled, IconStopwatch } from "@tabler/icons-react";
+import { IconCalendarWeekFilled } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import { CollectionCard } from "@/components/collections/collection-card";
@@ -113,10 +113,11 @@ export function MovieDetailView({
 
 							<div className="flex flex-wrap items-center gap-3">
 								<MediaTrailerButton videos={movie.videos?.results} />
-								<div className="flex gap-0.5 items-center font-bold">
-									<IconStopwatch width={16} height={16} />
-									<p className="text-sm">{formatRuntime(movie.runtime)}</p>
-								</div>
+								{movie.runtime ? (
+									<span className="text-sm text-muted-foreground">
+										{formatRuntime(movie.runtime)}
+									</span>
+								) : null}
 							</div>
 						</div>
 					</CardContent>

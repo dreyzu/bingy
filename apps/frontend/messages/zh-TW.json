@@ -124,7 +124,6 @@
 	"quick_copper_planet": "票房：",
 	"nifty_aqua_clover": "收合",
 	"hazy_maroon_galaxy": "展開",
-	"happy_slate_whale": "沒有簡介",
 	"winsome_sage_nectar": "你要找的頁面不存在，或已被移動",
 	"hasty_periwinkle_lynx": "回到首頁",
 	"quiet_turquoise_cedar": "搜尋…",
@@ -162,12 +161,10 @@
 	"gleeful_amber_lynx": "無法載入 {title}",
 	"lush_mint_turtle": "系列中的電影（{number}）",
 	"quiet_orange_anchor": "工作人員",
-	"warm_fuchsia_planet": "跳至工作人員",
+	"warm_fuchsia_planet": "工作人員",
+	"lush_purple_coral": "回到頂端",
 	"elegant_gold_violin": "查看完整的演員與工作人員名單",
 	"alert_sepia_cactus": "{primaryRole}（另有 {numberOfOtherRoles} 個角色）",
-	"eager_lilac_willow": "{primaryRole}",
-	"fair_orange_maple": "集",
-	"mighty_coral_kettle": "集",
 	"witty_sepia_spruce": "集",
 	"rapid_lemon_rabbit": "集",
 	"shiny_lilac_meadow": "沒有可用的人物簡介",
@@ -276,7 +273,7 @@
 	"eager_lavender_rocket": "這筆演職員資料不屬於影集",
 	"velvet_sapphire_nectar": "找不到集數",
 	"eager_indigo_marmot": "此演職員資料沒有集數資訊",
-	"happy_hazel_compass": "飾 {role}",
+	"humble_khaki_saddle": "{name}（{role}）",
 	"balmy_jade_forest": "未知",
 	"jaunty_sage_beacon": "糟糕！",
 	"zesty_fuchsia_dolphin": "目前無法查看演職員資料",
@@ -284,9 +281,10 @@
 	"elegant_lavender_mesa": "找不到集數",
 	"joyful_amber_comet": "找不到你要找的集數",
 	"bubbly_fuchsia_puma": "第 {episodeNumber} 集",
-	"steady_scarlet_meerkat": "簡介",
-	"eager_khaki_dune": "片長",
-	"lean_maroon_coral": "播出日期",
+	"vibrant_pink_violin": "第 {seasonNumber} 季",
+	"lively_coral_bamboo": "導演：{names}",
+	"fierce_olive_tiger": "編劇：{names}",
+	"grand_amber_mesa": "導演：{directors}，編劇：{writers}",
 	"quick_beige_meadow": "工作人員",
 	"golden_cerise_boulder": "客串演員",
 	"nifty_cerise_panda": [
@@ -294,8 +292,8 @@
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "集",
-				"countPlural=other": "集"
+				"countPlural=one": "{count} 集",
+				"countPlural=other": "{count} 集"
 			}
 		}
 	],
@@ -309,15 +307,13 @@
 	"steady_ruby_mesa": "找不到季",
 	"quiet_sepia_spruce": "找不到你要找的季",
 	"brave_khaki_island": "第 {seasonNumber} 季",
-	"velvet_beige_blossom": "評分",
-	"cozy_lemon_forest": "播出日期",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "集",
-				"countPlural=other": "集"
+				"countPlural=one": "{count} 集",
+				"countPlural=other": "{count} 集"
 			}
 		}
 	],
@@ -333,6 +329,18 @@
 	],
 	"candid_rose_crystal": "目前串流中",
 	"elegant_lemon_planet": "季",
+	"zesty_cerise_prairie": "全部季",
+	"smart_bronze_anchor": "上一季",
+	"brisk_tan_clover": "下一季",
+	"gleeful_pink_beaver": "第 {episodeNumber} 集",
+	"polite_navy_planet": "第 {seasonNumber} 季 · 第 {episodeNumber} 集",
+	"brave_maroon_bagel": "第 {seasonNumber} 季",
+	"breezy_sienna_iguana": "所有集數",
+	"rapid_yellow_kettle": "上一集",
+	"hardy_orange_daisy": "下一集",
+	"keen_sienna_spruce": "海報",
+	"bubbly_onyx_heron": "首播",
+	"noble_indigo_cherry": "大結局",
 	"vivid_rust_sunflower": "找不到影集的季資料",
 	"epic_lemon_jaguar": "找不到你要找的影集季資料。",
 	"wise_orange_cedar": "所有結果",
@@ -894,8 +902,10 @@
 	"upbeat_magenta_cactus": "沒有背景圖片",
 	"stellar_purple_pine": "此作品沒有可用的背景圖片",
 	"tidy_beige_bridge": "代碼似乎無效，請再試一次！",
-	"fierce_scarlet_mesa": "已播出於 ",
-	"agile_topaz_jasmine": "播出於 ",
+	"proud_scarlet_valley": "播出於 {date}",
+	"nimble_orange_crystal": "將於 {date} 播出",
+	"peppy_lemon_mesa": "播出於 {date}",
+	"joyful_peach_barn": "將於 {date} 播出",
 	"lush_periwinkle_salmon": "沒有可用的圖片",
 	"fair_cerise_wombat": "將本集標記為已看",
 	"dreamy_white_meerkat": "更多操作",
@@ -953,16 +963,6 @@
 	"bold_amber_pine": "哎呀！",
 	"wise_turquoise_lemur": "哎呀！",
 	"airy_ruby_coral": "首頁",
-	"chilly_saffron_galaxy": [
-		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
-			"match": {
-				"countPlural=one": "{count} 則評分",
-				"countPlural=other": "{count} 則評分"
-			}
-		}
-	],
 	"alert_sienna_cherry": "無",
 	"swift_saffron_daisy": "導演：{names}",
 	"elegant_lilac_mesa": "創作者：{names}",
@@ -1108,5 +1108,27 @@
 	"bold_plum_blossom": "追蹤 {name}",
 	"daring_saffron_banjo": "收回對 {name} 的追蹤要求",
 	"merry_peach_pine": "取消追蹤 {name}",
-	"dreamy_gray_tiger": "接受 {name} 的請求"
+	"dreamy_gray_tiger": "接受 {name} 的請求",
+	"nifty_hazel_maple": "{primaryJob}（另有 {numberOfOtherJobs} 個職務）",
+	"clever_bronze_sunflower": "查看個人檔案",
+	"hardy_periwinkle_lantern": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "演出 {count} 集",
+				"countPlural=other": "演出 {count} 集"
+			}
+		}
+	],
+	"wise_teal_banjo": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "參與 {count} 集",
+				"countPlural=other": "參與 {count} 集"
+			}
+		}
+	]
 }

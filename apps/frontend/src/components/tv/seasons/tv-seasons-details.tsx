@@ -1,7 +1,6 @@
 import type { Schemas } from "shared";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { BackButton } from "@/components/ui/back-button";
 import { m } from "@/paraglide/messages";
 import { SeasonCard } from "./season-card";
 
@@ -37,13 +36,8 @@ export function TvSeasonsDetailsView({
 
 	return (
 		<div className="w-full">
-			<BackButton />
-
-			<div className="grid gris-cols-1 gap-4 pt-2">
-				<div>
-					<h1 className="text-4xl font-bold mb-2">{tv.name}</h1>
-					<p className="text-muted-foreground">{m.elegant_lemon_planet()}</p>
-				</div>
+			<div className="grid grid-cols-1 gap-4">
+				<h1 className="text-2xl font-bold">{m.elegant_lemon_planet()}</h1>
 
 				<div className="grid gap-4 xl:grid-cols-2">
 					{regularSeasons.map((season) => (

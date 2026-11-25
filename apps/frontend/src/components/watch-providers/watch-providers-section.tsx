@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import type { Schemas } from "shared";
 import { m } from "@/paraglide/messages";
 import { getProviderName } from "@/utils/utils";
@@ -26,7 +27,7 @@ export function WatchProvidersSection({
 	const displayedProviders = providers.flatrate.slice(0, maxProviders);
 
 	return (
-		<div className={className}>
+		<div className={cn("pb-3", className)}>
 			{title ? (
 				<div>
 					<div className="text-lg font-semibold">{title}</div>
@@ -42,7 +43,7 @@ export function WatchProvidersSection({
 							href={providers.link}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex items-center gap-2 hover:opacity-80 transition-opacity pb-3 text-foreground"
+							className="flex min-w-0 items-center gap-2 hover:opacity-80 transition-opacity text-foreground"
 						>
 							{provider.logo_path && (
 								<img
@@ -52,11 +53,11 @@ export function WatchProvidersSection({
 											: undefined
 									}
 									alt={providerName}
-									className="w-10 h-10 rounded"
+									className="w-10 h-10 shrink-0 rounded"
 								/>
 							)}
-							<div className="flex flex-col h-10 justify-center">
-								<span className="text-sm leading-relaxed">
+							<div className="flex min-w-0 flex-col h-10 justify-center">
+								<span className="truncate text-sm leading-relaxed">
 									{m.candid_rose_crystal()}
 								</span>
 								<span className="text-base font-bold leading-relaxed md:hidden">
@@ -64,7 +65,10 @@ export function WatchProvidersSection({
 										? `${providerName.slice(0, 12)}...`
 										: providerName}
 								</span>
-								<span className="text-base font-bold leading-relaxed hidden md:inline">
+								<span
+									className="truncate text-base font-bold leading-relaxed hidden md:inline"
+									title={providerName}
+								>
 									{providerName}
 								</span>
 							</div>

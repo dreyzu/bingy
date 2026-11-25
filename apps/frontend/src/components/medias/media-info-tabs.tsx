@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import type { Schemas } from "shared";
 import {
 	type CreditsMedia,
@@ -12,7 +12,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { m } from "@/paraglide/messages";
 import { uniqueCastMembers, uniqueCrewMembers } from "@/utils/utils";
 
-type MediaInfoTab = "cast" | "crew" | "genres" | "details";
+/** People shown per tab; the full credits page lists the rest. */
+const MAX_PEOPLE = 10;
+
+export interface ExtraInfoTab {
+	id: string;
+	label: string;
+	content: ReactNode;
+}
 
 interface MediaInfoTabsProps {
 	cast: Array<Schemas.CastMember & { characters?: string[] }>;
@@ -20,6 +27,8 @@ interface MediaInfoTabsProps {
 	genres: Schemas.Genre[];
 	facts: MediaFact[];
 	media: CreditsMedia;
+	/** Tabs shown after the standard ones, e.g. a season's poster. */
+	extraTabs?: ExtraInfoTab[];
 }
 
 /**
@@ -33,24 +42,32 @@ export function MediaInfoTabs({
 	genres,
 	facts,
 	media,
+	extraTabs = [],
 }: MediaInfoTabsProps) {
 	// A person can be credited several times (multiple roles or jobs); show
 	// them once with all their roles merged.
 	const cast = uniqueCastMembers(castCredits);
 	const crew = uniqueCrewMembers(crewCredits);
+	// The full credits link only matters when the tab leaves people out.
+	const hasMoreCredits = (tab: string) =>
+		(tab === "cast" && cast.length > MAX_PEOPLE) ||
+		(tab === "crew" && crew.length > MAX_PEOPLE);
 
-	const availableTabs = (
-		[
-			["cast", cast.length > 0],
-			["crew", crew.length > 0],
-			["genres", genres.length > 0],
-			["details", facts.length > 0],
-		] as const
-	)
-		.filter(([, available]) => available)
-		.map(([tab]) => tab);
+	const availableTabs = [
+		...(
+			[
+				["cast", cast.length > 0],
+				["crew", crew.length > 0],
+				["genres", genres.length > 0],
+				["details", facts.length > 0],
+			] as const
+		)
+			.filter(([, available]) => available)
+			.map(([tab]) => tab),
+		...extraTabs.map((extraTab) => extraTab.id),
+	];
 
-	const [selectedTab, setSelectedTab] = useState<MediaInfoTab>();
+	const [selectedTab, setSelectedTab] = useState<string>();
 
 	const tab =
 		selectedTab && availableTabs.includes(selectedTab)
@@ -63,7 +80,7 @@ export function MediaInfoTabs({
 		<div className="flex flex-col gap-2">
 			<Tabs
 				value={tab}
-				onValueChange={(value: MediaInfoTab) => setSelectedTab(value)}
+				onValueChange={(value: string) => setSelectedTab(value)}
 				className="w-full m-0 gap-4"
 			>
 				<TabsList variant="line" className="gap-4">
@@ -87,12 +104,17 @@ export function MediaInfoTabs({
 							{m.epic_lemon_anchor()}
 						</TabsTrigger>
 					) : null}
+					{extraTabs.map((extraTab) => (
+						<TabsTrigger key={extraTab.id} value={extraTab.id} className="px-0">
+							{extraTab.label}
+						</TabsTrigger>
+					))}
 				</TabsList>
 				<TabsContent value="cast" className="p-0.75">
-					<CastList people={cast} />
+					<CastList people={cast.slice(0, MAX_PEOPLE)} />
 				</TabsContent>
 				<TabsContent value="crew" className="p-0.75">
-					<CrewList people={crew} />
+					<CrewList people={crew.slice(0, MAX_PEOPLE)} />
 				</TabsContent>
 				<TabsContent value="genres" className="p-0.75">
 					<MediaGenresBadge genres={genres} />
@@ -100,8 +122,13 @@ export function MediaInfoTabs({
 				<TabsContent value="details" className="p-0.75">
 					<MediaFactList facts={facts} />
 				</TabsContent>
+				{extraTabs.map((extraTab) => (
+					<TabsContent key={extraTab.id} value={extraTab.id} className="p-0.75">
+						{extraTab.content}
+					</TabsContent>
+				))}
 			</Tabs>
-			{tab === "cast" || tab === "crew" ? (
+			{hasMoreCredits(tab) ? (
 				<MediaCreditsLink
 					media={media}
 					section={tab === "crew" ? "crew" : undefined}

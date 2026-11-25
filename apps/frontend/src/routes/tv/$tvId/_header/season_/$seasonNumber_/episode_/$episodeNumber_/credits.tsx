@@ -6,7 +6,7 @@ import { useTvEpisodeResources } from "@/hooks/useTv";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 
 export const Route = createFileRoute(
-	"/tv/$tvId_/season_/$seasonNumber_/episode_/$episodeNumber_/credits",
+	"/tv/$tvId/_header/season_/$seasonNumber_/episode_/$episodeNumber_/credits",
 )({
 	component: TvEpisodeCreditsPage,
 });
@@ -30,6 +30,8 @@ function TvEpisodeCreditsPage() {
 
 	return (
 		<TvEpisodeCreditsView
+			tvId={Number(tvId)}
+			seasonNumber={Number(seasonNumber)}
 			episodeNumber={Number(episodeNumber)}
 			credits={credits}
 			isLoading={isLoading}

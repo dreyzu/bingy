@@ -124,7 +124,6 @@
 	"quick_copper_planet": "Recaudación:",
 	"nifty_aqua_clover": "Mostrar menos",
 	"hazy_maroon_galaxy": "Mostrar más",
-	"happy_slate_whale": "Sin sinopsis",
 	"winsome_sage_nectar": "La página que buscas no existe o se ha movido",
 	"hasty_periwinkle_lynx": "Ir al inicio",
 	"quiet_turquoise_cedar": "Buscar...",
@@ -162,12 +161,10 @@
 	"gleeful_amber_lynx": "No se pudo cargar {title}",
 	"lush_mint_turtle": "Películas de la colección ({number})",
 	"quiet_orange_anchor": "Equipo",
-	"warm_fuchsia_planet": "Ir al equipo",
+	"warm_fuchsia_planet": "Equipo técnico",
+	"lush_purple_coral": "Volver arriba",
 	"elegant_gold_violin": "Ver reparto y equipo completos",
 	"alert_sepia_cactus": "{primaryRole} (+{numberOfOtherRoles} más)",
-	"eager_lilac_willow": "{primaryRole}",
-	"fair_orange_maple": "episodios",
-	"mighty_coral_kettle": "episodio",
 	"witty_sepia_spruce": "episodios",
 	"rapid_lemon_rabbit": "episodio",
 	"shiny_lilac_meadow": "No hay biografía disponible",
@@ -276,7 +273,7 @@
 	"eager_lavender_rocket": "Este crédito no corresponde a una serie",
 	"velvet_sapphire_nectar": "No se han encontrado episodios",
 	"eager_indigo_marmot": "No hay información de episodios disponible para este crédito",
-	"happy_hazel_compass": "como {role}",
+	"humble_khaki_saddle": "{name} como {role}",
 	"balmy_jade_forest": "Desconocido",
 	"jaunty_sage_beacon": "¡Vaya!",
 	"zesty_fuchsia_dolphin": "Los créditos no están disponibles en este momento",
@@ -284,9 +281,10 @@
 	"elegant_lavender_mesa": "Episodio no encontrado",
 	"joyful_amber_comet": "No se ha encontrado el episodio que buscas",
 	"bubbly_fuchsia_puma": "Episodio {episodeNumber}",
-	"steady_scarlet_meerkat": "Sinopsis",
-	"eager_khaki_dune": "Duración",
-	"lean_maroon_coral": "Fecha de emisión",
+	"vibrant_pink_violin": "Temporada {seasonNumber}",
+	"lively_coral_bamboo": "Dirigido por {names}",
+	"fierce_olive_tiger": "Escrito por {names}",
+	"grand_amber_mesa": "Dirigido por {directors}, escrito por {writers}",
 	"quick_beige_meadow": "equipo",
 	"golden_cerise_boulder": "artistas invitados",
 	"nifty_cerise_panda": [
@@ -294,8 +292,8 @@
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "Episodio",
-				"countPlural=other": "Episodios"
+				"countPlural=one": "{count} episodio",
+				"countPlural=other": "{count} episodios"
 			}
 		}
 	],
@@ -309,15 +307,13 @@
 	"steady_ruby_mesa": "Temporada no encontrada",
 	"quiet_sepia_spruce": "No se ha encontrado la temporada que buscas",
 	"brave_khaki_island": "Temporada {seasonNumber}",
-	"velvet_beige_blossom": "Valoración",
-	"cozy_lemon_forest": "Fecha de emisión",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "Episodio",
-				"countPlural=other": "Episodios"
+				"countPlural=one": "{count} episodio",
+				"countPlural=other": "{count} episodios"
 			}
 		}
 	],
@@ -333,6 +329,18 @@
 	],
 	"candid_rose_crystal": "En streaming ahora",
 	"elegant_lemon_planet": "Temporadas",
+	"zesty_cerise_prairie": "Todas las temporadas",
+	"smart_bronze_anchor": "Temporada anterior",
+	"brisk_tan_clover": "Temporada siguiente",
+	"gleeful_pink_beaver": "Ep. {episodeNumber}",
+	"polite_navy_planet": "T{seasonNumber} · Ep. {episodeNumber}",
+	"brave_maroon_bagel": "T{seasonNumber}",
+	"breezy_sienna_iguana": "Todos los episodios",
+	"rapid_yellow_kettle": "Episodio anterior",
+	"hardy_orange_daisy": "Episodio siguiente",
+	"keen_sienna_spruce": "Cartel",
+	"bubbly_onyx_heron": "Estreno",
+	"noble_indigo_cherry": "Final",
 	"vivid_rust_sunflower": "No se han encontrado temporadas de la serie",
 	"epic_lemon_jaguar": "No se han encontrado las temporadas de la serie que buscas.",
 	"wise_orange_cedar": "Todos los resultados",
@@ -894,8 +902,10 @@
 	"upbeat_magenta_cactus": "No hay imágenes de fondo",
 	"stellar_purple_pine": "No hay imágenes de fondo disponibles para este título",
 	"tidy_beige_bridge": "El código no parece válido. ¡Inténtalo de nuevo!",
-	"fierce_scarlet_mesa": "Emitido el ",
-	"agile_topaz_jasmine": "Se emite el ",
+	"proud_scarlet_valley": "Emitido el {date}",
+	"nimble_orange_crystal": "Se estrena el {date}",
+	"peppy_lemon_mesa": "Emitido el {date}",
+	"joyful_peach_barn": "Se estrena el {date}",
 	"lush_periwinkle_salmon": "No hay imagen disponible",
 	"fair_cerise_wombat": "Marcar el episodio como visto",
 	"dreamy_white_meerkat": "Más acciones",
@@ -953,16 +963,6 @@
 	"bold_amber_pine": "¡Ups!",
 	"wise_turquoise_lemur": "¡Ups!",
 	"airy_ruby_coral": "Inicio",
-	"chilly_saffron_galaxy": [
-		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
-			"match": {
-				"countPlural=one": "{count} voto",
-				"countPlural=other": "{count} votos"
-			}
-		}
-	],
 	"alert_sienna_cherry": "N/A",
 	"swift_saffron_daisy": "Dirigida por {names}",
 	"elegant_lilac_mesa": "Creada por {names}",
@@ -1108,5 +1108,27 @@
 	"bold_plum_blossom": "Seguir a {name}",
 	"daring_saffron_banjo": "Cancelar tu solicitud para seguir a {name}",
 	"merry_peach_pine": "Dejar de seguir a {name}",
-	"dreamy_gray_tiger": "Aceptar la solicitud de {name}"
+	"dreamy_gray_tiger": "Aceptar la solicitud de {name}",
+	"nifty_hazel_maple": "{primaryJob} (+{numberOfOtherJobs} más)",
+	"clever_bronze_sunflower": "Ver perfil",
+	"hardy_periwinkle_lantern": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Aparece en {count} episodio",
+				"countPlural=other": "Aparece en {count} episodios"
+			}
+		}
+	],
+	"wise_teal_banjo": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Ha trabajado en {count} episodio",
+				"countPlural=other": "Ha trabajado en {count} episodios"
+			}
+		}
+	]
 }

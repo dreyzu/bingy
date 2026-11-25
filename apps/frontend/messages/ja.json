@@ -124,7 +124,6 @@
 	"quick_copper_planet": "興行収入：",
 	"nifty_aqua_clover": "折りたたむ",
 	"hazy_maroon_galaxy": "もっと見る",
-	"happy_slate_whale": "概要はありません",
 	"winsome_sage_nectar": "お探しのページは存在しないか、移動されました",
 	"hasty_periwinkle_lynx": "ホームへ戻る",
 	"quiet_turquoise_cedar": "検索...",
@@ -162,12 +161,10 @@
 	"gleeful_amber_lynx": "{title}の読み込みに失敗しました",
 	"lush_mint_turtle": "コレクション内の映画（{number}）",
 	"quiet_orange_anchor": "スタッフ",
-	"warm_fuchsia_planet": "スタッフへ移動",
+	"warm_fuchsia_planet": "スタッフ",
+	"lush_purple_coral": "トップへ戻る",
 	"elegant_gold_violin": "出演者とスタッフの一覧を見る",
 	"alert_sepia_cactus": "{primaryRole}（他{numberOfOtherRoles}件）",
-	"eager_lilac_willow": "{primaryRole}",
-	"fair_orange_maple": "エピソード",
-	"mighty_coral_kettle": "エピソード",
 	"witty_sepia_spruce": "エピソード",
 	"rapid_lemon_rabbit": "エピソード",
 	"shiny_lilac_meadow": "経歴はありません",
@@ -276,7 +273,7 @@
 	"eager_lavender_rocket": "このクレジットはTV番組のものではありません",
 	"velvet_sapphire_nectar": "エピソードが見つかりません",
 	"eager_indigo_marmot": "このクレジットのエピソード情報はありません",
-	"happy_hazel_compass": "役名：{role}",
+	"humble_khaki_saddle": "{name}（{role}）",
 	"balmy_jade_forest": "不明",
 	"jaunty_sage_beacon": "おっと！",
 	"zesty_fuchsia_dolphin": "現在クレジット情報はありません",
@@ -284,9 +281,10 @@
 	"elegant_lavender_mesa": "エピソードが見つかりません",
 	"joyful_amber_comet": "お探しのエピソードは見つかりませんでした",
 	"bubbly_fuchsia_puma": "エピソード{episodeNumber}",
-	"steady_scarlet_meerkat": "概要",
-	"eager_khaki_dune": "上映時間",
-	"lean_maroon_coral": "放送日",
+	"vibrant_pink_violin": "シーズン{seasonNumber}",
+	"lively_coral_bamboo": "演出：{names}",
+	"fierce_olive_tiger": "脚本：{names}",
+	"grand_amber_mesa": "演出：{directors}、脚本：{writers}",
 	"quick_beige_meadow": "スタッフ",
 	"golden_cerise_boulder": "ゲスト出演者",
 	"nifty_cerise_panda": [
@@ -294,8 +292,8 @@
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "エピソード",
-				"countPlural=other": "エピソード"
+				"countPlural=one": "{count}話",
+				"countPlural=other": "{count}話"
 			}
 		}
 	],
@@ -309,15 +307,13 @@
 	"steady_ruby_mesa": "シーズンが見つかりません",
 	"quiet_sepia_spruce": "お探しのシーズンは見つかりませんでした",
 	"brave_khaki_island": "シーズン{seasonNumber}",
-	"velvet_beige_blossom": "評価",
-	"cozy_lemon_forest": "放送日",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "エピソード",
-				"countPlural=other": "エピソード"
+				"countPlural=one": "{count}話",
+				"countPlural=other": "{count}話"
 			}
 		}
 	],
@@ -333,6 +329,18 @@
 	],
 	"candid_rose_crystal": "配信中",
 	"elegant_lemon_planet": "シーズン",
+	"zesty_cerise_prairie": "すべてのシーズン",
+	"smart_bronze_anchor": "前のシーズン",
+	"brisk_tan_clover": "次のシーズン",
+	"gleeful_pink_beaver": "第{episodeNumber}話",
+	"polite_navy_planet": "シーズン{seasonNumber}・第{episodeNumber}話",
+	"brave_maroon_bagel": "シーズン{seasonNumber}",
+	"breezy_sienna_iguana": "すべてのエピソード",
+	"rapid_yellow_kettle": "前のエピソード",
+	"hardy_orange_daisy": "次のエピソード",
+	"keen_sienna_spruce": "ポスター",
+	"bubbly_onyx_heron": "初回放送",
+	"noble_indigo_cherry": "最終回",
 	"vivid_rust_sunflower": "TV番組のシーズンが見つかりません",
 	"epic_lemon_jaguar": "お探しのTV番組のシーズンは見つかりませんでした。",
 	"wise_orange_cedar": "すべての結果",
@@ -894,8 +902,10 @@
 	"upbeat_magenta_cactus": "背景画像はありません",
 	"stellar_purple_pine": "この作品の背景画像はありません",
 	"tidy_beige_bridge": "コードが無効なようです。もう一度お試しください！",
-	"fierce_scarlet_mesa": "放送日：",
-	"agile_topaz_jasmine": "放送予定：",
+	"proud_scarlet_valley": "放送日：{date}",
+	"nimble_orange_crystal": "放送予定：{date}",
+	"peppy_lemon_mesa": "放送日：{date}",
+	"joyful_peach_barn": "放送予定：{date}",
 	"lush_periwinkle_salmon": "画像がありません",
 	"fair_cerise_wombat": "エピソードを視聴済みにする",
 	"dreamy_white_meerkat": "その他の操作",
@@ -953,16 +963,6 @@
 	"bold_amber_pine": "おっと！",
 	"wise_turquoise_lemur": "おっと！",
 	"airy_ruby_coral": "ホーム",
-	"chilly_saffron_galaxy": [
-		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
-			"match": {
-				"countPlural=one": "{count}票",
-				"countPlural=other": "{count}票"
-			}
-		}
-	],
 	"alert_sienna_cherry": "該当なし",
 	"swift_saffron_daisy": "監督：{names}",
 	"elegant_lilac_mesa": "クリエイター：{names}",
@@ -1108,5 +1108,27 @@
 	"bold_plum_blossom": "{name}さんをフォロー",
 	"daring_saffron_banjo": "{name}さんへのフォローリクエストを取り消し",
 	"merry_peach_pine": "{name}さんのフォローを解除",
-	"dreamy_gray_tiger": "{name}さんのリクエストを承認"
+	"dreamy_gray_tiger": "{name}さんのリクエストを承認",
+	"nifty_hazel_maple": "{primaryJob}（他{numberOfOtherJobs}件）",
+	"clever_bronze_sunflower": "プロフィールを見る",
+	"hardy_periwinkle_lantern": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count}話に出演",
+				"countPlural=other": "{count}話に出演"
+			}
+		}
+	],
+	"wise_teal_banjo": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count}話に参加",
+				"countPlural=other": "{count}話に参加"
+			}
+		}
+	]
 }

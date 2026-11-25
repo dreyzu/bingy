@@ -53,7 +53,7 @@ export function SearchForm({ initialQuery }: SearchFormProps) {
 				<Button
 					type="submit"
 					variant="secondary"
-					className="bg-brand hover:bg-brand/95 px-4 py-1 rounded-md text-dark-card-foreground font-bold min-h-10"
+					className="bg-brand not-disabled:hover:bg-brand/95 px-4 py-1 rounded-md text-dark-card-foreground font-bold min-h-10"
 				>
 					{m.breezy_crimson_mesa()}
 				</Button>

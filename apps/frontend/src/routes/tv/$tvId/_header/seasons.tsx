@@ -4,7 +4,7 @@ import { TvSeasonsDetailsView } from "@/components/tv/seasons/tv-seasons-details
 import { useTv } from "@/hooks/useTv";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 
-export const Route = createFileRoute("/tv/$tvId_/seasons")({
+export const Route = createFileRoute("/tv/$tvId/_header/seasons")({
 	component: SeasonsPage,
 });
 

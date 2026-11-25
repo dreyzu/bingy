@@ -124,7 +124,6 @@
 	"quick_copper_planet": "票房：",
 	"nifty_aqua_clover": "收起",
 	"hazy_maroon_galaxy": "展开",
-	"happy_slate_whale": "暂无简介",
 	"winsome_sage_nectar": "你要查找的页面不存在或已被移动",
 	"hasty_periwinkle_lynx": "返回首页",
 	"quiet_turquoise_cedar": "搜索……",
@@ -162,12 +161,10 @@
 	"gleeful_amber_lynx": "加载 {title} 失败",
 	"lush_mint_turtle": "合集中的电影（{number}）",
 	"quiet_orange_anchor": "制作人员",
-	"warm_fuchsia_planet": "跳转到制作人员",
+	"warm_fuchsia_planet": "制作人员",
+	"lush_purple_coral": "回到顶部",
 	"elegant_gold_violin": "查看完整的演员和制作人员名单",
 	"alert_sepia_cactus": "{primaryRole}（另有 {numberOfOtherRoles} 个角色）",
-	"eager_lilac_willow": "{primaryRole}",
-	"fair_orange_maple": "集",
-	"mighty_coral_kettle": "集",
 	"witty_sepia_spruce": "集",
 	"rapid_lemon_rabbit": "集",
 	"shiny_lilac_meadow": "暂无简介",
@@ -276,7 +273,7 @@
 	"eager_lavender_rocket": "此职员信息不属于电视剧",
 	"velvet_sapphire_nectar": "未找到集",
 	"eager_indigo_marmot": "此职员信息暂无集数详情",
-	"happy_hazel_compass": "饰 {role}",
+	"humble_khaki_saddle": "{name}（{role}）",
 	"balmy_jade_forest": "未知",
 	"jaunty_sage_beacon": "糟糕！",
 	"zesty_fuchsia_dolphin": "目前暂无职员信息",
@@ -284,9 +281,10 @@
 	"elegant_lavender_mesa": "未找到该集",
 	"joyful_amber_comet": "你要查找的集不存在",
 	"bubbly_fuchsia_puma": "第 {episodeNumber} 集",
-	"steady_scarlet_meerkat": "简介",
-	"eager_khaki_dune": "时长",
-	"lean_maroon_coral": "播出日期",
+	"vibrant_pink_violin": "第 {seasonNumber} 季",
+	"lively_coral_bamboo": "导演：{names}",
+	"fierce_olive_tiger": "编剧：{names}",
+	"grand_amber_mesa": "导演：{directors}，编剧：{writers}",
 	"quick_beige_meadow": "制作人员",
 	"golden_cerise_boulder": "客串演员",
 	"nifty_cerise_panda": [
@@ -294,8 +292,8 @@
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "集",
-				"countPlural=other": "集"
+				"countPlural=one": "{count} 集",
+				"countPlural=other": "{count} 集"
 			}
 		}
 	],
@@ -309,15 +307,13 @@
 	"steady_ruby_mesa": "未找到该季",
 	"quiet_sepia_spruce": "你要查找的季不存在",
 	"brave_khaki_island": "第 {seasonNumber} 季",
-	"velvet_beige_blossom": "评分",
-	"cozy_lemon_forest": "播出日期",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "集",
-				"countPlural=other": "集"
+				"countPlural=one": "{count} 集",
+				"countPlural=other": "{count} 集"
 			}
 		}
 	],
@@ -333,6 +329,18 @@
 	],
 	"candid_rose_crystal": "现已可观看",
 	"elegant_lemon_planet": "季",
+	"zesty_cerise_prairie": "全部季",
+	"smart_bronze_anchor": "上一季",
+	"brisk_tan_clover": "下一季",
+	"gleeful_pink_beaver": "第 {episodeNumber} 集",
+	"polite_navy_planet": "第 {seasonNumber} 季 · 第 {episodeNumber} 集",
+	"brave_maroon_bagel": "第 {seasonNumber} 季",
+	"breezy_sienna_iguana": "全部分集",
+	"rapid_yellow_kettle": "上一集",
+	"hardy_orange_daisy": "下一集",
+	"keen_sienna_spruce": "海报",
+	"bubbly_onyx_heron": "首播",
+	"noble_indigo_cherry": "大结局",
 	"vivid_rust_sunflower": "未找到电视剧季信息",
 	"epic_lemon_jaguar": "你要查找的电视剧季信息不存在。",
 	"wise_orange_cedar": "全部结果",
@@ -894,8 +902,10 @@
 	"upbeat_magenta_cactus": "暂无背景图片",
 	"stellar_purple_pine": "此作品暂无背景图片",
 	"tidy_beige_bridge": "验证码似乎无效，请重试！",
-	"fierce_scarlet_mesa": "播出于 ",
-	"agile_topaz_jasmine": "将播出于 ",
+	"proud_scarlet_valley": "播出于 {date}",
+	"nimble_orange_crystal": "将于 {date} 播出",
+	"peppy_lemon_mesa": "播出于 {date}",
+	"joyful_peach_barn": "将于 {date} 播出",
 	"lush_periwinkle_salmon": "暂无图片",
 	"fair_cerise_wombat": "将本集标记为已看",
 	"dreamy_white_meerkat": "更多操作",
@@ -953,16 +963,6 @@
 	"bold_amber_pine": "哎呀！",
 	"wise_turquoise_lemur": "哎呀！",
 	"airy_ruby_coral": "首页",
-	"chilly_saffron_galaxy": [
-		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
-			"match": {
-				"countPlural=one": "{count} 票",
-				"countPlural=other": "{count} 票"
-			}
-		}
-	],
 	"alert_sienna_cherry": "无",
 	"swift_saffron_daisy": "导演：{names}",
 	"elegant_lilac_mesa": "主创：{names}",
@@ -1108,5 +1108,27 @@
 	"bold_plum_blossom": "关注 {name}",
 	"daring_saffron_banjo": "撤回对 {name} 的关注请求",
 	"merry_peach_pine": "取消关注 {name}",
-	"dreamy_gray_tiger": "接受 {name} 的请求"
+	"dreamy_gray_tiger": "接受 {name} 的请求",
+	"nifty_hazel_maple": "{primaryJob}（另有 {numberOfOtherJobs} 个职务）",
+	"clever_bronze_sunflower": "查看个人资料",
+	"hardy_periwinkle_lantern": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "出演 {count} 集",
+				"countPlural=other": "出演 {count} 集"
+			}
+		}
+	],
+	"wise_teal_banjo": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "参与 {count} 集",
+				"countPlural=other": "参与 {count} 集"
+			}
+		}
+	]
 }

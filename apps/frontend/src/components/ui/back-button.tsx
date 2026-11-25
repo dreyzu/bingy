@@ -1,17 +1,18 @@
-import { IconArrowLeft } from "@tabler/icons-react";
 import { useRouter } from "@tanstack/react-router";
+import { cn } from "cn";
+import type { ComponentProps, ReactNode } from "react";
 import { Button } from "./button";
 
 interface BackButtonProps {
-	style?: string;
-	variant?: "ghost" | "default" | "outline" | "secondary" | "link";
-	text?: string;
+	children: ReactNode;
+	className?: string;
+	variant?: ComponentProps<typeof Button>["variant"];
 }
 
 export const BackButton = ({
-	style,
+	children,
+	className,
 	variant = "ghost",
-	text,
 }: BackButtonProps) => {
 	const router = useRouter();
 
@@ -21,9 +22,9 @@ export const BackButton = ({
 		<Button
 			onClick={() => router.history.back()}
 			variant={variant}
-			className={`${style} rounded-xl`}
+			className={cn("rounded-xl", className)}
 		>
-			<IconArrowLeft /> {text ? text : null}
+			{children}
 		</Button>
 	);
 };

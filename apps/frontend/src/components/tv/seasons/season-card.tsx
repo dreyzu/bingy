@@ -1,12 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { useAtomValue } from "jotai";
+import { getYear } from "date-fns";
 import type { Schemas } from "shared";
 import fallbackPoster from "@/assets/media-image-placeholder.jpg";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { localeRegionAtom } from "@/lib/atoms/region";
+import { Card, CardContent } from "@/components/ui/card";
 import { m } from "@/paraglide/messages";
-import { formatDate } from "@/utils/format-date";
 import { getTmdbImageUrl } from "@/utils/utils";
 
 export function SeasonCard({
@@ -16,8 +14,14 @@ export function SeasonCard({
 	season: Schemas.TvDetails["seasons"][number];
 	tvId: number;
 }) {
-	const localeRegion = useAtomValue(localeRegionAtom);
-	const imageUrl = getTmdbImageUrl(season.poster_path, "w500");
+	const imageUrl = getTmdbImageUrl(season.poster_path, "w200");
+	const isSpecials = season.season_number === 0;
+	const title = isSpecials
+		? m.lush_slate_pine()
+		: m.eager_lilac_penguin({ seasonNumber: season.season_number });
+	// Only shown when the season has its own name, e.g. "The Final Season".
+	const subtitle =
+		!isSpecials && season.name && season.name !== title ? season.name : null;
 
 	return (
 		<Link
@@ -27,60 +31,41 @@ export function SeasonCard({
 				seasonNumber: String(season.season_number),
 			}}
 		>
-			<Card>
-				<CardHeader>
-					<div className="flex items-center justify-between">
-						<div className="flex items-center gap-3">
-							<CardTitle>
-								{season.season_number === 0
-									? m.lush_slate_pine()
-									: m.eager_lilac_penguin({
-											seasonNumber: season.season_number,
-										})}
-							</CardTitle>
-							<Badge className="text-sm">
-								{season.air_date
-									? formatDate(season.air_date, localeRegion, {
-											year: "numeric",
-										})
-									: "N/A"}
+			<Card className="h-full transition-colors hover:bg-accent">
+				<CardContent className="flex items-start gap-3 sm:gap-4">
+					<img
+						src={imageUrl ?? fallbackPoster}
+						alt={season.name}
+						className="w-16 sm:w-20 aspect-2/3 shrink-0 rounded-md object-cover"
+						onError={(e) => {
+							const target = e.currentTarget;
+							if (target.src !== fallbackPoster) {
+								target.src = fallbackPoster;
+							}
+						}}
+					/>
+					<div className="flex min-w-0 flex-1 flex-col gap-1">
+						<div className="flex items-start justify-between gap-2">
+							<div className="flex min-w-0 flex-wrap items-baseline gap-x-2">
+								<h3 className="text-base font-semibold">{title}</h3>
+								{season.air_date ? (
+									<span className="text-sm text-muted-foreground">
+										{getYear(season.air_date)}
+									</span>
+								) : null}
+							</div>
+							<Badge variant="outline" className="shrink-0">
+								{m.nifty_cerise_panda({ count: season.episode_count })}
 							</Badge>
 						</div>
-						<Badge variant="outline">
-							<span>
-								{season.episode_count}{" "}
-								{m.nifty_cerise_panda({ count: season.episode_count })}
-							</span>
-						</Badge>
-					</div>
-				</CardHeader>
-				<CardContent>
-					<div className="flex gap-4 flex-col sm:flex-row sm:items-start">
-						<img
-							src={imageUrl ?? fallbackPoster}
-							alt={season.name}
-							className="rounded-lg w-50 h-80 lg:w-42 lg:h-62 object-cover mx-auto sm:mx-0"
-							onError={(e) => {
-								const target = e.currentTarget;
-								if (target.src !== fallbackPoster) {
-									target.src = fallbackPoster;
-								}
-							}}
-						/>
-						<div className="flex-1 gap-2">
-							{season.name
-								? season.name !==
-										m.eager_lilac_penguin({
-											seasonNumber: season.season_number,
-										}) &&
-									season.season_number !== 0 && (
-										<h3 className="font-semibold">{season.name}</h3>
-									)
-								: null}
-							<p className="text-muted-foreground xl:line-clamp-9">
-								{season.overview ? season.overview : m.happy_slate_whale()}
+						{subtitle ? (
+							<p className="text-sm font-medium">{subtitle}</p>
+						) : null}
+						{season.overview ? (
+							<p className="text-sm text-muted-foreground line-clamp-3">
+								{season.overview}
 							</p>
-						</div>
+						) : null}
 					</div>
 				</CardContent>
 			</Card>

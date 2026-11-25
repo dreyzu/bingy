@@ -6,7 +6,7 @@ import { useTvEpisodeResources } from "@/hooks/useTv";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 
 export const Route = createFileRoute(
-	"/tv/$tvId_/season_/$seasonNumber_/episode_/$episodeNumber",
+	"/tv/$tvId/_header/season_/$seasonNumber_/episode_/$episodeNumber",
 )({
 	component: TvEpisodeDetailsPage,
 });
