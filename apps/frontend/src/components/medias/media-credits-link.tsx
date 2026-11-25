@@ -2,14 +2,21 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import type { CreditsSection } from "@/components/credits/crew-section";
 
-export interface CreditsMedia {
-	type: "movie" | "tv";
-	id: number;
-}
+export type CreditsMedia =
+	| {
+			type: "movie" | "tv";
+			id: number;
+	  }
+	| {
+			type: "episode";
+			tvId: number;
+			seasonNumber: number;
+			episodeNumber: number;
+	  };
 
 interface MediaCreditsLinkProps {
 	media: CreditsMedia;
-	/** Section of the credits page to land on. */
+	/** Section of the credits page to land on. Ignored for episodes. */
 	section?: CreditsSection;
 	className?: string;
 	title?: string;
@@ -17,12 +24,26 @@ interface MediaCreditsLinkProps {
 	children: ReactNode;
 }
 
-/** Link to the full credits page of a movie or TV show. */
+/** Link to the full credits page of a movie, TV show or episode. */
 export function MediaCreditsLink({
 	media,
 	section,
 	...linkProps
 }: MediaCreditsLinkProps) {
+	if (media.type === "episode") {
+		return (
+			<Link
+				to="/tv/$tvId/season/$seasonNumber/episode/$episodeNumber/credits"
+				params={{
+					tvId: media.tvId.toString(),
+					seasonNumber: media.seasonNumber.toString(),
+					episodeNumber: media.episodeNumber.toString(),
+				}}
+				{...linkProps}
+			/>
+		);
+	}
+
 	const id = media.id.toString();
 
 	return media.type === "movie" ? (

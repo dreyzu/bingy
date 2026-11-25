@@ -8,14 +8,22 @@ import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { MediaDetailsOverview } from "@/components/medias/media-details-overview";
+import { MediaCreators } from "@/components/medias/media-creators";
 import { CastList } from "@/components/person/cast-list";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge, badgeVariants } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
 import { formatDate } from "@/utils/format-date";
 import { formatRuntime } from "@/utils/format-runtime";
+
+const WRITER_JOBS = new Set(["Writer", "Screenplay", "Story", "Teleplay"]);
+
+function uniqueById<T extends { id: number }>(people: T[]): T[] {
+	return Array.from(
+		new Map(people.map((person) => [person.id, person])).values(),
+	);
+}
 
 interface TvEpisodeDetailViewProps {
 	episode: Schemas.TvEpisodeDetails | undefined;
@@ -47,38 +55,19 @@ export function TvEpisodeDetailsView({
 		);
 	}
 
-	const getRole = (person: { job: string }) => {
-		if (person.job === "Director") return "Director";
-		if (["Writer", "Screenplay", "Story"].includes(person.job))
-			return person.job;
-		return null;
-	};
-
-	const crewWithRoles =
-		credits?.crew.reduce<
-			Map<number, { id: number; name: string; roles: Set<string> }>
-		>((map, person) => {
-			const role = getRole(person);
-			if (!role) return map;
-
-			const existing = map.get(person.id);
-			if (existing) {
-				existing.roles.add(role);
-			} else {
-				map.set(person.id, {
-					id: person.id,
-					name: person.name,
-					roles: new Set([role]),
-				});
-			}
-			return map;
-		}, new Map()) ?? new Map();
-
-	const crewToShow = Array.from(crewWithRoles.values());
-
-	const backgroundImage = episode.still_path
-		? `https://image.tmdb.org/t/p/original${episode.still_path}`
-		: undefined;
+	const crew = credits?.crew ?? [];
+	const directors = uniqueById(
+		crew.filter((person) => person.job === "Director"),
+	);
+	const writers = uniqueById(
+		crew.filter((person) => WRITER_JOBS.has(person.job)),
+	);
+	const creditsMedia = {
+		type: "episode",
+		tvId,
+		seasonNumber: episode.season_number,
+		episodeNumber: episode.episode_number,
+	} as const;
 
 	const mergedCast: Schemas.CastMember[] = credits?.cast
 		? credits.cast.map((member) => ({
@@ -96,130 +85,109 @@ export function TvEpisodeDetailsView({
 	}
 
 	return (
-		<div className="w-full">
-			<div className="flex flex-col gap-4 pt-4">
-				<div className="flex flex-col gap-2">
-					<h1 className="text-4xl font-bold">{episode.name}</h1>
-					{episode.name !== `Episode ${episode.episode_number}` && (
-						<Badge variant="secondary" className="self-start">
-							{m.bubbly_fuchsia_puma({
-								episodeNumber: episode.episode_number,
-							})}
-						</Badge>
-					)}
+		<div className="w-full flex flex-col gap-4">
+			<div className="flex flex-col gap-2">
+				<h1 className="text-2xl font-bold">{episode.name}</h1>
+				<div className="flex flex-wrap gap-2">
+					<Link
+						to="/tv/$tvId/season/$seasonNumber"
+						params={{
+							tvId: tvId.toString(),
+							seasonNumber: episode.season_number.toString(),
+						}}
+						className={badgeVariants({ variant: "secondary" })}
+					>
+						{m.vibrant_pink_violin({ seasonNumber: episode.season_number })}
+					</Link>
+					<Badge variant="secondary">
+						{m.bubbly_fuchsia_puma({ episodeNumber: episode.episode_number })}
+					</Badge>
 				</div>
+				<MediaCreators
+					creators={directors}
+					formatCredit={m.lively_coral_bamboo}
+					media={creditsMedia}
+				/>
+				<MediaCreators
+					creators={writers}
+					formatCredit={m.fierce_olive_tiger}
+					media={creditsMedia}
+				/>
+			</div>
 
-				<Card
-					className={`relative overflow-hidden justify-between ${
-						backgroundImage
-							? "text-dark-card-foreground min-h-75 border-none p-6"
-							: "text-foreground border"
-					}`}
-					style={
-						backgroundImage
-							? {
-									backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${backgroundImage})`,
-									backgroundSize: "cover",
-									backgroundPosition: "center",
-								}
-							: undefined
-					}
-				>
-					<CardHeader className="w-full p-0">
-						<CardTitle>{m.steady_scarlet_meerkat()}</CardTitle>
-						<MediaDetailsOverview overview={episode.overview} />
-					</CardHeader>
-					<CardContent className="flex flex-col gap-2">
-						{crewToShow.length > 0 && (
-							<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-								{crewToShow.slice(0, 3).map((person) => (
-									<div className="flex flex-col" key={person.id}>
-										<Link
-											to="/person/$personId"
-											params={{ personId: person.id.toString() }}
-										>
-											<h3 className="font-semibold text-lg whitespace-nowrap">
-												{person.name}
-											</h3>
-										</Link>
-										<p className="text-muted-foreground text-sm">
-											{Array.from(person.roles).join(", ")}
-										</p>
-									</div>
-								))}
+			{episode.overview ? (
+				<p className="text-sm lg:text-base whitespace-pre-line text-pretty leading-relaxed">
+					{episode.overview}
+				</p>
+			) : null}
+
+			<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+				{episode.vote_count > 0 ? (
+					<Card>
+						<CardContent className="flex items-center gap-4">
+							<IconStarFilled className="h-5 w-5 text-yellow-500" />
+							<div>
+								<p className="text-xl xl:text-2xl font-bold">
+									{episode.vote_average.toFixed(1)}
+								</p>
+								<p className="text-sm text-muted-foreground">
+									{m.chilly_saffron_galaxy({ count: episode.vote_count })}
+								</p>
 							</div>
-						)}
+						</CardContent>
+					</Card>
+				) : null}
+
+				<Card>
+					<CardContent className="flex items-center gap-4">
+						<IconClock className="h-5 w-5" />
+						<div>
+							<p className="text-xl xl:text-2xl font-bold">
+								{formatRuntime(episode.runtime)}
+							</p>
+							<p className="text-sm text-muted-foreground">
+								{m.eager_khaki_dune()}
+							</p>
+						</div>
 					</CardContent>
 				</Card>
 
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-					{episode.vote_count > 0 ? (
-						<Card>
-							<CardContent className="flex items-center gap-4">
-								<IconStarFilled className="h-5 w-5 text-yellow-500" />
-								<div>
-									<p className="text-xl xl:text-2xl font-bold">
-										{episode.vote_average.toFixed(1)}
-									</p>
-									<p className="text-sm text-muted-foreground">
-										{m.chilly_saffron_galaxy({ count: episode.vote_count })}
-									</p>
-								</div>
-							</CardContent>
-						</Card>
-					) : null}
-
-					<Card>
-						<CardContent className="flex items-center gap-4">
-							<IconClock className="h-5 w-5" />
-							<div>
-								<p className="text-xl xl:text-2xl font-bold">
-									{formatRuntime(episode.runtime)}
-								</p>
-								<p className="text-sm text-muted-foreground">
-									{m.eager_khaki_dune()}
-								</p>
-							</div>
-						</CardContent>
-					</Card>
-
-					<Card>
-						<CardContent className="flex items-center gap-4">
-							<IconCalendarWeekFilled className="h-5 w-5" />
-							<div>
-								<p className="text-xl xl:text-2xl font-bold">
-									{episode.air_date
-										? formatDate(episode.air_date, localeRegion, {
-												year: "numeric",
-												month: "short",
-												day: "numeric",
-											})
-										: "N/A"}
-								</p>
-								<p className="text-sm text-muted-foreground">
-									{m.lean_maroon_coral()}
-								</p>
-							</div>
-						</CardContent>
-					</Card>
-				</div>
-
-				{mergedCast.length > 0 && (
-					<div className="flex flex-col gap-2 overflow-hidden">
-						<CastList people={mergedCast} />
-						<Link
-							to="/tv/$tvId/season/$seasonNumber/episode/$episodeNumber/credits"
-							params={{
-								tvId: tvId.toString(),
-								seasonNumber: episode.season_number.toString(),
-								episodeNumber: episode.episode_number.toString(),
-							}}
-						>
-							{m.elegant_gold_violin()}
-						</Link>
-					</div>
-				)}
+				<Card>
+					<CardContent className="flex items-center gap-4">
+						<IconCalendarWeekFilled className="h-5 w-5" />
+						<div>
+							<p className="text-xl xl:text-2xl font-bold">
+								{episode.air_date
+									? formatDate(episode.air_date, localeRegion, {
+											year: "numeric",
+											month: "short",
+											day: "numeric",
+										})
+									: "N/A"}
+							</p>
+							<p className="text-sm text-muted-foreground">
+								{m.lean_maroon_coral()}
+							</p>
+						</div>
+					</CardContent>
+				</Card>
 			</div>
+
+			{mergedCast.length > 0 && (
+				<div className="flex flex-col gap-2 overflow-hidden">
+					<CastList people={mergedCast} />
+					<Link
+						to="/tv/$tvId/season/$seasonNumber/episode/$episodeNumber/credits"
+						params={{
+							tvId: tvId.toString(),
+							seasonNumber: episode.season_number.toString(),
+							episodeNumber: episode.episode_number.toString(),
+						}}
+					>
+						{m.elegant_gold_violin()}
+					</Link>
+				</div>
+			)}
 		</div>
 	);
 }
