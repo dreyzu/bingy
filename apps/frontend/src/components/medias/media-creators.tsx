@@ -9,7 +9,8 @@ import { m } from "@/paraglide/messages";
 const MAX_CREATORS = 3;
 // Private-use character, so it never collides with translated text.
 const NAMES_PLACEHOLDER = String.fromCodePoint(0xe000);
-const LINK_CLASSES = "font-semibold text-foreground hover:underline";
+export const CREATOR_LINK_CLASSES =
+	"font-semibold text-foreground hover:underline";
 
 interface CreatorPerson {
 	id: number;
@@ -47,7 +48,7 @@ export function MediaCreators({
 					<Link
 						to="/person/$personId"
 						params={{ personId: person.id.toString() }}
-						className={LINK_CLASSES}
+						className={CREATOR_LINK_CLASSES}
 					>
 						{person.name}
 					</Link>
@@ -74,7 +75,7 @@ function MoreCreatorsLink({ media }: Pick<MediaCreatorsProps, "media">) {
 			<MediaCreditsLink
 				media={media}
 				section="crew"
-				className={LINK_CLASSES}
+				className={CREATOR_LINK_CLASSES}
 				aria-label={label}
 				title={label}
 			>

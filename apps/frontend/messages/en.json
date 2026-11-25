@@ -287,6 +287,7 @@
 	"vibrant_pink_violin": "Season {seasonNumber}",
 	"lively_coral_bamboo": "Directed by {names}",
 	"fierce_olive_tiger": "Written by {names}",
+	"grand_amber_mesa": "Directed by {directors} and written by {writers}",
 	"eager_khaki_dune": "Runtime",
 	"lean_maroon_coral": "Air Date",
 	"quick_beige_meadow": "crew",

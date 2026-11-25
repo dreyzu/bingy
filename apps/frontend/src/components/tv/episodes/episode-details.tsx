@@ -9,8 +9,8 @@ import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { MediaCreators } from "@/components/medias/media-creators";
 import { CastList } from "@/components/person/cast-list";
+import { EpisodeCreators } from "@/components/tv/episodes/episode-creators";
 import { Badge, badgeVariants } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -64,12 +64,6 @@ export function TvEpisodeDetailsView({
 	const writers = uniqueById(
 		crew.filter((person) => WRITER_JOBS.has(person.job)),
 	);
-	const creditsMedia = {
-		type: "episode",
-		tvId,
-		seasonNumber: episode.season_number,
-		episodeNumber: episode.episode_number,
-	} as const;
 
 	const mergedCast: Schemas.CastMember[] = credits?.cast
 		? credits.cast.map((member) => ({
@@ -120,16 +114,7 @@ export function TvEpisodeDetailsView({
 						{m.bubbly_fuchsia_puma({ episodeNumber: episode.episode_number })}
 					</Badge>
 				</div>
-				<MediaCreators
-					creators={directors}
-					formatCredit={m.lively_coral_bamboo}
-					media={creditsMedia}
-				/>
-				<MediaCreators
-					creators={writers}
-					formatCredit={m.fierce_olive_tiger}
-					media={creditsMedia}
-				/>
+				<EpisodeCreators directors={directors} writers={writers} />
 			</div>
 
 			{episode.overview ? (
