@@ -9,8 +9,6 @@ interface WatchProvidersSectionProps {
 	className?: string;
 	maxProviders?: number;
 	title?: string;
-	/** Which side of the provider name the logo sits on. */
-	logoPosition?: "start" | "end";
 }
 
 export function WatchProvidersSection({
@@ -19,10 +17,7 @@ export function WatchProvidersSection({
 	className,
 	maxProviders = 1,
 	title,
-	logoPosition = "start",
 }: WatchProvidersSectionProps) {
-	const isLogoAtEnd = logoPosition === "end";
-
 	const providers = watchProviders?.results[region];
 
 	if (!providers?.flatrate?.length) {
@@ -38,12 +33,7 @@ export function WatchProvidersSection({
 					<div className="text-lg font-semibold">{title}</div>
 				</div>
 			) : null}
-			<div
-				className={cn(
-					"flex flex-row",
-					isLogoAtEnd ? "justify-end" : "justify-center",
-				)}
-			>
+			<div className="flex flex-row justify-center">
 				{displayedProviders.map((provider) => {
 					const providerName = getProviderName(provider.provider_name);
 
@@ -53,10 +43,7 @@ export function WatchProvidersSection({
 							href={providers.link}
 							target="_blank"
 							rel="noopener noreferrer"
-							className={cn(
-								"flex items-center gap-2 hover:opacity-80 transition-opacity text-foreground",
-								isLogoAtEnd && "flex-row-reverse",
-							)}
+							className="flex min-w-0 items-center gap-2 hover:opacity-80 transition-opacity text-foreground"
 						>
 							{provider.logo_path && (
 								<img
@@ -66,16 +53,11 @@ export function WatchProvidersSection({
 											: undefined
 									}
 									alt={providerName}
-									className="w-10 h-10 rounded"
+									className="w-10 h-10 shrink-0 rounded"
 								/>
 							)}
-							<div
-								className={cn(
-									"flex flex-col h-10 justify-center",
-									isLogoAtEnd && "items-end",
-								)}
-							>
-								<span className="text-sm leading-relaxed">
+							<div className="flex min-w-0 flex-col h-10 justify-center">
+								<span className="truncate text-sm leading-relaxed">
 									{m.candid_rose_crystal()}
 								</span>
 								<span className="text-base font-bold leading-relaxed md:hidden">
@@ -83,7 +65,10 @@ export function WatchProvidersSection({
 										? `${providerName.slice(0, 12)}...`
 										: providerName}
 								</span>
-								<span className="text-base font-bold leading-relaxed hidden md:inline">
+								<span
+									className="truncate text-base font-bold leading-relaxed hidden md:inline"
+									title={providerName}
+								>
 									{providerName}
 								</span>
 							</div>
