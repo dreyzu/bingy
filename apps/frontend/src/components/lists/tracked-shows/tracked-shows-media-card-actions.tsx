@@ -120,7 +120,7 @@ export const TrackedShowsMediaCardActions = ({
 								variant="ghost"
 								size="icon"
 								aria-label={m.dreamy_white_meerkat()}
-								className="bg-background/70 backdrop-blur-sm hover:bg-background/90"
+								className="bg-background/70 backdrop-blur-sm not-disabled:hover:bg-background/90"
 							>
 								<IconDotsFilled />
 							</Button>
@@ -194,7 +194,7 @@ export const TrackedShowsMediaCardActions = ({
 								variant="ghost"
 								size="icon"
 								aria-label={m.dreamy_white_meerkat()}
-								className="bg-background/70 backdrop-blur-sm hover:bg-background/90"
+								className="bg-background/70 backdrop-blur-sm not-disabled:hover:bg-background/90"
 							>
 								<IconDotsFilled />
 							</Button>
