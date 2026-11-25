@@ -309,15 +309,13 @@
 	"steady_ruby_mesa": "Temporada não encontrada",
 	"quiet_sepia_spruce": "A temporada que você procura não foi encontrada",
 	"brave_khaki_island": "Temporada {seasonNumber}",
-	"velvet_beige_blossom": "Classificação",
-	"cozy_lemon_forest": "Data de exibição",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "Episódio",
-				"countPlural=other": "Episódios"
+				"countPlural=one": "{count} episódio",
+				"countPlural=other": "{count} episódios"
 			}
 		}
 	],
@@ -337,6 +335,9 @@
 	"breezy_sienna_iguana": "Todos os episódios",
 	"rapid_yellow_kettle": "Episódio anterior",
 	"hardy_orange_daisy": "Próximo episódio",
+	"keen_sienna_spruce": "Pôster",
+	"bubbly_onyx_heron": "Estreia",
+	"noble_indigo_cherry": "Final",
 	"vivid_rust_sunflower": "Temporadas da série não encontradas",
 	"epic_lemon_jaguar": "As temporadas da série que você procura não foram encontradas.",
 	"wise_orange_cedar": "Todos os resultados",

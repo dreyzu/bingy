@@ -309,15 +309,13 @@
 	"steady_ruby_mesa": "シーズンが見つかりません",
 	"quiet_sepia_spruce": "お探しのシーズンは見つかりませんでした",
 	"brave_khaki_island": "シーズン{seasonNumber}",
-	"velvet_beige_blossom": "評価",
-	"cozy_lemon_forest": "放送日",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "エピソード",
-				"countPlural=other": "エピソード"
+				"countPlural=one": "{count}話",
+				"countPlural=other": "{count}話"
 			}
 		}
 	],
@@ -337,6 +335,9 @@
 	"breezy_sienna_iguana": "すべてのエピソード",
 	"rapid_yellow_kettle": "前のエピソード",
 	"hardy_orange_daisy": "次のエピソード",
+	"keen_sienna_spruce": "ポスター",
+	"bubbly_onyx_heron": "初回放送",
+	"noble_indigo_cherry": "最終回",
 	"vivid_rust_sunflower": "TV番組のシーズンが見つかりません",
 	"epic_lemon_jaguar": "お探しのTV番組のシーズンは見つかりませんでした。",
 	"wise_orange_cedar": "すべての結果",

@@ -309,15 +309,13 @@
 	"steady_ruby_mesa": "Season not found",
 	"quiet_sepia_spruce": "The season you're looking for could not be found",
 	"brave_khaki_island": "Season {seasonNumber}",
-	"velvet_beige_blossom": "Rating",
-	"cozy_lemon_forest": "Air Date",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "Episode",
-				"countPlural=other": "Episodes"
+				"countPlural=one": "{count} episode",
+				"countPlural=other": "{count} episodes"
 			}
 		}
 	],
@@ -337,6 +335,9 @@
 	"breezy_sienna_iguana": "All episodes",
 	"rapid_yellow_kettle": "Previous episode",
 	"hardy_orange_daisy": "Next episode",
+	"keen_sienna_spruce": "Poster",
+	"bubbly_onyx_heron": "Premiere",
+	"noble_indigo_cherry": "Finale",
 	"vivid_rust_sunflower": "TV Show seasons not found",
 	"epic_lemon_jaguar": "The TV Show seasons you're looking for could not be found.",
 	"wise_orange_cedar": "All results",

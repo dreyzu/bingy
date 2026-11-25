@@ -309,15 +309,13 @@
 	"steady_ruby_mesa": "未找到该季",
 	"quiet_sepia_spruce": "你要查找的季不存在",
 	"brave_khaki_island": "第 {seasonNumber} 季",
-	"velvet_beige_blossom": "评分",
-	"cozy_lemon_forest": "播出日期",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "集",
-				"countPlural=other": "集"
+				"countPlural=one": "{count} 集",
+				"countPlural=other": "{count} 集"
 			}
 		}
 	],
@@ -337,6 +335,9 @@
 	"breezy_sienna_iguana": "全部分集",
 	"rapid_yellow_kettle": "上一集",
 	"hardy_orange_daisy": "下一集",
+	"keen_sienna_spruce": "海报",
+	"bubbly_onyx_heron": "首播",
+	"noble_indigo_cherry": "大结局",
 	"vivid_rust_sunflower": "未找到电视剧季信息",
 	"epic_lemon_jaguar": "你要查找的电视剧季信息不存在。",
 	"wise_orange_cedar": "全部结果",

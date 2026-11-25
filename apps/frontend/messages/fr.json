@@ -289,15 +289,13 @@
 	"steady_ruby_mesa": "Saison introuvable",
 	"quiet_sepia_spruce": "La saison demandée n'est pas disponible pour le moment",
 	"brave_khaki_island": "Saison {seasonNumber}",
-	"velvet_beige_blossom": "Votes",
-	"cozy_lemon_forest": "Date de diffusion",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "Épisode",
-				"countPlural=other": "Épisodes"
+				"countPlural=one": "{count} épisode",
+				"countPlural=other": "{count} épisodes"
 			}
 		}
 	],
@@ -317,6 +315,9 @@
 	"breezy_sienna_iguana": "Tous les épisodes",
 	"rapid_yellow_kettle": "Épisode précédent",
 	"hardy_orange_daisy": "Épisode suivant",
+	"keen_sienna_spruce": "Affiche",
+	"bubbly_onyx_heron": "Premier épisode",
+	"noble_indigo_cherry": "Dernier épisode",
 	"vivid_rust_sunflower": "Saisons introuvables",
 	"epic_lemon_jaguar": "Les saisons demandées ne sont pas disponibles pour le moment",
 	"wise_orange_cedar": "Tous les résultats",

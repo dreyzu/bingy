@@ -27,10 +27,11 @@ function TvSeasonDetailsPage() {
 		{ language: localeRegion, region },
 	);
 
-	const { data: credits } = useTvSeasonResources<Schemas.TvCredits>(
+	// Same query as the season credits page.
+	const { data: credits } = useTvSeasonResources<Schemas.TvAggregatedCredits>(
 		Number(tvId),
 		Number(seasonNumber),
-		"credits",
+		"aggregate_credits",
 		{ language: localeRegion, region },
 	);
 

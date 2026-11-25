@@ -309,15 +309,13 @@
 	"steady_ruby_mesa": "Staffel nicht gefunden",
 	"quiet_sepia_spruce": "Die gesuchte Staffel konnte nicht gefunden werden",
 	"brave_khaki_island": "Staffel {seasonNumber}",
-	"velvet_beige_blossom": "Bewertung",
-	"cozy_lemon_forest": "Ausstrahlungsdatum",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "Folge",
-				"countPlural=other": "Folgen"
+				"countPlural=one": "{count} Folge",
+				"countPlural=other": "{count} Folgen"
 			}
 		}
 	],
@@ -337,6 +335,9 @@
 	"breezy_sienna_iguana": "Alle Folgen",
 	"rapid_yellow_kettle": "Vorherige Folge",
 	"hardy_orange_daisy": "Nächste Folge",
+	"keen_sienna_spruce": "Poster",
+	"bubbly_onyx_heron": "Premiere",
+	"noble_indigo_cherry": "Finale",
 	"vivid_rust_sunflower": "Staffeln der Serie nicht gefunden",
 	"epic_lemon_jaguar": "Die gesuchten Staffeln der Serie konnten nicht gefunden werden.",
 	"wise_orange_cedar": "Alle Ergebnisse",

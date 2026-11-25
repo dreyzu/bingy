@@ -309,15 +309,13 @@
 	"steady_ruby_mesa": "시즌을 찾을 수 없어요",
 	"quiet_sepia_spruce": "찾으시는 시즌을 찾을 수 없어요",
 	"brave_khaki_island": "시즌 {seasonNumber}",
-	"velvet_beige_blossom": "평점",
-	"cozy_lemon_forest": "방영일",
 	"witty_coral_tulip": [
 		{
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "에피소드",
-				"countPlural=other": "에피소드"
+				"countPlural=one": "에피소드 {count}개",
+				"countPlural=other": "에피소드 {count}개"
 			}
 		}
 	],
@@ -337,6 +335,9 @@
 	"breezy_sienna_iguana": "전체 회차",
 	"rapid_yellow_kettle": "이전 회차",
 	"hardy_orange_daisy": "다음 회차",
+	"keen_sienna_spruce": "포스터",
+	"bubbly_onyx_heron": "첫 방송",
+	"noble_indigo_cherry": "마지막 방송",
 	"vivid_rust_sunflower": "TV 프로그램 시즌을 찾을 수 없어요",
 	"epic_lemon_jaguar": "찾으시는 TV 프로그램 시즌을 찾을 수 없어요.",
 	"wise_orange_cedar": "모든 결과",
