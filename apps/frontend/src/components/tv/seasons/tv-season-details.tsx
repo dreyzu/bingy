@@ -1,5 +1,6 @@
 import {
 	IconCalendarWeekFilled,
+	IconChevronLeft,
 	IconStack2,
 	IconStarFilled,
 	IconStopwatch,
@@ -13,6 +14,7 @@ import { MediaDetailsOverview } from "@/components/medias/media-details-overview
 import { CastList } from "@/components/person/cast-list";
 import { EpisodesContainer } from "@/components/tv/episodes/episodes-container";
 import { Badge } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
@@ -122,6 +124,18 @@ export function TvSeasonDetailsView({
 	return (
 		<div className="w-full flex flex-col gap-4">
 			<div className="flex flex-col gap-2">
+				<Link
+					to="/tv/$tvId/seasons"
+					params={{ tvId: tvId.toString() }}
+					className={buttonVariants({
+						variant: "ghost",
+						size: "sm",
+						className: "-ml-2 w-fit text-muted-foreground",
+					})}
+				>
+					<IconChevronLeft data-icon="inline-start" />
+					{m.zesty_cerise_prairie()}
+				</Link>
 				<div className="flex items-center justify-between gap-3">
 					<h1 className="text-2xl font-bold">{tvSeason.name}</h1>
 					{hasRuntime ? (
