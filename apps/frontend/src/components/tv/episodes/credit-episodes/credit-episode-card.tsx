@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { cn } from "cn";
 import { useAtomValue } from "jotai";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -53,63 +54,71 @@ export const CreditEpisodeCard = ({
 	};
 
 	return (
-		<Card
-			className={`relative overflow-hidden rounded-md ${
-				backgroundImage
-					? "text-dark-card-foreground min-h-50"
-					: "text-foreground border"
-			}`}
-			style={
-				backgroundImage
-					? {
-							backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${backgroundImage})`,
-							backgroundSize: "cover",
-							backgroundPosition: "center",
-						}
-					: undefined
-			}
+		<Link
+			to="/tv/$tvId/season/$seasonNumber/episode/$episodeNumber"
+			params={{
+				tvId: tvId.toString(),
+				seasonNumber: episode.season_number.toString(),
+				episodeNumber: episode.episode_number.toString(),
+			}}
+			className="group/episode block rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
 		>
-			<CardHeader>
-				<div className="flex items-start justify-between gap-2">
-					<div className="flex items-center gap-2 flex-1">
-						<Link
-							to="/tv/$tvId/season/$seasonNumber/episode/$episodeNumber"
-							params={{
-								tvId: tvId.toString(),
-								seasonNumber: episode.season_number.toString(),
-								episodeNumber: episode.episode_number.toString(),
-							}}
-						>
-							<CardTitle className="font-bold">{episode.name}</CardTitle>
-						</Link>
-						{episode.runtime ? (
-							<Badge variant="secondary">
-								{formatRuntime(episode.runtime)}
-							</Badge>
-						) : null}
-						{isGuestAppearance ? (
-							<Badge variant="default">{m.alert_pearl_heron()}</Badge>
-						) : null}
-					</div>
-					<div className="text-sm whitespace-nowrap">
-						{episode.season_number}x{episode.episode_number}
-					</div>
-				</div>
-				{episode.overview ? (
-					<CardDescription
-						className={`w-full xl:max-w-2/3 ${
-							backgroundImage
-								? "text-dark-card-foreground"
-								: "text-muted-foreground"
-						}`}
-					>
-						{episode.overview}
-					</CardDescription>
+			<Card
+				className={cn(
+					"relative overflow-hidden rounded-md transition-colors",
+					backgroundImage
+						? "text-dark-card-foreground min-h-50"
+						: "text-foreground border group-hover/episode:bg-accent",
+				)}
+				style={
+					backgroundImage
+						? {
+								backgroundImage: `url(${backgroundImage})`,
+								backgroundSize: "cover",
+								backgroundPosition: "center",
+							}
+						: undefined
+				}
+			>
+				{backgroundImage ? (
+					<div
+						aria-hidden
+						className="absolute inset-0 bg-black/80 transition-colors group-hover/episode:bg-black/70"
+					/>
 				) : null}
-			</CardHeader>
-			<CardContent className="flex flex-col gap-1 mt-auto">
-				<p className="text-sm">{getAirDateText()}</p>
-			</CardContent>
-		</Card>
+				<CardHeader className="relative">
+					<div className="flex items-start justify-between gap-2">
+						<div className="flex items-center gap-2 flex-1">
+							<CardTitle className="font-bold">{episode.name}</CardTitle>
+							{episode.runtime ? (
+								<Badge variant="secondary">
+									{formatRuntime(episode.runtime)}
+								</Badge>
+							) : null}
+							{isGuestAppearance ? (
+								<Badge variant="default">{m.alert_pearl_heron()}</Badge>
+							) : null}
+						</div>
+						<div className="text-sm whitespace-nowrap">
+							{episode.season_number}x{episode.episode_number}
+						</div>
+					</div>
+					{episode.overview ? (
+						<CardDescription
+							className={`w-full xl:max-w-2/3 ${
+								backgroundImage
+									? "text-dark-card-foreground"
+									: "text-muted-foreground"
+							}`}
+						>
+							{episode.overview}
+						</CardDescription>
+					) : null}
+				</CardHeader>
+				<CardContent className="relative flex flex-col gap-1 mt-auto">
+					<p className="text-sm">{getAirDateText()}</p>
+				</CardContent>
+			</Card>
+		</Link>
 	);
 };
