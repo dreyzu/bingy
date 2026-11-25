@@ -6,7 +6,7 @@ import { MovieCreditsView } from "@/components/movies/movie-credits";
 import { useMovieResource } from "@/hooks/useMovies";
 import { localeRegionAtom } from "@/lib/atoms/region";
 
-export const Route = createFileRoute("/movies/$movieId_/credits")({
+export const Route = createFileRoute("/movies/$movieId/_header/credits")({
 	validateSearch: creditsSearchSchema,
 	component: MovieCreditsPage,
 });

@@ -11,8 +11,19 @@ import { WatchProvidersSection } from "@/components/watch-providers/watch-provid
 /** Overrides every breakpoint of PortraitImage's default size. */
 const POSTER_CLASSES = "w-20 sm:w-24 md:w-24 lg:w-60 2xl:w-75 shrink-0";
 
-interface TvShowLayoutProps {
-	tv: Schemas.TvDetails | undefined;
+const TITLE_CLASSES =
+	"text-2xl lg:text-3xl font-bold hover:underline underline-offset-4";
+
+export interface MediaHeader {
+	type: "movie" | "tv";
+	id: number;
+	title: string;
+	posterPath: string | null;
+	releaseDate: string | null | undefined;
+}
+
+interface MediaHeaderLayoutProps {
+	media: MediaHeader | undefined;
 	isLoading: boolean;
 	watchProviders: Schemas.WatchProviders | undefined;
 	region: Schemas.WatchProvidersCountry;
@@ -22,15 +33,16 @@ interface TvShowLayoutProps {
 	children: ReactNode;
 }
 
-export function TvShowLayout({
-	tv,
+/** Poster, title and providers above a media's sub-pages, such as its credits. */
+export function MediaHeaderLayout({
+	media,
 	isLoading,
 	watchProviders,
 	region,
 	backgroundImage,
 	isBackgroundLoading,
 	children,
-}: TvShowLayoutProps) {
+}: MediaHeaderLayoutProps) {
 	return (
 		<>
 			{isBackgroundLoading ? null : (
@@ -43,14 +55,14 @@ export function TvShowLayout({
 				{/* On mobile, this wrapper is skipped so the title sits left of the
 				    poster and the providers get their own row. On desktop, the
 				    providers sit below the poster. */}
-				<div className="contents lg:row-span-2 lg:flex lg:w-60 lg:flex-col lg:items-center lg:gap-3 lg:self-start 2xl:w-75">
+				<div className="contents lg:row-span-2 lg:flex lg:w-60 lg:flex-col lg:items-center lg:gap-2 lg:self-start 2xl:w-75">
 					<div className="order-2 lg:order-none">
-						{tv ? (
+						{media ? (
 							<PortraitImage
-								imagePath={tv.poster_path}
-								alt={tv.name}
+								imagePath={media.posterPath}
+								alt={media.title}
 								imageSize="w500"
-								category="tv"
+								category={media.type}
 								className={POSTER_CLASSES}
 							/>
 						) : isLoading ? (
@@ -67,16 +79,26 @@ export function TvShowLayout({
 				</div>
 
 				<div className="order-1 flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1 self-center lg:order-none lg:col-start-2 lg:row-start-1 lg:self-start">
-					{tv ? (
+					{media ? (
 						<>
-							<Link
-								to="/tv/$tvId"
-								params={{ tvId: tv.id.toString() }}
-								className="text-2xl lg:text-3xl font-bold hover:underline underline-offset-4"
-							>
-								{tv.name}
-							</Link>
-							<MediaReleaseYear releaseDate={tv.first_air_date} />
+							{media.type === "movie" ? (
+								<Link
+									to="/movies/$movieId"
+									params={{ movieId: media.id.toString() }}
+									className={TITLE_CLASSES}
+								>
+									{media.title}
+								</Link>
+							) : (
+								<Link
+									to="/tv/$tvId"
+									params={{ tvId: media.id.toString() }}
+									className={TITLE_CLASSES}
+								>
+									{media.title}
+								</Link>
+							)}
+							<MediaReleaseYear releaseDate={media.releaseDate} />
 						</>
 					) : isLoading ? (
 						<Skeleton className="h-8 w-48" />

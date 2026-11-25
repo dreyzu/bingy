@@ -5,7 +5,7 @@ import { useMovie, useMovieResource } from "@/hooks/useMovies";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 import { getReleaseDate } from "@/utils/release-dates";
 
-export const Route = createFileRoute("/movies/$movieId")({
+export const Route = createFileRoute("/movies/$movieId/")({
 	component: MovieDetailsPage,
 });
 
