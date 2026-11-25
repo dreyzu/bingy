@@ -161,9 +161,6 @@
 	"quiet_orange_anchor": "Équipe de production",
 	"elegant_gold_violin": "Voir le casting complet et l'équipe de production",
 	"alert_sepia_cactus": "{primaryRole} (+{numberOfOtherRoles} de plus)",
-	"eager_lilac_willow": "{primaryRole}",
-	"fair_orange_maple": "épisodes",
-	"mighty_coral_kettle": "épisode",
 	"witty_sepia_spruce": "épisodes",
 	"rapid_lemon_rabbit": "épisode",
 	"shiny_lilac_meadow": "Pas de biographie disponible",
@@ -1109,5 +1106,27 @@
 	"bold_plum_blossom": "Suivre {name}",
 	"daring_saffron_banjo": "Annuler ta demande pour suivre {name}",
 	"merry_peach_pine": "Ne plus suivre {name}",
-	"dreamy_gray_tiger": "Accepter la demande de {name}"
+	"dreamy_gray_tiger": "Accepter la demande de {name}",
+	"nifty_hazel_maple": "{primaryJob} (+{numberOfOtherJobs} autres)",
+	"clever_bronze_sunflower": "Voir le profil",
+	"hardy_periwinkle_lantern": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Apparaît dans {count} épisode",
+				"countPlural=other": "Apparaît dans {count} épisodes"
+			}
+		}
+	],
+	"wise_teal_banjo": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "A travaillé sur {count} épisode",
+				"countPlural=other": "A travaillé sur {count} épisodes"
+			}
+		}
+	]
 }

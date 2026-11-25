@@ -1,4 +1,10 @@
 import type { Schemas } from "shared";
+import { CastCreditsSection } from "@/components/credits/cast-credits-section";
+import {
+	castFromAggregatedCredits,
+	crewFromAggregatedCredits,
+} from "@/components/credits/credit-people";
+import { CrewCreditsSection } from "@/components/credits/crew-credits-section";
 import {
 	CREW_SECTION_ID,
 	type CreditsSection,
@@ -8,8 +14,6 @@ import { ScrollToCrewButton } from "@/components/credits/scroll-to-crew-button";
 import { ScrollToTopButton } from "@/components/credits/scroll-to-top-button";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { CastSectionAggregated } from "@/components/person/aggregated/cast-section-aggregated";
-import { CrewSectionAggregated } from "@/components/person/aggregated/crew-section-aggregated";
 import { m } from "@/paraglide/messages";
 
 interface TvCreditsViewProps {
@@ -54,9 +58,11 @@ export function TvCreditsView({
 				) : null}
 			</div>
 			<div className="flex flex-col gap-2 mt-4 text-center md:text-left">
-				<CastSectionAggregated people={credits.cast} />
+				<CastCreditsSection people={castFromAggregatedCredits(credits.cast)} />
 				<div id={CREW_SECTION_ID} className="scroll-mt-26 lg:scroll-mt-30">
-					<CrewSectionAggregated people={credits.crew} />
+					<CrewCreditsSection
+						people={crewFromAggregatedCredits(credits.crew)}
+					/>
 				</div>
 			</div>
 		</div>

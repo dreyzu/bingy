@@ -1,4 +1,10 @@
 import type { Schemas } from "shared";
+import { CastCreditsSection } from "@/components/credits/cast-credits-section";
+import {
+	castFromCredits,
+	crewFromCredits,
+} from "@/components/credits/credit-people";
+import { CrewCreditsSection } from "@/components/credits/crew-credits-section";
 import {
 	CREW_SECTION_ID,
 	type CreditsSection,
@@ -8,8 +14,6 @@ import { ScrollToCrewButton } from "@/components/credits/scroll-to-crew-button";
 import { ScrollToTopButton } from "@/components/credits/scroll-to-top-button";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { CastSectionMovie } from "@/components/person/movie/cast-section-movie";
-import { CrewSectionMovie } from "@/components/person/movie/crew-section-movie";
 import { m } from "@/paraglide/messages";
 
 interface MovieCreditsViewProps {
@@ -51,9 +55,9 @@ export function MovieCreditsView({
 				) : null}
 			</div>
 			<div className="flex flex-col gap-2 mt-4 text-center md:text-left">
-				<CastSectionMovie people={credits.cast} />
+				<CastCreditsSection people={castFromCredits(credits.cast)} />
 				<div id={CREW_SECTION_ID} className="scroll-mt-26 lg:scroll-mt-30">
-					<CrewSectionMovie people={credits.crew} />
+					<CrewCreditsSection people={crewFromCredits(credits.crew)} />
 				</div>
 			</div>
 		</div>

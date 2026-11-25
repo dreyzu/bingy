@@ -165,9 +165,6 @@
 	"lush_purple_coral": "回到頂端",
 	"elegant_gold_violin": "查看完整的演員與工作人員名單",
 	"alert_sepia_cactus": "{primaryRole}（另有 {numberOfOtherRoles} 個角色）",
-	"eager_lilac_willow": "{primaryRole}",
-	"fair_orange_maple": "集",
-	"mighty_coral_kettle": "集",
 	"witty_sepia_spruce": "集",
 	"rapid_lemon_rabbit": "集",
 	"shiny_lilac_meadow": "沒有可用的人物簡介",
@@ -1109,5 +1106,27 @@
 	"bold_plum_blossom": "追蹤 {name}",
 	"daring_saffron_banjo": "收回對 {name} 的追蹤要求",
 	"merry_peach_pine": "取消追蹤 {name}",
-	"dreamy_gray_tiger": "接受 {name} 的請求"
+	"dreamy_gray_tiger": "接受 {name} 的請求",
+	"nifty_hazel_maple": "{primaryJob}（另有 {numberOfOtherJobs} 個職務）",
+	"clever_bronze_sunflower": "查看個人檔案",
+	"hardy_periwinkle_lantern": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "演出 {count} 集",
+				"countPlural=other": "演出 {count} 集"
+			}
+		}
+	],
+	"wise_teal_banjo": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "參與 {count} 集",
+				"countPlural=other": "參與 {count} 集"
+			}
+		}
+	]
 }

@@ -165,9 +165,6 @@
 	"lush_purple_coral": "맨 위로",
 	"elegant_gold_violin": "전체 출연진 및 제작진 보기",
 	"alert_sepia_cactus": "{primaryRole} (외 {numberOfOtherRoles}개 역할)",
-	"eager_lilac_willow": "{primaryRole}",
-	"fair_orange_maple": "에피소드",
-	"mighty_coral_kettle": "에피소드",
 	"witty_sepia_spruce": "에피소드",
 	"rapid_lemon_rabbit": "에피소드",
 	"shiny_lilac_meadow": "약력이 없어요",
@@ -1109,5 +1106,27 @@
 	"bold_plum_blossom": "{name} 님 팔로우",
 	"daring_saffron_banjo": "{name} 님에게 보낸 팔로우 요청 취소",
 	"merry_peach_pine": "{name} 님 팔로우 취소",
-	"dreamy_gray_tiger": "{name} 님의 요청 수락"
+	"dreamy_gray_tiger": "{name} 님의 요청 수락",
+	"nifty_hazel_maple": "{primaryJob} (외 {numberOfOtherJobs}개 직무)",
+	"clever_bronze_sunflower": "프로필 보기",
+	"hardy_periwinkle_lantern": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "에피소드 {count}개에 출연",
+				"countPlural=other": "에피소드 {count}개에 출연"
+			}
+		}
+	],
+	"wise_teal_banjo": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "에피소드 {count}개에 참여",
+				"countPlural=other": "에피소드 {count}개에 참여"
+			}
+		}
+	]
 }

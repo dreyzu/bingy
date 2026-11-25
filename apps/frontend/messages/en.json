@@ -165,9 +165,6 @@
 	"lush_purple_coral": "Back to top",
 	"elegant_gold_violin": "See full cast and crew",
 	"alert_sepia_cactus": "{primaryRole} (+{numberOfOtherRoles} more)",
-	"eager_lilac_willow": "{primaryRole}",
-	"fair_orange_maple": "episodes",
-	"mighty_coral_kettle": "episode",
 	"witty_sepia_spruce": "episodes",
 	"rapid_lemon_rabbit": "episode",
 	"shiny_lilac_meadow": "No biography available",
@@ -1109,5 +1106,27 @@
 	"bold_plum_blossom": "Follow {name}",
 	"daring_saffron_banjo": "Cancel your request to follow {name}",
 	"merry_peach_pine": "Unfollow {name}",
-	"dreamy_gray_tiger": "Accept {name}'s request"
+	"dreamy_gray_tiger": "Accept {name}'s request",
+	"nifty_hazel_maple": "{primaryJob} (+{numberOfOtherJobs} more)",
+	"clever_bronze_sunflower": "View profile",
+	"hardy_periwinkle_lantern": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Appears in {count} episode",
+				"countPlural=other": "Appears in {count} episodes"
+			}
+		}
+	],
+	"wise_teal_banjo": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Worked on {count} episode",
+				"countPlural=other": "Worked on {count} episodes"
+			}
+		}
+	]
 }

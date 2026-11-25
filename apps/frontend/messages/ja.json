@@ -165,9 +165,6 @@
 	"lush_purple_coral": "トップへ戻る",
 	"elegant_gold_violin": "出演者とスタッフの一覧を見る",
 	"alert_sepia_cactus": "{primaryRole}（他{numberOfOtherRoles}件）",
-	"eager_lilac_willow": "{primaryRole}",
-	"fair_orange_maple": "エピソード",
-	"mighty_coral_kettle": "エピソード",
 	"witty_sepia_spruce": "エピソード",
 	"rapid_lemon_rabbit": "エピソード",
 	"shiny_lilac_meadow": "経歴はありません",
@@ -1109,5 +1106,27 @@
 	"bold_plum_blossom": "{name}さんをフォロー",
 	"daring_saffron_banjo": "{name}さんへのフォローリクエストを取り消し",
 	"merry_peach_pine": "{name}さんのフォローを解除",
-	"dreamy_gray_tiger": "{name}さんのリクエストを承認"
+	"dreamy_gray_tiger": "{name}さんのリクエストを承認",
+	"nifty_hazel_maple": "{primaryJob}（他{numberOfOtherJobs}件）",
+	"clever_bronze_sunflower": "プロフィールを見る",
+	"hardy_periwinkle_lantern": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count}話に出演",
+				"countPlural=other": "{count}話に出演"
+			}
+		}
+	],
+	"wise_teal_banjo": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "{count}話に参加",
+				"countPlural=other": "{count}話に参加"
+			}
+		}
+	]
 }
