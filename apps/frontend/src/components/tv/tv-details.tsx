@@ -1,5 +1,6 @@
 import {
 	IconCalendarWeekFilled,
+	IconChevronRight,
 	IconDeviceTv,
 	IconStack2,
 } from "@tabler/icons-react";
@@ -161,7 +162,7 @@ export function TvDetailsView({
 					<TVStatusCard status={tv.status} />
 
 					<Link to="/tv/$tvId/seasons" params={{ tvId: tv.id.toString() }}>
-						<Card>
+						<Card className="h-full transition-colors hover:bg-accent">
 							<CardContent className="flex items-center gap-4">
 								<IconDeviceTv />
 								<div>
@@ -170,6 +171,10 @@ export function TvDetailsView({
 										{m.lean_crimson_puma({ count: tv.number_of_seasons })}
 									</p>
 								</div>
+								<IconChevronRight
+									aria-hidden
+									className="ml-auto text-muted-foreground"
+								/>
 							</CardContent>
 						</Card>
 					</Link>
