@@ -18,7 +18,7 @@ export const Route = createFileRoute("/tv/$tvId/_header")({
 function TvShowHeaderLayout() {
 	const { tvId } = Route.useParams();
 	// Set on season and episode pages, which show the season's providers.
-	// Episode pages also show the episode still as the page background.
+	// Episode pages show the episode still as the backdrop instead of the show's.
 	const { seasonNumber, episodeNumber } = useParams({ strict: false });
 	const hasSeason = seasonNumber !== undefined;
 	const hasEpisode = hasSeason && episodeNumber !== undefined;
@@ -63,16 +63,10 @@ function TvShowHeaderLayout() {
 			isLoading={isLoading}
 			watchProviders={hasSeason ? seasonProviders : showProviders}
 			region={region}
-			background={
-				hasEpisode
-					? {
-							image: getTmdbImageUrl(
-								episode?.still_path ?? tv?.backdrop_path ?? null,
-							),
-							isLoading: isEpisodeLoading || isLoading,
-						}
-					: undefined
-			}
+			backgroundImage={getTmdbImageUrl(
+				episode?.still_path ?? tv?.backdrop_path ?? null,
+			)}
+			isBackgroundLoading={isLoading || isEpisodeLoading}
 		>
 			<Outlet />
 		</TvShowLayout>

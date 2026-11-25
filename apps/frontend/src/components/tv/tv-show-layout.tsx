@@ -12,16 +12,14 @@ import { useIsMobile } from "@/integrations/media-query";
 /** Overrides every breakpoint of PortraitImage's default size. */
 const POSTER_CLASSES = "w-20 sm:w-24 md:w-24 lg:w-28 2xl:w-28 shrink-0";
 
-/** Same top offset as MediaDetailsLayout, so content starts below the backdrop. */
-const BACKGROUND_OFFSET_CLASSES = "pt-39 md:pt-58 lg:pt-70";
-
 interface TvShowLayoutProps {
 	tv: Schemas.TvDetails | undefined;
 	isLoading: boolean;
 	watchProviders: Schemas.WatchProviders | undefined;
 	region: Schemas.WatchProvidersCountry;
-	/** Shows a backdrop behind the header. The image is drawn once loaded. */
-	background?: { image: string | null; isLoading: boolean };
+	/** Backdrop behind the header, drawn once it is known. */
+	backgroundImage: string | null;
+	isBackgroundLoading: boolean;
 	children: ReactNode;
 }
 
@@ -30,21 +28,20 @@ export function TvShowLayout({
 	isLoading,
 	watchProviders,
 	region,
-	background,
+	backgroundImage,
+	isBackgroundLoading,
 	children,
 }: TvShowLayoutProps) {
 	const isMobile = useIsMobile();
 
 	return (
 		<>
-			{background && !background.isLoading ? (
-				<MediaBackgroundImage backgroundImage={background.image} />
-			) : null}
+			{isBackgroundLoading ? null : (
+				<MediaBackgroundImage backgroundImage={backgroundImage} />
+			)}
 			<div
-				className={cn(
-					"grid w-full grid-cols-[1fr_auto] lg:grid-cols-[auto_1fr] gap-x-3 gap-y-4 pt-2 lg:gap-x-6 lg:gap-y-6",
-					background && BACKGROUND_OFFSET_CLASSES,
-				)}
+				// Same top offset as MediaDetailsLayout, so content starts below the backdrop.
+				className="grid w-full grid-cols-[1fr_auto] lg:grid-cols-[auto_1fr] gap-x-3 gap-y-4 pt-39 md:pt-58 lg:pt-70 lg:gap-x-6 lg:gap-y-6"
 			>
 				<div className="order-2 lg:order-none lg:row-span-2">
 					{tv ? (
