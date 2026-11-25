@@ -101,6 +101,7 @@ export function useTvEpisodeResources<T>(
 	episode_number: number,
 	endpoint: TvEpisodeEndpoints,
 	params?: TvParams,
+	options?: Omit<UseQueryOptions<T>, "queryKey" | "queryFn">,
 ) {
 	return useQuery<T>({
 		queryKey: ["tv", tv_id, season_number, episode_number, endpoint, params],
@@ -110,5 +111,6 @@ export function useTvEpisodeResources<T>(
 				params,
 			}),
 		staleTime: 1000 * 60 * 20,
+		...options,
 	});
 }

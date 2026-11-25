@@ -2,8 +2,14 @@ import { createFileRoute, Outlet, useParams } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
 import { TvShowLayout } from "@/components/tv/tv-show-layout";
-import { useTv, useTvResources, useTvSeasonResources } from "@/hooks/useTv";
+import {
+	useTv,
+	useTvEpisodeResources,
+	useTvResources,
+	useTvSeasonResources,
+} from "@/hooks/useTv";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
+import { getTmdbImageUrl } from "@/utils/utils";
 
 export const Route = createFileRoute("/tv/$tvId/_header")({
 	component: TvShowHeaderLayout,
@@ -12,8 +18,10 @@ export const Route = createFileRoute("/tv/$tvId/_header")({
 function TvShowHeaderLayout() {
 	const { tvId } = Route.useParams();
 	// Set on season and episode pages, which show the season's providers.
-	const { seasonNumber } = useParams({ strict: false });
+	// Episode pages also show the episode still as the page background.
+	const { seasonNumber, episodeNumber } = useParams({ strict: false });
 	const hasSeason = seasonNumber !== undefined;
+	const hasEpisode = hasSeason && episodeNumber !== undefined;
 	const localeRegion = useAtomValue(localeRegionAtom);
 	const region = useAtomValue(regionAtom);
 
@@ -38,12 +46,33 @@ function TvShowHeaderLayout() {
 			{ enabled: hasSeason },
 		);
 
+	// Same query as the episode page, so the request is shared.
+	const { data: episode, isLoading: isEpisodeLoading } =
+		useTvEpisodeResources<Schemas.TvEpisodeDetails>(
+			Number(tvId),
+			Number(seasonNumber),
+			Number(episodeNumber),
+			"",
+			{ language: localeRegion, region },
+			{ enabled: hasEpisode },
+		);
+
 	return (
 		<TvShowLayout
 			tv={tv}
 			isLoading={isLoading}
 			watchProviders={hasSeason ? seasonProviders : showProviders}
 			region={region}
+			background={
+				hasEpisode
+					? {
+							image: getTmdbImageUrl(
+								episode?.still_path ?? tv?.backdrop_path ?? null,
+							),
+							isLoading: isEpisodeLoading || isLoading,
+						}
+					: undefined
+			}
 		>
 			<Outlet />
 		</TvShowLayout>
