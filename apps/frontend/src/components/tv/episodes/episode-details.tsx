@@ -1,5 +1,6 @@
 import { IconChevronLeft } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
+import { isFuture } from "date-fns";
 import { useAtomValue } from "jotai";
 import { Fragment, type ReactNode } from "react";
 import type { Schemas } from "shared";
@@ -93,14 +94,19 @@ export function TvEpisodeDetailsView({
 		meta.push({ id: "runtime", content: formatRuntime(episode.runtime) });
 	}
 	if (episode.air_date) {
+		const formatAirDate = isFuture(new Date(episode.air_date))
+			? m.joyful_peach_barn
+			: m.peppy_lemon_mesa;
 		meta.push({
 			id: "air-date",
 			content: (
 				<time dateTime={episode.air_date}>
-					{formatDate(episode.air_date, localeRegion, {
-						year: "numeric",
-						month: "short",
-						day: "numeric",
+					{formatAirDate({
+						date: formatDate(episode.air_date, localeRegion, {
+							year: "numeric",
+							month: "short",
+							day: "numeric",
+						}),
 					})}
 				</time>
 			),

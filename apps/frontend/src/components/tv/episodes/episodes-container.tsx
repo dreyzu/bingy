@@ -39,13 +39,14 @@ export function EpisodesContainer({ episodes }: EpisodesContainerProps) {
 									</h3>
 									{episode.air_date ? (
 										<p className="text-sm text-muted-foreground">
-											{isFuture(new Date(episode.air_date))
-												? m.agile_topaz_jasmine()
-												: m.fierce_scarlet_mesa()}
-											{formatDate(episode.air_date, localeRegion, {
-												year: "numeric",
-												month: "short",
-												day: "numeric",
+											{(isFuture(new Date(episode.air_date))
+												? m.nimble_orange_crystal
+												: m.proud_scarlet_valley)({
+												date: formatDate(episode.air_date, localeRegion, {
+													year: "numeric",
+													month: "short",
+													day: "numeric",
+												}),
 											})}
 										</p>
 									) : null}
