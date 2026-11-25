@@ -110,13 +110,12 @@ export function TvEpisodeDetailsView({
 	return (
 		<div className="w-full flex flex-col gap-4">
 			<div className="flex flex-col gap-2">
-				<div className="flex items-center justify-between gap-2">
+				<div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
 					<Link
 						to="/tv/$tvId/season/$seasonNumber"
 						params={seasonParams}
 						className={buttonVariants({
 							variant: "ghost",
-							size: "sm",
 							className: "-ml-2 w-fit text-muted-foreground",
 						})}
 					>

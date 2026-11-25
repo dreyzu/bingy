@@ -14,6 +14,7 @@ import {
 } from "@/components/medias/media-info-tabs";
 import { PortraitImage } from "@/components/portrait-image";
 import { EpisodesContainer } from "@/components/tv/episodes/episodes-container";
+import { SeasonNavigation } from "@/components/tv/seasons/season-navigation";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { localeRegionAtom } from "@/lib/atoms/region";
@@ -155,18 +156,20 @@ export function TvSeasonDetailsView({
 	return (
 		<div className="w-full flex flex-col gap-4">
 			<div className="flex flex-col gap-2">
-				<Link
-					to="/tv/$tvId/seasons"
-					params={{ tvId: tvId.toString() }}
-					className={buttonVariants({
-						variant: "ghost",
-						size: "sm",
-						className: "-ml-2 w-fit text-muted-foreground",
-					})}
-				>
-					<IconChevronLeft data-icon="inline-start" />
-					{m.zesty_cerise_prairie()}
-				</Link>
+				<div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+					<Link
+						to="/tv/$tvId/seasons"
+						params={{ tvId: tvId.toString() }}
+						className={buttonVariants({
+							variant: "ghost",
+							className: "-ml-2 w-fit text-muted-foreground",
+						})}
+					>
+						<IconChevronLeft data-icon="inline-start" />
+						{m.zesty_cerise_prairie()}
+					</Link>
+					<SeasonNavigation tvId={tvId} seasonNumber={tvSeason.season_number} />
+				</div>
 				<div className="flex items-center justify-between gap-3">
 					<h1 className="text-2xl font-bold">{tvSeason.name}</h1>
 					{hasRuntime ? (
