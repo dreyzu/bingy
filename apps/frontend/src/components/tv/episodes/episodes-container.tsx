@@ -1,9 +1,7 @@
-import { IconStopwatch } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import { isFuture } from "date-fns";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { localeRegionAtom } from "@/lib/atoms/region";
@@ -26,7 +24,7 @@ export function EpisodesContainer({ episodes }: EpisodesContainerProps) {
 						{index > 0 ? <Separator className="mb-4" /> : null}
 						<div className="flex flex-col gap-2">
 							<div className="flex items-start justify-between gap-4">
-								<div className="flex-1">
+								<div className="min-w-0 flex-1">
 									<h3 className="font-semibold text-lg">
 										<Link
 											to="/tv/$tvId/season/$seasonNumber/episode/$episodeNumber"
@@ -52,14 +50,11 @@ export function EpisodesContainer({ episodes }: EpisodesContainerProps) {
 										</p>
 									) : null}
 								</div>
-								<div className="flex flex-row gap-2">
-									{episode.runtime && episode.runtime > 0 ? (
-										<Badge className="flex items-center gap-1 border-none self-center">
-											<IconStopwatch className="w-4 h-4" />
-											{formatRuntime(episode.runtime)}
-										</Badge>
-									) : null}
-								</div>
+								{episode.runtime ? (
+									<span className="shrink-0 pt-1 text-sm text-muted-foreground">
+										{formatRuntime(episode.runtime)}
+									</span>
+								) : null}
 							</div>
 							{episode.overview ? (
 								<p className="text-sm whitespace-pre-line max-w-5/6 text-pretty">

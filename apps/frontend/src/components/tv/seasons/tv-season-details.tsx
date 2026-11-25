@@ -1,4 +1,4 @@
-import { IconChevronLeft, IconStopwatch } from "@tabler/icons-react";
+import { IconChevronLeft } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
 import { getYear } from "date-fns";
 import { useAtomValue } from "jotai";
@@ -15,7 +15,6 @@ import {
 import { PortraitImage } from "@/components/portrait-image";
 import { EpisodesContainer } from "@/components/tv/episodes/episodes-container";
 import { SeasonNavigation } from "@/components/tv/seasons/season-navigation";
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
@@ -96,6 +95,9 @@ export function TvSeasonDetailsView({
 			content: m.witty_coral_tulip({ count: tvSeason.episodes.length }),
 		});
 	}
+	if (hasRuntime) {
+		meta.push({ id: "runtime", content: totalRuntimeHours });
+	}
 
 	const formatAirDate = (date: string) =>
 		formatDate(date, localeRegion, {
@@ -170,15 +172,7 @@ export function TvSeasonDetailsView({
 					</Link>
 					<SeasonNavigation tvId={tvId} seasonNumber={tvSeason.season_number} />
 				</div>
-				<div className="flex items-center justify-between gap-3">
-					<h1 className="text-2xl font-bold">{tvSeason.name}</h1>
-					{hasRuntime ? (
-						<Badge variant="default" className="shrink-0 gap-1">
-							<IconStopwatch className="h-4 w-4" />
-							<span>{totalRuntimeHours}</span>
-						</Badge>
-					) : null}
-				</div>
+				<h1 className="text-2xl font-bold">{tvSeason.name}</h1>
 				{meta.length > 0 ? (
 					<p className="flex flex-wrap items-center gap-x-2 text-sm lg:text-base text-muted-foreground">
 						{meta.map((item, index) => (
