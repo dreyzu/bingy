@@ -1,7 +1,4 @@
-import { Link } from "@tanstack/react-router";
 import type { Schemas } from "shared";
-import { PortraitImage } from "@/components/portrait-image";
-import { Card, CardContent } from "@/components/ui/card";
 import { m } from "@/paraglide/messages";
 import { CreditEpisodeCard } from "./credit-episode-card";
 
@@ -10,8 +7,6 @@ interface CreditEpisodesListProps {
 	personName: string;
 	character: string;
 	job?: string;
-	showName: string;
-	posterPath: string | null;
 	guestEpisodeIds: Set<number>;
 	episodes: Omit<Schemas.Episode, "media_type">[];
 }
@@ -21,55 +16,28 @@ export const CreditEpisodesList = ({
 	personName,
 	character,
 	job,
-	showName,
-	posterPath,
 	guestEpisodeIds,
 	episodes,
 }: CreditEpisodesListProps) => {
 	const role = character || job || m.balmy_jade_forest();
 
 	return (
-		<div className="w-full">
-			<div className="grid lg:grid-cols-[auto_1fr] gap-2 lg:gap-4 pt-2 justify-items-center">
-				<div className="flex flex-col gap-2 items-center lg:items-start max-w-62.5 md:max-w-60 2xl:max-w-75">
-					<PortraitImage
-						alt={showName}
-						imagePath={posterPath}
-						imageSize="w500"
-						category="tv"
-					/>
-				</div>
+		<div className="w-full flex flex-col gap-4">
+			<h1 className="text-xl text-muted-foreground">
+				<span className="text-foreground">{personName}</span>{" "}
+				{m.happy_hazel_compass({ role: role })}
+			</h1>
 
-				<div className="w-full flex flex-col gap-4 overflow-hidden px-0.5">
-					<Card className="shadow-none bg-transparent pt-0 lg:p-0 border-none ring-0 rounded-none">
-						<CardContent>
-							<div className="flex flex-col gap-2">
-								<Link to="/tv/$tvId" params={{ tvId: tvId.toString() }}>
-									<h1 className="text-4xl font-bold leading-relaxed">
-										{showName}
-									</h1>
-								</Link>
-
-								<p className="text-xl text-muted-foreground mt-2">
-									<span className="text-foreground">{personName}</span>{" "}
-									{m.happy_hazel_compass({ role: role })}
-								</p>
-							</div>
-						</CardContent>
-					</Card>
-
-					{episodes.map((episode) => (
-						<CreditEpisodeCard
-							key={episode.id}
-							episode={episode}
-							tvId={tvId}
-							isGuestAppearance={
-								character ? guestEpisodeIds.has(episode.id) : false
-							}
-						/>
-					))}
-				</div>
-			</div>
+			{episodes.map((episode) => (
+				<CreditEpisodeCard
+					key={episode.id}
+					episode={episode}
+					tvId={tvId}
+					isGuestAppearance={
+						character ? guestEpisodeIds.has(episode.id) : false
+					}
+				/>
+			))}
 		</div>
 	);
 };

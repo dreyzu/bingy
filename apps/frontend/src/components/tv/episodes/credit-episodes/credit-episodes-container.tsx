@@ -55,7 +55,7 @@ export const CreditEpisodesContainer = ({
 	}
 
 	const { job, person } = creditDetails;
-	const { episodes, character, name, poster_path } = tvMedia;
+	const { episodes, character } = tvMedia;
 
 	if (seasonQueries.some((query) => query.isLoading)) {
 		return <LoadingCentered />;
@@ -93,8 +93,6 @@ export const CreditEpisodesContainer = ({
 			personName={person.name}
 			character={character}
 			job={job}
-			showName={name}
-			posterPath={poster_path}
 			episodes={allEpisodes}
 			guestEpisodeIds={guestEpisodeIds}
 		/>
