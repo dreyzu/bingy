@@ -10,7 +10,6 @@ import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
 import { MediaOverview } from "@/components/medias/media-overview";
 import { CastList } from "@/components/person/cast-list";
-import { BackButton } from "@/components/ui/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { localeRegionAtom } from "@/lib/atoms/region";
@@ -98,8 +97,6 @@ export function TvEpisodeDetailsView({
 
 	return (
 		<div className="w-full">
-			<BackButton />
-
 			<div className="flex flex-col gap-4 pt-4">
 				<div className="flex flex-col gap-2">
 					<h1 className="text-4xl font-bold">{episode.name}</h1>

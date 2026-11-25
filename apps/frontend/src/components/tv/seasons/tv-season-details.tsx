@@ -13,7 +13,6 @@ import { MediaOverview } from "@/components/medias/media-overview";
 import { CastList } from "@/components/person/cast-list";
 import { PortraitImage } from "@/components/portrait-image";
 import { EpisodesContainer } from "@/components/tv/episodes/episodes-container";
-import { BackButton } from "@/components/ui/back-button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { WatchProvidersSection } from "@/components/watch-providers/watch-providers-section";
@@ -120,8 +119,6 @@ export function TvSeasonDetailsView({
 
 	return (
 		<div className="w-full">
-			<BackButton />
-
 			<div className="grid lg:grid-cols-[auto_1fr] gap-2 lg:gap-4 pt-2 justify-items-center">
 				<div className="flex flex-col gap-2 items-center lg:items-start max-w-62.5 md:max-w-60 2xl:max-w-75">
 					<PortraitImage

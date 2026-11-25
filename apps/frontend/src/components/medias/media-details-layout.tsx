@@ -1,7 +1,6 @@
 import { cn } from "cn";
 import type { ReactNode } from "react";
 import { MediaBackgroundImage } from "@/components/medias/media-background-image";
-import { BackButton } from "@/components/ui/back-button";
 
 /** Poster size for detail pages: small beside the header below `lg`. */
 export const MEDIA_DETAILS_POSTER_CLASSES =
@@ -20,32 +19,6 @@ interface MediaDetailsLayoutProps {
 	className?: string;
 }
 
-/**
- * Below `lg`, the header sits next to a small poster on the right, then the
- * overview, the watch providers, the actions, the stats, the info tabs and the
- * rest of the content span the full width, leaving the backdrop visible
- * above. From `lg` up, the poster and watch providers form a left column, and
- * the right column shows the header, the overview and the info tabs stacked,
- * the actions beside them, then the stats and the content.
- *
- * The info tabs row is `1fr` so that, when the actions are taller than what
- * sits beside them, the extra height goes below the tabs instead of between
- * the header, the overview and the tabs. The right column is `self-start` so
- * it never stretches to the poster column's height: otherwise that row would
- * also grow when the content below is short, and the gap above the content
- * would change when switching tabs.
- *
- * The right column clips its overflow from `lg` up, which would also cut off
- * the 1px ring drawn outside the actions card at the column's right edge, so
- * the actions cell has a 1px padding to keep the ring inside it.
- *
- * Without actions (signed out, or collections), the overview would span the
- * whole right column from `lg` up, so it is capped at three quarters of it to
- * keep lines readable.
- *
- * Both column wrappers use `display: contents` below `lg`, so their children
- * become items of the outer grid and are laid out by their `order`.
- */
 export function MediaDetailsLayout({
 	backgroundImage,
 	poster,
@@ -62,9 +35,7 @@ export function MediaDetailsLayout({
 		<>
 			<MediaBackgroundImage backgroundImage={backgroundImage} />
 			<div className={cn("w-full pt-3 md:pt-10 lg:pt-60", className)}>
-				<BackButton />
-
-				<div className="grid grid-cols-[1fr_auto] lg:grid-cols-[auto_1fr] gap-x-3 gap-y-4 lg:gap-4 pt-28 md:pt-40 lg:pt-2">
+				<div className="grid grid-cols-[1fr_auto] lg:grid-cols-[auto_1fr] gap-x-3 gap-y-4 lg:gap-4 pt-36 md:pt-48 lg:pt-10">
 					<div className="contents lg:flex lg:flex-col lg:gap-2 lg:items-start lg:max-w-60 2xl:max-w-75">
 						<div className="order-2 self-start">{poster}</div>
 						{watchProviders ? (

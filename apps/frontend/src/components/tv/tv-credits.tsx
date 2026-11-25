@@ -9,7 +9,6 @@ import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
 import { CastSectionAggregated } from "@/components/person/aggregated/cast-section-aggregated";
 import { CrewSectionAggregated } from "@/components/person/aggregated/crew-section-aggregated";
-import { BackButton } from "@/components/ui/back-button";
 import { m } from "@/paraglide/messages";
 
 interface TvCreditsViewProps {
@@ -43,8 +42,6 @@ export function TvCreditsView({
 	return (
 		<div className="scroll-smooth w-full">
 			<div className="flex justify-between w-full">
-				<BackButton />
-
 				{credits.crew.length > 0 && credits.cast.length > 0 ? (
 					<ScrollToCrewButton crewSectionId={CREW_SECTION_ID} />
 				) : null}

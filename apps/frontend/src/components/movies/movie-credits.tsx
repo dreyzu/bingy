@@ -9,7 +9,6 @@ import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
 import { CastSectionMovie } from "@/components/person/movie/cast-section-movie";
 import { CrewSectionMovie } from "@/components/person/movie/crew-section-movie";
-import { BackButton } from "@/components/ui/back-button";
 import { m } from "@/paraglide/messages";
 
 interface MovieCreditsViewProps {
@@ -40,8 +39,6 @@ export function MovieCreditsView({
 	return (
 		<div className="scroll-smooth w-full">
 			<div className="flex justify-between w-full">
-				<BackButton />
-
 				{credits.crew.length > 0 && credits.cast.length > 0 ? (
 					<ScrollToCrewButton crewSectionId={CREW_SECTION_ID} />
 				) : null}

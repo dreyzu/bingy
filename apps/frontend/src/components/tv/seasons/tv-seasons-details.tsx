@@ -1,7 +1,6 @@
 import type { Schemas } from "shared";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
-import { BackButton } from "@/components/ui/back-button";
 import { m } from "@/paraglide/messages";
 import { SeasonCard } from "./season-card";
 
@@ -37,8 +36,6 @@ export function TvSeasonsDetailsView({
 
 	return (
 		<div className="w-full">
-			<BackButton />
-
 			<div className="grid gris-cols-1 gap-4 pt-2">
 				<div>
 					<h1 className="text-4xl font-bold mb-2">{tv.name}</h1>
