@@ -12,7 +12,7 @@ import { WatchProvidersSection } from "@/components/watch-providers/watch-provid
 const POSTER_CLASSES = "w-20 sm:w-24 md:w-24 lg:w-60 2xl:w-75 shrink-0";
 
 const TITLE_CLASSES =
-	"text-2xl lg:text-3xl font-bold hover:underline underline-offset-4";
+	"text-2xl lg:text-4xl font-bold leading-none hover:underline underline-offset-4";
 
 export interface MediaHeader {
 	type: "movie" | "tv";
@@ -78,7 +78,7 @@ export function MediaHeaderLayout({
 					/>
 				</div>
 
-				<div className="order-1 flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1 self-center lg:order-none lg:col-start-2 lg:row-start-1 lg:self-start">
+				<div className="order-1 flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1 self-center lg:order-none lg:col-start-2 lg:row-start-1 lg:self-start">
 					{media ? (
 						<>
 							{media.type === "movie" ? (
