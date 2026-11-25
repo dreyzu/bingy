@@ -288,8 +288,6 @@
 	"lively_coral_bamboo": "연출: {names}",
 	"fierce_olive_tiger": "각본: {names}",
 	"grand_amber_mesa": "연출: {directors}, 각본: {writers}",
-	"eager_khaki_dune": "상영 시간",
-	"lean_maroon_coral": "방영일",
 	"quick_beige_meadow": "제작진",
 	"golden_cerise_boulder": "게스트 출연진",
 	"nifty_cerise_panda": [
@@ -958,16 +956,6 @@
 	"bold_amber_pine": "이런!",
 	"wise_turquoise_lemur": "이런!",
 	"airy_ruby_coral": "홈",
-	"chilly_saffron_galaxy": [
-		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
-			"match": {
-				"countPlural=one": "{count}명 평가",
-				"countPlural=other": "{count}명 평가"
-			}
-		}
-	],
 	"alert_sienna_cherry": "해당 없음",
 	"swift_saffron_daisy": "감독: {names}",
 	"elegant_lilac_mesa": "크리에이터: {names}",

@@ -288,8 +288,6 @@
 	"lively_coral_bamboo": "Dirigido por {names}",
 	"fierce_olive_tiger": "Escrito por {names}",
 	"grand_amber_mesa": "Dirigido por {directors} e escrito por {writers}",
-	"eager_khaki_dune": "Duração",
-	"lean_maroon_coral": "Data de exibição",
 	"quick_beige_meadow": "equipe",
 	"golden_cerise_boulder": "participações especiais",
 	"nifty_cerise_panda": [
@@ -958,16 +956,6 @@
 	"bold_amber_pine": "Ops!",
 	"wise_turquoise_lemur": "Ops!",
 	"airy_ruby_coral": "Início",
-	"chilly_saffron_galaxy": [
-		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
-			"match": {
-				"countPlural=one": "{count} voto",
-				"countPlural=other": "{count} votos"
-			}
-		}
-	],
 	"alert_sienna_cherry": "N/D",
 	"swift_saffron_daisy": "Dirigido por {names}",
 	"elegant_lilac_mesa": "Criada por {names}",

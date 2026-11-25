@@ -288,8 +288,6 @@
 	"lively_coral_bamboo": "演出：{names}",
 	"fierce_olive_tiger": "脚本：{names}",
 	"grand_amber_mesa": "演出：{directors}、脚本：{writers}",
-	"eager_khaki_dune": "上映時間",
-	"lean_maroon_coral": "放送日",
 	"quick_beige_meadow": "スタッフ",
 	"golden_cerise_boulder": "ゲスト出演者",
 	"nifty_cerise_panda": [
@@ -958,16 +956,6 @@
 	"bold_amber_pine": "おっと！",
 	"wise_turquoise_lemur": "おっと！",
 	"airy_ruby_coral": "ホーム",
-	"chilly_saffron_galaxy": [
-		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
-			"match": {
-				"countPlural=one": "{count}票",
-				"countPlural=other": "{count}票"
-			}
-		}
-	],
 	"alert_sienna_cherry": "該当なし",
 	"swift_saffron_daisy": "監督：{names}",
 	"elegant_lilac_mesa": "クリエイター：{names}",

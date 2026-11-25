@@ -288,8 +288,6 @@
 	"lively_coral_bamboo": "导演：{names}",
 	"fierce_olive_tiger": "编剧：{names}",
 	"grand_amber_mesa": "导演：{directors}，编剧：{writers}",
-	"eager_khaki_dune": "时长",
-	"lean_maroon_coral": "播出日期",
 	"quick_beige_meadow": "制作人员",
 	"golden_cerise_boulder": "客串演员",
 	"nifty_cerise_panda": [
@@ -958,16 +956,6 @@
 	"bold_amber_pine": "哎呀！",
 	"wise_turquoise_lemur": "哎呀！",
 	"airy_ruby_coral": "首页",
-	"chilly_saffron_galaxy": [
-		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
-			"match": {
-				"countPlural=one": "{count} 票",
-				"countPlural=other": "{count} 票"
-			}
-		}
-	],
 	"alert_sienna_cherry": "无",
 	"swift_saffron_daisy": "导演：{names}",
 	"elegant_lilac_mesa": "主创：{names}",

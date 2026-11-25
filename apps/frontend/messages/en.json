@@ -288,8 +288,6 @@
 	"lively_coral_bamboo": "Directed by {names}",
 	"fierce_olive_tiger": "Written by {names}",
 	"grand_amber_mesa": "Directed by {directors} and written by {writers}",
-	"eager_khaki_dune": "Runtime",
-	"lean_maroon_coral": "Air Date",
 	"quick_beige_meadow": "crew",
 	"golden_cerise_boulder": "guest stars",
 	"nifty_cerise_panda": [
@@ -958,16 +956,6 @@
 	"bold_amber_pine": "Oops!",
 	"wise_turquoise_lemur": "Oops!",
 	"airy_ruby_coral": "Home",
-	"chilly_saffron_galaxy": [
-		{
-			"declarations": ["input count", "local countPlural = count: plural"],
-			"selectors": ["countPlural"],
-			"match": {
-				"countPlural=one": "{count} vote",
-				"countPlural=other": "{count} votes"
-			}
-		}
-	],
 	"alert_sienna_cherry": "N/A",
 	"swift_saffron_daisy": "Directed by {names}",
 	"elegant_lilac_mesa": "Created by {names}",
