@@ -7,7 +7,6 @@ import {
 	toCastWithCharacters,
 	toCrewWithJobs,
 } from "@/utils/aggregate-credits";
-import { uniqueCastMembers, uniqueCrewMembers } from "@/utils/utils";
 
 export const Route = createFileRoute("/tv/$tvId/")({
 	component: TvDetailsContainer,
@@ -29,13 +28,9 @@ function TvDetailsContainer() {
 		region,
 	});
 
-	const cast = uniqueCastMembers(
-		toCastWithCharacters(tv?.aggregate_credits?.cast ?? []),
-	).slice(0, 20);
-
-	const crew = uniqueCrewMembers(
-		toCrewWithJobs(tv?.aggregate_credits?.crew ?? []),
-	).slice(0, 20);
+	// The info tabs shorten these and link to the full credits.
+	const cast = toCastWithCharacters(tv?.aggregate_credits?.cast ?? []);
+	const crew = toCrewWithJobs(tv?.aggregate_credits?.crew ?? []);
 
 	const watchProviders = tv?.["watch/providers"];
 

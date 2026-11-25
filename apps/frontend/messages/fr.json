@@ -156,7 +156,8 @@
 			}
 		}
 	],
-	"warm_fuchsia_planet": "Voir l'équipe",
+	"warm_fuchsia_planet": "Équipe technique",
+	"lush_purple_coral": "Revenir en haut",
 	"quiet_orange_anchor": "Équipe de production",
 	"elegant_gold_violin": "Voir le casting complet et l'équipe de production",
 	"alert_sepia_cactus": "{primaryRole} (+{numberOfOtherRoles} de plus)",

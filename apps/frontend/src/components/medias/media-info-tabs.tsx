@@ -12,6 +12,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { m } from "@/paraglide/messages";
 import { uniqueCastMembers, uniqueCrewMembers } from "@/utils/utils";
 
+/** People shown per tab; the full credits page lists the rest. */
+const MAX_PEOPLE = 10;
+
 export interface ExtraInfoTab {
 	id: string;
 	label: string;
@@ -45,6 +48,10 @@ export function MediaInfoTabs({
 	// them once with all their roles merged.
 	const cast = uniqueCastMembers(castCredits);
 	const crew = uniqueCrewMembers(crewCredits);
+	// The full credits link only matters when the tab leaves people out.
+	const hasMoreCredits = (tab: string) =>
+		(tab === "cast" && cast.length > MAX_PEOPLE) ||
+		(tab === "crew" && crew.length > MAX_PEOPLE);
 
 	const availableTabs = [
 		...(
@@ -104,10 +111,10 @@ export function MediaInfoTabs({
 					))}
 				</TabsList>
 				<TabsContent value="cast" className="p-0.75">
-					<CastList people={cast} />
+					<CastList people={cast.slice(0, MAX_PEOPLE)} />
 				</TabsContent>
 				<TabsContent value="crew" className="p-0.75">
-					<CrewList people={crew} />
+					<CrewList people={crew.slice(0, MAX_PEOPLE)} />
 				</TabsContent>
 				<TabsContent value="genres" className="p-0.75">
 					<MediaGenresBadge genres={genres} />
@@ -121,7 +128,7 @@ export function MediaInfoTabs({
 					</TabsContent>
 				))}
 			</Tabs>
-			{tab === "cast" || tab === "crew" ? (
+			{hasMoreCredits(tab) ? (
 				<MediaCreditsLink
 					media={media}
 					section={tab === "crew" ? "crew" : undefined}

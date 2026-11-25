@@ -30,6 +30,7 @@ function TvSeasonCreditsPage() {
 	return (
 		<TvSeasonCreditsView
 			credits={credits}
+			tvId={Number(tvId)}
 			seasonNumber={Number(seasonNumber)}
 			isLoading={isLoading}
 			isError={isError}

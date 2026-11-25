@@ -5,6 +5,7 @@ import {
 	useScrollToCrewSection,
 } from "@/components/credits/crew-section";
 import { ScrollToCrewButton } from "@/components/credits/scroll-to-crew-button";
+import { ScrollToTopButton } from "@/components/credits/scroll-to-top-button";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
 import { CastSectionAggregated } from "@/components/person/aggregated/cast-section-aggregated";
@@ -43,7 +44,13 @@ export function TvCreditsView({
 		<div className="scroll-smooth w-full">
 			<div className="flex justify-between w-full">
 				{credits.crew.length > 0 && credits.cast.length > 0 ? (
-					<ScrollToCrewButton crewSectionId={CREW_SECTION_ID} />
+					<>
+						<ScrollToCrewButton
+							crewSectionId={CREW_SECTION_ID}
+							className="-ml-2"
+						/>
+						<ScrollToTopButton crewSectionId={CREW_SECTION_ID} />
+					</>
 				) : null}
 			</div>
 			<div className="flex flex-col gap-2 mt-4 text-center md:text-left">
