@@ -11,25 +11,18 @@ export function MediaLearnMoreCard({ id, mediaType }: MediaLearnMoreProps) {
 	const tmdbUrl = `https://www.themoviedb.org/${mediaType}/${id}`;
 
 	return (
-		<Card>
-			<CardContent className=" flex items-center gap-4">
-				<IconExternalLink />
-				<div>
-					<p className="text-lg font-bold">
-						<a
-							href={tmdbUrl}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="hover:underline"
-						>
-							{m.plucky_saffron_wolf()}
-						</a>
-					</p>
-					<p className="text-sm text-muted-foreground">
-						{m.nifty_azure_hippo()}
-					</p>
-				</div>
-			</CardContent>
-		</Card>
+		<a href={tmdbUrl} target="_blank" rel="noopener noreferrer">
+			<Card className="h-full transition-colors hover:bg-accent">
+				<CardContent className="flex items-center gap-4">
+					<IconExternalLink />
+					<div>
+						<p className="text-lg font-bold">{m.plucky_saffron_wolf()}</p>
+						<p className="text-sm text-muted-foreground">
+							{m.nifty_azure_hippo()}
+						</p>
+					</div>
+				</CardContent>
+			</Card>
+		</a>
 	);
 }
