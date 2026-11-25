@@ -1,5 +1,6 @@
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
+import type { Schemas } from "shared";
 import { logger } from "../../lib/logger";
 import {
 	serveInternalServerError,
@@ -155,11 +156,13 @@ movieRoutes.get(
 					path: { movie_id: id },
 				},
 			);
+
 			return serveData(c, movieAlternativeTitles);
 		} catch (error) {
 			if (error instanceof TmdbError && error.status === 404) {
 				return serveNotFound(c, "Resource not found");
 			}
+
 			logger.error(error);
 			return serveInternalServerError(c, error);
 		}
@@ -175,15 +178,28 @@ movieRoutes.get(
 		const { language } = c.req.valid("query");
 
 		try {
-			const movieCredits = await tmdbClient.get("/movie/{movie_id}/credits", {
-				query: { language },
-				path: { movie_id: id },
-			});
-			return serveData(c, movieCredits);
+			const [movieCredits, movie] = await Promise.all([
+				tmdbClient.get("/movie/{movie_id}/credits", {
+					query: { language },
+					path: { movie_id: id },
+				}),
+				tmdbClient.get("/movie/{movie_id}", {
+					query: { language },
+					path: { movie_id: id },
+				}),
+			]);
+
+			const response: Schemas.MovieCreditsWithTitle = {
+				...movieCredits,
+				title: movie.title,
+			};
+
+			return serveData(c, response);
 		} catch (error) {
 			if (error instanceof TmdbError && error.status === 404) {
 				return serveNotFound(c, "Resource not found");
 			}
+
 			logger.error(error);
 			return serveInternalServerError(c, error);
 		}
