@@ -7,6 +7,7 @@ import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { LoadingCentered } from "@/components/loading/loading-centered";
 import { MediaInfoTabs } from "@/components/medias/media-info-tabs";
 import { EpisodeCreators } from "@/components/tv/episodes/episode-creators";
+import { EpisodeNavigation } from "@/components/tv/episodes/episode-navigation";
 import { buttonVariants } from "@/components/ui/button";
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
@@ -109,18 +110,25 @@ export function TvEpisodeDetailsView({
 	return (
 		<div className="w-full flex flex-col gap-4">
 			<div className="flex flex-col gap-2">
-				<Link
-					to="/tv/$tvId/season/$seasonNumber"
-					params={seasonParams}
-					className={buttonVariants({
-						variant: "ghost",
-						size: "sm",
-						className: "-ml-2 w-fit text-muted-foreground",
-					})}
-				>
-					<IconChevronLeft data-icon="inline-start" />
-					{m.breezy_sienna_iguana()}
-				</Link>
+				<div className="flex items-center justify-between gap-2">
+					<Link
+						to="/tv/$tvId/season/$seasonNumber"
+						params={seasonParams}
+						className={buttonVariants({
+							variant: "ghost",
+							size: "sm",
+							className: "-ml-2 w-fit text-muted-foreground",
+						})}
+					>
+						<IconChevronLeft data-icon="inline-start" />
+						{m.breezy_sienna_iguana()}
+					</Link>
+					<EpisodeNavigation
+						tvId={tvId}
+						seasonNumber={episode.season_number}
+						episodeNumber={episode.episode_number}
+					/>
+				</div>
 				<h1 className="text-2xl font-bold">{episode.name}</h1>
 				<p className="flex flex-wrap items-center gap-x-2 text-sm lg:text-base text-muted-foreground">
 					{meta.map((item, index) => (
