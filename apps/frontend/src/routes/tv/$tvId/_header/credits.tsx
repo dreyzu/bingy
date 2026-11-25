@@ -6,7 +6,7 @@ import { TvCreditsView } from "@/components/tv/tv-credits";
 import { useTvResources } from "@/hooks/useTv";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 
-export const Route = createFileRoute("/tv/$tvId_/credits")({
+export const Route = createFileRoute("/tv/$tvId/_header/credits")({
 	validateSearch: creditsSearchSchema,
 	component: TvCreditsPage,
 });

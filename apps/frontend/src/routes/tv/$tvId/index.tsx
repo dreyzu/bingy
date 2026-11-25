@@ -6,7 +6,7 @@ import { useTv } from "@/hooks/useTv";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 import { uniqueCastMembers, uniqueCrewMembers } from "@/utils/utils";
 
-export const Route = createFileRoute("/tv/$tvId")({
+export const Route = createFileRoute("/tv/$tvId/")({
 	component: TvDetailsContainer,
 });
 

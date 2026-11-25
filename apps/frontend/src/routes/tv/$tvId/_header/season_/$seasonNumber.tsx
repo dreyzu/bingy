@@ -1,36 +1,44 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
-import { TvSeasonCreditsView } from "@/components/tv/seasons/tv-season-credits";
+import { TvSeasonDetailsView } from "@/components/tv/seasons/tv-season-details";
 import { useTvSeasonResources } from "@/hooks/useTv";
 import { localeRegionAtom, regionAtom } from "@/lib/atoms/region";
 
-export const Route = createFileRoute(
-	"/tv/$tvId_/season_/$seasonNumber_/credits",
-)({
-	component: TvSeasonCreditsPage,
-});
+export const Route = createFileRoute("/tv/$tvId/_header/season_/$seasonNumber")(
+	{
+		component: TvSeasonDetailsPage,
+	},
+);
 
-function TvSeasonCreditsPage() {
+function TvSeasonDetailsPage() {
 	const { tvId, seasonNumber } = Route.useParams();
 	const localeRegion = useAtomValue(localeRegionAtom);
 	const region = useAtomValue(regionAtom);
 
 	const {
-		data: credits,
+		data: tvSeason,
 		isLoading,
 		isError,
-	} = useTvSeasonResources<Schemas.TvAggregatedCredits>(
+	} = useTvSeasonResources<Schemas.TvSeasonDetails>(
 		Number(tvId),
 		Number(seasonNumber),
-		"aggregate_credits",
+		"",
+		{ language: localeRegion, region },
+	);
+
+	const { data: credits } = useTvSeasonResources<Schemas.TvCredits>(
+		Number(tvId),
+		Number(seasonNumber),
+		"credits",
 		{ language: localeRegion, region },
 	);
 
 	return (
-		<TvSeasonCreditsView
+		<TvSeasonDetailsView
+			tvSeason={tvSeason}
 			credits={credits}
-			seasonNumber={Number(seasonNumber)}
+			tvId={Number(tvId)}
 			isLoading={isLoading}
 			isError={isError}
 		/>
