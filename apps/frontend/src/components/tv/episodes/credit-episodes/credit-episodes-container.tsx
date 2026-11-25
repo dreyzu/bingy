@@ -90,7 +90,7 @@ export const CreditEpisodesContainer = ({
 	return (
 		<CreditEpisodesList
 			tvId={tvId}
-			personName={person.name}
+			person={person}
 			character={character}
 			job={job}
 			episodes={allEpisodes}
