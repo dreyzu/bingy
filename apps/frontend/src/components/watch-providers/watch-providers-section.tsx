@@ -1,3 +1,4 @@
+import { cn } from "cn";
 import type { Schemas } from "shared";
 import { m } from "@/paraglide/messages";
 import { getProviderName } from "@/utils/utils";
@@ -8,6 +9,8 @@ interface WatchProvidersSectionProps {
 	className?: string;
 	maxProviders?: number;
 	title?: string;
+	/** Which side of the provider name the logo sits on. */
+	logoPosition?: "start" | "end";
 }
 
 export function WatchProvidersSection({
@@ -16,7 +19,10 @@ export function WatchProvidersSection({
 	className,
 	maxProviders = 1,
 	title,
+	logoPosition = "start",
 }: WatchProvidersSectionProps) {
+	const isLogoAtEnd = logoPosition === "end";
+
 	const providers = watchProviders?.results[region];
 
 	if (!providers?.flatrate?.length) {
@@ -26,13 +32,18 @@ export function WatchProvidersSection({
 	const displayedProviders = providers.flatrate.slice(0, maxProviders);
 
 	return (
-		<div className={className}>
+		<div className={cn("pb-3", className)}>
 			{title ? (
 				<div>
 					<div className="text-lg font-semibold">{title}</div>
 				</div>
 			) : null}
-			<div className="flex flex-row justify-center">
+			<div
+				className={cn(
+					"flex flex-row",
+					isLogoAtEnd ? "justify-end" : "justify-center",
+				)}
+			>
 				{displayedProviders.map((provider) => {
 					const providerName = getProviderName(provider.provider_name);
 
@@ -42,7 +53,10 @@ export function WatchProvidersSection({
 							href={providers.link}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="flex items-center gap-2 hover:opacity-80 transition-opacity pb-3 text-foreground"
+							className={cn(
+								"flex items-center gap-2 hover:opacity-80 transition-opacity text-foreground",
+								isLogoAtEnd && "flex-row-reverse",
+							)}
 						>
 							{provider.logo_path && (
 								<img
@@ -55,7 +69,12 @@ export function WatchProvidersSection({
 									className="w-10 h-10 rounded"
 								/>
 							)}
-							<div className="flex flex-col h-10 justify-center">
+							<div
+								className={cn(
+									"flex flex-col h-10 justify-center",
+									isLogoAtEnd && "items-end",
+								)}
+							>
 								<span className="text-sm leading-relaxed">
 									{m.candid_rose_crystal()}
 								</span>

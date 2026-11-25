@@ -84,12 +84,14 @@ export function useTvSeasonResources<T>(
 	season_number: number,
 	endpoint: TvSeasonEndpoints,
 	params?: TvParams,
+	options?: Omit<UseQueryOptions<T>, "queryKey" | "queryFn">,
 ) {
 	return useQuery<T>({
 		queryKey: ["tv", tv_id, season_number, endpoint, params],
 		queryFn: () =>
 			fetchTvSeasonResources(tv_id, season_number, { endpoint, params }),
 		staleTime: 1000 * 60 * 20,
+		...options,
 	});
 }
 
