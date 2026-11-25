@@ -1,6 +1,5 @@
 import { IconStopwatch } from "@tabler/icons-react";
 import { Link } from "@tanstack/react-router";
-import { cn } from "cn";
 import { isFuture } from "date-fns";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
@@ -62,14 +61,11 @@ export function EpisodesContainer({ episodes }: EpisodesContainerProps) {
 									) : null}
 								</div>
 							</div>
-							<p
-								className={cn(
-									"text-sm whitespace-pre-line max-w-5/6 text-pretty",
-									!episode.overview && "italic",
-								)}
-							>
-								{episode.overview || m.happy_slate_whale()}
-							</p>
+							{episode.overview ? (
+								<p className="text-sm whitespace-pre-line max-w-5/6 text-pretty">
+									{episode.overview}
+								</p>
+							) : null}
 						</div>
 					</div>
 				))}

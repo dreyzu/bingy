@@ -124,7 +124,6 @@
 	"quick_copper_planet": "수익:",
 	"nifty_aqua_clover": "간략히 보기",
 	"hazy_maroon_galaxy": "더 보기",
-	"happy_slate_whale": "줄거리가 없어요",
 	"winsome_sage_nectar": "찾으시는 페이지가 존재하지 않거나 이동되었어요",
 	"hasty_periwinkle_lynx": "홈으로 가기",
 	"quiet_turquoise_cedar": "검색...",
@@ -295,8 +294,8 @@
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "에피소드",
-				"countPlural=other": "에피소드"
+				"countPlural=one": "에피소드 {count}개",
+				"countPlural=other": "에피소드 {count}개"
 			}
 		}
 	],

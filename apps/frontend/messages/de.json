@@ -124,7 +124,6 @@
 	"quick_copper_planet": "Einnahmen:",
 	"nifty_aqua_clover": "Weniger anzeigen",
 	"hazy_maroon_galaxy": "Mehr anzeigen",
-	"happy_slate_whale": "Keine Beschreibung",
 	"winsome_sage_nectar": "Die Seite, die du suchst, existiert nicht oder wurde verschoben",
 	"hasty_periwinkle_lynx": "Zur Startseite",
 	"quiet_turquoise_cedar": "Suchen...",
@@ -295,8 +294,8 @@
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "Folge",
-				"countPlural=other": "Folgen"
+				"countPlural=one": "{count} Folge",
+				"countPlural=other": "{count} Folgen"
 			}
 		}
 	],

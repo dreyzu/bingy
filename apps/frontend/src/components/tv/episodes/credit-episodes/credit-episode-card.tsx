@@ -95,15 +95,17 @@ export const CreditEpisodeCard = ({
 						{episode.season_number}x{episode.episode_number}
 					</div>
 				</div>
-				<CardDescription
-					className={`w-full xl:max-w-2/3 ${
-						backgroundImage
-							? "text-dark-card-foreground"
-							: "text-muted-foreground"
-					}`}
-				>
-					{episode.overview || m.happy_slate_whale()}
-				</CardDescription>
+				{episode.overview ? (
+					<CardDescription
+						className={`w-full xl:max-w-2/3 ${
+							backgroundImage
+								? "text-dark-card-foreground"
+								: "text-muted-foreground"
+						}`}
+					>
+						{episode.overview}
+					</CardDescription>
+				) : null}
 			</CardHeader>
 			<CardContent className="flex flex-col gap-1 mt-auto">
 				<p className="text-sm">{getAirDateText()}</p>

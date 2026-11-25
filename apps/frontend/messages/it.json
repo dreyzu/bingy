@@ -124,7 +124,6 @@
 	"quick_copper_planet": "Incassi:",
 	"nifty_aqua_clover": "Mostra meno",
 	"hazy_maroon_galaxy": "Mostra di più",
-	"happy_slate_whale": "Nessuna trama disponibile",
 	"winsome_sage_nectar": "La pagina che stai cercando non esiste o è stata spostata",
 	"hasty_periwinkle_lynx": "Torna alla home",
 	"quiet_turquoise_cedar": "Cerca...",
@@ -295,8 +294,8 @@
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "Episodio",
-				"countPlural=other": "Episodi"
+				"countPlural=one": "{count} episodio",
+				"countPlural=other": "{count} episodi"
 			}
 		}
 	],

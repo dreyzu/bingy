@@ -124,7 +124,6 @@
 	"quick_copper_planet": "興行収入：",
 	"nifty_aqua_clover": "折りたたむ",
 	"hazy_maroon_galaxy": "もっと見る",
-	"happy_slate_whale": "概要はありません",
 	"winsome_sage_nectar": "お探しのページは存在しないか、移動されました",
 	"hasty_periwinkle_lynx": "ホームへ戻る",
 	"quiet_turquoise_cedar": "検索...",
@@ -295,8 +294,8 @@
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "エピソード",
-				"countPlural=other": "エピソード"
+				"countPlural=one": "{count}話",
+				"countPlural=other": "{count}話"
 			}
 		}
 	],

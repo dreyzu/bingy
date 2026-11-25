@@ -124,7 +124,6 @@
 	"quick_copper_planet": "Receitas:",
 	"nifty_aqua_clover": "Mostrar menos",
 	"hazy_maroon_galaxy": "Mostrar mais",
-	"happy_slate_whale": "Sem sinopse",
 	"winsome_sage_nectar": "A página que procuras não existe ou foi movida",
 	"hasty_periwinkle_lynx": "Ir para o início",
 	"quiet_turquoise_cedar": "Pesquisar...",
@@ -295,8 +294,8 @@
 			"declarations": ["input count", "local countPlural = count: plural"],
 			"selectors": ["countPlural"],
 			"match": {
-				"countPlural=one": "Episódio",
-				"countPlural=other": "Episódios"
+				"countPlural=one": "{count} episódio",
+				"countPlural=other": "{count} episódios"
 			}
 		}
 	],
