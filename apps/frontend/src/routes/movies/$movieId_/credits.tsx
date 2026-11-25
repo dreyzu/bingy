@@ -20,12 +20,17 @@ function MovieCreditsPage() {
 		data: credits,
 		isLoading,
 		isError,
-	} = useMovieResource<Schemas.MovieCredits>(Number(movieId), "credits", {
-		language: localeRegion,
-	});
+	} = useMovieResource<Schemas.MovieCreditsWithTitle>(
+		Number(movieId),
+		"credits",
+		{
+			language: localeRegion,
+		},
+	);
 
 	return (
 		<MovieCreditsView
+			movieId={Number(movieId)}
 			credits={credits}
 			section={section}
 			isLoading={isLoading}
