@@ -1,5 +1,6 @@
 import {
 	IconCalendarWeekFilled,
+	IconChevronLeft,
 	IconClock,
 	IconStarFilled,
 } from "@tabler/icons-react";
@@ -11,6 +12,7 @@ import { LoadingCentered } from "@/components/loading/loading-centered";
 import { MediaCreators } from "@/components/medias/media-creators";
 import { CastList } from "@/components/person/cast-list";
 import { Badge, badgeVariants } from "@/components/ui/badge";
+import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { localeRegionAtom } from "@/lib/atoms/region";
 import { m } from "@/paraglide/messages";
@@ -87,6 +89,21 @@ export function TvEpisodeDetailsView({
 	return (
 		<div className="w-full flex flex-col gap-4">
 			<div className="flex flex-col gap-2">
+				<Link
+					to="/tv/$tvId/season/$seasonNumber"
+					params={{
+						tvId: tvId.toString(),
+						seasonNumber: episode.season_number.toString(),
+					}}
+					className={buttonVariants({
+						variant: "ghost",
+						size: "sm",
+						className: "-ml-2 w-fit text-muted-foreground",
+					})}
+				>
+					<IconChevronLeft data-icon="inline-start" />
+					{m.breezy_sienna_iguana()}
+				</Link>
 				<h1 className="text-2xl font-bold">{episode.name}</h1>
 				<div className="flex flex-wrap gap-2">
 					<Link
