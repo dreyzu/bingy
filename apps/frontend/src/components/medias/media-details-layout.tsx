@@ -8,6 +8,8 @@ export const MEDIA_DETAILS_POSTER_CLASSES =
 
 interface MediaDetailsLayoutProps {
 	backgroundImage: string | null;
+	/** Vertical crop position of the backdrop, 0 (top) to 100 (bottom). */
+	backgroundFocusY?: number | null;
 	poster: ReactNode;
 	watchProviders?: ReactNode;
 	header: ReactNode;
@@ -21,6 +23,7 @@ interface MediaDetailsLayoutProps {
 
 export function MediaDetailsLayout({
 	backgroundImage,
+	backgroundFocusY,
 	poster,
 	watchProviders,
 	header,
@@ -33,7 +36,10 @@ export function MediaDetailsLayout({
 }: MediaDetailsLayoutProps) {
 	return (
 		<>
-			<MediaBackgroundImage backgroundImage={backgroundImage} />
+			<MediaBackgroundImage
+				backgroundImage={backgroundImage}
+				focusY={backgroundFocusY}
+			/>
 			<div className={cn("w-full pt-3 md:pt-10 lg:pt-60", className)}>
 				<div className="grid grid-cols-[1fr_auto] lg:grid-cols-[auto_1fr] gap-x-3 gap-y-4 lg:gap-4 pt-36 md:pt-48 lg:pt-10">
 					<div className="contents lg:flex lg:flex-col lg:gap-2 lg:items-start lg:max-w-60 2xl:max-w-75">

@@ -1,6 +1,7 @@
 import { IconCalendarWeekFilled } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
+import { getBackdropFocusY } from "@/api/artwork";
 import { CollectionCard } from "@/components/collections/collection-card";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { MediaActionMenu } from "@/components/lists/media-actions/media-action-menu";
@@ -76,6 +77,7 @@ export function MovieDetailView({
 	return (
 		<MediaDetailsLayout
 			backgroundImage={backgroundImage}
+			backgroundFocusY={getBackdropFocusY(movie)}
 			poster={
 				<PortraitImage
 					imagePath={movie.poster_path}

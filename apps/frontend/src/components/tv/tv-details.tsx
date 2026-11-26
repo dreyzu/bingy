@@ -7,6 +7,7 @@ import {
 import { Link } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
+import { getBackdropFocusY } from "@/api/artwork";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { MediaActionMenu } from "@/components/lists/media-actions/media-action-menu";
 import { LoadingCentered } from "@/components/loading/loading-centered";
@@ -73,6 +74,7 @@ export function TvDetailsView({
 	return (
 		<MediaDetailsLayout
 			backgroundImage={backgroundImage}
+			backgroundFocusY={getBackdropFocusY(tv)}
 			poster={
 				<PortraitImage
 					imagePath={tv.poster_path}

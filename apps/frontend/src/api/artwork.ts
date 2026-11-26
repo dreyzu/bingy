@@ -14,6 +14,18 @@ export type ArtworkOverride = {
 	/** Null when it applies to every locale. */
 	locale: Locale | null;
 	filePath: string;
+	/** Backdrops only: vertical crop position, 0 (top) to 100 (bottom). */
+	focusY: number | null;
+};
+
+/**
+ * Crop position the backend adds to a media (`backdrop_focus_y`) when its
+ * backdrop override has one. Null means the top.
+ */
+export const getBackdropFocusY = (media: object | undefined): number | null => {
+	const value =
+		media && "backdrop_focus_y" in media ? media.backdrop_focus_y : undefined;
+	return typeof value === "number" ? value : null;
 };
 
 export type ArtworkImages = {
@@ -57,10 +69,11 @@ export const setArtwork = async ({
 	kind,
 	scope,
 	filePath,
-}: ArtworkSlot & { filePath: string }) => {
+	focusY,
+}: ArtworkSlot & { filePath: string; focusY?: number }) => {
 	const res = await apiFetch<{ data: ArtworkOverride }>(
 		`/artwork/${mediaType}/${tmdbId}/${kind}/${scope}`,
-		{ method: "PUT", body: { filePath } },
+		{ method: "PUT", body: { filePath, focusY } },
 	);
 	return res.data;
 };

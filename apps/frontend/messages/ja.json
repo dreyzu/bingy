@@ -1154,5 +1154,8 @@
 	"balmy_copper_pebble": "TMDBの画像に戻せませんでした",
 	"noble_onyx_otter": "このポスターを使用",
 	"zesty_teal_turtle": "この背景画像を使用",
-	"velvet_violet_cloud": "画像を読み込めませんでした"
+	"velvet_violet_cloud": "画像を読み込めませんでした",
+	"cozy_topaz_lemur": "トリミング位置",
+	"dapper_rose_arrow": "ワイド画面での表示イメージ",
+	"vivid_ruby_iguana": "位置を保存"
 }

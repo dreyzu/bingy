@@ -31,6 +31,8 @@ interface MediaHeaderLayoutProps {
 	region: Schemas.WatchProvidersCountry;
 	/** Backdrop behind the header, drawn once it is known. */
 	backgroundImage: string | null;
+	/** Vertical crop position of the backdrop, 0 (top) to 100 (bottom). */
+	backgroundFocusY?: number | null;
 	isBackgroundLoading: boolean;
 	children: ReactNode;
 }
@@ -42,13 +44,17 @@ export function MediaHeaderLayout({
 	watchProviders,
 	region,
 	backgroundImage,
+	backgroundFocusY,
 	isBackgroundLoading,
 	children,
 }: MediaHeaderLayoutProps) {
 	return (
 		<>
 			{isBackgroundLoading ? null : (
-				<MediaBackgroundImage backgroundImage={backgroundImage} />
+				<MediaBackgroundImage
+					backgroundImage={backgroundImage}
+					focusY={backgroundFocusY}
+				/>
 			)}
 			<div
 				// Same top offset as MediaDetailsLayout, so content starts below the backdrop.

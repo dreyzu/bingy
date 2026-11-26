@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet, useParams } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
+import { getBackdropFocusY } from "@/api/artwork";
 import { MediaHeaderLayout } from "@/components/medias/media-header-layout";
 import {
 	useTv,
@@ -76,6 +77,8 @@ function TvShowHeaderLayout() {
 			backgroundImage={getTmdbImageUrl(
 				episode?.still_path ?? tv?.backdrop_path ?? null,
 			)}
+			// The crop position is set for the show's backdrop, not episode stills.
+			backgroundFocusY={episode?.still_path ? null : getBackdropFocusY(tv)}
 			isBackgroundLoading={isLoading || isEpisodeLoading}
 		>
 			<Outlet />

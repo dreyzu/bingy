@@ -7,8 +7,10 @@ import type {
 	ArtworkKind,
 	ArtworkOverride,
 	ArtworkScope,
+	ArtworkSlot,
 	ArtworkTarget,
 } from "@/api/artwork";
+import { MEDIA_BACKGROUND_MASK_CLASSES } from "@/components/medias/media-background-image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,6 +36,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import {
@@ -275,6 +278,14 @@ function ArtworkPicker({
 			</div>
 
 			<div className="min-h-0 flex-1 overflow-y-auto no-scrollbar">
+				{kind === "backdrop" && current ? (
+					<BackdropPosition
+						// Starts over from the saved position after each save or pick.
+						key={`${current.filePath}:${current.focusY}`}
+						slot={slot}
+						override={current}
+					/>
+				) : null}
 				<div
 					className={cn(
 						"grid gap-2 p-1",
@@ -335,5 +346,60 @@ function ArtworkPicker({
 				</div>
 			</div>
 		</>
+	);
+}
+
+interface BackdropPositionProps {
+	slot: ArtworkSlot;
+	override: ArtworkOverride;
+}
+
+/**
+ * Picks which part of the backdrop shows where the page is shorter than the
+ * image, with a preview of the widest screen, where the most is cropped.
+ */
+function BackdropPosition({ slot, override }: BackdropPositionProps) {
+	const savedFocusY = override.focusY ?? 0;
+	const [focusY, setFocusY] = useState(savedFocusY);
+	const setArtwork = useSetArtwork();
+	const labelId = useId();
+
+	return (
+		<div className="mb-3 flex flex-col gap-2 p-1">
+			<Label id={labelId}>{m.cozy_topaz_lemur()}</Label>
+			{/* The page backdrop at its widest: 80rem by 28.125rem. */}
+			<div className="aspect-[128/45] w-full overflow-hidden rounded-lg">
+				<div className={cn("size-full", MEDIA_BACKGROUND_MASK_CLASSES)}>
+					<img
+						src={getTmdbImageUrl(override.filePath, "w500") ?? undefined}
+						alt=""
+						className="block size-full object-cover"
+						style={{ objectPosition: `50% ${focusY}%` }}
+					/>
+				</div>
+			</div>
+			<p className="text-xs text-muted-foreground">{m.dapper_rose_arrow()}</p>
+			<div className="flex items-center gap-3">
+				<Slider
+					aria-labelledby={labelId}
+					min={0}
+					max={100}
+					step={1}
+					value={focusY}
+					onValueChange={(value) => setFocusY(value as number)}
+					disabled={setArtwork.isPending}
+					className="flex-1"
+				/>
+				<Button
+					size="sm"
+					disabled={focusY === savedFocusY || setArtwork.isPending}
+					onClick={() =>
+						setArtwork.mutate({ ...slot, filePath: override.filePath, focusY })
+					}
+				>
+					{m.vivid_ruby_iguana()}
+				</Button>
+			</div>
+		</div>
 	);
 }

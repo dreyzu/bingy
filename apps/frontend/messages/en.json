@@ -1154,5 +1154,8 @@
 	"balmy_copper_pebble": "Couldn't restore the TMDB image",
 	"noble_onyx_otter": "Use this poster",
 	"zesty_teal_turtle": "Use this backdrop",
-	"velvet_violet_cloud": "Couldn't load the images"
+	"velvet_violet_cloud": "Couldn't load the images",
+	"cozy_topaz_lemur": "Crop position",
+	"dapper_rose_arrow": "As it shows on a wide screen",
+	"vivid_ruby_iguana": "Save position"
 }
