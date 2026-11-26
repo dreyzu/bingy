@@ -188,10 +188,12 @@ function ArtworkPicker({
 	const hasTextless = images.some((image) => !image.iso_639_1);
 	const localeLanguage = locale.split("-")[0] ?? "";
 
-	// Images in the app's language first, as they are the likely pick.
-	const [filter, setFilter] = useState<LanguageFilter>(() =>
-		languages.includes(localeLanguage) ? localeLanguage : "all",
-	);
+	// Start with the likely pick: posters in the app's language, and backdrops
+	// without text, since they show in every locale.
+	const [filter, setFilter] = useState<LanguageFilter>(() => {
+		if (kind === "backdrop") return hasTextless ? "none" : "all";
+		return languages.includes(localeLanguage) ? localeLanguage : "all";
+	});
 
 	const filterLabel = (value: LanguageFilter) => {
 		if (value === "all") return m.airy_onyx_cricket();
