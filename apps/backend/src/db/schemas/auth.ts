@@ -65,6 +65,10 @@ export const sessions = pgTable(
 		expiresAt: timestamp("expires_at").notNull(),
 		ipAddress: text("ip_address"),
 		userAgent: text("user_agent"),
+		// Admin impersonating the user, set by Better Auth's admin plugin.
+		impersonatedBy: uuid("impersonated_by").references(() => users.id, {
+			onDelete: "cascade",
+		}),
 		...timestamps,
 	},
 	(table) => [uniqueIndex("unique_session_token").on(table.token)],
