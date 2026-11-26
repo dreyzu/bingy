@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { cn } from "cn";
 import type { ReactNode } from "react";
 import type { Schemas } from "shared";
+import { MediaArtworkButton } from "@/components/medias/media-artwork-button";
 import { MediaBackgroundImage } from "@/components/medias/media-background-image";
 import { MEDIA_DETAILS_POSTER_CLASSES } from "@/components/medias/media-details-layout";
 import { MediaReleaseYear } from "@/components/medias/media-release-year";
@@ -100,6 +101,7 @@ export function MediaHeaderLayout({
 								</Link>
 							)}
 							<MediaReleaseYear releaseDate={media.releaseDate} />
+							<MediaArtworkButton mediaType={media.type} tmdbId={media.id} />
 						</>
 					) : isLoading ? (
 						<Skeleton className="h-8 w-48" />

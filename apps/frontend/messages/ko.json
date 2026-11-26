@@ -1130,5 +1130,29 @@
 				"countPlural=other": "에피소드 {count}개에 참여"
 			}
 		}
-	]
+	],
+	"gentle_sienna_jaguar": "아트워크 편집",
+	"loyal_periwinkle_squirrel": "아트워크",
+	"kind_slate_jaguar": "기본 이미지 대신 보여 줄 TMDB 이미지를 선택하세요.",
+	"brisk_beige_flute": "포스터",
+	"peppy_lavender_crystal": "배경 이미지",
+	"humble_coral_fern": "적용 대상",
+	"agile_rose_beaver": "{language}만",
+	"alert_magenta_rabbit": "모든 언어",
+	"fancy_mint_kettle": "이미지 언어",
+	"airy_onyx_cricket": "모든 언어",
+	"vibrant_purple_mirror": "텍스트 없음",
+	"sunny_pink_eagle": "TMDB 이미지 사용",
+	"glossy_azure_maple": "현재",
+	"alert_yellow_beacon": "모든 언어에 적용됨",
+	"brave_khaki_otter": "이미지 없음",
+	"elegant_yellow_rocket": "TMDB에 아직 이 작품에 등록된 항목이 없어요.",
+	"velvet_onyx_garden": "이미지를 불러오는 중",
+	"wise_amber_octopus": "아트워크를 업데이트했어요",
+	"icy_scarlet_sunflower": "아트워크를 업데이트하지 못했어요",
+	"modest_rose_blossom": "TMDB 이미지로 되돌렸어요",
+	"balmy_copper_pebble": "TMDB 이미지로 되돌리지 못했어요",
+	"noble_onyx_otter": "이 포스터 사용",
+	"zesty_teal_turtle": "이 배경 이미지 사용",
+	"velvet_violet_cloud": "이미지를 불러오지 못했어요"
 }

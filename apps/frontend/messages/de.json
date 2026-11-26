@@ -1130,5 +1130,29 @@
 				"countPlural=other": "An {count} Folgen beteiligt"
 			}
 		}
-	]
+	],
+	"gentle_sienna_jaguar": "Bilder bearbeiten",
+	"loyal_periwinkle_squirrel": "Bilder",
+	"kind_slate_jaguar": "Wähle ein TMDB-Bild, das statt des Standardbilds angezeigt wird.",
+	"brisk_beige_flute": "Poster",
+	"peppy_lavender_crystal": "Hintergrund",
+	"humble_coral_fern": "Gilt für",
+	"agile_rose_beaver": "Nur {language}",
+	"alert_magenta_rabbit": "Alle Sprachen",
+	"fancy_mint_kettle": "Bildsprache",
+	"airy_onyx_cricket": "Alle Sprachen",
+	"vibrant_purple_mirror": "Ohne Text",
+	"sunny_pink_eagle": "TMDB-Bild verwenden",
+	"glossy_azure_maple": "Aktuell",
+	"alert_yellow_beacon": "Für alle Sprachen",
+	"brave_khaki_otter": "Keine Bilder",
+	"elegant_yellow_rocket": "TMDB hat für diesen Titel noch keine.",
+	"velvet_onyx_garden": "Bilder werden geladen",
+	"wise_amber_octopus": "Bilder aktualisiert",
+	"icy_scarlet_sunflower": "Bilder konnten nicht aktualisiert werden",
+	"modest_rose_blossom": "TMDB-Bild wiederhergestellt",
+	"balmy_copper_pebble": "TMDB-Bild konnte nicht wiederhergestellt werden",
+	"noble_onyx_otter": "Dieses Poster verwenden",
+	"zesty_teal_turtle": "Diesen Hintergrund verwenden",
+	"velvet_violet_cloud": "Bilder konnten nicht geladen werden"
 }

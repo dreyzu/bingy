@@ -1130,5 +1130,29 @@
 				"countPlural=other": "A travaillé sur {count} épisodes"
 			}
 		}
-	]
+	],
+	"gentle_sienna_jaguar": "Modifier les visuels",
+	"loyal_periwinkle_squirrel": "Visuels",
+	"kind_slate_jaguar": "Choisis une image TMDB à afficher à la place de celle par défaut.",
+	"brisk_beige_flute": "Affiche",
+	"peppy_lavender_crystal": "Arrière-plan",
+	"humble_coral_fern": "S’applique à",
+	"agile_rose_beaver": "{language} uniquement",
+	"alert_magenta_rabbit": "Toutes les langues",
+	"fancy_mint_kettle": "Langue de l’image",
+	"airy_onyx_cricket": "Toutes les langues",
+	"vibrant_purple_mirror": "Sans texte",
+	"sunny_pink_eagle": "Utiliser l’image TMDB",
+	"glossy_azure_maple": "Actuelle",
+	"alert_yellow_beacon": "Pour toutes les langues",
+	"brave_khaki_otter": "Aucune image",
+	"elegant_yellow_rocket": "TMDB n’en a pas encore pour ce titre.",
+	"velvet_onyx_garden": "Chargement des images",
+	"wise_amber_octopus": "Visuels mis à jour",
+	"icy_scarlet_sunflower": "Impossible de mettre à jour les visuels",
+	"modest_rose_blossom": "Image TMDB rétablie",
+	"balmy_copper_pebble": "Impossible de rétablir l’image TMDB",
+	"noble_onyx_otter": "Utiliser cette affiche",
+	"zesty_teal_turtle": "Utiliser cet arrière-plan",
+	"velvet_violet_cloud": "Impossible de charger les images"
 }

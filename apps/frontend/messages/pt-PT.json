@@ -1130,5 +1130,29 @@
 				"countPlural=other": "Trabalhou em {count} episódios"
 			}
 		}
-	]
+	],
+	"gentle_sienna_jaguar": "Editar imagens",
+	"loyal_periwinkle_squirrel": "Imagens",
+	"kind_slate_jaguar": "Escolhe uma imagem do TMDB para mostrar em vez da predefinida.",
+	"brisk_beige_flute": "Cartaz",
+	"peppy_lavender_crystal": "Fundo",
+	"humble_coral_fern": "Aplica-se a",
+	"agile_rose_beaver": "Apenas {language}",
+	"alert_magenta_rabbit": "Todos os idiomas",
+	"fancy_mint_kettle": "Idioma da imagem",
+	"airy_onyx_cricket": "Todos os idiomas",
+	"vibrant_purple_mirror": "Sem texto",
+	"sunny_pink_eagle": "Usar a imagem do TMDB",
+	"glossy_azure_maple": "Atual",
+	"alert_yellow_beacon": "Para todos os idiomas",
+	"brave_khaki_otter": "Nenhuma imagem",
+	"elegant_yellow_rocket": "O TMDB ainda não tem nenhuma para este título.",
+	"velvet_onyx_garden": "A carregar imagens",
+	"wise_amber_octopus": "Imagens atualizadas",
+	"icy_scarlet_sunflower": "Não foi possível atualizar as imagens",
+	"modest_rose_blossom": "Imagem do TMDB reposta",
+	"balmy_copper_pebble": "Não foi possível repor a imagem do TMDB",
+	"noble_onyx_otter": "Usar este cartaz",
+	"zesty_teal_turtle": "Usar este fundo",
+	"velvet_violet_cloud": "Não foi possível carregar as imagens"
 }
