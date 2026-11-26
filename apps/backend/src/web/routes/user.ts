@@ -13,6 +13,7 @@ import {
 	users,
 	watchlist,
 } from "../../db/schemas";
+import { withArtworkOwner } from "../../lib/artwork/apply";
 import { db } from "../../lib/database";
 import { logger } from "../../lib/logger";
 import { notify, resolveFollowRequests } from "../../lib/notifications";
@@ -258,10 +259,12 @@ userProfileRoutes.get("/:username/activity", async (c) => {
 				);
 			}
 
-			return {
-				...account,
-				mediaDetails,
-			};
+			const entry = { ...account, mediaDetails };
+			// A review shows its media with its author's artwork.
+			const hasReview = Boolean(
+				account.movieWatchHistory?.review || account.tvShowWatchHistory?.review,
+			);
+			return hasReview ? withArtworkOwner(entry, account.userId) : entry;
 		}),
 	);
 

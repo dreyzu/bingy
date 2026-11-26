@@ -14,17 +14,25 @@ export type NormalizedMedia = {
 	numberOfSeasons?: number;
 };
 
+/**
+ * Summary of a movie or TV show, cached for a day. `mediaType` lets the
+ * artwork override layer tell movies from TV shows, which share `title` here.
+ */
 export async function getMediaDetails(
 	id: number,
 	mediaType: string,
 	language: string,
-): Promise<Omit<NormalizedMedia, "mediaType" | "addedAt"> | null> {
+): Promise<Omit<NormalizedMedia, "addedAt"> | null> {
 	const cacheKey = `tmdb:${mediaType}:${id}:${language}`;
 
 	const cached = await cacheClient.get(cacheKey);
 	if (cached) {
 		logger.info(`Cache hit: ${cacheKey}`);
-		return JSON.parse(cached);
+		// Entries cached before `mediaType` was stored lack it.
+		return {
+			...JSON.parse(cached),
+			mediaType: mediaType as NormalizedMedia["mediaType"],
+		};
 	}
 	// Fetch from TMDB
 	try {
@@ -42,6 +50,7 @@ export async function getMediaDetails(
 				releaseDate: movie.release_date,
 				posterPath: movie.poster_path,
 				voteAverage: movie.vote_average,
+				mediaType: "movie" as const,
 			};
 
 			await cacheClient.set(cacheKey, JSON.stringify(details), 86400);
@@ -64,6 +73,7 @@ export async function getMediaDetails(
 			voteAverage: tv.vote_average,
 			numberOfEpisodes: tv.number_of_episodes,
 			numberOfSeasons: tv.number_of_seasons,
+			mediaType: "tv" as const,
 		};
 
 		await cacheClient.set(cacheKey, JSON.stringify(details), 86400);

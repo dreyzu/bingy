@@ -13,7 +13,9 @@ import env from "./lib/env";
 import { logger } from "./lib/logger";
 import { serveInternalServerError } from "./lib/responses/error";
 import { startScheduler } from "./lib/scheduler";
+import { artworkMiddleware } from "./web/middlewares/artwork";
 import { sessionMiddleware } from "./web/middlewares/session";
+import artworkRoutes from "./web/routes/artwork";
 import authRoutes from "./web/routes/auth";
 import blockRoutes from "./web/routes/block";
 import certificationRoutes from "./web/routes/certification";
@@ -81,7 +83,10 @@ startScheduler(jobs);
 
 app.use("*", sessionMiddleware);
 const api = new Hono();
+// First, so it sees every response last, after any cache.
+api.use("*", artworkMiddleware);
 api.route("/auth", authRoutes);
+api.route("/artwork", artworkRoutes);
 api.route("/health", healthRoutes);
 api.route("/lists", userListRoutes);
 api.route("/history", userHistoryRoutes);
