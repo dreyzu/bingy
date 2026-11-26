@@ -17,6 +17,7 @@ import type { auth } from "../../lib/auth";
 import { db } from "../../lib/database";
 import { APP_LOCALES } from "../../lib/locales";
 import {
+	serveBadRequest,
 	serveNotFound,
 	serveUnprocessableEntity,
 } from "../../lib/responses/error";
@@ -132,6 +133,7 @@ artworkRoutes.get(
 				kind: mediaArtwork.kind,
 				locale: mediaArtwork.locale,
 				filePath: mediaArtwork.filePath,
+				focusY: mediaArtwork.focusY,
 			})
 			.from(mediaArtwork)
 			.innerJoin(media, eq(media.id, mediaArtwork.mediaId))
@@ -147,17 +149,29 @@ artworkRoutes.get(
 	},
 );
 
-// Set the poster or backdrop of a media, for one locale or all of them
+// Set the poster or backdrop of a media, for one locale or all of them.
+// `focusY` is the backdrop's vertical crop position; leaving it out keeps the top.
 artworkRoutes.put(
 	"/:mediaType/:tmdbId/:kind/:scope",
 	zValidator("param", slotParamSchema),
-	zValidator("json", z.object({ filePath: z.string().min(1).max(100) })),
+	zValidator(
+		"json",
+		z.object({
+			filePath: z.string().min(1).max(100),
+			focusY: z.number().int().min(0).max(100).nullish(),
+		}),
+	),
 	async (c) => {
 		const user = c.get("user") as SessionUser;
 		const { mediaType, tmdbId, kind, scope } = c.req.valid("param");
 		const { filePath } = c.req.valid("json");
+		const focusY = c.req.valid("json").focusY ?? null;
 		const ownerId = ownerIdOf(user);
 		const locale = toLocale(scope);
+
+		if (kind === "poster" && focusY !== null) {
+			return serveBadRequest(c, "POSTER_FOCUS_NOT_ALLOWED");
+		}
 
 		let images: Schemas.MovieImages;
 		try {
@@ -187,6 +201,7 @@ artworkRoutes.put(
 					locale,
 					userId: ownerId,
 					filePath,
+					focusY,
 					createdBy: user.id,
 				})
 				.onConflictDoUpdate({
@@ -196,12 +211,13 @@ artworkRoutes.put(
 						mediaArtwork.locale,
 						mediaArtwork.userId,
 					],
-					set: { filePath, updatedAt: new Date() },
+					set: { filePath, focusY, updatedAt: new Date() },
 				})
 				.returning({
 					kind: mediaArtwork.kind,
 					locale: mediaArtwork.locale,
 					filePath: mediaArtwork.filePath,
+					focusY: mediaArtwork.focusY,
 				});
 
 			return row;

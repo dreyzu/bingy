@@ -12,6 +12,12 @@ const IMAGE_KEYS: Record<string, ArtworkKind> = {
 
 const OWNER_KEY = "$artworkOwner";
 
+/**
+ * Added next to `backdrop_path` when the backdrop override has a crop
+ * position: 0 (top) to 100 (bottom). Absent means the top.
+ */
+const BACKDROP_FOCUS_KEY = "backdrop_focus_y";
+
 const MAY_HAVE_ARTWORK =
 	/"(poster_path|posterPath|backdrop_path|\$artworkOwner)"/;
 
@@ -125,11 +131,13 @@ export async function applyArtwork(
 				{ ownerId, locale },
 			);
 			for (const slot of slots) {
-				const filePath = resolved.get(artworkField(slot.ref));
-				if (filePath && slot.node[slot.key] !== filePath) {
-					slot.node[slot.key] = filePath;
-					changed = true;
+				const override = resolved.get(artworkField(slot.ref));
+				if (!override) continue;
+				slot.node[slot.key] = override.filePath;
+				if (slot.ref.kind === "backdrop" && override.focusY !== null) {
+					slot.node[BACKDROP_FOCUS_KEY] = override.focusY;
 				}
+				changed = true;
 			}
 		}),
 	);

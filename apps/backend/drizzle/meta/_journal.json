@@ -127,6 +127,13 @@
       "when": 1795729417027,
       "tag": "0017_media_artwork_backdrop_locale",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "7",
+      "when": 1795732295037,
+      "tag": "0018_media_artwork_focus_y",
+      "breakpoints": true
     }
   ]
 }

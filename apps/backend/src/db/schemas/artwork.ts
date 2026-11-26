@@ -3,6 +3,7 @@ import {
 	check,
 	index,
 	pgTable,
+	smallint,
 	timestamp,
 	unique,
 	uuid,
@@ -34,6 +35,10 @@ export const mediaArtwork = pgTable(
 			onDelete: "cascade",
 		}),
 		filePath: varchar("file_path", { length: 100 }).notNull(),
+		// Backdrops only: the vertical crop position, from 0 (top) to 100
+		// (bottom), for where the backdrop is shorter than the image. Null keeps
+		// the top.
+		focusY: smallint("focus_y"),
 		createdBy: uuid("created_by").references(() => users.id, {
 			onDelete: "set null",
 		}),
@@ -55,6 +60,10 @@ export const mediaArtwork = pgTable(
 		check(
 			"media_artwork_backdrop_locale_check",
 			sql`${table.kind} = 'poster' or ${table.locale} is null`,
+		),
+		check(
+			"media_artwork_focus_y_check",
+			sql`${table.focusY} is null or (${table.kind} = 'backdrop' and ${table.focusY} between 0 and 100)`,
 		),
 	],
 );

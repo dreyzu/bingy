@@ -1,5 +1,6 @@
 import type { AppLocale } from "../locales";
 import {
+	type ArtworkOverride,
 	type ArtworkRef,
 	type ArtworkScope,
 	artworkField,
@@ -36,15 +37,15 @@ export async function scopesFor(
 }
 
 /**
- * The override file path of each ref that has one, keyed by `artworkField`,
+ * The override of each ref that has one, keyed by `artworkField`,
  * as `ownerId` sees it. `ownerId` is the viewer, except for media shown with a
  * review, which follows the review's author.
  */
 export async function resolveArtwork(
 	refs: ArtworkRef[],
 	{ ownerId, locale }: { ownerId: string | null; locale: AppLocale | null },
-): Promise<Map<string, string>> {
-	const resolved = new Map<string, string>();
+): Promise<Map<string, ArtworkOverride>> {
+	const resolved = new Map<string, ArtworkOverride>();
 	const fields = [...new Set(refs.map(artworkField))];
 	if (fields.length === 0) return resolved;
 
@@ -55,10 +56,10 @@ export async function resolveArtwork(
 
 	// Scopes are in priority order: keep the first match of each field.
 	for (const values of valuesByScope) {
-		values.forEach((filePath, index) => {
+		values.forEach((override, index) => {
 			const field = fields[index];
-			if (filePath && field && !resolved.has(field)) {
-				resolved.set(field, filePath);
+			if (override && field && !resolved.has(field)) {
+				resolved.set(field, override);
 			}
 		});
 	}
