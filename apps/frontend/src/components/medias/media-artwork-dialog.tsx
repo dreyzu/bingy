@@ -51,6 +51,29 @@ import { getLanguageName } from "@/utils/display-names";
 import { LOCALE_LABELS } from "@/utils/locale-labels";
 import { getTmdbImageUrl } from "@/utils/utils";
 
+// Pixel counts of the usual video resolutions, highest first.
+const QUALITY_TIERS = [
+	{ pixels: 3840 * 2160, label: () => m.gallant_khaki_hippo() }, // 4K
+	{ pixels: 2560 * 1440, label: () => m.zippy_navy_lemur() }, // 2K
+	{ pixels: 1920 * 1080, label: () => m.sturdy_green_rocket() }, // HD
+	{ pixels: 720 * 480, label: () => m.bright_hazel_panda() }, // SD
+];
+
+/**
+ * Quality label of an image: the resolution its pixel count is nearest to, on
+ * a log scale. Pixel counts rather than sizes, so posters get a label too.
+ */
+function qualityLabel(image: Schemas.Image): string | null {
+	const pixels = image.width * image.height;
+	if (!(pixels > 0)) return null;
+	const distance = (tierPixels: number) =>
+		Math.abs(Math.log(pixels / tierPixels));
+	const nearest = QUALITY_TIERS.reduce((best, tier) =>
+		distance(tier.pixels) < distance(best.pixels) ? tier : best,
+	);
+	return nearest.label();
+}
+
 /** Image language filter: every image, textless images, or an ISO 639-1 code. */
 type LanguageFilter = "all" | "none" | (string & {});
 
@@ -299,6 +322,7 @@ function ArtworkPicker({
 						if (!filePath) return null;
 						const isCurrent = filePath === current?.filePath;
 						const isInherited = filePath === inherited?.filePath;
+						const quality = qualityLabel(image);
 
 						return (
 							<button
@@ -338,6 +362,14 @@ function ArtworkPicker({
 								) : isInherited ? (
 									<Badge variant="secondary" className="absolute top-1 left-1">
 										{m.alert_yellow_beacon()}
+									</Badge>
+								) : null}
+								{quality ? (
+									<Badge
+										variant="secondary"
+										className="absolute right-1 bottom-1 px-1.5 text-[10px]"
+									>
+										{quality}
 									</Badge>
 								) : null}
 							</button>
