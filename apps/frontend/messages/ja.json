@@ -1130,5 +1130,36 @@
 				"countPlural=other": "{count}話に参加"
 			}
 		}
-	]
+	],
+	"gentle_sienna_jaguar": "画像を編集",
+	"loyal_periwinkle_squirrel": "画像",
+	"kind_slate_jaguar": "デフォルトの代わりに表示するTMDBの画像を選んでください。",
+	"brisk_beige_flute": "ポスター",
+	"peppy_lavender_crystal": "背景画像",
+	"humble_coral_fern": "適用範囲",
+	"agile_rose_beaver": "{language}のみ",
+	"alert_magenta_rabbit": "すべての言語",
+	"fancy_mint_kettle": "画像の言語",
+	"airy_onyx_cricket": "すべての言語",
+	"vibrant_purple_mirror": "テキストなし",
+	"sunny_pink_eagle": "TMDBの画像を使用",
+	"glossy_azure_maple": "現在",
+	"alert_yellow_beacon": "すべての言語に適用",
+	"brave_khaki_otter": "画像がありません",
+	"elegant_yellow_rocket": "このタイトルはまだTMDBに登録されていません。",
+	"velvet_onyx_garden": "画像を読み込み中",
+	"wise_amber_octopus": "画像を更新しました",
+	"icy_scarlet_sunflower": "画像を更新できませんでした",
+	"modest_rose_blossom": "TMDBの画像に戻しました",
+	"balmy_copper_pebble": "TMDBの画像に戻せませんでした",
+	"noble_onyx_otter": "このポスターを使用",
+	"zesty_teal_turtle": "この背景画像を使用",
+	"velvet_violet_cloud": "画像を読み込めませんでした",
+	"cozy_topaz_lemur": "トリミング位置",
+	"dapper_rose_arrow": "ワイド画面での表示イメージ",
+	"vivid_ruby_iguana": "位置を保存",
+	"gallant_khaki_hippo": "4K",
+	"zippy_navy_lemur": "2K",
+	"sturdy_green_rocket": "HD",
+	"bright_hazel_panda": "SD"
 }

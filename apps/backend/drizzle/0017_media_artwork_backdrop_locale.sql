@@ -1,0 +1,1 @@
+ALTER TABLE "media_artwork" ADD CONSTRAINT "media_artwork_backdrop_locale_check" CHECK ("media_artwork"."kind" = 'poster' or "media_artwork"."locale" is null);

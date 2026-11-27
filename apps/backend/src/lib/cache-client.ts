@@ -29,6 +29,32 @@ export const cacheClient = {
 			logger.error(error, `Cache set error for key ${key}`);
 		}
 	},
+	/** Values of `fields` in the hash at `key`, or null if Redis fails. */
+	hmget: async (
+		key: string,
+		fields: string[],
+	): Promise<Array<string | null> | null> => {
+		try {
+			return await cacheRedis.hmget(key, fields);
+		} catch (error) {
+			logger.error(error, `Cache hmget error for key ${key}`);
+			return null;
+		}
+	},
+	hset: async (
+		key: string,
+		values: Record<string, string>,
+		ttl?: number,
+	): Promise<void> => {
+		try {
+			await cacheRedis.hset(key, values);
+			if (ttl) {
+				await cacheRedis.expire(key, ttl);
+			}
+		} catch (error) {
+			logger.error(error, `Cache hset error for key ${key}`);
+		}
+	},
 	delete: async (key: string): Promise<void> => {
 		try {
 			await cacheRedis.del(key);

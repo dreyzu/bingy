@@ -1130,5 +1130,36 @@
 				"countPlural=other": "Worked on {count} episodes"
 			}
 		}
-	]
+	],
+	"gentle_sienna_jaguar": "Edit artwork",
+	"loyal_periwinkle_squirrel": "Artwork",
+	"kind_slate_jaguar": "Pick a TMDB image to show instead of the default one.",
+	"brisk_beige_flute": "Poster",
+	"peppy_lavender_crystal": "Backdrop",
+	"humble_coral_fern": "Applies to",
+	"agile_rose_beaver": "{language} only",
+	"alert_magenta_rabbit": "All languages",
+	"fancy_mint_kettle": "Image language",
+	"airy_onyx_cricket": "All languages",
+	"vibrant_purple_mirror": "No text",
+	"sunny_pink_eagle": "Use TMDB image",
+	"glossy_azure_maple": "Current",
+	"alert_yellow_beacon": "For all languages",
+	"brave_khaki_otter": "No images",
+	"elegant_yellow_rocket": "TMDB doesn't have any for this title yet.",
+	"velvet_onyx_garden": "Loading images",
+	"wise_amber_octopus": "Artwork updated",
+	"icy_scarlet_sunflower": "Couldn't update the artwork",
+	"modest_rose_blossom": "TMDB image restored",
+	"balmy_copper_pebble": "Couldn't restore the TMDB image",
+	"noble_onyx_otter": "Use this poster",
+	"zesty_teal_turtle": "Use this backdrop",
+	"velvet_violet_cloud": "Couldn't load the images",
+	"cozy_topaz_lemur": "Crop position",
+	"dapper_rose_arrow": "As it shows on a wide screen",
+	"vivid_ruby_iguana": "Save position",
+	"gallant_khaki_hippo": "4K",
+	"zippy_navy_lemur": "2K",
+	"sturdy_green_rocket": "HD",
+	"bright_hazel_panda": "SD"
 }

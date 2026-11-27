@@ -1,4 +1,5 @@
 export * from "./activity";
+export * from "./artwork";
 export * from "./auth";
 export * from "./block";
 export * from "./collection";

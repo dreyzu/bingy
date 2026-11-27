@@ -1,6 +1,6 @@
 import type { Schemas } from "shared";
 
-export type ImageSize = "w200" | "w500" | "original";
+export type ImageSize = "w200" | "w500" | "w1280" | "original";
 
 export const getTmdbImageUrl = (
 	path: string | null,

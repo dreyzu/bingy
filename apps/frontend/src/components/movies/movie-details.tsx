@@ -1,10 +1,12 @@
 import { IconCalendarWeekFilled } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
+import { getBackdropFocusY } from "@/api/artwork";
 import { CollectionCard } from "@/components/collections/collection-card";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { MediaActionMenu } from "@/components/lists/media-actions/media-action-menu";
 import { LoadingCentered } from "@/components/loading/loading-centered";
+import { MediaArtworkButton } from "@/components/medias/media-artwork-button";
 import { MediaCreators } from "@/components/medias/media-creators";
 import {
 	MEDIA_DETAILS_POSTER_CLASSES,
@@ -75,6 +77,7 @@ export function MovieDetailView({
 	return (
 		<MediaDetailsLayout
 			backgroundImage={backgroundImage}
+			backgroundFocusY={getBackdropFocusY(movie)}
 			poster={
 				<PortraitImage
 					imagePath={movie.poster_path}
@@ -113,6 +116,7 @@ export function MovieDetailView({
 
 							<div className="flex flex-wrap items-center gap-3">
 								<MediaTrailerButton videos={movie.videos?.results} />
+								<MediaArtworkButton mediaType="movie" tmdbId={movie.id} />
 								{movie.runtime ? (
 									<span className="text-sm text-muted-foreground">
 										{formatRuntime(movie.runtime)}

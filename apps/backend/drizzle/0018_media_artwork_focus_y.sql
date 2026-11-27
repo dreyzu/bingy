@@ -1,0 +1,2 @@
+ALTER TABLE "media_artwork" ADD COLUMN "focus_y" smallint;--> statement-breakpoint
+ALTER TABLE "media_artwork" ADD CONSTRAINT "media_artwork_focus_y_check" CHECK ("media_artwork"."focus_y" is null or ("media_artwork"."kind" = 'backdrop' and "media_artwork"."focus_y" between 0 and 100));

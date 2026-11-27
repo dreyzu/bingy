@@ -26,6 +26,11 @@ export const users = pgTable(
 		twoFactorEnabled: boolean("two_factor_enabled").default(false).notNull(),
 		isPrivate: boolean("is_private").default(false).notNull(),
 		lastLoginMethod: text("last_login_method"),
+		// Managed by Better Auth's admin plugin.
+		role: varchar("role", { length: 20 }).default("user").notNull(),
+		banned: boolean("banned").default(false).notNull(),
+		banReason: text("ban_reason"),
+		banExpires: timestamp("ban_expires"),
 		...timestamps,
 	},
 	(table) => [index("idx_users_name").on(table.name)],

@@ -1130,5 +1130,36 @@
 				"countPlural=other": "參與 {count} 集"
 			}
 		}
-	]
+	],
+	"gentle_sienna_jaguar": "編輯圖片",
+	"loyal_periwinkle_squirrel": "圖片",
+	"kind_slate_jaguar": "選擇一張 TMDB 圖片來取代預設圖片。",
+	"brisk_beige_flute": "海報",
+	"peppy_lavender_crystal": "背景圖片",
+	"humble_coral_fern": "套用範圍",
+	"agile_rose_beaver": "僅限{language}",
+	"alert_magenta_rabbit": "所有語言",
+	"fancy_mint_kettle": "圖片語言",
+	"airy_onyx_cricket": "所有語言",
+	"vibrant_purple_mirror": "無文字",
+	"sunny_pink_eagle": "使用 TMDB 圖片",
+	"glossy_azure_maple": "目前",
+	"alert_yellow_beacon": "套用於所有語言",
+	"brave_khaki_otter": "沒有圖片",
+	"elegant_yellow_rocket": "TMDB 上目前還沒有這部作品的相關內容。",
+	"velvet_onyx_garden": "正在載入圖片",
+	"wise_amber_octopus": "圖片已更新",
+	"icy_scarlet_sunflower": "無法更新圖片",
+	"modest_rose_blossom": "已還原 TMDB 圖片",
+	"balmy_copper_pebble": "無法還原 TMDB 圖片",
+	"noble_onyx_otter": "使用這張海報",
+	"zesty_teal_turtle": "使用這張背景圖片",
+	"velvet_violet_cloud": "無法載入圖片",
+	"cozy_topaz_lemur": "裁切位置",
+	"dapper_rose_arrow": "寬螢幕上的顯示效果",
+	"vivid_ruby_iguana": "儲存位置",
+	"gallant_khaki_hippo": "4K",
+	"zippy_navy_lemur": "2K",
+	"sturdy_green_rocket": "HD",
+	"bright_hazel_panda": "SD"
 }

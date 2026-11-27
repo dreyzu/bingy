@@ -7,9 +7,11 @@ import {
 import { Link } from "@tanstack/react-router";
 import { useAtomValue } from "jotai";
 import type { Schemas } from "shared";
+import { getBackdropFocusY } from "@/api/artwork";
 import { ResourceNotFound } from "@/components/errors/resource-not-found";
 import { MediaActionMenu } from "@/components/lists/media-actions/media-action-menu";
 import { LoadingCentered } from "@/components/loading/loading-centered";
+import { MediaArtworkButton } from "@/components/medias/media-artwork-button";
 import { MediaCreators } from "@/components/medias/media-creators";
 import {
 	MEDIA_DETAILS_POSTER_CLASSES,
@@ -72,6 +74,7 @@ export function TvDetailsView({
 	return (
 		<MediaDetailsLayout
 			backgroundImage={backgroundImage}
+			backgroundFocusY={getBackdropFocusY(tv)}
 			poster={
 				<PortraitImage
 					imagePath={tv.poster_path}
@@ -105,7 +108,10 @@ export function TvDetailsView({
 								/>
 							</div>
 
-							<MediaTrailerButton videos={tv.videos?.results} />
+							<div className="flex flex-wrap items-center gap-3 empty:hidden">
+								<MediaTrailerButton videos={tv.videos?.results} />
+								<MediaArtworkButton mediaType="tv" tmdbId={tv.id} />
+							</div>
 						</div>
 					</CardContent>
 				</Card>

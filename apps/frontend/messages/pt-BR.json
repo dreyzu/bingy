@@ -1130,5 +1130,36 @@
 				"countPlural=other": "Trabalhou em {count} episódios"
 			}
 		}
-	]
+	],
+	"gentle_sienna_jaguar": "Editar imagens",
+	"loyal_periwinkle_squirrel": "Imagens",
+	"kind_slate_jaguar": "Escolha uma imagem do TMDB para mostrar no lugar da padrão.",
+	"brisk_beige_flute": "Pôster",
+	"peppy_lavender_crystal": "Fundo",
+	"humble_coral_fern": "Aplica-se a",
+	"agile_rose_beaver": "Somente {language}",
+	"alert_magenta_rabbit": "Todos os idiomas",
+	"fancy_mint_kettle": "Idioma da imagem",
+	"airy_onyx_cricket": "Todos os idiomas",
+	"vibrant_purple_mirror": "Sem texto",
+	"sunny_pink_eagle": "Usar a imagem do TMDB",
+	"glossy_azure_maple": "Atual",
+	"alert_yellow_beacon": "Para todos os idiomas",
+	"brave_khaki_otter": "Nenhuma imagem",
+	"elegant_yellow_rocket": "O TMDB ainda não tem nenhuma para este título.",
+	"velvet_onyx_garden": "Carregando imagens",
+	"wise_amber_octopus": "Imagens atualizadas",
+	"icy_scarlet_sunflower": "Não foi possível atualizar as imagens",
+	"modest_rose_blossom": "Imagem do TMDB restaurada",
+	"balmy_copper_pebble": "Não foi possível restaurar a imagem do TMDB",
+	"noble_onyx_otter": "Usar este pôster",
+	"zesty_teal_turtle": "Usar este fundo",
+	"velvet_violet_cloud": "Não foi possível carregar as imagens",
+	"cozy_topaz_lemur": "Enquadramento",
+	"dapper_rose_arrow": "Como aparece em uma tela larga",
+	"vivid_ruby_iguana": "Salvar enquadramento",
+	"gallant_khaki_hippo": "4K",
+	"zippy_navy_lemur": "2K",
+	"sturdy_green_rocket": "HD",
+	"bright_hazel_panda": "SD"
 }

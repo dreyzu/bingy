@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { cn } from "cn";
 import type { ReactNode } from "react";
 import type { Schemas } from "shared";
+import { MediaArtworkButton } from "@/components/medias/media-artwork-button";
 import { MediaBackgroundImage } from "@/components/medias/media-background-image";
 import { MEDIA_DETAILS_POSTER_CLASSES } from "@/components/medias/media-details-layout";
 import { MediaReleaseYear } from "@/components/medias/media-release-year";
@@ -30,6 +31,8 @@ interface MediaHeaderLayoutProps {
 	region: Schemas.WatchProvidersCountry;
 	/** Backdrop behind the header, drawn once it is known. */
 	backgroundImage: string | null;
+	/** Vertical crop position of the backdrop, 0 (top) to 100 (bottom). */
+	backgroundFocusY?: number | null;
 	isBackgroundLoading: boolean;
 	children: ReactNode;
 }
@@ -41,13 +44,17 @@ export function MediaHeaderLayout({
 	watchProviders,
 	region,
 	backgroundImage,
+	backgroundFocusY,
 	isBackgroundLoading,
 	children,
 }: MediaHeaderLayoutProps) {
 	return (
 		<>
 			{isBackgroundLoading ? null : (
-				<MediaBackgroundImage backgroundImage={backgroundImage} />
+				<MediaBackgroundImage
+					backgroundImage={backgroundImage}
+					focusY={backgroundFocusY}
+				/>
 			)}
 			<div
 				// Same top offset as MediaDetailsLayout, so content starts below the backdrop.
@@ -100,6 +107,7 @@ export function MediaHeaderLayout({
 								</Link>
 							)}
 							<MediaReleaseYear releaseDate={media.releaseDate} />
+							<MediaArtworkButton mediaType={media.type} tmdbId={media.id} />
 						</>
 					) : isLoading ? (
 						<Skeleton className="h-8 w-48" />
