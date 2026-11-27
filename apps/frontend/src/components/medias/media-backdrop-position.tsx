@@ -31,7 +31,7 @@ export function MediaBackdropPosition({
 		<div className="flex shrink-0 flex-col gap-2">
 			<Label id={labelId}>{m.cozy_topaz_lemur()}</Label>
 			{/* The page backdrop at its widest: 80rem by 28.125rem. */}
-			<div className="aspect-[128/45] w-full overflow-hidden rounded-lg">
+			<div className="aspect-128/45 w-full overflow-hidden rounded-lg">
 				<div className={cn("size-full", MEDIA_BACKGROUND_MASK_CLASSES)}>
 					<img
 						src={getTmdbImageUrl(override.filePath, "w1280") ?? undefined}
