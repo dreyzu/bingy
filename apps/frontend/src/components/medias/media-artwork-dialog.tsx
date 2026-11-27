@@ -403,7 +403,7 @@ function BackdropPosition({ slot, override }: BackdropPositionProps) {
 			<div className="aspect-[128/45] w-full overflow-hidden rounded-lg">
 				<div className={cn("size-full", MEDIA_BACKGROUND_MASK_CLASSES)}>
 					<img
-						src={getTmdbImageUrl(override.filePath, "w500") ?? undefined}
+						src={getTmdbImageUrl(override.filePath, "w1280") ?? undefined}
 						alt=""
 						className="block size-full object-cover"
 						style={{ objectPosition: `50% ${focusY}%` }}
