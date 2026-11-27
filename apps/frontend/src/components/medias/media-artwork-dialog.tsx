@@ -300,15 +300,16 @@ function ArtworkPicker({
 				</Button>
 			</div>
 
+			{kind === "backdrop" && current ? (
+				<BackdropPosition
+					// Starts over from the saved position after each save or pick.
+					key={`${current.filePath}:${current.focusY}`}
+					slot={slot}
+					override={current}
+				/>
+			) : null}
+
 			<div className="min-h-0 flex-1 overflow-y-auto no-scrollbar">
-				{kind === "backdrop" && current ? (
-					<BackdropPosition
-						// Starts over from the saved position after each save or pick.
-						key={`${current.filePath}:${current.focusY}`}
-						slot={slot}
-						override={current}
-					/>
-				) : null}
 				<div
 					className={cn(
 						"grid gap-2 p-1",
@@ -397,7 +398,7 @@ function BackdropPosition({ slot, override }: BackdropPositionProps) {
 	const labelId = useId();
 
 	return (
-		<div className="mb-3 flex flex-col gap-2 p-1">
+		<div className="flex shrink-0 flex-col gap-2">
 			<Label id={labelId}>{m.cozy_topaz_lemur()}</Label>
 			{/* The page backdrop at its widest: 80rem by 28.125rem. */}
 			<div className="aspect-[128/45] w-full overflow-hidden rounded-lg">
